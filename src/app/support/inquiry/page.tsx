@@ -99,13 +99,27 @@ export default function InquiryPage() {
     async (data: InquiryFormValues) => {
       setIsSubmitting(true);
 
-      // TODO: Resend 또는 EmailJS로 실제 이메일 발송 연동
-      console.log("📋 견적문의 접수 데이터:", data);
+      try {
+        const response = await fetch('/api/inquiry', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
 
-      // 1초 딜레이 후 성공 모달 표시
-      await new Promise((r) => setTimeout(r, 1000));
-      setIsSubmitting(false);
-      setShowSuccessModal(true);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || '접수 중 오류가 발생했습니다.');
+        }
+
+        setShowSuccessModal(true);
+      } catch (error) {
+        console.error('Submission error:', error);
+        alert(error instanceof Error ? error.message : '서버와 통신 중 오류가 발생했습니다.');
+      } finally {
+        setIsSubmitting(false);
+      }
     },
     []
   );

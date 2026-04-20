@@ -22,4 +22,4 @@ B2B 폐기물 배출 사업장 담당자
 이 문서는 Antigravity Knowledge Base의 일부로, 이후 모든 에이전트 작업 시 참조됩니다.
 
 ## [LEARNING HOOK] SEO & Deployment 최적화
-프로젝트는 Vercel 즉시 배포 가능한 상태로 완성되었으며, `DEPLOY_CHECKLIST.md`의 항목들만 실제 정보로 교체하면 바로 운영 가능합니다. 모든 메타데이터는 한국어 지정폐기물 관련 키워드에 최적화되어 있습니다.
+프로젝트는 Vercel 즉시 배포 가능한 상태로 완성되었습니다. 실제 운영을 위해서는 [DEPLOY_CHECKLIST.md](file:///c:/Users/JU%20YEONG%20JUN/Desktop/%EC%99%B8%EC%A3%BC%EC%97%85%EB%AC%B4_%ED%98%84%EB%8C%80%EC%9C%A0%EC%95%A4%EC%95%84%EC%9D%B4%20%EC%98%A8%EB%9D%BC%EC%9D%B8%EB%A7%88%EC%BC%80%ED%8C%85/website/DEPLOY_CHECKLIST.md)의 항목들을 실제 정보로 교체한 후 배포하시기 바랍니다. 모든 메타데이터는 한국어 지정폐기물 관련 키워드에 최적화되어 있습니다.
