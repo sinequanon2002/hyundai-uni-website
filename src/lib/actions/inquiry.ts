@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import { inquiryFormSchema } from "@/lib/schemas/inquiry";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { InquiryNotificationEmail } from "@/emails/InquiryNotificationEmail";
 import { InquiryConfirmationEmail } from "@/emails/InquiryConfirmationEmail";
 
@@ -71,7 +72,7 @@ export async function submitInquiry(
   }
 
   const data = parsed.data;
-  const supabase = createClient();
+  const supabase = createAdminClient();
 
   const { data: inserted, error: dbError } = await supabase
     .from("inquiries")
@@ -104,7 +105,7 @@ export async function submitInquiry(
   Promise.all([
     resend.emails.send({
       from: "현대유앤아이환경 <onboarding@resend.dev>",
-      to: ["hduni3973@naver.com"],
+      to: ["snbhwmc@gmail.com"],
       subject: `[신규 견적 문의] ${data.companyName} - ${data.contactName}님`,
       react: InquiryNotificationEmail({
         companyName: data.companyName,
