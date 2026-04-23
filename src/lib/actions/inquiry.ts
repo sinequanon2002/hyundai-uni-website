@@ -102,43 +102,60 @@ export async function submitInquiry(
   const inquiryId = inserted.id as string;
   const submittedAt = new Date().toISOString();
 
-  // 이메일 발송 (fire-and-forget)
-  try {
-    Promise.all([
-    getResend().emails.send({
-      from: "현대유앤아이환경 <onboarding@resend.dev>",
-      to: ["snbhwmc@gmail.com"],
-      subject: `[신규 견적 문의] ${data.companyName} - ${data.contactName}님`,
-      react: InquiryNotificationEmail({
-        companyName: data.companyName,
-        department: data.department,
-        contactName: data.contactName,
-        email: data.email,
-        phone: data.phone,
-        address: data.address,
-        addressDetail: data.addressDetail,
-        wasteTypes: data.wasteTypes,
-        marketingConsent: data.marketingConsent ?? false,
-        inquiryId,
-        submittedAt,
-        hasPhotos: (data.photoUrls?.length ?? 0) > 0,
-      }),
-    }),
-    getResend().emails.send({
-      from: "현대유앤아이환경 <onboarding@resend.dev>",
-      to: [data.email],
-      subject: "견적 문의가 접수되었습니다 - 현대유앤아이환경",
-      react: InquiryConfirmationEmail({
-        contactName: data.contactName,
-        companyName: data.companyName,
-        wasteTypes: data.wasteTypes,
-        inquiryId,
-      }),
-    }),
-    ]).catch((err) => console.error("[submitInquiry] Email error:", err));
-  } catch (err) {
-    console.error("[submitInquiry] Email setup error:", err);
-  }
+  // 이메일 발송 — 각각 독립 try-catch로 분리해 한쪽 실패가 다른쪽에 영향 없음
+  void (async () => {
+    // 관리자 알림
+    try {
+      const r1 = await getResend().emails.send({
+        from: "현대유앤아이환경 <onboarding@resend.dev>",
+        to: ["snbhwmc@gmail.com"],
+        subject: `[신규 견적 문의] ${data.companyName} - ${data.contactName}님`,
+        react: InquiryNotificationEmail({
+          companyName: data.companyName,
+          department: data.department,
+          contactName: data.contactName,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+          addressDetail: data.addressDetail,
+          wasteTypes: data.wasteTypes,
+          marketingConsent: data.marketingConsent ?? false,
+          inquiryId,
+          submittedAt,
+          hasPhotos: (data.photoUrls?.length ?? 0) > 0,
+        }),
+      });
+      if (r1.error) {
+        console.error("[submitInquiry] Admin email error:", r1.error);
+      } else {
+        console.log("[submitInquiry] Admin email sent:", r1.data?.id);
+      }
+    } catch (err) {
+      console.error("[submitInquiry] Admin email exception:", err);
+    }
+
+    // 고객 접수 확인
+    try {
+      const r2 = await getResend().emails.send({
+        from: "현대유앤아이환경 <onboarding@resend.dev>",
+        to: [data.email],
+        subject: "견적 문의가 접수되었습니다 - 현대유앤아이환경",
+        react: InquiryConfirmationEmail({
+          contactName: data.contactName,
+          companyName: data.companyName,
+          wasteTypes: data.wasteTypes,
+          inquiryId,
+        }),
+      });
+      if (r2.error) {
+        console.error("[submitInquiry] Customer email error:", r2.error);
+      } else {
+        console.log("[submitInquiry] Customer email sent:", r2.data?.id);
+      }
+    } catch (err) {
+      console.error("[submitInquiry] Customer email exception:", err);
+    }
+  })();
 
   return { success: true, data: { id: inquiryId } };
 }
