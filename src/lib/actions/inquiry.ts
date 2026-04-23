@@ -8,7 +8,9 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { InquiryNotificationEmail } from "@/emails/InquiryNotificationEmail";
 import { InquiryConfirmationEmail } from "@/emails/InquiryConfirmationEmail";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -103,7 +105,7 @@ export async function submitInquiry(
 
   // 이메일 발송 (fire-and-forget)
   Promise.all([
-    resend.emails.send({
+    getResend().emails.send({
       from: "현대유앤아이환경 <onboarding@resend.dev>",
       to: ["snbhwmc@gmail.com"],
       subject: `[신규 견적 문의] ${data.companyName} - ${data.contactName}님`,
@@ -122,7 +124,7 @@ export async function submitInquiry(
         hasPhotos: (data.photoUrls?.length ?? 0) > 0,
       }),
     }),
-    resend.emails.send({
+    getResend().emails.send({
       from: "현대유앤아이환경 <onboarding@resend.dev>",
       to: [data.email],
       subject: "견적 문의가 접수되었습니다 - 현대유앤아이환경",

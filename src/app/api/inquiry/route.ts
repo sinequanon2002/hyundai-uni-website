@@ -3,9 +3,8 @@ import { Resend } from 'resend';
 import { supabase } from '@/lib/supabase';
 import { inquirySchema } from '@/lib/schemas/inquiry';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await request.json();
     
