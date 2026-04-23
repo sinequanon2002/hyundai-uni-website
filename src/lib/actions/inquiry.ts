@@ -144,74 +144,77 @@ export async function submitInquiry(
 export async function getInquiries(
   filters: InquiryFilters = {}
 ): Promise<ActionResult<{ inquiries: Inquiry[]; total: number; totalPages: number }>> {
-  // TODO: auth 구현 시 아래 주석 해제
-  // const supabase = createClient();
-  // const { data: { user } } = await supabase.auth.getUser();
-  // if (!user) return { success: false, error: "인증이 필요합니다" };
+  try {
+    const {
+      status = "all",
+      search = "",
+      page = 1,
+      pageSize = 20,
+      sortBy = "created_at",
+      sortOrder = "desc",
+    } = filters;
 
-  const {
-    status = "all",
-    search = "",
-    page = 1,
-    pageSize = 20,
-    sortBy = "created_at",
-    sortOrder = "desc",
-  } = filters;
+    const supabase = createAdminClient();
+    let query = supabase.from("inquiries").select("*", { count: "exact" });
 
-  const supabase = createAdminClient();
-  let query = supabase.from("inquiries").select("*", { count: "exact" });
+    if (status !== "all") {
+      query = query.eq("status", status);
+    }
 
-  if (status !== "all") {
-    query = query.eq("status", status);
-  }
+    if (search.trim()) {
+      const q = search.trim();
+      query = query.or(
+        `company_name.ilike.%${q}%,contact_name.ilike.%${q}%`
+      );
+    }
 
-  if (search.trim()) {
-    const q = search.trim();
-    query = query.or(
-      `company_name.ilike.%${q}%,contact_name.ilike.%${q}%`
-    );
-  }
+    query = query.order(sortBy, { ascending: sortOrder === "asc" });
 
-  query = query.order(sortBy, { ascending: sortOrder === "asc" });
+    const offset = (page - 1) * pageSize;
+    query = query.range(offset, offset + pageSize - 1);
 
-  const offset = (page - 1) * pageSize;
-  query = query.range(offset, offset + pageSize - 1);
+    const { data, error, count } = await query;
 
-  const { data, error, count } = await query;
+    if (error) {
+      console.error("[getInquiries] error:", error);
+      return { success: false, error: "데이터를 불러오는 중 오류가 발생했습니다" };
+    }
 
-  if (error) {
-    console.error("[getInquiries] error:", error);
+    const total = count ?? 0;
+    return {
+      success: true,
+      data: {
+        inquiries: (data ?? []) as Inquiry[],
+        total,
+        totalPages: Math.ceil(total / pageSize),
+      },
+    };
+  } catch (err) {
+    console.error("[getInquiries] unexpected error:", err);
     return { success: false, error: "데이터를 불러오는 중 오류가 발생했습니다" };
   }
-
-  const total = count ?? 0;
-  return {
-    success: true,
-    data: {
-      inquiries: (data ?? []) as Inquiry[],
-      total,
-      totalPages: Math.ceil(total / pageSize),
-    },
-  };
 }
 
 export async function getInquiryById(
   id: string
 ): Promise<ActionResult<Inquiry>> {
-  // TODO: auth 구현 시 인증 체크 추가
+  try {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("inquiries")
+      .select("*")
+      .eq("id", id)
+      .single();
 
-  const supabase = createAdminClient();
-  const { data, error } = await supabase
-    .from("inquiries")
-    .select("*")
-    .eq("id", id)
-    .single();
+    if (error || !data) {
+      return { success: false, error: "문의를 찾을 수 없습니다" };
+    }
 
-  if (error || !data) {
-    return { success: false, error: "문의를 찾을 수 없습니다" };
+    return { success: true, data: data as Inquiry };
+  } catch (err) {
+    console.error("[getInquiryById] unexpected error:", err);
+    return { success: false, error: "문의를 불러오는 중 오류가 발생했습니다" };
   }
-
-  return { success: true, data: data as Inquiry };
 }
 
 export async function updateInquiryStatus(
