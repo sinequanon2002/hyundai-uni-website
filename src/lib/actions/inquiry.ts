@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import { inquiryFormSchema } from "@/lib/schemas/inquiry";
-import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { InquiryNotificationEmail } from "@/emails/InquiryNotificationEmail";
 import { InquiryConfirmationEmail } from "@/emails/InquiryConfirmationEmail";
@@ -159,7 +158,7 @@ export async function getInquiries(
     sortOrder = "desc",
   } = filters;
 
-  const supabase = createClient();
+  const supabase = createAdminClient();
   let query = supabase.from("inquiries").select("*", { count: "exact" });
 
   if (status !== "all") {
@@ -201,7 +200,7 @@ export async function getInquiryById(
 ): Promise<ActionResult<Inquiry>> {
   // TODO: auth 구현 시 인증 체크 추가
 
-  const supabase = createClient();
+  const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("inquiries")
     .select("*")
@@ -229,7 +228,7 @@ export async function updateInquiryStatus(
     return { success: false, error: "유효하지 않은 상태값입니다" };
   }
 
-  const supabase = createClient();
+  const supabase = createAdminClient();
   const updateData: Record<string, unknown> = { status };
   if (notes !== undefined) updateData.notes = notes;
 
