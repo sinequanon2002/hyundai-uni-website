@@ -103,7 +103,8 @@ export async function submitInquiry(
   const submittedAt = new Date().toISOString();
 
   // 이메일 발송 (fire-and-forget)
-  Promise.all([
+  try {
+    Promise.all([
     getResend().emails.send({
       from: "현대유앤아이환경 <onboarding@resend.dev>",
       to: ["snbhwmc@gmail.com"],
@@ -134,7 +135,10 @@ export async function submitInquiry(
         inquiryId,
       }),
     }),
-  ]).catch((err) => console.error("[submitInquiry] Email error:", err));
+    ]).catch((err) => console.error("[submitInquiry] Email error:", err));
+  } catch (err) {
+    console.error("[submitInquiry] Email setup error:", err);
+  }
 
   return { success: true, data: { id: inquiryId } };
 }
