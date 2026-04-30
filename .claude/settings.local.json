@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"src/app/\\(admin\\)/inquiries/\")",
+      "Bash(find . -name *.sql -type f)",
+      "Bash(ls -la src/app/\\\\\\(admin\\\\\\)/)",
+      "Bash(find src:*)"
+    ]
+  }
+}
