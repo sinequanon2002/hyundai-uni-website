@@ -71,7 +71,7 @@ export function InquiryConfirmationEmail({
           <Section style={sectionStyle}>
             <Text style={subHeadingStyle}>다음 단계</Text>
             <Step number="01" title="문의 검토" desc="접수된 내용을 전문 담당자가 검토합니다." />
-            <Step number="02" title="현장 확인 연락" desc="담당자가 직접 연락하여 수거 일정 및 조건을 협의합니다." />
+            <Step number="02" title="현장 방문 / 상담" desc="담당자가 직접 연락하여 수거 일정 및 조건을 협의합니다." />
             <Step number="03" title="견적서 발송" desc="검토 완료 후 맞춤 견적서를 이메일로 발송드립니다." />
           </Section>
 

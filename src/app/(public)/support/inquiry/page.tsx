@@ -132,9 +132,9 @@ export default function InquiryPage() {
     const files = Array.from(e.target.files ?? []);
     if (files.length === 0) return;
 
-    const remaining = 5 - uploadedFiles.length;
+    const remaining = 10 - uploadedFiles.length;
     if (remaining <= 0) {
-      alert("최대 5개의 파일을 첨부할 수 있습니다.");
+      alert("최대 10개의 파일을 첨부할 수 있습니다.");
       return;
     }
     const toUpload = files.slice(0, remaining);
@@ -273,7 +273,7 @@ export default function InquiryPage() {
                 <div className="space-y-3">
                   {[
                     { step: "01", title: "문의 접수", desc: "온라인 양식 또는 전화" },
-                    { step: "02", title: "현장 확인", desc: "담당자 직접 연락" },
+                    { step: "02", title: "현장 방문 / 상담", desc: "담당자 직접 연락" },
                     { step: "03", title: "견적 발송", desc: "맞춤 견적서 이메일 발송" },
                   ].map(({ step, title, desc }, i, arr) => (
                     <div key={step} className="flex items-start gap-3">
@@ -476,11 +476,37 @@ export default function InquiryPage() {
                     )}
                   </div>
 
+                  {/* 수거 요청일 + 폐기물 수량 */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className={labelCls}>수거 요청일</label>
+                      <input
+                        {...register("collectionDate")}
+                        type="date"
+                        className={inputCls(!!errors.collectionDate)}
+                      />
+                      <p className="text-[10px] text-gray-400 mt-1">
+                        * 희망하시는 수거 날짜를 선택해주세요.
+                      </p>
+                    </div>
+                    <div>
+                      <label className={labelCls}>폐기물 수량/단위</label>
+                      <input
+                        {...register("quantity")}
+                        placeholder="예: 약 500kg, 2드럼 등"
+                        className={inputCls(!!errors.quantity)}
+                      />
+                      <p className="text-[10px] text-gray-400 mt-1">
+                        * 대략적인 정보를 입력하셔도 괜찮습니다.
+                      </p>
+                    </div>
+                  </div>
+
                   {/* 수거 장소 사진 */}
                   <div>
                     <label className={labelCls}>수거 장소 사진</label>
                     <p className="text-xs text-gray-400 mb-2">
-                      배출장의 사진을 업로드해주시면 더 빠른 상담이 가능합니다
+                      배출장의 사진을 여러 장 업로드해주시면 더 정확한 견적이 가능합니다. (파일당 최대 50MB)
                     </p>
 
                     {uploadedFiles.length > 0 && (
@@ -506,7 +532,7 @@ export default function InquiryPage() {
                       </div>
                     )}
 
-                    {uploadedFiles.length < 5 && (
+                    {uploadedFiles.length < 10 && (
                       <>
                         <input
                           ref={fileInputRef}

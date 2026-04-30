@@ -1,15 +1,16 @@
 import { z } from "zod";
 
 export const WASTE_TYPE_OPTIONS = [
-  "폐유",
-  "폐산",
-  "폐알칼리",
+  "특정시설 발생 폐기물",
+  "부식성 폐기물",
+  "유해물질 함유 폐기물",
   "폐유기용제",
-  "폐페인트·폐락카",
+  "폐페인트 및 폐락카",
+  "폐유",
   "폐석면",
-  "폐촉매",
-  "오니류",
+  "PCBs 함유 폐기물",
   "폐유독물질",
+  "의료폐기물",
   "기타",
 ] as const;
 
@@ -32,6 +33,8 @@ export const inquiryFormSchema = z.object({
   wasteTypes: z
     .array(z.string())
     .min(1, "폐기물 종류를 하나 이상 선택해주세요"),
+  collectionDate: z.string().optional().or(z.literal("")),
+  quantity: z.string().optional().or(z.literal("")),
   photoUrls: z.array(z.string()).optional().default([]),
   agreement: z.literal(true, {
     errorMap: () => ({ message: "개인정보 수집·이용에 동의하셔야 합니다" }),

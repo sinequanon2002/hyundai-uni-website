@@ -42,8 +42,9 @@ export interface Inquiry {
   // legacy
   region_sido: string | null;
   region_sigungu: string | null;
-  quantity: number | null;
+  quantity: string | null;
   unit: string | null;
+  collection_date: string | null;
   frequency: string | null;
   message: string | null;
 }
@@ -92,6 +93,8 @@ export async function submitInquiry(
       marketing_consent: data.marketingConsent ?? false,
       agreement: data.agreement,
       status: "pending",
+      collection_date: data.collectionDate ?? null,
+      quantity: data.quantity ?? null,
     })
     .select("id")
     .single();
@@ -125,6 +128,8 @@ export async function submitInquiry(
           inquiryId,
           submittedAt,
           hasPhotos: (data.photoUrls?.length ?? 0) > 0,
+          collectionDate: data.collectionDate,
+          quantity: data.quantity,
         }),
       });
       if (r1.error) {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
 const ALLOWED_TYPES = [
   "image/jpeg",
   "image/png",
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     if (file.size > MAX_FILE_SIZE) {
       return NextResponse.json(
-        { error: "파일 크기는 10MB를 초과할 수 없습니다" },
+        { error: "파일 크기는 50MB를 초과할 수 없습니다" },
         { status: 400 }
       );
     }

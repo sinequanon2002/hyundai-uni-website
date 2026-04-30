@@ -25,6 +25,8 @@ interface InquiryNotificationEmailProps {
   inquiryId: string;
   submittedAt: string;
   hasPhotos: boolean;
+  collectionDate?: string;
+  quantity?: string;
 }
 
 export function InquiryNotificationEmail({
@@ -40,6 +42,8 @@ export function InquiryNotificationEmail({
   inquiryId,
   submittedAt,
   hasPhotos,
+  collectionDate,
+  quantity,
 }: InquiryNotificationEmailProps) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
@@ -71,6 +75,8 @@ export function InquiryNotificationEmail({
               value={addressDetail ? `${address} ${addressDetail}` : address}
             />
             <Row label="폐기물 종류" value={wasteTypes.join(", ")} />
+            <Row label="수거 요청일" value={collectionDate || "미지정"} />
+            <Row label="폐기물 수량" value={quantity || "미입력"} />
             <Row label="사진 첨부" value={hasPhotos ? "있음" : "없음"} />
             <Row
               label="마케팅 수신 동의"
