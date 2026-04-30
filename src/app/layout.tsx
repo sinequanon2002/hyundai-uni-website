@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
@@ -59,13 +57,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-pretendard antialiased flex flex-col"
         )}
       >
-        <Header />
-        
-        <main className="flex-1">
-          {children}
-        </main>
-        
-        <Footer />
+        {children}
       </body>
     </html>
   );

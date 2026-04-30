@@ -29,7 +29,15 @@ export function Footer() {
       </div>
       <div className="container mx-auto px-4 mt-8 pt-8 border-t border-neutral-800 text-xs text-neutral-500 flex flex-col md:flex-row justify-between items-center">
         <p>&copy; {new Date().getFullYear()} Hyundai U&I. All rights reserved.</p>
-        <p className="mt-2 md:mt-0">대표이사: 김현대 | 사업자등록번호: 123-45-67890</p>
+        <div className="flex items-center gap-4 mt-2 md:mt-0">
+          <p>대표이사: 김현대 | 사업자등록번호: 123-45-67890</p>
+          <Link
+            href="/login"
+            className="text-neutral-700 hover:text-neutral-500 transition-colors"
+          >
+            직원 로그인
+          </Link>
+        </div>
       </div>
     </footer>
   );

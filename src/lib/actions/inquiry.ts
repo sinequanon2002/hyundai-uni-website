@@ -3,7 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import { inquiryFormSchema } from "@/lib/schemas/inquiry";
+import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { isStaff } from "@/lib/auth/roles";
 import { InquiryNotificationEmail } from "@/emails/InquiryNotificationEmail";
 import { InquiryConfirmationEmail } from "@/emails/InquiryConfirmationEmail";
 
@@ -160,12 +162,37 @@ export async function submitInquiry(
   return { success: true, data: { id: inquiryId } };
 }
 
+// ─── 관리자 전용: 역할 검증 헬퍼 ─────────────────────────────────────────────────
+
+async function requireStaff(): Promise<void> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw new Error("인증이 필요합니다");
+  }
+
+  const adminClient = createAdminClient();
+  const { data: profile } = await adminClient
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (!profile || !isStaff(profile.role)) {
+    throw new Error("접근 권한이 없습니다");
+  }
+}
+
 // ─── 관리자 액션 ───────────────────────────────────────────────────────────────
 
 export async function getInquiries(
   filters: InquiryFilters = {}
 ): Promise<ActionResult<{ inquiries: Inquiry[]; total: number; totalPages: number }>> {
   try {
+    await requireStaff();
     const {
       status = "all",
       search = "",
@@ -220,6 +247,7 @@ export async function getInquiryById(
   id: string
 ): Promise<ActionResult<Inquiry>> {
   try {
+    await requireStaff();
     const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("inquiries")
@@ -243,7 +271,11 @@ export async function updateInquiryStatus(
   status: InquiryStatus,
   notes?: string
 ): Promise<ActionResult> {
-  // TODO: auth 구현 시 인증 체크 추가
+  try {
+    await requireStaff();
+  } catch {
+    return { success: false, error: "접근 권한이 없습니다" };
+  }
 
   const validStatuses: InquiryStatus[] = [
     "pending", "reviewing", "quoted", "completed", "cancelled",
