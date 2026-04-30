@@ -1,20 +1,20 @@
 import { z } from "zod";
 
-export const WASTE_TYPE_OPTIONS = [
-  "특정시설 발생 폐기물",
-  "부식성 폐기물",
-  "유해물질 함유 폐기물",
-  "폐유기용제",
-  "폐페인트 및 폐락카",
-  "폐유",
-  "폐석면",
-  "PCBs 함유 폐기물",
-  "폐유독물질",
-  "의료폐기물",
-  "기타",
-] as const;
+export const WASTE_CATEGORIES = {
+  "특정시설 발생 폐기물": ["폐합성 고분자화합물", "오니류", "폐농약", "기타"],
+  "부식성 폐기물": ["폐산(pH 2.0 이하)", "폐알칼리(pH 12.5 이상)", "기타"],
+  "유해물질 함유 폐기물": ["광재", "분진", "폐주물사", "소각재", "기타"],
+  "폐유기용제": ["할로겐족 유기용제", "그 밖의 폐유기용제", "기타"],
+  "폐페인트 및 폐락카": ["폐페인트", "폐락카", "도료 찌꺼기", "기타"],
+  "폐유": ["폐윤활유", "폐연료유", "기타"],
+  "폐석면": ["건축자재", "단열재", "기타"],
+  "PCBs 함유 폐기물": ["변압기", "절연유", "기타"],
+  "폐유독물질": ["유독물질 관련 폐기물"],
+  "의료폐기물": ["격리의료폐기물", "위해의료폐기물", "기타"],
+  "기타": ["기타"],
+} as const;
 
-export type WasteType = (typeof WASTE_TYPE_OPTIONS)[number];
+export type WasteMajorCategory = keyof typeof WASTE_CATEGORIES;
 
 /** 신규 견적문의 폼 스키마 */
 export const inquiryFormSchema = z.object({
@@ -32,9 +32,10 @@ export const inquiryFormSchema = z.object({
   addressDetail: z.string().optional().or(z.literal("")),
   wasteTypes: z
     .array(z.string())
-    .min(1, "폐기물 종류를 하나 이상 선택해주세요"),
+    .min(1, "폐기물 종류를 최소 하나 이상 선택해주세요"),
   collectionDate: z.string().optional().or(z.literal("")),
   quantity: z.string().optional().or(z.literal("")),
+  message: z.string().optional().or(z.literal("")),
   photoUrls: z.array(z.string()).optional().default([]),
   agreement: z.literal(true, {
     errorMap: () => ({ message: "개인정보 수집·이용에 동의하셔야 합니다" }),

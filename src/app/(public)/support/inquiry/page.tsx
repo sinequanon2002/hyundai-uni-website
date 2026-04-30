@@ -10,7 +10,7 @@ import { COMPANY } from "@/lib/constants";
 import {
   inquiryFormSchema,
   type InquiryFormValues,
-  WASTE_TYPE_OPTIONS,
+  WASTE_CATEGORIES,
 } from "@/lib/schemas/inquiry";
 import { submitInquiry } from "@/lib/actions/inquiry";
 import {
@@ -24,6 +24,7 @@ import {
   Mail,
   Clock,
   ArrowRight,
+  ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -78,6 +79,7 @@ export default function InquiryPage() {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
   const {
     register,
@@ -436,36 +438,64 @@ export default function InquiryPage() {
                       name="wasteTypes"
                       control={control}
                       render={({ field }) => (
-                        <div
-                          className={cn(
-                            "flex flex-wrap gap-2 p-3 border rounded-lg",
-                            errors.wasteTypes
-                              ? "border-red-400 bg-red-50/30"
-                              : "border-gray-200"
-                          )}
-                        >
-                          {WASTE_TYPE_OPTIONS.map((type) => {
-                            const checked = field.value.includes(type);
+                        <div className={cn("space-y-2 p-1", errors.wasteTypes && "border border-red-400 rounded-lg bg-red-50/30")}>
+                          {Object.entries(WASTE_CATEGORIES).map(([major, minors]) => {
+                            const isExpanded = expandedCategory === major;
+                            const selectedCount = field.value.filter((v) => v.startsWith(`${major} - `) || v === major).length;
+
                             return (
-                              <button
-                                key={type}
-                                type="button"
-                                onClick={() => {
-                                  field.onChange(
-                                    checked
-                                      ? field.value.filter((v) => v !== type)
-                                      : [...field.value, type]
-                                  );
-                                }}
-                                className={cn(
-                                  "px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
-                                  checked
-                                    ? "bg-[#1F4E79] border-[#1F4E79] text-white"
-                                    : "bg-white border-gray-200 text-gray-600 hover:border-[#1F4E79]/50"
+                              <div key={major} className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                                <button
+                                  type="button"
+                                  onClick={() => setExpandedCategory(isExpanded ? null : major)}
+                                  className={cn(
+                                    "w-full flex items-center justify-between px-4 py-3 transition-colors",
+                                    isExpanded ? "bg-[#F5F8FB]" : "hover:bg-gray-50",
+                                    selectedCount > 0 && !isExpanded && "border-l-4 border-l-[#1F4E79]"
+                                  )}
+                                >
+                                  <span className="font-semibold text-sm text-gray-800">
+                                    {major}
+                                    {selectedCount > 0 && (
+                                      <span className="ml-2 text-[#1F4E79] bg-[#1F4E79]/10 px-2 py-0.5 rounded-full text-xs">
+                                        {selectedCount}개 선택됨
+                                      </span>
+                                    )}
+                                  </span>
+                                  <ChevronDown
+                                    className={cn("w-4 h-4 text-gray-500 transition-transform", isExpanded && "rotate-180")}
+                                  />
+                                </button>
+                                {isExpanded && (
+                                  <div className="p-4 bg-white border-t border-gray-100 flex flex-wrap gap-2">
+                                    {minors.map((minor) => {
+                                      const valueStr = major === "기타" ? "기타" : `${major} - ${minor}`;
+                                      const checked = field.value.includes(valueStr);
+                                      return (
+                                        <button
+                                          key={minor}
+                                          type="button"
+                                          onClick={() => {
+                                            field.onChange(
+                                              checked
+                                                ? field.value.filter((v) => v !== valueStr)
+                                                : [...field.value, valueStr]
+                                            );
+                                          }}
+                                          className={cn(
+                                            "px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
+                                            checked
+                                              ? "bg-[#1F4E79] border-[#1F4E79] text-white"
+                                              : "bg-white border-gray-200 text-gray-600 hover:border-[#1F4E79]/50"
+                                          )}
+                                        >
+                                          {minor}
+                                        </button>
+                                      );
+                                    })}
+                                  </div>
                                 )}
-                              >
-                                {type}
-                              </button>
+                              </div>
                             );
                           })}
                         </div>
@@ -502,11 +532,25 @@ export default function InquiryPage() {
                     </div>
                   </div>
 
-                  {/* 수거 장소 사진 */}
+                  {/* 기타 문의사항 */}
                   <div>
-                    <label className={labelCls}>수거 장소 사진</label>
+                    <label className={labelCls}>기타 문의사항</label>
+                    <textarea
+                      {...register("message")}
+                      placeholder="특이사항이나 추가로 문의하실 내용을 자유롭게 작성해주세요."
+                      rows={3}
+                      className={cn(inputCls(!!errors.message), "resize-none")}
+                    />
+                    {errors.message && (
+                      <p className={errorCls}>{errors.message.message}</p>
+                    )}
+                  </div>
+
+                  {/* 첨부 파일 (사진, 서류) */}
+                  <div>
+                    <label className={labelCls}>첨부 파일 (사진, 서류 등)</label>
                     <p className="text-xs text-gray-400 mb-2">
-                      배출장의 사진을 여러 장 업로드해주시면 더 정확한 견적이 가능합니다. (파일당 최대 50MB)
+                      현장 사진, MSDS 등 관련 서류를 업로드해 주시면 빠르고 정확한 견적이 가능합니다. (이미지, PDF, DOC, HWP 지원 / 파일당 최대 10MB)
                     </p>
 
                     {uploadedFiles.length > 0 && (
@@ -538,7 +582,7 @@ export default function InquiryPage() {
                           ref={fileInputRef}
                           type="file"
                           multiple
-                          accept="image/jpeg,image/png,image/webp,image/heic,application/pdf"
+                          accept="image/jpeg,image/png,image/webp,image/heic,application/pdf,.doc,.docx,.hwp,.hwpx"
                           onChange={handleFileChange}
                           className="hidden"
                           id="photo-upload"

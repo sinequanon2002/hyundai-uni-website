@@ -95,6 +95,7 @@ export async function submitInquiry(
       status: "pending",
       collection_date: data.collectionDate ?? null,
       quantity: data.quantity ?? null,
+      message: data.message ?? null,
     })
     .select("id")
     .single();
@@ -130,6 +131,7 @@ export async function submitInquiry(
           hasPhotos: (data.photoUrls?.length ?? 0) > 0,
           collectionDate: data.collectionDate,
           quantity: data.quantity,
+          message: data.message,
         }),
       });
       if (r1.error) {

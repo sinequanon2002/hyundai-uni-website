@@ -27,6 +27,7 @@ interface InquiryNotificationEmailProps {
   hasPhotos: boolean;
   collectionDate?: string;
   quantity?: string;
+  message?: string;
 }
 
 export function InquiryNotificationEmail({
@@ -44,6 +45,7 @@ export function InquiryNotificationEmail({
   hasPhotos,
   collectionDate,
   quantity,
+  message,
 }: InquiryNotificationEmailProps) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
@@ -77,7 +79,8 @@ export function InquiryNotificationEmail({
             <Row label="폐기물 종류" value={wasteTypes.join(", ")} />
             <Row label="수거 요청일" value={collectionDate || "미지정"} />
             <Row label="폐기물 수량" value={quantity || "미입력"} />
-            <Row label="사진 첨부" value={hasPhotos ? "있음" : "없음"} />
+            {message && <Row label="기타 문의사항" value={message} />}
+            <Row label="사진/서류 첨부" value={hasPhotos ? "있음" : "없음"} />
             <Row
               label="마케팅 수신 동의"
               value={marketingConsent ? "동의" : "미동의"}

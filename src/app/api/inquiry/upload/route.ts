@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ALLOWED_TYPES = [
   "image/jpeg",
   "image/png",
   "image/webp",
   "image/heic",
   "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // docx
+  "application/x-hwp",
+  "application/haansofthwp",
+  "application/vnd.hancom.hwp",
+  "application/hwp+zip", // hwpx
 ];
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -21,14 +27,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     if (file.size > MAX_FILE_SIZE) {
       return NextResponse.json(
-        { error: "파일 크기는 50MB를 초과할 수 없습니다" },
+        { error: "파일 크기는 10MB를 초과할 수 없습니다" },
         { status: 400 }
       );
     }
 
     if (!ALLOWED_TYPES.includes(file.type)) {
       return NextResponse.json(
-        { error: "지원하지 않는 파일 형식입니다 (jpg, png, webp, heic, pdf만 가능)" },
+        { error: "지원하지 않는 파일 형식입니다 (이미지, PDF, DOC, HWP만 가능)" },
         { status: 400 }
       );
     }
