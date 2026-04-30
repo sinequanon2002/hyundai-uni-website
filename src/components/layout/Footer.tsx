@@ -23,13 +23,15 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             <li><Link href="/company/greeting" className="hover:text-white transition-colors">회사소개</Link></li>
             <li><Link href="/waste/types" className="hover:text-white transition-colors">수거 대상 폐기물</Link></li>
-            <li><Link href="/support/notice" className="hover:text-white transition-colors">공지사항</Link></li>
+            <li><Link href="/allbaro/about" className="hover:text-white transition-colors">올바로시스템</Link></li>
           </ul>
         </div>
         <div>
           <h3 className="text-white font-medium mb-4">고객지원</h3>
            <ul className="space-y-2 text-sm">
             <li><Link href="/support/inquiry" className="hover:text-white transition-colors">온라인 견적문의</Link></li>
+            <li><Link href="/support/notice" className="hover:text-white transition-colors">공지사항</Link></li>
+            <li><Link href="/support/gallery" className="hover:text-white transition-colors">현장갤러리</Link></li>
             <li><Link href="/company/location" className="hover:text-white transition-colors">오시는 길</Link></li>
           </ul>
         </div>

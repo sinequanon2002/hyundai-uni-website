@@ -30,7 +30,7 @@ export function SubNav({ items = COMPANY_SUBNAV_ITEMS }: { items?: {label: strin
   const pathname = usePathname();
 
   return (
-    <div className="w-full border-b border-gray-200 bg-white sticky top-0 z-40">
+    <div className="w-full border-b border-gray-200 bg-white sticky top-16 z-40">
       <div className="max-w-6xl mx-auto px-4">
         <nav className="flex overflow-x-auto no-scrollbar justify-start md:justify-center">
           <ul className="flex space-x-2 md:space-x-8 whitespace-nowrap">
