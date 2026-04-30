@@ -80,6 +80,7 @@ export default function InquiryPage() {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [wasteSearch, setWasteSearch] = useState("");
 
   const {
     register,
@@ -434,72 +435,115 @@ export default function InquiryPage() {
                       폐기물 종류 (중복 선택){" "}
                       <span className="text-red-500">*</span>
                     </label>
+                    <div className="relative mb-3">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <input
+                        type="text"
+                        placeholder="폐기물 명칭 검색 (예: 폐유, 슬러지...)"
+                        value={wasteSearch}
+                        onChange={(e) => setWasteSearch(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1F4E79]/20 transition-all"
+                      />
+                      {wasteSearch && (
+                        <button
+                          type="button"
+                          onClick={() => setWasteSearch("")}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
                     <Controller
                       name="wasteTypes"
                       control={control}
-                      render={({ field }) => (
-                        <div className={cn("space-y-2 p-1", errors.wasteTypes && "border border-red-400 rounded-lg bg-red-50/30")}>
-                          {Object.entries(WASTE_CATEGORIES).map(([major, minors]) => {
-                            const isExpanded = expandedCategory === major;
-                            const selectedCount = field.value.filter((v) => v.startsWith(`${major} - `) || v === major).length;
+                      render={({ field }) => {
+                        const filteredCategories = Object.entries(WASTE_CATEGORIES).filter(([major, minors]) => {
+                          if (!wasteSearch) return true;
+                          const s = wasteSearch.toLowerCase();
+                          return major.toLowerCase().includes(s) || minors.some(m => m.toLowerCase().includes(s));
+                        });
 
-                            return (
-                              <div key={major} className="border border-gray-200 rounded-lg overflow-hidden bg-white">
-                                <button
-                                  type="button"
-                                  onClick={() => setExpandedCategory(isExpanded ? null : major)}
-                                  className={cn(
-                                    "w-full flex items-center justify-between px-4 py-3 transition-colors",
-                                    isExpanded ? "bg-[#F5F8FB]" : "hover:bg-gray-50",
-                                    selectedCount > 0 && !isExpanded && "border-l-4 border-l-[#1F4E79]"
-                                  )}
-                                >
-                                  <span className="font-semibold text-sm text-gray-800">
-                                    {major}
-                                    {selectedCount > 0 && (
-                                      <span className="ml-2 text-[#1F4E79] bg-[#1F4E79]/10 px-2 py-0.5 rounded-full text-xs">
-                                        {selectedCount}개 선택됨
+                        return (
+                          <div className={cn("space-y-2 p-1", errors.wasteTypes && "border border-red-400 rounded-lg bg-red-50/30")}>
+                            {filteredCategories.length === 0 ? (
+                              <p className="text-center py-8 text-gray-400 text-sm italic">
+                                검색 결과가 없습니다. 직접 입력하시려면 '기타'를 선택해 주세요.
+                              </p>
+                            ) : (
+                              filteredCategories.map(([major, minors]) => {
+                                // 검색어가 있을 때, 해당 카테고리가 검색어와 직접 매칭되지 않더라도 
+                                // 하위 아이템이 매칭되면 카테고리를 강제로 확장해서 보여줍니다.
+                                const s = wasteSearch.toLowerCase();
+                                const isMajorMatch = major.toLowerCase().includes(s);
+                                const matchingMinors = minors.filter(m => m.toLowerCase().includes(s));
+                                
+                                // 검색 중이고 하위 아이템이 매칭되거나, 클릭해서 확장된 경우
+                                const isExpanded = (wasteSearch && matchingMinors.length > 0) || expandedCategory === major;
+                                const selectedCount = field.value.filter((v) => v.startsWith(`${major} - `) || v === major).length;
+
+                                return (
+                                  <div key={major} className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                                    <button
+                                      type="button"
+                                      onClick={() => setExpandedCategory(isExpanded ? null : major)}
+                                      className={cn(
+                                        "w-full flex items-center justify-between px-4 py-3 transition-colors",
+                                        isExpanded ? "bg-[#F5F8FB]" : "hover:bg-gray-50",
+                                        selectedCount > 0 && !isExpanded && "border-l-4 border-l-[#1F4E79]"
+                                      )}
+                                    >
+                                      <span className="font-semibold text-sm text-gray-800">
+                                        {major}
+                                        {selectedCount > 0 && (
+                                          <span className="ml-2 text-[#1F4E79] bg-[#1F4E79]/10 px-2 py-0.5 rounded-full text-xs">
+                                            {selectedCount}개 선택됨
+                                          </span>
+                                        )}
                                       </span>
+                                      <ChevronDown
+                                        className={cn("w-4 h-4 text-gray-500 transition-transform", isExpanded && "rotate-180")}
+                                      />
+                                    </button>
+                                    {isExpanded && (
+                                      <div className="p-4 bg-white border-t border-gray-100 flex flex-wrap gap-2">
+                                        {minors.map((minor) => {
+                                          const valueStr = major === "기타" ? "기타" : `${major} - ${minor}`;
+                                          const checked = field.value.includes(valueStr);
+                                          // 검색 중일 때 매칭되는 아이템만 강조하거나 필터링할 수 있지만, 
+                                          // 여기서는 전체 리스트를 보여주되 매칭되는 것 위주로 확장했습니다.
+                                          return (
+                                            <button
+                                              key={minor}
+                                              type="button"
+                                              onClick={() => {
+                                                field.onChange(
+                                                  checked
+                                                    ? field.value.filter((v) => v !== valueStr)
+                                                    : [...field.value, valueStr]
+                                                );
+                                              }}
+                                              className={cn(
+                                                "px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
+                                                checked
+                                                  ? "bg-[#1F4E79] border-[#1F4E79] text-white"
+                                                  : "bg-white border-gray-200 text-gray-600 hover:border-[#1F4E79]/50",
+                                                wasteSearch && minor.toLowerCase().includes(s) && !checked && "ring-2 ring-[#1F4E79]/30 border-[#1F4E79]/50"
+                                              )}
+                                            >
+                                              {minor}
+                                            </button>
+                                          );
+                                        })}
+                                      </div>
                                     )}
-                                  </span>
-                                  <ChevronDown
-                                    className={cn("w-4 h-4 text-gray-500 transition-transform", isExpanded && "rotate-180")}
-                                  />
-                                </button>
-                                {isExpanded && (
-                                  <div className="p-4 bg-white border-t border-gray-100 flex flex-wrap gap-2">
-                                    {minors.map((minor) => {
-                                      const valueStr = major === "기타" ? "기타" : `${major} - ${minor}`;
-                                      const checked = field.value.includes(valueStr);
-                                      return (
-                                        <button
-                                          key={minor}
-                                          type="button"
-                                          onClick={() => {
-                                            field.onChange(
-                                              checked
-                                                ? field.value.filter((v) => v !== valueStr)
-                                                : [...field.value, valueStr]
-                                            );
-                                          }}
-                                          className={cn(
-                                            "px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
-                                            checked
-                                              ? "bg-[#1F4E79] border-[#1F4E79] text-white"
-                                              : "bg-white border-gray-200 text-gray-600 hover:border-[#1F4E79]/50"
-                                          )}
-                                        >
-                                          {minor}
-                                        </button>
-                                      );
-                                    })}
                                   </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      )}
+                                );
+                              })
+                            )}
+                          </div>
+                        );
+                      }}
                     />
                     {errors.wasteTypes && (
                       <p className={errorCls}>{errors.wasteTypes.message}</p>
