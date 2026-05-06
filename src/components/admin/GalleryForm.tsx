@@ -3,13 +3,8 @@
 import { useState, useTransition, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import {
-  createPortfolioItem,
-  updatePortfolioItem,
-  PORTFOLIO_CATEGORIES,
-  PORTFOLIO_REGIONS,
-  type PortfolioItem,
-} from "@/lib/actions/portfolio";
+import { createPortfolioItem, updatePortfolioItem, type PortfolioItem } from "@/lib/actions/portfolio";
+import { PORTFOLIO_CATEGORIES, PORTFOLIO_REGIONS } from "@/lib/constants/portfolio";
 
 interface Props {
   item?: PortfolioItem;
