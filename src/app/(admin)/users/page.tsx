@@ -67,7 +67,6 @@ function DeleteButton({ userId, currentUserId }: { userId: string; currentUserId
       <button
         type="submit"
         className="text-xs text-red-500 hover:text-red-700 hover:underline transition-colors"
-        onClick={() => {}} // 클라이언트 confirm은 별도 컴포넌트 분리 필요
       >
         삭제
       </button>
