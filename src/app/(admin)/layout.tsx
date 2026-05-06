@@ -52,6 +52,7 @@ export default async function AdminLayout({
           <nav className="hidden sm:flex items-center gap-4 text-xs text-white/70">
             <a href="/inquiries" className="hover:text-white transition-colors">견적 문의</a>
             <a href="/notices" className="hover:text-white transition-colors">공지사항</a>
+            <a href="/gallery" className="hover:text-white transition-colors">현장갤러리</a>
             {isAdmin(profile.role) && (
               <>
                 <a href="/users" className="hover:text-white transition-colors">사용자 관리</a>
