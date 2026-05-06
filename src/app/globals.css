@@ -15,6 +15,14 @@ body {
 }
 
 @layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   .animate-slow-zoom {
     animation: slow-zoom 20s ease-in-out infinite alternate;
   }
