@@ -113,7 +113,7 @@ export async function submitInquiry(
     // 관리자 알림
     try {
       const r1 = await getResend().emails.send({
-        from: "현대유앤아이환경 <onboarding@resend.dev>",
+        from: "현대유앤아이 <onboarding@resend.dev>",
         to: ["snbhwmc@gmail.com"],
         subject: `[신규 견적 문의] ${data.companyName} - ${data.contactName}님`,
         react: InquiryNotificationEmail({
@@ -146,9 +146,9 @@ export async function submitInquiry(
     // 고객 접수 확인
     try {
       const r2 = await getResend().emails.send({
-        from: "현대유앤아이환경 <onboarding@resend.dev>",
+        from: "현대유앤아이 <onboarding@resend.dev>",
         to: [data.email],
-        subject: "견적 문의가 접수되었습니다 - 현대유앤아이환경",
+        subject: "견적 문의가 접수되었습니다 - 현대유앤아이",
         react: InquiryConfirmationEmail({
           contactName: data.contactName,
           companyName: data.companyName,

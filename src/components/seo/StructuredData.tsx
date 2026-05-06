@@ -4,7 +4,7 @@ export function StructuredData() {
   const localBusinessData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "현대유앤아이환경",
+    "name": "현대유앤아이",
     "description": "신뢰성과 전문성을 최우선으로 하는 지정폐기물 수거·운반업 전문 기업입니다.",
     "telephone": "02-1234-5678", // TODO: 실제 전화번호
     "address": {

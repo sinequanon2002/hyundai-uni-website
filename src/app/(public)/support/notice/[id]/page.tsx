@@ -2,11 +2,19 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageBanner } from "@/components/ui/PageBanner";
 import { SubNav, SUPPORT_SUBNAV_ITEMS } from "@/components/ui/SubNav";
-import { notices } from "@/lib/notices";
+import { getNoticeById, incrementNoticeViews } from "@/lib/actions/notices";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { ChevronUp, ChevronDown, List, Eye, Calendar, Tag } from "lucide-react";
+import type { Metadata } from "next";
 
 interface Props {
   params: { id: string };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const result = await getNoticeById(params.id);
+  if (!result.success || !result.data) return { title: "공지사항 | 현대유앤아이" };
+  return { title: `${result.data.title} | 현대유앤아이` };
 }
 
 const categoryColorMap: Record<string, string> = {
@@ -16,21 +24,30 @@ const categoryColorMap: Record<string, string> = {
   "시스템점검": "bg-yellow-100 text-yellow-700",
 };
 
-export function generateStaticParams() {
-  return notices.map((n) => ({ id: String(n.id) }));
-}
+export default async function NoticeDetailPage({ params }: Props) {
+  const result = await getNoticeById(params.id);
+  if (!result.success || !result.data) notFound();
 
-export default function NoticeDetailPage({ params }: Props) {
-  const id = parseInt(params.id, 10);
-  const noticeIndex = notices.findIndex((n) => n.id === id);
+  const notice = result.data;
 
-  if (noticeIndex === -1) {
-    notFound();
-  }
+  // 조회수 증가 (비동기, 응답에 영향 없음)
+  void incrementNoticeViews(notice.id);
 
-  const notice = notices[noticeIndex];
-  const prev = noticeIndex < notices.length - 1 ? notices[noticeIndex + 1] : null;
-  const next = noticeIndex > 0 ? notices[noticeIndex - 1] : null;
+  // 이전/다음 글 조회
+  const adminClient = createAdminClient();
+  const { data: adjacentData } = await adminClient
+    .from("notices")
+    .select("id, title, created_at")
+    .order("is_pinned", { ascending: false })
+    .order("created_at", { ascending: false });
+
+  const allIds = (adjacentData ?? []).map((n) => n.id as string);
+  const currentIdx = allIds.indexOf(notice.id);
+  const prevId = currentIdx < allIds.length - 1 ? allIds[currentIdx + 1] : null;
+  const nextId = currentIdx > 0 ? allIds[currentIdx - 1] : null;
+
+  const prevTitle = prevId ? adjacentData?.find((n) => n.id === prevId)?.title : null;
+  const nextTitle = nextId ? adjacentData?.find((n) => n.id === nextId)?.title : null;
 
   return (
     <main className="min-h-screen bg-white">
@@ -43,7 +60,7 @@ export default function NoticeDetailPage({ params }: Props) {
           <div className="flex items-center gap-3 mb-4">
             <span
               className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
-                categoryColorMap[notice.category] || "bg-gray-100 text-gray-600"
+                categoryColorMap[notice.category] ?? "bg-gray-100 text-gray-600"
               }`}
             >
               {notice.category}
@@ -55,7 +72,7 @@ export default function NoticeDetailPage({ params }: Props) {
           <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
-              {notice.date}
+              {new Date(notice.created_at).toLocaleDateString("ko-KR")}
             </span>
             <span className="flex items-center gap-1.5">
               <Eye className="w-4 h-4" />
@@ -70,35 +87,35 @@ export default function NoticeDetailPage({ params }: Props) {
 
         {/* 본문 */}
         <div
-          className="py-10 md:py-14 prose prose-neutral max-w-none leading-relaxed text-neutral-700 
-                     prose-headings:text-neutral-900 prose-p:mb-4 prose-ul:pl-5 prose-ol:pl-5 prose-li:mb-1 
+          className="py-10 md:py-14 prose prose-neutral max-w-none leading-relaxed text-neutral-700
+                     prose-headings:text-neutral-900 prose-p:mb-4 prose-ul:pl-5 prose-ol:pl-5 prose-li:mb-1
                      min-h-[200px]"
           dangerouslySetInnerHTML={{ __html: notice.content }}
         />
 
         {/* 이전글 / 다음글 */}
         <div className="border-t border-gray-200">
-          {next && (
+          {nextId && nextTitle && (
             <Link
-              href={`/support/notice/${next.id}`}
+              href={`/support/notice/${nextId}`}
               className="flex items-center gap-3 px-4 py-4 hover:bg-blue-50/50 transition-colors border-b border-gray-100 group"
             >
               <ChevronUp className="w-4 h-4 text-gray-400 group-hover:text-primary" />
               <span className="text-sm text-gray-500 w-16 shrink-0">다음글</span>
               <span className="text-sm text-neutral-900 group-hover:text-primary transition-colors truncate">
-                {next.title}
+                {nextTitle}
               </span>
             </Link>
           )}
-          {prev && (
+          {prevId && prevTitle && (
             <Link
-              href={`/support/notice/${prev.id}`}
+              href={`/support/notice/${prevId}`}
               className="flex items-center gap-3 px-4 py-4 hover:bg-blue-50/50 transition-colors border-b border-gray-100 group"
             >
               <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-primary" />
               <span className="text-sm text-gray-500 w-16 shrink-0">이전글</span>
               <span className="text-sm text-neutral-900 group-hover:text-primary transition-colors truncate">
-                {prev.title}
+                {prevTitle}
               </span>
             </Link>
           )}

@@ -6,7 +6,7 @@ import { logout } from "@/lib/actions/auth";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "관리자 | 현대유앤아이환경",
+  title: "관리자 | 현대유앤아이",
   robots: { index: false, follow: false },
 };
 
@@ -47,16 +47,29 @@ export default async function AdminLayout({
       <header className="bg-primary text-white px-6 py-3 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-6">
           <a href="/inquiries" className="font-bold text-sm tracking-tight hover:opacity-80 transition-opacity">
-            현대유앤아이환경 · 관리자
+            현대유앤아이 · 관리자
           </a>
           <nav className="hidden sm:flex items-center gap-4 text-xs text-white/70">
             <a href="/inquiries" className="hover:text-white transition-colors">견적 문의</a>
+            <a href="/notices" className="hover:text-white transition-colors">공지사항</a>
             {isAdmin(profile.role) && (
-              <a href="/users" className="hover:text-white transition-colors">사용자 관리</a>
+              <>
+                <a href="/users" className="hover:text-white transition-colors">사용자 관리</a>
+                <a href="/settings" className="hover:text-white transition-colors">설정</a>
+              </>
             )}
           </nav>
         </div>
         <div className="flex items-center gap-4">
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-white/60 hover:text-white transition-colors hidden sm:block"
+            title="홈페이지 새 탭으로 열기"
+          >
+            홈페이지 ↗
+          </a>
           <span className="text-xs text-white/70 hidden sm:block">
             <span className="text-white/50 mr-1">[{roleLabel}]</span>
             {displayName}

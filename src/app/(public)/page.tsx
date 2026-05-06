@@ -25,7 +25,7 @@ export default function Home() {
 
 
 export const metadata = {
-  title: "현대유앤아이환경 | 지정폐기물 수거·운반업 전문",
-  description: "안전하고 적법한 지정폐기물 수거/운반 처리 전문 업체 현대유앤아이환경입니다. 올바로시스템 대행, 폐산, 폐유 등 전 품목 무료 방문 견적.",
+  title: "현대유앤아이 | 지정폐기물 수거·운반업 전문",
+  description: "안전하고 적법한 지정폐기물 수거/운반 처리 전문 업체 현대유앤아이입니다. 올바로시스템 대행, 폐산, 폐유 등 전 품목 무료 방문 견적.",
   alternates: { canonical: '/' }
 };

@@ -2,7 +2,7 @@ import { login } from "@/lib/actions/auth";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "관리자 로그인 | 현대유앤아이환경",
+  title: "관리자 로그인 | 현대유앤아이",
   robots: { index: false, follow: false },
 };
 
@@ -41,7 +41,7 @@ export default function LoginPage({ searchParams }: PageProps) {
               />
             </svg>
           </div>
-          <h1 className="text-xl font-bold text-neutral-dark">현대유앤아이환경</h1>
+          <h1 className="text-xl font-bold text-neutral-dark">현대유앤아이</h1>
           <p className="text-sm text-neutral-mid mt-1">내부 관리 시스템</p>
         </div>
 

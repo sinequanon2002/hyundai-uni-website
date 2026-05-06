@@ -98,7 +98,7 @@ export function InquiryNotificationEmail({
           <Hr style={hrStyle} />
 
           <Text style={footerStyle}>
-            문의 ID: {inquiryId} · 현대유앤아이환경 내부 시스템
+            문의 ID: {inquiryId} · 현대유앤아이 내부 시스템
           </Text>
         </Container>
       </Body>

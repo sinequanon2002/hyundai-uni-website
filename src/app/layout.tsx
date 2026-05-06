@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
-    template: "%s | 현대유앤아이환경",
-    default: "현대유앤아이환경 | 지정폐기물 수거·운반업 전문",
+    template: "%s | 현대유앤아이",
+    default: "현대유앤아이 | 지정폐기물 수거·운반업 전문",
   },
   description: "신뢰성과 전문성을 최우선으로 하는 지정폐기물 수거·운반업 전문 기업입니다. 폐산, 폐유, 폐알칼리 등 안전한 처리 보장.",
   keywords: [
@@ -15,17 +15,17 @@ export const metadata: Metadata = {
     "올바로시스템", "사업장폐기물", "폐기물처리업체", "수도권 지정폐기물"
   ],
   openGraph: {
-    title: "현대유앤아이환경 | 지정폐기물 수거·운반업 전문",
+    title: "현대유앤아이 | 지정폐기물 수거·운반업 전문",
     description: "신뢰성과 전문성을 최우선으로 하는 지정폐기물 수거·운반업 전문 기업입니다.",
     url: "https://[도메인]", // TODO: 실제 도메인 교체
-    siteName: "현대유앤아이환경",
-    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "현대유앤아이환경 대표 이미지" }],
+    siteName: "현대유앤아이",
+    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "현대유앤아이 대표 이미지" }],
     locale: "ko_KR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "현대유앤아이환경 | 지정폐기물 수거·운반업 전문",
+    title: "현대유앤아이 | 지정폐기물 수거·운반업 전문",
     description: "신뢰성과 전문성을 최우선으로 하는 지정폐기물 수거·운반업 전문 기업입니다.",
     images: ["/images/og-image.jpg"],
   },
