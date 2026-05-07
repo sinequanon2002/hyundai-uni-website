@@ -21,6 +21,8 @@ import {
 import type { Metadata } from "next";
 import { wasteTypeDetails, wasteTypeDetailBySlug } from "@/lib/waste-type-details";
 import { COMPANY } from "@/lib/constants";
+import { ContentMeta } from "@/components/ui/ContentMeta";
+import { AuthorityLinks } from "@/components/ui/AuthorityLinks";
 
 const iconMap: Record<string, React.ElementType> = {
   Factory,
@@ -223,6 +225,12 @@ export default function WasteTypeDetailPage({ params }: Props) {
           다른 지정폐기물 종류 보기
         </Link>
       </div>
+
+      <AuthorityLinks className="mt-10" />
+      <ContentMeta
+        reviewDate="2026-05"
+        legalBasis={detail.legalBasis}
+      />
     </div>
   );
 }

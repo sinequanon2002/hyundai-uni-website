@@ -4,6 +4,72 @@ import { cn } from "@/lib/utils";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://hyundaiuni.kr";
 
+// LocalBusiness + Organization 구조화 데이터 — AI 엔진에 사업자 정보를 명확히 전달
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "EnvironmentalBusiness"],
+      "@id": `${SITE_URL}/#business`,
+      name: "주식회사 현대유앤아이",
+      alternateName: "현대유앤아이",
+      url: SITE_URL,
+      logo: `${SITE_URL}/images/logo.png`,
+      image: `${SITE_URL}/images/og-image.jpg`,
+      description:
+        "지정폐기물 수거·운반업 전문. 폐유·폐산·폐알칼리·폐유기용제·폐석면 등 지정폐기물 처리. 경상북도·대구 기반 전국 서비스.",
+      telephone: "053-781-7667",
+      email: "hduni3973@naver.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "하양읍 하양로 34, 2층 비-04호",
+        addressLocality: "경산시",
+        addressRegion: "경상북도",
+        postalCode: "38540",
+        addressCountry: "KR",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 35.9259,
+        longitude: 128.8223,
+      },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "18:00",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "대한민국",
+      },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "지정폐기물 수거·운반 서비스",
+        itemListElement: [
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "폐유 수거·운반" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "폐산·폐알칼리 수거·운반" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "폐유기용제 수거·운반" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "폐석면 수거·운반" } },
+          { "@type": "Offer", itemOffered: { "@type": "Service", name: "의료폐기물 수거·운반" } },
+        ],
+      },
+      foundingDate: "2024-02-14",
+      legalName: "주식회사 현대유앤아이",
+      taxID: "857-87-03200",
+      sameAs: [SITE_URL],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "현대유앤아이",
+      publisher: { "@id": `${SITE_URL}/#business` },
+      inLanguage: "ko-KR",
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -58,6 +124,10 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
       </head>
       <body
         className={cn(
