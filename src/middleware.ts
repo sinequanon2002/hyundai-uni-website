@@ -6,11 +6,14 @@ import { type NextRequest, NextResponse } from "next/server";
  * (admin) 라우트 그룹은 URL에 영향 없음 → 실제 경로로 나열
  */
 const ADMIN_PATHS = ["/inquiries", "/users", "/notices", "/gallery", "/settings"];
+const CUSTOMER_PATHS = ["/my"];
 
 function isAdminPath(pathname: string): boolean {
-  return ADMIN_PATHS.some(
-    (p) => pathname === p || pathname.startsWith(p + "/")
-  );
+  return ADMIN_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
+}
+
+function isCustomerPath(pathname: string): boolean {
+  return CUSTOMER_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
 }
 
 export async function middleware(request: NextRequest) {
@@ -31,11 +34,18 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // 로그인 페이지: 이미 로그인된 경우 /inquiries로 이동
-  if (pathname === "/login" && user) {
-    const next = request.nextUrl.searchParams.get("next") ?? "/inquiries";
-    // open redirect 방지: 같은 origin의 경로만 허용
-    const safeNext = next.startsWith("/") ? next : "/inquiries";
+  // 고객 마이페이지 라우트: 미인증 시 로그인으로 리다이렉트
+  if (isCustomerPath(pathname) && !user) {
+    const loginUrl = request.nextUrl.clone();
+    loginUrl.pathname = "/login";
+    loginUrl.searchParams.set("next", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // 로그인/회원가입 페이지: 이미 로그인된 경우 리다이렉트
+  if ((pathname === "/login" || pathname === "/register") && user) {
+    const next = request.nextUrl.searchParams.get("next") ?? "/my";
+    const safeNext = next.startsWith("/") && !next.startsWith("//") ? next : "/my";
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = safeNext;
     redirectUrl.search = "";

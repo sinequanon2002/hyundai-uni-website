@@ -77,6 +77,12 @@ export async function submitInquiry(
   }
 
   const data = parsed.data;
+
+  // 로그인된 사용자이면 user_id 연결
+  const userClient = createClient();
+  const { data: { user } } = await userClient.auth.getUser();
+  const userId = user?.id ?? null;
+
   const supabase = createAdminClient();
 
   const { data: inserted, error: dbError } = await supabase
@@ -98,6 +104,7 @@ export async function submitInquiry(
       quantity: data.quantity ?? null,
       message: data.message ?? null,
       notification_method: data.notificationMethod,
+      user_id: userId,
     })
     .select("id")
     .single();
