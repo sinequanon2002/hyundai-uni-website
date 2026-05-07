@@ -8,6 +8,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { isStaff } from "@/lib/auth/roles";
 import { InquiryNotificationEmail } from "@/emails/InquiryNotificationEmail";
 import { InquiryConfirmationEmail } from "@/emails/InquiryConfirmationEmail";
+import { sendInquiryNotification } from "@/lib/solapi";
 
 function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
@@ -168,10 +169,20 @@ export async function submitInquiry(
       }
     }
 
-    // SMS / 카카오 알림톡 — 향후 솔라피(Solapi) API 연동 시 여기에 추가
-    // if (data.notificationMethod === "sms" || data.notificationMethod === "kakao") {
-    //   TODO: SOLAPI_API_KEY 환경변수 추가 후 활성화
-    // }
+    // SMS / 카카오 알림톡 발송 (솔라피)
+    if (data.notificationMethod === "sms" || data.notificationMethod === "kakao") {
+      try {
+        await sendInquiryNotification(data.notificationMethod, {
+          to: data.phone,
+          contactName: data.contactName,
+          companyName: data.companyName,
+          wasteTypes: data.wasteTypes,
+          inquiryId,
+        });
+      } catch (err) {
+        console.error("[submitInquiry] SMS/알림톡 발송 실패:", err);
+      }
+    }
   })();
 
   return { success: true, data: { id: inquiryId } };
