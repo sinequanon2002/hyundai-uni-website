@@ -82,11 +82,11 @@ export async function submitInquiry(
     .from("inquiries")
     .insert({
       company_name: data.companyName,
-      department: data.department,
+      department: data.department || null,
       contact_name: data.contactName,
-      email: data.email,
+      email: data.email || null,
       phone: data.phone,
-      address: data.address,
+      address: data.address || null,
       address_detail: data.addressDetail ?? null,
       waste_types: data.wasteTypes,
       photo_urls: data.photoUrls && data.photoUrls.length > 0 ? data.photoUrls : null,
@@ -96,6 +96,7 @@ export async function submitInquiry(
       collection_date: data.collectionDate ?? null,
       quantity: data.quantity ?? null,
       message: data.message ?? null,
+      notification_method: data.notificationMethod,
     })
     .select("id")
     .single();
@@ -143,27 +144,34 @@ export async function submitInquiry(
       console.error("[submitInquiry] Admin email exception:", err);
     }
 
-    // 고객 접수 확인
-    try {
-      const r2 = await getResend().emails.send({
-        from: "현대유앤아이 <onboarding@resend.dev>",
-        to: [data.email],
-        subject: "견적 문의가 접수되었습니다 - 현대유앤아이",
-        react: InquiryConfirmationEmail({
-          contactName: data.contactName,
-          companyName: data.companyName,
-          wasteTypes: data.wasteTypes,
-          inquiryId,
-        }),
-      });
-      if (r2.error) {
-        console.error("[submitInquiry] Customer email error:", r2.error);
-      } else {
-        console.log("[submitInquiry] Customer email sent:", r2.data?.id);
+    // 고객 접수 확인 (이메일 선택 + 이메일 주소 있을 때만)
+    if (data.notificationMethod === "email" && data.email) {
+      try {
+        const r2 = await getResend().emails.send({
+          from: "현대유앤아이 <onboarding@resend.dev>",
+          to: [data.email],
+          subject: "견적 문의가 접수되었습니다 - 현대유앤아이",
+          react: InquiryConfirmationEmail({
+            contactName: data.contactName,
+            companyName: data.companyName,
+            wasteTypes: data.wasteTypes,
+            inquiryId,
+          }),
+        });
+        if (r2.error) {
+          console.error("[submitInquiry] Customer email error:", r2.error);
+        } else {
+          console.log("[submitInquiry] Customer email sent:", r2.data?.id);
+        }
+      } catch (err) {
+        console.error("[submitInquiry] Customer email exception:", err);
       }
-    } catch (err) {
-      console.error("[submitInquiry] Customer email exception:", err);
     }
+
+    // SMS / 카카오 알림톡 — 향후 솔라피(Solapi) API 연동 시 여기에 추가
+    // if (data.notificationMethod === "sms" || data.notificationMethod === "kakao") {
+    //   TODO: SOLAPI_API_KEY 환경변수 추가 후 활성화
+    // }
   })();
 
   return { success: true, data: { id: inquiryId } };

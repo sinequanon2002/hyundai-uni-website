@@ -11,6 +11,8 @@ import {
   inquiryFormSchema,
   type InquiryFormValues,
   WASTE_CATEGORIES,
+  NOTIFICATION_METHODS,
+  type NotificationMethod,
 } from "@/lib/schemas/inquiry";
 import { submitInquiry } from "@/lib/actions/inquiry";
 import {
@@ -25,6 +27,8 @@ import {
   Clock,
   ArrowRight,
   ChevronDown,
+  MessageSquare,
+  MapPin,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -81,6 +85,7 @@ export default function InquiryPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
   const [wasteSearch, setWasteSearch] = useState("");
+  const [notificationMethod, setNotificationMethod] = useState<NotificationMethod>("sms");
 
   const {
     register,
@@ -96,6 +101,7 @@ export default function InquiryPage() {
       wasteTypes: [],
       photoUrls: [],
       marketingConsent: false,
+      notificationMethod: "sms",
     },
   });
 
@@ -328,24 +334,22 @@ export default function InquiryPage() {
                     </div>
                     <div>
                       <label className={labelCls}>
-                        소속팀 <span className="text-red-500">*</span>
+                        소속팀{" "}
+                        <span className="text-gray-400 font-normal text-xs">(선택)</span>
                       </label>
                       <input
                         {...register("department")}
                         placeholder="예: 환경안전팀"
-                        className={inputCls(!!errors.department)}
+                        className={inputCls(false)}
                       />
-                      {errors.department && (
-                        <p className={errorCls}>{errors.department.message}</p>
-                      )}
                     </div>
                   </div>
 
-                  {/* 이름 + 이메일 */}
+                  {/* 이름 + 전화번호 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className={labelCls}>
-                        이름 <span className="text-red-500">*</span>
+                        담당자명 <span className="text-red-500">*</span>
                       </label>
                       <input
                         {...register("contactName")}
@@ -356,6 +360,93 @@ export default function InquiryPage() {
                         <p className={errorCls}>{errors.contactName.message}</p>
                       )}
                     </div>
+                    <div>
+                      <label className={labelCls}>
+                        전화번호 <span className="text-red-500">*</span>
+                      </label>
+                      <Controller
+                        name="phone"
+                        control={control}
+                        render={({ field }) => (
+                          <input
+                            {...field}
+                            type="tel"
+                            placeholder="010-0000-0000"
+                            onChange={(e) =>
+                              field.onChange(formatPhone(e.target.value))
+                            }
+                            className={inputCls(!!errors.phone)}
+                          />
+                        )}
+                      />
+                      {errors.phone && (
+                        <p className={errorCls}>{errors.phone.message}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* 견적 알림 수신 방법 */}
+                  <div>
+                    <label className={labelCls}>
+                      <MessageSquare className="inline w-4 h-4 mr-1 mb-0.5 text-[#1F4E79]" />
+                      견적 알림 수신 방법 <span className="text-red-500">*</span>
+                    </label>
+                    <p className="text-xs text-gray-400 mb-2">
+                      견적서 발송 및 상담 연락을 받으실 방법을 선택해주세요.
+                    </p>
+                    <Controller
+                      name="notificationMethod"
+                      control={control}
+                      render={({ field }) => (
+                        <div className="flex flex-wrap gap-2">
+                          {NOTIFICATION_METHODS.map(({ value, label }) => {
+                            const selected = field.value === value;
+                            return (
+                              <button
+                                key={value}
+                                type="button"
+                                onClick={() => {
+                                  field.onChange(value);
+                                  setNotificationMethod(value as NotificationMethod);
+                                }}
+                                className={cn(
+                                  "flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all",
+                                  selected
+                                    ? "bg-[#1F4E79] border-[#1F4E79] text-white shadow-sm"
+                                    : "bg-white border-gray-200 text-gray-600 hover:border-[#1F4E79]/50"
+                                )}
+                              >
+                                <span>{label}</span>
+                                {value === "sms" && (
+                                  <span className="text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded-full font-semibold hidden">
+                                    즉시
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    />
+                    {notificationMethod === "sms" && (
+                      <p className="mt-2 text-xs text-[#1F4E79] bg-[#1F4E79]/5 rounded-lg px-3 py-2">
+                        입력하신 전화번호로 문자메시지(SMS)를 통해 견적을 안내해드립니다.
+                      </p>
+                    )}
+                    {notificationMethod === "kakao" && (
+                      <p className="mt-2 text-xs text-[#1F4E79] bg-[#1F4E79]/5 rounded-lg px-3 py-2">
+                        카카오톡 알림톡으로 견적을 안내해드립니다. 카카오 미사용 시 문자로 대체 발송됩니다.
+                      </p>
+                    )}
+                    {notificationMethod === "email" && (
+                      <p className="mt-2 text-xs text-[#1F4E79] bg-[#1F4E79]/5 rounded-lg px-3 py-2">
+                        아래에 이메일 주소를 입력해주세요. 견적서를 이메일로 발송해드립니다.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* 이메일 — 이메일 수신 선택 시에만 표시 */}
+                  {notificationMethod === "email" && (
                     <div>
                       <label className={labelCls}>
                         이메일 <span className="text-red-500">*</span>
@@ -370,44 +461,28 @@ export default function InquiryPage() {
                         <p className={errorCls}>{errors.email.message}</p>
                       )}
                     </div>
-                  </div>
-
-                  {/* 전화번호 */}
-                  <div>
-                    <label className={labelCls}>
-                      전화번호 <span className="text-red-500">*</span>
-                    </label>
-                    <Controller
-                      name="phone"
-                      control={control}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="tel"
-                          placeholder="010-0000-0000"
-                          onChange={(e) =>
-                            field.onChange(formatPhone(e.target.value))
-                          }
-                          className={inputCls(!!errors.phone)}
-                        />
-                      )}
-                    />
-                    {errors.phone && (
-                      <p className={errorCls}>{errors.phone.message}</p>
-                    )}
-                  </div>
+                  )}
 
                   {/* 수거 장소 */}
                   <div>
                     <label className={labelCls}>
-                      수거 장소 <span className="text-red-500">*</span>
+                      <MapPin className="inline w-4 h-4 mr-1 mb-0.5 text-[#1F4E79]" />
+                      수거 장소{" "}
+                      <span className="text-gray-400 font-normal text-xs">(선택)</span>
                     </label>
+                    <p className="text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2 mb-2 flex items-start gap-1.5">
+                      <span className="shrink-0 mt-0.5">💡</span>
+                      <span>
+                        정확한 수거 지역을 입력하시면 운반 거리를 반영한 더 정확한 견적을 안내해드릴 수 있습니다.
+                        주소 입력은 필수가 아니며, 미입력 시 담당자 연락 후 확인합니다.
+                      </span>
+                    </p>
                     <div className="flex gap-2">
                       <input
                         readOnly
                         value={addressValue ?? ""}
-                        placeholder="주소를 입력해 주세요"
-                        className={cn(inputCls(!!errors.address), "cursor-pointer flex-1 min-w-0")}
+                        placeholder="주소 검색 (선택)"
+                        className={cn(inputCls(false), "cursor-pointer flex-1 min-w-0")}
                         onClick={handleAddressSearch}
                       />
                       <button
@@ -419,12 +494,9 @@ export default function InquiryPage() {
                         <Search className="w-4 h-4" />
                       </button>
                     </div>
-                    {errors.address && (
-                      <p className={errorCls}>{errors.address.message}</p>
-                    )}
                     <input
                       {...register("addressDetail")}
-                      placeholder="상세 주소를 입력해 주세요"
+                      placeholder="상세 주소 (선택)"
                       className={cn(inputCls(), "mt-2")}
                     />
                   </div>
@@ -482,19 +554,35 @@ export default function InquiryPage() {
                                 const isExpanded = (wasteSearch && matchingMinors.length > 0) || expandedCategory === major;
                                 const selectedCount = field.value.filter((v) => v.startsWith(`${major} - `) || v === major).length;
 
+                                const isFeatured = major.startsWith("⭐");
                                 return (
-                                  <div key={major} className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                                  <div
+                                    key={major}
+                                    className={cn(
+                                      "border rounded-lg overflow-hidden bg-white",
+                                      isFeatured
+                                        ? "border-[#1F4E79]/40 ring-1 ring-[#1F4E79]/20"
+                                        : "border-gray-200"
+                                    )}
+                                  >
                                     <button
                                       type="button"
                                       onClick={() => setExpandedCategory(isExpanded ? null : major)}
                                       className={cn(
                                         "w-full flex items-center justify-between px-4 py-3 transition-colors",
-                                        isExpanded ? "bg-[#F5F8FB]" : "hover:bg-gray-50",
-                                        selectedCount > 0 && !isExpanded && "border-l-4 border-l-[#1F4E79]"
+                                        isFeatured
+                                          ? isExpanded ? "bg-[#1F4E79]/10" : "bg-[#1F4E79]/5 hover:bg-[#1F4E79]/10"
+                                          : isExpanded ? "bg-[#F5F8FB]" : "hover:bg-gray-50",
+                                        selectedCount > 0 && !isExpanded && !isFeatured && "border-l-4 border-l-[#1F4E79]"
                                       )}
                                     >
-                                      <span className="font-semibold text-sm text-gray-800">
+                                      <span className={cn("font-semibold text-sm", isFeatured ? "text-[#1F4E79]" : "text-gray-800")}>
                                         {major}
+                                        {isFeatured && (
+                                          <span className="ml-2 text-[10px] bg-[#1F4E79] text-white px-2 py-0.5 rounded-full font-bold">
+                                            집중 처리
+                                          </span>
+                                        )}
                                         {selectedCount > 0 && (
                                           <span className="ml-2 text-[#1F4E79] bg-[#1F4E79]/10 px-2 py-0.5 rounded-full text-xs">
                                             {selectedCount}개 선택됨
@@ -502,7 +590,7 @@ export default function InquiryPage() {
                                         )}
                                       </span>
                                       <ChevronDown
-                                        className={cn("w-4 h-4 text-gray-500 transition-transform", isExpanded && "rotate-180")}
+                                        className={cn("w-4 h-4 transition-transform", isFeatured ? "text-[#1F4E79]" : "text-gray-500", isExpanded && "rotate-180")}
                                       />
                                     </button>
                                     {isExpanded && (

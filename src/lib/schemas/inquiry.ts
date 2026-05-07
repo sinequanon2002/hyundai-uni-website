@@ -1,14 +1,17 @@
 import { z } from "zod";
 
 export const WASTE_CATEGORIES = {
+  "⭐ 그 밖의 폐산 (혼합·미상 성분)": [
+    "그 밖의 폐산", "혼합폐산", "성분미상 폐산", "공정부산 폐산", "폐산 (기타)"
+  ],
   "폐유류": [
     "폐윤활유", "폐경유", "폐유처리", "폐오일", "폐절삭유", "폐산업유", "폐구리스", "폐방커씨유", "폐선박유"
   ],
   "폐유기용제류": [
     "폐유기용제", "폐알콜", "폐신너", "폐유기용제처리"
   ],
-  "폐산류": [
-    "폐황산", "폐산", "폐염산", "폐불산", "폐질산", "폐황산처리", "폐황산중화작업"
+  "폐산류 (특정 성분)": [
+    "폐황산", "폐염산", "폐불산", "폐질산", "폐황산처리", "폐황산중화작업"
   ],
   "폐알칼리류": [
     "폐알칼리", "폐알칼리처리"
@@ -36,19 +39,35 @@ export const WASTE_CATEGORIES = {
 
 export type WasteMajorCategory = keyof typeof WASTE_CATEGORIES;
 
+/** 알림 수신 방법 */
+export const NOTIFICATION_METHODS = [
+  { value: "email", label: "이메일" },
+  { value: "sms",   label: "문자메시지(SMS)" },
+  { value: "kakao", label: "카카오톡 알림톡" },
+] as const;
+
+export type NotificationMethod = "email" | "sms" | "kakao";
+
 /** 신규 견적문의 폼 스키마 */
 export const inquiryFormSchema = z.object({
   companyName: z.string().min(1, "사업장명을 입력해주세요"),
-  department: z.string().min(1, "소속팀을 입력해주세요"),
+  department: z.string().optional().or(z.literal("")),
   contactName: z.string().min(1, "이름을 입력해주세요"),
-  email: z.string().email("올바른 이메일 형식이 아닙니다"),
+  notificationMethod: z.enum(["email", "sms", "kakao"]).default("sms"),
+  email: z
+    .string()
+    .optional()
+    .refine(
+      (v) => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+      "올바른 이메일 형식이 아닙니다"
+    ),
   phone: z
     .string()
     .regex(
       /^\d{2,3}-\d{3,4}-\d{4}$/,
       "올바른 전화번호 형식이 아닙니다 (예: 010-1234-5678)"
     ),
-  address: z.string().min(1, "수거 장소 주소를 검색해주세요"),
+  address: z.string().optional().or(z.literal("")),
   addressDetail: z.string().optional().or(z.literal("")),
   wasteTypes: z
     .array(z.string())
@@ -61,7 +80,10 @@ export const inquiryFormSchema = z.object({
     errorMap: () => ({ message: "개인정보 수집·이용에 동의하셔야 합니다" }),
   }),
   marketingConsent: z.boolean().optional().default(false),
-});
+}).refine(
+  (data) => data.notificationMethod !== "email" || (!!data.email && data.email.length > 0),
+  { message: "이메일 수신을 선택하신 경우 이메일 주소를 입력해주세요", path: ["email"] }
+);
 
 export type InquiryFormValues = z.infer<typeof inquiryFormSchema>;
 
