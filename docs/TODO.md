@@ -46,11 +46,13 @@
 
 ---
 
-## 🔵 E. 이메일 템플릿
+## 🔵 E. 이메일 (Resend)
 
 | # | 항목 | 상태 | 비고 |
 |---|------|------|------|
-| E-1 | 견적서 발송 이메일 템플릿 | ⬜ 미구현 | 관리자가 견적 확정 후 고객에게 견적서 발송 시 사용 |
+| E-1 | Resend 도메인 인증 완료 확인 | ⬜ 대기중 | `hyundaiuni.kr` DNS 전파 완료 후 Resend Domains → Verify |
+| E-2 | 발신 주소 변경 — `onboarding@resend.dev` → `no-reply@hyundaiuni.kr` | ⬜ 미완성 | E-1 완료 후 `src/lib/actions/inquiry.ts` 2곳 수정 + 재배포 |
+| E-3 | 견적서 발송 이메일 템플릿 | ⬜ 미구현 | 관리자가 견적 확정 후 고객에게 견적서 발송 시 사용 |
 
 ---
 
