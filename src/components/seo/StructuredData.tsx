@@ -1,38 +1,41 @@
-import Script from 'next/script';
+/**
+ * 메인 홈페이지 전용 WebPage 구조화 데이터
+ *
+ * LocalBusiness 스키마는 layout.tsx에서 전역 삽입되므로 여기서 중복 삽입하지 않음.
+ * 이 컴포넌트는 홈페이지(WebPage) + BreadcrumbList 스키마만 담당.
+ */
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://hyundaiuni.kr";
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${SITE_URL}/#webpage`,
+  url: SITE_URL,
+  name: "현대유앤아이 | 지정폐기물 수거·운반업 전문",
+  description:
+    "신뢰성과 전문성을 최우선으로 하는 지정폐기물 수거·운반업 전문 기업. 폐유·폐산·폐알칼리·폐유기용제 등 전 품목 허가 처리.",
+  inLanguage: "ko-KR",
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  about: { "@id": `${SITE_URL}/#business` },
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "홈",
+        item: SITE_URL,
+      },
+    ],
+  },
+};
 
 export function StructuredData() {
-  const localBusinessData = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "현대유앤아이",
-    "description": "신뢰성과 전문성을 최우선으로 하는 지정폐기물 수거·운반업 전문 기업입니다.",
-    "telephone": "02-1234-5678", // TODO: 실제 전화번호
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "TODO_STREET_ADDRESS",
-      "addressLocality": "화성시",
-      "addressRegion": "경기도",
-      "postalCode": "12345",
-      "addressCountry": "KR"
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "18:00"
-      }
-    ],
-    "areaServed": ["서울", "경기", "인천", "충청"],
-    "url": "https://[도메인]", // TODO
-    "image": "https://[도메인]/images/og-image.jpg" // TODO
-  };
-
   return (
-    <Script
-      id="structured-data"
+    <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessData) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
     />
   );
 }
