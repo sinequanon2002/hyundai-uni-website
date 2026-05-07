@@ -3,16 +3,28 @@
 import { register } from "@/lib/actions/customer";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useTransition } from "react";
+import { useFormStatus } from "react-dom";
 import { Suspense } from "react";
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full mt-2 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
+    >
+      {pending ? "처리 중..." : "가입하기"}
+    </button>
+  );
+}
 
 function RegisterForm() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const verify = searchParams.get("verify");
-  const [isPending, startTransition] = useTransition();
 
-  // 이메일 확인 대기 화면
+  // 이메일 확인 대기 화면 (email_confirm 활성화 시에만 해당)
   if (verify === "1") {
     return (
       <div className="min-h-screen bg-neutral-light flex items-center justify-center px-4 py-12">
@@ -31,8 +43,7 @@ function RegisterForm() {
           </p>
           <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-left mb-6">
             <p className="text-xs text-blue-700 leading-relaxed">
-              이메일이 오지 않는 경우 스팸함을 확인하거나,
-              잠시 후 다시 시도해주세요.
+              이메일이 오지 않는 경우 스팸함을 확인하거나 잠시 후 다시 시도해주세요.
             </p>
           </div>
           <Link href="/login" className="block w-full py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-secondary transition-colors text-center">
@@ -41,12 +52,6 @@ function RegisterForm() {
         </div>
       </div>
     );
-  }
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    startTransition(() => register(formData));
   }
 
   return (
@@ -68,11 +73,11 @@ function RegisterForm() {
 
           {error && (
             <div role="alert" className="mb-5 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700">
-              {error}
+              {decodeURIComponent(error)}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form action={register} className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-neutral-dark mb-1.5">
                 이메일 <span className="text-red-500">*</span>
@@ -118,13 +123,7 @@ function RegisterForm() {
                 className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition" />
             </div>
 
-            <button
-              type="submit"
-              disabled={isPending}
-              className="w-full mt-2 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
-            >
-              {isPending ? "처리 중..." : "가입하기"}
-            </button>
+            <SubmitButton />
           </form>
         </div>
 

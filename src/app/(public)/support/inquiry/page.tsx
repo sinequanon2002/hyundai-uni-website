@@ -891,20 +891,27 @@ export default function InquiryPage() {
                 <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-left">
                   <p className="text-xs font-semibold text-blue-800 mb-1">문의 내역을 온라인으로 확인하세요</p>
                   <p className="text-xs text-blue-600 leading-relaxed">
-                    로그인하면 접수 현황·견적 결과를 실시간으로 확인할 수 있습니다.
+                    로그인하면 접수 현황·견적 결과를 실시간으로 추적할 수 있습니다.
                   </p>
                 </div>
+                <Link
+                  href="/support/inquiry-status"
+                  className="block w-full py-2.5 bg-[#1F4E79] text-white font-semibold rounded-xl hover:bg-[#2E75B6] transition-colors text-sm text-center"
+                  onClick={() => setShowSuccessModal(false)}
+                >
+                  문의현황 조회하기
+                </Link>
                 <div className="flex gap-2">
                   <Link
                     href="/login"
-                    className="flex-1 py-2.5 bg-[#1F4E79] text-white font-semibold rounded-xl hover:bg-[#2E75B6] transition-colors text-sm text-center"
+                    className="flex-1 py-2 border border-[#1F4E79] text-[#1F4E79] font-semibold rounded-xl hover:bg-blue-50 transition-colors text-sm text-center"
                     onClick={() => setShowSuccessModal(false)}
                   >
                     로그인
                   </Link>
                   <Link
                     href="/register"
-                    className="flex-1 py-2.5 border border-[#1F4E79] text-[#1F4E79] font-semibold rounded-xl hover:bg-blue-50 transition-colors text-sm text-center"
+                    className="flex-1 py-2 border border-gray-300 text-gray-600 font-semibold rounded-xl hover:bg-gray-50 transition-colors text-sm text-center"
                     onClick={() => setShowSuccessModal(false)}
                   >
                     회원가입

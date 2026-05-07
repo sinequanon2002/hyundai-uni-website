@@ -24,7 +24,8 @@ export const SUPPORT_SUBNAV_ITEMS = [
   { label: "공지사항", href: "/support/notice" },
   { label: "자료실", href: "/support/blog" },
   { label: "현장갤러리", href: "/support/gallery" },
-  { label: "견적문의", href: "/support/inquiry" }
+  { label: "견적문의", href: "/support/inquiry" },
+  { label: "문의현황 조회", href: "/support/inquiry-status" },
 ];
 
 export function SubNav({ items = COMPANY_SUBNAV_ITEMS }: { items?: {label: string, href: string}[] }) {

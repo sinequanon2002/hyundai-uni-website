@@ -41,6 +41,41 @@ export interface MyInquiry {
   notification_method: string;
 }
 
+export interface PublicInquiry {
+  id: string;
+  created_at: string;
+  waste_types: string[];
+  status: "pending" | "reviewing" | "quoted" | "completed" | "cancelled";
+  collection_date: string | null;
+  message: string | null;
+}
+
+// ─── 비회원 전화번호 문의 조회 (공개) ─────────────────────────────────────────
+
+export async function searchInquiriesByPhone(
+  phone: string
+): Promise<ActionResult<PublicInquiry[]>> {
+  const cleaned = phone.replace(/\D/g, "");
+  if (cleaned.length < 9) {
+    return { success: false, error: "올바른 전화번호를 입력해주세요" };
+  }
+
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("inquiries")
+    .select("id, created_at, waste_types, status, collection_date, message")
+    .or(`phone.eq.${phone},phone.eq.${cleaned}`)
+    .order("created_at", { ascending: false })
+    .limit(20);
+
+  if (error) {
+    console.error("[searchInquiriesByPhone] error:", error);
+    return { success: false, error: "조회 중 오류가 발생했습니다" };
+  }
+
+  return { success: true, data: (data ?? []) as PublicInquiry[] };
+}
+
 // ─── 인증 헬퍼 ───────────────────────────────────────────────────────────────
 
 async function requireCustomer(): Promise<string> {
