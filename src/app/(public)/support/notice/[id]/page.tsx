@@ -32,11 +32,36 @@ const categoryColorMap: Record<string, string> = {
   "시스템점검": "bg-yellow-100 text-yellow-700",
 };
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://hyundaiuni.kr";
+
 export default async function NoticeDetailPage({ params }: Props) {
   const result = await getNoticeById(params.id);
   if (!result.success || !result.data) notFound();
 
   const notice = result.data;
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: notice.title,
+    description: extractDescription(notice.content),
+    datePublished: notice.created_at,
+    dateModified: notice.created_at,
+    url: `${SITE_URL}/support/notice/${notice.id}`,
+    publisher: {
+      "@type": "Organization",
+      name: "주식회사 현대유앤아이",
+      url: SITE_URL,
+    },
+    author: {
+      "@type": "Organization",
+      name: "주식회사 현대유앤아이",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/support/notice/${notice.id}`,
+    },
+  };
 
   // 조회수 증가 (비동기, 응답에 영향 없음)
   void incrementNoticeViews(notice.id);
@@ -59,6 +84,10 @@ export default async function NoticeDetailPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <PageBanner title="고객센터" subtitle="Customer Support" />
       <SubNav items={SUPPORT_SUBNAV_ITEMS} />
 
