@@ -1,19 +1,22 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { wasteTypes } from '@/lib/waste-types';
-import { 
-  Factory, 
-  FlaskConical, 
-  AlertOctagon, 
-  Droplets, 
-  Paintbrush, 
-  Fuel, 
-  Mountain, 
-  Zap, 
-  Skull, 
+import { wasteTypeSlugById } from '@/lib/waste-type-details';
+import {
+  Factory,
+  FlaskConical,
+  AlertOctagon,
+  Droplets,
+  Paintbrush,
+  Fuel,
+  Mountain,
+  Zap,
+  Skull,
   Stethoscope,
-  ChevronDown
+  ChevronDown,
+  ArrowRight,
 } from 'lucide-react';
 
 const iconMap: Record<string, React.ElementType> = {
@@ -49,13 +52,14 @@ export default function WasteTypesPage() {
         {wasteTypes.map((waste) => {
           const Icon = iconMap[waste.icon] || AlertOctagon;
           const isOpen = openId === waste.id;
+          const slug = wasteTypeSlugById[waste.id];
 
           return (
-            <div 
+            <div
               key={waste.id}
               className={`bg-white rounded-2xl shadow-sm border overflow-hidden transition-all duration-300 ${isOpen ? 'ring-2 ring-primary border-transparent' : 'border-gray-200 hover:border-primary/50 hover:shadow-md'}`}
             >
-              <button 
+              <button
                 onClick={() => toggleAccordion(waste.id)}
                 className="w-full text-left p-6 flex flex-col items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
@@ -65,27 +69,57 @@ export default function WasteTypesPage() {
                   </div>
                   <ChevronDown className={`w-6 h-6 text-gray-400 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} />
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{waste.name}</h3>
                 <p className="text-gray-500 text-sm font-medium">{waste.summary}</p>
               </button>
-              
-              <div 
-                className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}
+
+              <div
+                className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-56 opacity-100' : 'max-h-0 opacity-0'}`}
               >
                 <div className="px-6 pb-6 pt-0 text-gray-600 leading-relaxed border-t border-gray-100 mt-2">
-                  <div className="pt-4">
-                    {waste.details}
-                  </div>
+                  <div className="pt-4 text-sm">{waste.details}</div>
+                  {slug && (
+                    <Link
+                      href={`/waste/types/${slug}`}
+                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      수거·운반 서비스 자세히 보기
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* 전용 랜딩 페이지 바로가기 */}
+      <div className="mt-14 bg-primary/5 rounded-2xl border border-primary/15 p-8">
+        <h3 className="text-lg font-bold text-neutral-900 mb-2">품목별 전문 서비스 안내</h3>
+        <p className="text-sm text-neutral-600 mb-5">
+          주요 품목은 수거·운반 절차, 발생 업종, 현장 사진까지 자세히 확인할 수 있습니다.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {[
+            { slug: "폐유", label: "폐유 수거·운반" },
+            { slug: "폐산", label: "폐산·폐알칼리 수거·운반" },
+            { slug: "폐유기용제", label: "폐유기용제 수거·운반" },
+            { slug: "폐석면", label: "폐석면 수거·운반" },
+          ].map(({ slug, label }) => (
+            <Link
+              key={slug}
+              href={`/waste/types/${slug}`}
+              className="inline-flex items-center gap-1.5 bg-white border border-primary/30 text-primary px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition-all"
+            >
+              {label}
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
-
-
-

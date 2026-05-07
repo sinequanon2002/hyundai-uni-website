@@ -9,16 +9,39 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "현장갤러리 | 현대유앤아이",
-  description:
-    "현대유앤아이의 지정폐기물 수거·운반 현장을 확인하세요. 폐유, 폐산, 폐유기용제, 폐석면 등 다양한 지정폐기물 처리 실적과 보유 장비를 소개합니다.",
-};
-
 const ITEMS_PER_PAGE = 12;
 
 interface Props {
   searchParams: { category?: string; region?: string; year?: string; page?: string };
+}
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const region = searchParams.region ?? "";
+  const category = searchParams.category ?? "";
+
+  if (region && category) {
+    return {
+      title: `${region} ${category} 수거·운반 현장 | 현대유앤아이`,
+      description: `${region} 지역 ${category} 수거·운반 실제 현장 사진. 현대유앤아이의 ${region} 지정폐기물 처리 실적을 확인하세요.`,
+    };
+  }
+  if (region) {
+    return {
+      title: `${region} 지정폐기물 수거·운반 현장 | 현대유앤아이`,
+      description: `${region} 지역 지정폐기물 수거·운반 실제 현장 사진. 경상북도·대구 기반 전국 서비스를 제공하는 현대유앤아이의 처리 실적을 확인하세요.`,
+    };
+  }
+  if (category) {
+    return {
+      title: `${category} 수거·운반 현장 | 현대유앤아이`,
+      description: `${category} 수거·운반 실제 현장 사진. 현대유앤아이의 전문 지정폐기물 처리 실적과 보유 장비를 확인하세요.`,
+    };
+  }
+  return {
+    title: "현장갤러리 | 현대유앤아이",
+    description:
+      "현대유앤아이의 지정폐기물 수거·운반 현장을 확인하세요. 폐유, 폐산, 폐유기용제, 폐석면 등 다양한 지정폐기물 처리 실적과 보유 장비를 소개합니다.",
+  };
 }
 
 export default async function GalleryPage({ searchParams }: Props) {
@@ -56,6 +79,21 @@ export default async function GalleryPage({ searchParams }: Props) {
     return `/support/gallery${qs ? `?${qs}` : ""}`;
   }
 
+  // 동적 헤딩 텍스트
+  const headingTitle =
+    region && category
+      ? `${region} ${category} 현장`
+      : region
+      ? `${region} 현장갤러리`
+      : category
+      ? `${category} 현장갤러리`
+      : "현장갤러리";
+
+  const headingDesc =
+    region || category
+      ? `${[region, category].filter(Boolean).join(" ")} 지정폐기물 수거·운반 실제 작업 현장을 확인하세요.`
+      : "지정폐기물 수거·운반 현장 사진과 보유 장비를 확인하세요.";
+
   return (
     <main className="min-h-screen bg-neutral-50">
       <PageBanner title="고객센터" subtitle="Customer Support" />
@@ -67,10 +105,8 @@ export default async function GalleryPage({ searchParams }: Props) {
           <span className="text-primary font-bold tracking-wider text-sm mb-2 block">GALLERY</span>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">현장갤러리</h2>
-              <p className="text-neutral-500 text-sm mt-2">
-                지정폐기물 수거·운반 현장 사진과 보유 장비를 확인하세요.
-              </p>
+              <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">{headingTitle}</h2>
+              <p className="text-neutral-500 text-sm mt-2">{headingDesc}</p>
               <div className="w-12 h-1 bg-accent mt-4" />
             </div>
             {total > 0 && (
@@ -215,6 +251,30 @@ export default async function GalleryPage({ searchParams }: Props) {
             </Link>
           </div>
         )}
+
+        {/* ── 지역별 현장 링크 허브 ── */}
+        <section className="mt-16 bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+          <h3 className="text-base font-bold text-neutral-800 mb-1">지역별 현장 현황</h3>
+          <p className="text-xs text-neutral-500 mb-4">
+            경상북도·대구 기반으로 전국 지정폐기물 수거·운반 서비스를 제공합니다.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {PORTFOLIO_REGIONS.map((r) => (
+              <Link
+                key={r}
+                href={buildUrl({ region: r, page: 1 })}
+                className={cn(
+                  "px-4 py-2 rounded-full text-sm font-medium transition-all border",
+                  region === r
+                    ? "bg-primary text-white border-primary shadow-sm"
+                    : "bg-white text-neutral-700 border-neutral-200 hover:border-primary hover:text-primary"
+                )}
+              >
+                {r} 현장
+              </Link>
+            ))}
+          </div>
+        </section>
       </section>
     </main>
   );
