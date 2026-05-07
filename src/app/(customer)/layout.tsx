@@ -1,17 +1,52 @@
+import { redirect } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { isStaff } from "@/lib/auth/roles";
 import { logout } from "@/lib/actions/auth";
 
+export const metadata: Metadata = {
+  title: "마이페이지 | 현대유앤아이",
+  robots: { index: false, follow: false },
+};
+
 const NAV_ITEMS = [
-  { href: "/my", label: "대시보드", exact: true },
+  { href: "/my", label: "대시보드" },
   { href: "/my/inquiries", label: "나의 문의 내역" },
   { href: "/my/profile", label: "프로필 설정" },
 ];
 
-export default function CustomerLayout({
+export default async function CustomerLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // 1) 인증 확인 — 미들웨어에서 처리하지만 레이아웃에서도 이중 검증
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login?next=/my");
+  }
+
+  // 2) 역할 확인 — 스태프는 관리자 백오피스로 리다이렉트
+  const adminClient = createAdminClient();
+  const { data: profile } = await adminClient
+    .from("profiles")
+    .select("role, full_name, company_name")
+    .eq("id", user.id)
+    .single();
+
+  if (profile && isStaff(profile.role)) {
+    redirect("/inquiries");
+  }
+
+  const displayName = profile?.full_name ?? user.email ?? "고객";
+  const companyName = profile?.company_name;
+
   return (
     <div className="min-h-screen bg-neutral-light flex flex-col">
       {/* 상단 헤더 */}
@@ -21,6 +56,12 @@ export default function CustomerLayout({
             현대유앤아이
           </Link>
           <div className="flex items-center gap-4">
+            <div className="hidden sm:block text-right">
+              <p className="text-xs font-medium text-neutral-dark leading-none">{displayName}</p>
+              {companyName && (
+                <p className="text-xs text-neutral-mid mt-0.5">{companyName}</p>
+              )}
+            </div>
             <Link href="/" className="text-sm text-neutral-mid hover:text-primary transition-colors">
               홈으로
             </Link>
@@ -56,6 +97,14 @@ export default function CustomerLayout({
               ))}
             </ul>
           </nav>
+
+          {/* 새 문의 버튼 */}
+          <Link
+            href="/support/inquiry"
+            className="mt-3 flex items-center justify-center gap-1.5 w-full py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-secondary transition-colors"
+          >
+            새 견적 문의
+          </Link>
         </aside>
 
         {/* 메인 콘텐츠 */}

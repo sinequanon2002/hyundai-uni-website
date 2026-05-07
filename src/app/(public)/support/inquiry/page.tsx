@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useTransition, useRef } from "react";
+import { useState, useTransition, useRef, useEffect } from "react";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
 import Script from "next/script";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -78,6 +80,14 @@ interface UploadedFile {
 export default function InquiryPage() {
   const [isPending, startTransition] = useTransition();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setIsLoggedIn(!!user);
+    });
+  }, []);
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   const [marketingModalOpen, setMarketingModalOpen] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
@@ -849,15 +859,65 @@ export default function InquiryPage() {
             </h3>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
               빠른 시일 내에 담당자가 연락드리겠습니다.
-              <br />
-              접수 확인 이메일을 발송했습니다.
+              {notificationMethod === "email" && (
+                <><br />접수 확인 이메일을 발송했습니다.</>
+              )}
+              {notificationMethod === "sms" && (
+                <><br />접수 확인 문자를 발송했습니다.</>
+              )}
+              {notificationMethod === "kakao" && (
+                <><br />카카오 알림톡을 발송했습니다.</>
+              )}
             </p>
-            <button
-              onClick={() => setShowSuccessModal(false)}
-              className="w-full py-3 bg-[#1F4E79] text-white font-semibold rounded-xl hover:bg-[#2E75B6] transition-colors text-sm"
-            >
-              확인
-            </button>
+
+            {isLoggedIn ? (
+              <div className="space-y-2">
+                <Link
+                  href="/my/inquiries"
+                  className="block w-full py-3 bg-[#1F4E79] text-white font-semibold rounded-xl hover:bg-[#2E75B6] transition-colors text-sm"
+                  onClick={() => setShowSuccessModal(false)}
+                >
+                  문의 내역 확인하기
+                </Link>
+                <button
+                  onClick={() => setShowSuccessModal(false)}
+                  className="block w-full py-2.5 text-sm text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  닫기
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-left">
+                  <p className="text-xs font-semibold text-blue-800 mb-1">문의 내역을 온라인으로 확인하세요</p>
+                  <p className="text-xs text-blue-600 leading-relaxed">
+                    로그인하면 접수 현황·견적 결과를 실시간으로 확인할 수 있습니다.
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Link
+                    href="/login"
+                    className="flex-1 py-2.5 bg-[#1F4E79] text-white font-semibold rounded-xl hover:bg-[#2E75B6] transition-colors text-sm text-center"
+                    onClick={() => setShowSuccessModal(false)}
+                  >
+                    로그인
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="flex-1 py-2.5 border border-[#1F4E79] text-[#1F4E79] font-semibold rounded-xl hover:bg-blue-50 transition-colors text-sm text-center"
+                    onClick={() => setShowSuccessModal(false)}
+                  >
+                    회원가입
+                  </Link>
+                </div>
+                <button
+                  onClick={() => setShowSuccessModal(false)}
+                  className="block w-full py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  닫기
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
