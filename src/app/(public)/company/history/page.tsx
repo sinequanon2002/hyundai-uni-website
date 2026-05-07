@@ -8,28 +8,23 @@ export const metadata = {
 
 const HISTORY_DATA = [
   {
+    year: "2026",
+    events: [
+      "폐기물 수집·운반업 허가증 갱신 (대구지방환경청, 제 대구수집 130호)",
+      "차량 증차 — 81다 7183 (3.0톤) 추가 등록"
+    ]
+  },
+  {
+    year: "2025",
+    events: [
+      "폐기물 수집·운반업 최초 허가 취득 (허가일 2025. 07. 21)",
+      "수집·운반 차량 3대 등록 (91루 3460 · 82라 6276 · 92마 3973)"
+    ]
+  },
+  {
     year: "2024",
     events: [
-      "OOO 인증 취득",
-      "수집운반 차량 증차"
-    ]
-  },
-  {
-    year: "2020",
-    events: [
-      "지정폐기물 수집·운반업 허가 취득"
-    ]
-  },
-  {
-    year: "2018",
-    events: [
-      "사업장폐기물 수집·운반업 허가 취득"
-    ]
-  },
-  {
-    year: "2015",
-    events: [
-      `${COMPANY.shortName} 법인 설립`
+      `${COMPANY.name} 법인 설립 (2024. 02. 14)`
     ]
   }
 ];
@@ -48,25 +43,25 @@ export default function HistoryPage() {
         <div className="relative">
           {/* Vertical Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 transform md:-translate-x-1/2"></div>
-          
+
           <div className="space-y-12 md:space-y-6">
             {HISTORY_DATA.map((item, idx) => {
-              const isEven = idx % 2 === 0; // Even items go on the right side on PC (index 0 is even)
-              
+              const isEven = idx % 2 === 0;
+
               return (
                 <div key={item.year} className={`relative flex flex-col md:flex-row items-start md:items-center ${!isEven ? 'md:flex-row-reverse' : ''}`}>
                   {/* Timeline Dot */}
                   <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-primary transform -translate-x-[7px] md:-translate-x-1/2 mt-2 md:mt-0 ring-4 ring-white z-10 shadow-sm"></div>
-                  
+
                   {/* Content Container */}
                   <div className={`ml-12 md:ml-0 md:w-1/2 w-full pt-0.5 md:pt-4 pb-4 ${isEven ? 'md:pl-16' : 'md:pr-16 md:text-right'}`}>
                     <h3 className="text-4xl font-extrabold text-primary mb-4 tracking-tighter opacity-90">{item.year}</h3>
                     <ul className="space-y-3 text-lg text-neutral-700">
                       {item.events.map((event, i) => (
-                        <li 
-                          key={i} 
-                          className={`relative break-keep leading-relaxed 
-                            ${isEven ? 'pl-4 before:left-0' : 'pl-4 md:pr-4 md:pl-0 before:left-0 md:before:right-0 md:before:left-auto'} 
+                        <li
+                          key={i}
+                          className={`relative break-keep leading-relaxed
+                            ${isEven ? 'pl-4 before:left-0' : 'pl-4 md:pr-4 md:pl-0 before:left-0 md:before:right-0 md:before:left-auto'}
                             before:absolute before:top-2.5 before:w-1.5 before:h-1.5 before:bg-accent before:rounded-full`}
                         >
                           {event}

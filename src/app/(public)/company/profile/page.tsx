@@ -25,13 +25,20 @@ const VISIONS = [
   }
 ];
 
+const VEHICLES = [
+  { plate: "91루 3460", licenseNo: "2025-전-041", tons: "4.0톤" },
+  { plate: "82라 6276", licenseNo: "2025-전-042", tons: "11.8톤" },
+  { plate: "92마 3973", licenseNo: "2025-전-043", tons: "3.7톤" },
+  { plate: "81다 7183", licenseNo: "2026-전-007", tons: "3.0톤" },
+];
+
 export default function ProfilePage() {
   return (
     <main className="min-h-screen bg-white">
       <PageBanner title="회사소개" subtitle="Company Profile" />
       <SubNav />
       <section className="max-w-6xl mx-auto px-4 py-16 md:py-24 space-y-24">
-        
+
         {/* Vision Section */}
         <div>
           <div className="text-center mb-12">
@@ -62,36 +69,38 @@ export default function ProfilePage() {
           <div className="bg-white border-t-2 border-primary shadow-sm rounded-sm">
             <dl className="grid grid-cols-1 md:grid-cols-2">
               <div className="flex border-b border-gray-200 p-4 hover:bg-neutral-50 transition-colors">
-                <dt className="w-32 flex-shrink-0 font-bold text-neutral-900">회사명</dt>
+                <dt className="w-36 flex-shrink-0 font-bold text-neutral-900">회사명</dt>
                 <dd className="text-neutral-600">{COMPANY.name}</dd>
               </div>
               <div className="flex border-b border-gray-200 p-4 hover:bg-neutral-50 transition-colors">
-                <dt className="w-32 flex-shrink-0 font-bold text-neutral-900">대표이사</dt>
+                <dt className="w-36 flex-shrink-0 font-bold text-neutral-900">대표이사</dt>
                 <dd className="text-neutral-600">{COMPANY.ceo}</dd>
               </div>
               <div className="flex border-b border-gray-200 p-4 hover:bg-neutral-50 transition-colors">
-                <dt className="w-32 flex-shrink-0 font-bold text-neutral-900">설립일</dt>
-                <dd className="text-neutral-600">{COMPANY.established}</dd>
+                <dt className="w-36 flex-shrink-0 font-bold text-neutral-900">설립일</dt>
+                <dd className="text-neutral-600">2024년 02월 14일</dd>
               </div>
               <div className="flex border-b border-gray-200 p-4 hover:bg-neutral-50 transition-colors">
-                <dt className="w-32 flex-shrink-0 font-bold text-neutral-900">사업분야</dt>
-                <dd className="text-neutral-600">지정폐기물 / 사업장 일반폐기물 수집·운반업</dd>
+                <dt className="w-36 flex-shrink-0 font-bold text-neutral-900">사업분야</dt>
+                <dd className="text-neutral-600">지정폐기물 수집·운반업</dd>
               </div>
               <div className="flex border-b border-gray-200 p-4 hover:bg-neutral-50 transition-colors">
-                <dt className="w-32 flex-shrink-0 font-bold text-neutral-900">허가번호</dt>
+                <dt className="w-36 flex-shrink-0 font-bold text-neutral-900">허가번호</dt>
                 <dd className="text-neutral-600">{COMPANY.licenseNumber}</dd>
               </div>
               <div className="flex border-b border-gray-200 p-4 hover:bg-neutral-50 transition-colors">
-                <dt className="w-32 flex-shrink-0 font-bold text-neutral-900">사업자등록번호</dt>
+                <dt className="w-36 flex-shrink-0 font-bold text-neutral-900">사업자등록번호</dt>
                 <dd className="text-neutral-600">{COMPANY.businessNumber}</dd>
               </div>
               <div className="flex border-b border-gray-200 p-4 md:col-span-2 hover:bg-neutral-50 transition-colors">
-                <dt className="w-32 flex-shrink-0 font-bold text-neutral-900">소재지</dt>
+                <dt className="w-36 flex-shrink-0 font-bold text-neutral-900">소재지</dt>
                 <dd className="text-neutral-600">{COMPANY.address}</dd>
               </div>
               <div className="flex border-b border-gray-200 p-4 md:col-span-2 hover:bg-neutral-50 transition-colors">
-                <dt className="w-32 flex-shrink-0 font-bold text-neutral-900">연락처</dt>
-                <dd className="text-neutral-600">TEL: {COMPANY.tel} / FAX: {COMPANY.fax}</dd>
+                <dt className="w-36 flex-shrink-0 font-bold text-neutral-900">연락처</dt>
+                <dd className="text-neutral-600">
+                  TEL: {COMPANY.tel}&nbsp;&nbsp;|&nbsp;&nbsp;Mobile: {COMPANY.mobile}&nbsp;&nbsp;|&nbsp;&nbsp;E-mail: {COMPANY.email}
+                </dd>
               </div>
             </dl>
           </div>
@@ -103,38 +112,29 @@ export default function ProfilePage() {
             <h2 className="text-2xl font-bold text-neutral-900 border-b-2 border-primary pb-4 inline-block">보유 차량 현황</h2>
           </div>
           <div className="overflow-x-auto shadow-sm rounded-sm">
-            <table className="w-full text-left border-collapse min-w-[600px]">
+            <table className="w-full text-left border-collapse min-w-[480px]">
               <thead>
                 <tr className="bg-neutral-100 border-t-2 border-primary border-b border-gray-300">
-                  <th className="py-4 px-6 font-bold text-neutral-900 w-1/4">차량 종류</th>
-                  <th className="py-4 px-6 font-bold text-neutral-900 w-1/4">적재 중량</th>
-                  <th className="py-4 px-6 font-bold text-neutral-900 w-1/4">보유 대수</th>
-                  <th className="py-4 px-6 font-bold text-neutral-900 w-1/4">용도</th>
+                  <th className="py-4 px-6 font-bold text-neutral-900">차량번호</th>
+                  <th className="py-4 px-6 font-bold text-neutral-900">허가번호</th>
+                  <th className="py-4 px-6 font-bold text-neutral-900">적재중량</th>
+                  <th className="py-4 px-6 font-bold text-neutral-900">용도</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-200 hover:bg-neutral-50 transition-colors bg-white">
-                  <td className="py-4 px-6 font-medium text-neutral-900">탱크로리</td>
-                  <td className="py-4 px-6 text-neutral-600">XX 톤</td>
-                  <td className="py-4 px-6 text-neutral-600">O 대</td>
-                  <td className="py-4 px-6 text-neutral-600">액상 폐기물 수집·운반</td>
-                </tr>
-                <tr className="border-b border-gray-200 hover:bg-neutral-50 transition-colors bg-white">
-                  <td className="py-4 px-6 font-medium text-neutral-900">밀폐형 차량</td>
-                  <td className="py-4 px-6 text-neutral-600">XX 톤</td>
-                  <td className="py-4 px-6 text-neutral-600">O 대</td>
-                  <td className="py-4 px-6 text-neutral-600">고상 폐기물 낙하 방지</td>
-                </tr>
-                <tr className="border-b border-gray-200 hover:bg-neutral-50 transition-colors bg-white">
-                  <td className="py-4 px-6 font-medium text-neutral-900">덮개설치 차량</td>
-                  <td className="py-4 px-6 text-neutral-600">XX 톤</td>
-                  <td className="py-4 px-6 text-neutral-600">O 대</td>
-                  <td className="py-4 px-6 text-neutral-600">대형/벌크 폐기물 운반</td>
-                </tr>
+                {VEHICLES.map((v) => (
+                  <tr key={v.plate} className="border-b border-gray-200 hover:bg-neutral-50 transition-colors bg-white">
+                    <td className="py-4 px-6 font-medium text-neutral-900">{v.plate}</td>
+                    <td className="py-4 px-6 text-neutral-600">{v.licenseNo}</td>
+                    <td className="py-4 px-6 text-neutral-600">{v.tons}</td>
+                    <td className="py-4 px-6 text-neutral-600">액상 폐기물 수집·운반</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
+
       </section>
     </main>
   );
