@@ -11,10 +11,18 @@ interface Props {
   params: { id: string };
 }
 
+function extractDescription(html: string, maxLength = 155): string {
+  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const result = await getNoticeById(params.id);
   if (!result.success || !result.data) return { title: "공지사항 | 현대유앤아이" };
-  return { title: `${result.data.title} | 현대유앤아이` };
+  const { title, content } = result.data;
+  return {
+    title: `${title} | 현대유앤아이`,
+    description: extractDescription(content),
+  };
 }
 
 const categoryColorMap: Record<string, string> = {

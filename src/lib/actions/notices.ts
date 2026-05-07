@@ -26,6 +26,7 @@ export interface NoticeFilters {
   search?: string;
   page?: number;
   pageSize?: number;
+  post_type?: string; // 'notice' | 'blog' (기본값 'notice')
 }
 
 // ─── 헬퍼 ──────────────────────────────────────────────────────────────────────
@@ -86,18 +87,20 @@ export async function getNotices(
   filters: NoticeFilters = {}
 ): Promise<ActionResult<{ notices: Notice[]; total: number; totalPages: number; categories: string[] }>> {
   try {
-    const { category, search, page = 1, pageSize = 15 } = filters;
+    const { category, search, page = 1, pageSize = 15, post_type = "notice" } = filters;
     const adminClient = createAdminClient();
 
     // 카테고리 목록 (UI 필터용)
     const { data: catData } = await adminClient
       .from("notices")
-      .select("category");
+      .select("category")
+      .eq("post_type", post_type);
     const categories = Array.from(new Set((catData ?? []).map((r) => r.category))).sort();
 
     let query = adminClient
       .from("notices")
       .select("*", { count: "exact" })
+      .eq("post_type", post_type)
       .order("is_pinned", { ascending: false })
       .order("created_at", { ascending: false });
 
@@ -202,6 +205,10 @@ export async function createNotice(payload: {
   content: string;
   category: string;
   is_pinned: boolean;
+  post_type?: string;
+  excerpt?: string;
+  thumbnail_url?: string;
+  tags?: string[];
 }): Promise<ActionResult<{ id: string }>> {
   let userId: string;
   let authorName: string;
@@ -222,6 +229,10 @@ export async function createNotice(payload: {
       content: payload.content,
       category: payload.category || "공지",
       is_pinned: payload.is_pinned,
+      post_type: payload.post_type ?? "notice",
+      excerpt: payload.excerpt ?? null,
+      thumbnail_url: payload.thumbnail_url ?? null,
+      tags: payload.tags ?? [],
       author_id: userId,
       author_name: authorName,
     })
@@ -240,7 +251,7 @@ export async function createNotice(payload: {
 
 export async function updateNotice(
   id: string,
-  payload: { title: string; content: string; category: string; is_pinned: boolean }
+  payload: { title: string; content: string; category: string; is_pinned: boolean; excerpt?: string; thumbnail_url?: string; tags?: string[] }
 ): Promise<ActionResult> {
   try {
     await requireWritePermission();
@@ -259,6 +270,9 @@ export async function updateNotice(
       content: payload.content,
       category: payload.category || "공지",
       is_pinned: payload.is_pinned,
+      excerpt: payload.excerpt ?? null,
+      thumbnail_url: payload.thumbnail_url ?? null,
+      tags: payload.tags ?? [],
     })
     .eq("id", id);
 

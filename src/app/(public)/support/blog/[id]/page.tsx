@@ -1,0 +1,167 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { PageBanner } from "@/components/ui/PageBanner";
+import { SubNav, SUPPORT_SUBNAV_ITEMS } from "@/components/ui/SubNav";
+import { getBlogPostById, incrementBlogViews } from "@/lib/actions/blog";
+import { ChevronLeft, Eye, Calendar, Tag, BookOpen } from "lucide-react";
+import type { Metadata } from "next";
+
+interface Props {
+  params: { id: string };
+}
+
+function extractDescription(html: string, maxLength = 155): string {
+  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const result = await getBlogPostById(params.id);
+  if (!result.success || !result.data) return { title: "폐기물 정보 자료실 | 현대유앤아이" };
+  const { title, excerpt, content, thumbnail_url } = result.data;
+  const description = excerpt || extractDescription(content);
+  return {
+    title: `${title} | 현대유앤아이`,
+    description,
+    openGraph: {
+      title: `${title} | 현대유앤아이`,
+      description,
+      ...(thumbnail_url && { images: [{ url: thumbnail_url }] }),
+    },
+  };
+}
+
+const categoryColorMap: Record<string, string> = {
+  "폐기물 정보":  "bg-blue-100 text-blue-700",
+  "법규 안내":    "bg-red-100 text-red-700",
+  "처리 사례":    "bg-green-100 text-green-700",
+  "올바로시스템": "bg-purple-100 text-purple-700",
+  "회사 소식":    "bg-yellow-100 text-yellow-800",
+};
+
+export default async function BlogDetailPage({ params }: Props) {
+  const result = await getBlogPostById(params.id);
+  if (!result.success || !result.data) notFound();
+
+  const post = result.data;
+  void incrementBlogViews(post.id);
+
+  // Article 구조화 데이터
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt || extractDescription(post.content),
+    datePublished: post.created_at,
+    dateModified: post.updated_at ?? post.created_at,
+    author: { "@type": "Organization", name: "현대유앤아이" },
+    publisher: {
+      "@type": "Organization",
+      name: "현대유앤아이",
+      logo: { "@type": "ImageObject", url: "/images/logo.png" },
+    },
+    ...(post.thumbnail_url && { image: post.thumbnail_url }),
+  };
+
+  return (
+    <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <PageBanner title="고객센터" subtitle="Customer Support" />
+      <SubNav items={SUPPORT_SUBNAV_ITEMS} />
+
+      <section className="max-w-3xl mx-auto px-4 py-10 md:py-16">
+        {/* 뒤로가기 */}
+        <Link
+          href="/support/blog"
+          className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary transition-colors mb-8"
+        >
+          <ChevronLeft className="w-4 h-4" />
+          자료실 목록
+        </Link>
+
+        {/* 썸네일 */}
+        {post.thumbnail_url && (
+          <div className="rounded-2xl overflow-hidden mb-8 aspect-[16/9] bg-neutral-100">
+            <img src={post.thumbnail_url} alt={post.title} className="w-full h-full object-cover" />
+          </div>
+        )}
+
+        {/* 헤더 */}
+        <div className="border-t-2 border-primary pt-8 pb-6 border-b border-neutral-200">
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${categoryColorMap[post.category] ?? "bg-gray-100 text-gray-600"}`}>
+              {post.category}
+            </span>
+            {post.tags?.map((t) => (
+              <span key={t} className="inline-flex items-center gap-1 text-xs text-neutral-500 bg-neutral-100 px-2.5 py-1 rounded-full">
+                <Tag className="w-3 h-3" />
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <h1 className="text-xl md:text-2xl font-bold text-neutral-900 leading-tight mb-4 break-keep">
+            {post.title}
+          </h1>
+
+          {post.excerpt && (
+            <p className="text-neutral-500 text-sm leading-relaxed mb-4 bg-neutral-50 rounded-xl p-4 border border-neutral-100">
+              {post.excerpt}
+            </p>
+          )}
+
+          <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-400">
+            <span className="flex items-center gap-1.5">
+              <Calendar className="w-4 h-4" />
+              {new Date(post.created_at).toLocaleDateString("ko-KR")}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Eye className="w-4 h-4" />
+              조회 {post.views.toLocaleString()}
+            </span>
+            {post.author_name && (
+              <span className="flex items-center gap-1.5">
+                <BookOpen className="w-4 h-4" />
+                {post.author_name}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* 본문 */}
+        <div
+          className="py-10 md:py-14 prose prose-neutral max-w-none leading-relaxed text-neutral-700
+                     prose-headings:text-neutral-900 prose-p:mb-4 prose-ul:pl-5 prose-ol:pl-5 prose-li:mb-1
+                     min-h-[200px]"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+
+        {/* 하단 CTA */}
+        <div className="mt-10 bg-primary/5 rounded-2xl border border-primary/15 p-6 text-center">
+          <p className="text-sm text-neutral-600 mb-4">
+            지정폐기물 처리가 필요하시면 무료 상담을 요청하세요.
+          </p>
+          <Link
+            href="/support/inquiry"
+            className="inline-flex items-center gap-2 bg-primary text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors"
+          >
+            무료 견적 문의
+          </Link>
+        </div>
+
+        {/* 목록 버튼 */}
+        <div className="mt-8 flex justify-center">
+          <Link
+            href="/support/blog"
+            className="inline-flex items-center gap-2 px-6 py-2.5 border border-neutral-300 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:border-primary hover:text-primary transition-all"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            자료실 목록으로
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}

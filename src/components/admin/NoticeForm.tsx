@@ -6,7 +6,8 @@ import { RichTextEditor } from "./RichTextEditor";
 import { createNotice, updateNotice } from "@/lib/actions/notices";
 import type { Notice } from "@/lib/actions/notices";
 
-const CATEGORIES = ["공지", "법령안내", "회사소식", "시스템점검"];
+const NOTICE_CATEGORIES = ["공지", "법령안내", "회사소식", "시스템점검"];
+const BLOG_CATEGORIES = ["폐기물 정보", "법규 안내", "처리 사례", "올바로시스템", "회사 소식"];
 
 interface Props {
   notice?: Notice; // 없으면 새 글
@@ -16,11 +17,16 @@ export function NoticeForm({ notice }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
+  const [postType, setPostType] = useState<"notice" | "blog">((notice as Notice & { post_type?: string })?.post_type === "blog" ? "blog" : "notice");
   const [title, setTitle] = useState(notice?.title ?? "");
   const [content, setContent] = useState(notice?.content ?? "");
   const [category, setCategory] = useState(notice?.category ?? "공지");
   const [isPinned, setIsPinned] = useState(notice?.is_pinned ?? false);
+  const [excerpt, setExcerpt] = useState((notice as Notice & { excerpt?: string })?.excerpt ?? "");
+  const [tags, setTags] = useState<string>((notice as Notice & { tags?: string[] })?.tags?.join(", ") ?? "");
   const [error, setError] = useState<string | null>(null);
+
+  const CATEGORIES = postType === "blog" ? BLOG_CATEGORIES : NOTICE_CATEGORIES;
 
   const isEdit = !!notice;
 
@@ -29,9 +35,10 @@ export function NoticeForm({ notice }: Props) {
     setError(null);
 
     startTransition(async () => {
+      const tagArray = tags.split(",").map((t) => t.trim()).filter(Boolean);
       const result = isEdit
-        ? await updateNotice(notice.id, { title, content, category, is_pinned: isPinned })
-        : await createNotice({ title, content, category, is_pinned: isPinned });
+        ? await updateNotice(notice.id, { title, content, category, is_pinned: isPinned, excerpt: excerpt || undefined, tags: tagArray })
+        : await createNotice({ title, content, category, is_pinned: isPinned, post_type: postType, excerpt: excerpt || undefined, tags: tagArray });
 
       if (!result.success) {
         setError(result.error ?? "저장 중 오류가 발생했습니다");
@@ -48,6 +55,37 @@ export function NoticeForm({ notice }: Props) {
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
           {error}
+        </div>
+      )}
+
+      {/* 글 유형 (신규 작성 시만 선택) */}
+      {!isEdit && (
+        <div>
+          <label className="block text-sm font-medium text-neutral-700 mb-2">글 유형</label>
+          <div className="flex gap-3">
+            {(["notice", "blog"] as const).map((type) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() => {
+                  setPostType(type);
+                  setCategory(type === "blog" ? "폐기물 정보" : "공지");
+                }}
+                className={`px-5 py-2 rounded-lg text-sm font-semibold border transition-colors ${
+                  postType === type
+                    ? "bg-primary text-white border-primary"
+                    : "bg-white text-neutral-600 border-neutral-300 hover:border-primary"
+                }`}
+              >
+                {type === "notice" ? "공지사항" : "블로그 자료실"}
+              </button>
+            ))}
+          </div>
+          {postType === "blog" && (
+            <p className="mt-2 text-xs text-neutral-500">
+              블로그 자료실은 /support/blog 에 노출됩니다. 발췌문과 태그를 입력하면 SEO에 유리합니다.
+            </p>
+          )}
         </div>
       )}
 
@@ -92,6 +130,38 @@ export function NoticeForm({ notice }: Props) {
           </label>
         </div>
       </div>
+
+      {/* 블로그 전용: 발췌문 */}
+      {postType === "blog" && (
+        <div>
+          <label className="block text-sm font-medium text-neutral-700 mb-1">
+            발췌문 <span className="text-neutral-400 font-normal">(목록 카드에 표시되는 요약 문장)</span>
+          </label>
+          <textarea
+            value={excerpt}
+            onChange={(e) => setExcerpt(e.target.value)}
+            placeholder="검색 결과와 목록 카드에 표시할 1~2문장 요약을 입력하세요"
+            rows={2}
+            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary resize-none"
+          />
+        </div>
+      )}
+
+      {/* 블로그 전용: 태그 */}
+      {postType === "blog" && (
+        <div>
+          <label className="block text-sm font-medium text-neutral-700 mb-1">
+            태그 <span className="text-neutral-400 font-normal">(쉼표로 구분)</span>
+          </label>
+          <input
+            type="text"
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
+            placeholder="예: 폐유, 폐기물관리법, 올바로시스템"
+            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+          />
+        </div>
+      )}
 
       {/* 내용 */}
       <div>
