@@ -205,13 +205,29 @@ export async function register(formData: FormData): Promise<void> {
   const { email, password, full_name, company_name, phone } = parsed.data;
 
   const supabase = createClient();
-  const { data, error } = await supabase.auth.signUp({ email, password });
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      // 트리거(handle_new_user)가 raw_user_meta_data에서 full_name을 읽어 profiles에 저장
+      data: { full_name },
+    },
+  });
 
-  if (error || !data.user) {
-    const msg = error?.message?.includes("already registered")
+  if (error) {
+    const msg = error.message.includes("already registered") || error.message.includes("User already registered")
       ? "이미 가입된 이메일입니다"
-      : "회원가입 중 오류가 발생했습니다";
+      : `회원가입 중 오류가 발생했습니다 (${error.message})`;
     redirect(`/register?error=${encodeURIComponent(msg)}`);
+  }
+
+  if (!data.user) {
+    redirect(`/register?error=${encodeURIComponent("회원가입 중 오류가 발생했습니다")}`);
+  }
+
+  // 중복 이메일: 이메일 확인 활성화 상태에서 Supabase는 에러 없이 fake user 반환 (identities=[])
+  if ((data.user.identities ?? []).length === 0) {
+    redirect(`/register?error=${encodeURIComponent("이미 가입된 이메일입니다")}`);
   }
 
   // profiles 테이블 업데이트 (트리거로 row가 먼저 생성됨)
@@ -220,6 +236,11 @@ export async function register(formData: FormData): Promise<void> {
     .from("profiles")
     .update({ full_name, company_name, phone: phone || null })
     .eq("id", data.user.id);
+
+  // data.session이 null이면 이메일 확인이 필요한 상태
+  if (!data.session) {
+    redirect("/register?verify=1");
+  }
 
   redirect("/my");
 }
