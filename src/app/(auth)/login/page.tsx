@@ -1,5 +1,6 @@
 import { login } from "@/lib/actions/auth";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "관리자 로그인 | 현대유앤아이",
@@ -120,6 +121,19 @@ export default function LoginPage({ searchParams }: PageProps) {
         <p className="text-center text-xs text-neutral-mid mt-6">
           내부 직원 전용 시스템입니다. 계정 문의는 관리자에게 연락하세요.
         </p>
+
+        <div className="mt-4 text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-sm text-neutral-mid hover:text-primary transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            웹사이트 메인으로
+          </Link>
+        </div>
       </div>
     </div>
   );
