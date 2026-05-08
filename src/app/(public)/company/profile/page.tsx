@@ -26,10 +26,9 @@ const VISIONS = [
 ];
 
 const VEHICLES = [
-  { plate: "91루 3460", licenseNo: "2025-전-041", tons: "4.0톤" },
   { plate: "82라 6276", licenseNo: "2025-전-042", tons: "11.8톤" },
   { plate: "92마 3973", licenseNo: "2025-전-043", tons: "3.7톤" },
-  { plate: "81다 7183", licenseNo: "2026-전-007", tons: "3.0톤" },
+  { plate: "81다 7183", licenseNo: "2026-전-007", tons: "0.9톤" },
 ];
 
 export default function ProfilePage() {
