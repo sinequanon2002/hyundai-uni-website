@@ -77,6 +77,7 @@ interface UploadedFile {
 export default function InquiryPage() {
   const [isPending, startTransition] = useTransition();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -191,6 +192,7 @@ export default function InquiryPage() {
     startTransition(async () => {
       const result = await submitInquiry(data);
       if (result.success) {
+        setSubmittedEmail(data.email ?? "");
         setShowSuccessModal(true);
         reset();
         setUploadedFiles([]);
@@ -391,14 +393,16 @@ export default function InquiryPage() {
                     </div>
                   </div>
 
-                  {/* 이메일 (견적 결과 수신용) */}
+                  {/* 이메일 (견적 결과 수신용 — 선택) */}
                   <div>
                     <label className={labelCls}>
                       <Mail className="inline w-4 h-4 mr-1 mb-0.5 text-[#1F4E79]" />
-                      이메일 <span className="text-red-500">*</span>
+                      이메일{" "}
+                      <span className="text-gray-400 font-normal text-xs">(선택)</span>
                     </label>
-                    <p className="text-xs text-[#1F4E79] bg-[#1F4E79]/5 rounded-lg px-3 py-2 mb-2">
-                      입력하신 이메일로 접수 확인 및 견적서를 발송해드립니다.
+                    <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 mb-2">
+                      입력하시면 접수 확인 및 견적서를 이메일로 발송해드립니다.
+                      미입력 시 담당자가 전화로 연락드립니다.
                     </p>
                     <input
                       {...register("email")}
@@ -796,8 +800,10 @@ export default function InquiryPage() {
               문의가 접수되었습니다
             </h3>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-              빠른 시일 내에 담당자가 연락드리겠습니다.<br />
-              접수 확인 이메일을 발송했습니다.
+              빠른 시일 내에 담당자가 연락드리겠습니다.
+              {submittedEmail && (
+                <><br />접수 확인 이메일을 발송했습니다.</>
+              )}
             </p>
 
             {isLoggedIn ? (

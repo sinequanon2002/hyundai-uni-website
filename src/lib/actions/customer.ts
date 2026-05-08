@@ -287,7 +287,15 @@ export async function register(formData: FormData): Promise<void> {
     .eq("id", data.user.id);
 
   // 회원가입 전 비회원으로 제출한 견적 문의를 새 계정과 연결
-  // (이메일이 일치하고 아직 user_id가 없는 문의)
+  // 전화번호 기준 연결 (전화번호는 견적 폼 필수 입력값)
+  if (phone) {
+    await adminClient
+      .from("inquiries")
+      .update({ user_id: data.user.id })
+      .is("user_id", null)
+      .eq("phone", phone);
+  }
+  // 이메일 기준 추가 연결 (전화번호로 이미 연결된 건 user_id 있어 스킵됨)
   await adminClient
     .from("inquiries")
     .update({ user_id: data.user.id })
