@@ -21,12 +21,31 @@ const STATUS_COLOR: Record<string, string> = {
 
 const STATUS_STEPS = ["pending", "reviewing", "quoted", "completed"] as const;
 
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 3) return digits;
+  if (digits.startsWith("02")) {
+    // 서울 지역번호 02-XXXX-XXXX 또는 02-XXX-XXXX
+    if (digits.length <= 5) return `${digits.slice(0, 2)}-${digits.slice(2)}`;
+    if (digits.length <= 9) return `${digits.slice(0, 2)}-${digits.slice(2, 5)}-${digits.slice(5)}`;
+    return `${digits.slice(0, 2)}-${digits.slice(2, 6)}-${digits.slice(6)}`;
+  }
+  // 010, 011, 016, 051 등 3자리 지역번호
+  if (digits.length <= 6) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+  if (digits.length <= 10) return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+  return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+}
+
 export default function InquiryStatusSearch() {
   const [phone, setPhone] = useState("");
   const [results, setResults] = useState<PublicInquiry[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
   const [isPending, startTransition] = useTransition();
+
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setPhone(formatPhone(e.target.value));
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -49,7 +68,7 @@ export default function InquiryStatusSearch() {
         <input
           type="tel"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={handlePhoneChange}
           placeholder="010-0000-0000"
           required
           className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
