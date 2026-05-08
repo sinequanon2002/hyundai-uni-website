@@ -33,12 +33,18 @@ export default async function CustomerLayout({
   }
 
   // 2) 역할 확인 — 스태프는 관리자 백오피스로 리다이렉트
-  const adminClient = createAdminClient();
-  const { data: profile } = await adminClient
-    .from("profiles")
-    .select("role, full_name, company_name")
-    .eq("id", user.id)
-    .single();
+  let profile: { role: string; full_name: string | null; company_name: string | null } | null = null;
+  try {
+    const adminClient = createAdminClient();
+    const { data } = await adminClient
+      .from("profiles")
+      .select("role, full_name, company_name")
+      .eq("id", user.id)
+      .single();
+    profile = data;
+  } catch {
+    // DB 오류 시 고객으로 처리 (접근 차단하지 않음)
+  }
 
   if (profile && isStaff(profile.role)) {
     redirect("/inquiries");

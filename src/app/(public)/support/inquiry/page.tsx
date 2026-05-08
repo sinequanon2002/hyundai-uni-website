@@ -13,8 +13,6 @@ import {
   inquiryFormSchema,
   type InquiryFormValues,
   WASTE_CATEGORIES,
-  NOTIFICATION_METHODS,
-  type NotificationMethod,
 } from "@/lib/schemas/inquiry";
 import { submitInquiry } from "@/lib/actions/inquiry";
 import {
@@ -29,7 +27,6 @@ import {
   Clock,
   ArrowRight,
   ChevronDown,
-  MessageSquare,
   MapPin,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -95,7 +92,6 @@ export default function InquiryPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
   const [wasteSearch, setWasteSearch] = useState("");
-  const [notificationMethod, setNotificationMethod] = useState<NotificationMethod>("sms");
 
   const {
     register,
@@ -111,7 +107,7 @@ export default function InquiryPage() {
       wasteTypes: [],
       photoUrls: [],
       marketingConsent: false,
-      notificationMethod: "sms",
+      notificationMethod: "email",
     },
   });
 
@@ -395,83 +391,25 @@ export default function InquiryPage() {
                     </div>
                   </div>
 
-                  {/* 견적 알림 수신 방법 */}
+                  {/* 이메일 (견적 결과 수신용) */}
                   <div>
                     <label className={labelCls}>
-                      <MessageSquare className="inline w-4 h-4 mr-1 mb-0.5 text-[#1F4E79]" />
-                      견적 알림 수신 방법 <span className="text-red-500">*</span>
+                      <Mail className="inline w-4 h-4 mr-1 mb-0.5 text-[#1F4E79]" />
+                      이메일 <span className="text-red-500">*</span>
                     </label>
-                    <p className="text-xs text-gray-400 mb-2">
-                      견적서 발송 및 상담 연락을 받으실 방법을 선택해주세요.
+                    <p className="text-xs text-[#1F4E79] bg-[#1F4E79]/5 rounded-lg px-3 py-2 mb-2">
+                      입력하신 이메일로 접수 확인 및 견적서를 발송해드립니다.
                     </p>
-                    <Controller
-                      name="notificationMethod"
-                      control={control}
-                      render={({ field }) => (
-                        <div className="flex flex-wrap gap-2">
-                          {NOTIFICATION_METHODS.map(({ value, label }) => {
-                            const selected = field.value === value;
-                            return (
-                              <button
-                                key={value}
-                                type="button"
-                                onClick={() => {
-                                  field.onChange(value);
-                                  setNotificationMethod(value as NotificationMethod);
-                                }}
-                                className={cn(
-                                  "flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all",
-                                  selected
-                                    ? "bg-[#1F4E79] border-[#1F4E79] text-white shadow-sm"
-                                    : "bg-white border-gray-200 text-gray-600 hover:border-[#1F4E79]/50"
-                                )}
-                              >
-                                <span>{label}</span>
-                                {value === "sms" && (
-                                  <span className="text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded-full font-semibold hidden">
-                                    즉시
-                                  </span>
-                                )}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      )}
+                    <input
+                      {...register("email")}
+                      type="email"
+                      placeholder="example@company.com"
+                      className={inputCls(!!errors.email)}
                     />
-                    {notificationMethod === "sms" && (
-                      <p className="mt-2 text-xs text-[#1F4E79] bg-[#1F4E79]/5 rounded-lg px-3 py-2">
-                        입력하신 전화번호로 문자메시지(SMS)를 통해 견적을 안내해드립니다.
-                      </p>
-                    )}
-                    {notificationMethod === "kakao" && (
-                      <p className="mt-2 text-xs text-[#1F4E79] bg-[#1F4E79]/5 rounded-lg px-3 py-2">
-                        카카오톡 알림톡으로 견적을 안내해드립니다. 카카오 미사용 시 문자로 대체 발송됩니다.
-                      </p>
-                    )}
-                    {notificationMethod === "email" && (
-                      <p className="mt-2 text-xs text-[#1F4E79] bg-[#1F4E79]/5 rounded-lg px-3 py-2">
-                        아래에 이메일 주소를 입력해주세요. 견적서를 이메일로 발송해드립니다.
-                      </p>
+                    {errors.email && (
+                      <p className={errorCls}>{errors.email.message}</p>
                     )}
                   </div>
-
-                  {/* 이메일 — 이메일 수신 선택 시에만 표시 */}
-                  {notificationMethod === "email" && (
-                    <div>
-                      <label className={labelCls}>
-                        이메일 <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        {...register("email")}
-                        type="email"
-                        placeholder="example@company.com"
-                        className={inputCls(!!errors.email)}
-                      />
-                      {errors.email && (
-                        <p className={errorCls}>{errors.email.message}</p>
-                      )}
-                    </div>
-                  )}
 
                   {/* 수거 장소 */}
                   <div>
@@ -858,16 +796,8 @@ export default function InquiryPage() {
               문의가 접수되었습니다
             </h3>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-              빠른 시일 내에 담당자가 연락드리겠습니다.
-              {notificationMethod === "email" && (
-                <><br />접수 확인 이메일을 발송했습니다.</>
-              )}
-              {notificationMethod === "sms" && (
-                <><br />접수 확인 문자를 발송했습니다.</>
-              )}
-              {notificationMethod === "kakao" && (
-                <><br />카카오 알림톡을 발송했습니다.</>
-              )}
+              빠른 시일 내에 담당자가 연락드리겠습니다.<br />
+              접수 확인 이메일을 발송했습니다.
             </p>
 
             {isLoggedIn ? (

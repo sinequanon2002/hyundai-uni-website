@@ -8,7 +8,6 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { isStaff } from "@/lib/auth/roles";
 import { InquiryNotificationEmail } from "@/emails/InquiryNotificationEmail";
 import { InquiryConfirmationEmail } from "@/emails/InquiryConfirmationEmail";
-import { sendInquiryNotification } from "@/lib/solapi";
 
 function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
@@ -152,8 +151,8 @@ export async function submitInquiry(
       console.error("[submitInquiry] Admin email exception:", err);
     }
 
-    // 고객 접수 확인 (이메일 선택 + 이메일 주소 있을 때만)
-    if (data.notificationMethod === "email" && data.email) {
+    // 고객 접수 확인 이메일 (이메일은 항상 필수)
+    if (data.email) {
       try {
         const r2 = await getResend().emails.send({
           from: "현대유앤아이 <onboarding@resend.dev>",
@@ -173,21 +172,6 @@ export async function submitInquiry(
         }
       } catch (err) {
         console.error("[submitInquiry] Customer email exception:", err);
-      }
-    }
-
-    // SMS / 카카오 알림톡 발송 (솔라피)
-    if (data.notificationMethod === "sms" || data.notificationMethod === "kakao") {
-      try {
-        await sendInquiryNotification(data.notificationMethod, {
-          to: data.phone,
-          contactName: data.contactName,
-          companyName: data.companyName,
-          wasteTypes: data.wasteTypes,
-          inquiryId,
-        });
-      } catch (err) {
-        console.error("[submitInquiry] SMS/알림톡 발송 실패:", err);
       }
     }
   })();

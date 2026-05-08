@@ -39,28 +39,23 @@ export const WASTE_CATEGORIES = {
 
 export type WasteMajorCategory = keyof typeof WASTE_CATEGORIES;
 
-/** 알림 수신 방법 */
+/** 알림 수신 방법 — 이메일 전용 */
 export const NOTIFICATION_METHODS = [
   { value: "email", label: "이메일" },
-  { value: "sms",   label: "문자메시지(SMS)" },
-  { value: "kakao", label: "카카오톡 알림톡" },
 ] as const;
 
-export type NotificationMethod = "email" | "sms" | "kakao";
+export type NotificationMethod = "email";
 
 /** 신규 견적문의 폼 스키마 */
 export const inquiryFormSchema = z.object({
   companyName: z.string().min(1, "사업장명을 입력해주세요"),
   department: z.string().optional().or(z.literal("")),
   contactName: z.string().min(1, "이름을 입력해주세요"),
-  notificationMethod: z.enum(["email", "sms", "kakao"]).default("sms"),
+  notificationMethod: z.literal("email").default("email"),
   email: z
     .string()
-    .optional()
-    .refine(
-      (v) => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
-      "올바른 이메일 형식이 아닙니다"
-    ),
+    .min(1, "이메일 주소를 입력해주세요")
+    .email("올바른 이메일 형식이 아닙니다"),
   phone: z
     .string()
     .regex(
@@ -80,10 +75,7 @@ export const inquiryFormSchema = z.object({
     errorMap: () => ({ message: "개인정보 수집·이용에 동의하셔야 합니다" }),
   }),
   marketingConsent: z.boolean().optional().default(false),
-}).refine(
-  (data) => data.notificationMethod !== "email" || (!!data.email && data.email.length > 0),
-  { message: "이메일 수신을 선택하신 경우 이메일 주소를 입력해주세요", path: ["email"] }
-);
+});
 
 export type InquiryFormValues = z.infer<typeof inquiryFormSchema>;
 

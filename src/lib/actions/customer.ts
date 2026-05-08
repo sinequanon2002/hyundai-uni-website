@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { isStaff } from "@/lib/auth/roles";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
@@ -82,6 +83,19 @@ async function requireCustomer(): Promise<string> {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login?next=/my");
+
+  // 내부 직원(스태프)은 고객 포털 액션 사용 불가 → 관리자 페이지로
+  const adminClient = createAdminClient();
+  const { data: profile } = await adminClient
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (profile && isStaff(profile.role)) {
+    redirect("/inquiries");
+  }
+
   return user.id;
 }
 
@@ -271,6 +285,14 @@ export async function register(formData: FormData): Promise<void> {
     .from("profiles")
     .update({ full_name, company_name, phone: phone || null })
     .eq("id", data.user.id);
+
+  // 회원가입 전 비회원으로 제출한 견적 문의를 새 계정과 연결
+  // (이메일이 일치하고 아직 user_id가 없는 문의)
+  await adminClient
+    .from("inquiries")
+    .update({ user_id: data.user.id })
+    .is("user_id", null)
+    .eq("email", email);
 
   // data.session이 null이면 이메일 확인이 필요한 상태
   if (!data.session) {
