@@ -67,7 +67,7 @@ export default function LoginPage({ searchParams }: PageProps) {
             <input
               type="hidden"
               name="next"
-              value={searchParams.next ?? "/inquiries"}
+              value={searchParams.next ?? ""}
             />
 
             {/* 이메일 */}
