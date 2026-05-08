@@ -404,11 +404,17 @@ export default function InquiryPage() {
                       입력하시면 접수 확인 및 견적서를 이메일로 발송해드립니다.
                       미입력 시 담당자가 전화로 연락드립니다.
                     </p>
-                    <input
-                      {...register("email")}
-                      type="email"
-                      placeholder="example@company.com"
-                      className={inputCls(!!errors.email)}
+                    <Controller
+                      name="email"
+                      control={control}
+                      render={({ field }) => (
+                        <EmailAutocomplete
+                          value={field.value ?? ""}
+                          onChange={field.onChange}
+                          onBlur={field.onBlur}
+                          hasError={!!errors.email}
+                        />
+                      )}
                     />
                     {errors.email && (
                       <p className={errorCls}>{errors.email.message}</p>
@@ -883,6 +889,135 @@ export default function InquiryPage() {
         />
       )}
     </>
+  );
+}
+
+// ─── 이메일 자동완성 ────────────────────────────────────────────────────────────
+
+const EMAIL_DOMAINS = [
+  "naver.com",
+  "gmail.com",
+  "daum.net",
+  "kakao.com",
+  "hanmail.net",
+  "nate.com",
+  "outlook.com",
+  "icloud.com",
+];
+
+function EmailAutocomplete({
+  value,
+  onChange,
+  onBlur,
+  hasError,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  onBlur?: () => void;
+  hasError?: boolean;
+}) {
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [activeIdx, setActiveIdx] = useState(-1);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const inputCls = cn(
+    "w-full border rounded-lg px-4 py-2.5 text-sm outline-none transition-colors",
+    "focus:ring-2 focus:ring-[#1F4E79]/25 focus:border-[#1F4E79]",
+    hasError
+      ? "border-red-400 bg-red-50/30"
+      : "border-gray-200 bg-white hover:border-gray-300"
+  );
+
+  function getSuggestions(v: string): string[] {
+    const atIdx = v.indexOf("@");
+    if (atIdx < 1) return [];
+    const local = v.slice(0, atIdx);
+    const domainTyped = v.slice(atIdx + 1).toLowerCase();
+    const matched = EMAIL_DOMAINS.filter((d) => d.startsWith(domainTyped));
+    // 완전히 입력됐으면 숨김
+    if (matched.length === 1 && matched[0] === domainTyped) return [];
+    return matched.map((d) => `${local}@${d}`);
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const v = e.target.value;
+    onChange(v);
+    const next = getSuggestions(v);
+    setSuggestions(next);
+    setActiveIdx(-1);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (suggestions.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIdx((i) => Math.min(i + 1, suggestions.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIdx((i) => Math.max(i - 1, -1));
+    } else if (e.key === "Enter" && activeIdx >= 0) {
+      e.preventDefault();
+      select(suggestions[activeIdx]);
+    } else if (e.key === "Escape") {
+      setSuggestions([]);
+      setActiveIdx(-1);
+    }
+  }
+
+  function select(v: string) {
+    onChange(v);
+    setSuggestions([]);
+    setActiveIdx(-1);
+  }
+
+  useEffect(() => {
+    function onMouseDown(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setSuggestions([]);
+        setActiveIdx(-1);
+      }
+    }
+    document.addEventListener("mousedown", onMouseDown);
+    return () => document.removeEventListener("mousedown", onMouseDown);
+  }, []);
+
+  return (
+    <div ref={containerRef} className="relative">
+      <input
+        type="email"
+        value={value}
+        onChange={handleChange}
+        onBlur={onBlur}
+        onKeyDown={handleKeyDown}
+        placeholder="example@company.com"
+        autoComplete="off"
+        className={inputCls}
+      />
+      {suggestions.length > 0 && (
+        <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+          {suggestions.map((s, idx) => (
+            <li key={s}>
+              <button
+                type="button"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  select(s);
+                }}
+                className={cn(
+                  "w-full px-4 py-2.5 text-sm text-left flex items-center gap-2 transition-colors",
+                  idx === activeIdx
+                    ? "bg-[#1F4E79] text-white"
+                    : "text-gray-700 hover:bg-[#1F4E79]/5 hover:text-[#1F4E79]"
+                )}
+              >
+                <Mail className={cn("w-3.5 h-3.5 shrink-0", idx === activeIdx ? "text-white/70" : "text-gray-400")} />
+                <span>{s}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 
