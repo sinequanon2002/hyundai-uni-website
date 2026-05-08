@@ -4,7 +4,7 @@
  * 필요 환경변수:
  *   SOLAPI_API_KEY          — 솔라피 API Key
  *   SOLAPI_API_SECRET       — 솔라피 API Secret
- *   SOLAPI_SENDER_PHONE     — 등록된 발신번호 (예: 053-781-7667)
+ *   SOLAPI_SENDER_PHONE     — 등록된 발신번호 (예: 010-9084-9480)
  *   SOLAPI_KAKAO_PF_ID      — 카카오 채널 pfId (알림톡 사용 시)
  *   SOLAPI_KAKAO_TEMPLATE_ID — 승인된 알림톡 템플릿 ID (알림톡 사용 시)
  */
@@ -56,7 +56,7 @@ export async function sendInquirySms(params: InquiryNotificationParams): Promise
     `■ 폐기물: ${wasteList}${more}`,
     ``,
     `담당자가 확인 후 빠르게 연락드리겠습니다.`,
-    `문의: 053-781-7667`,
+    `문의: 010-9084-9480`,
   ].join("\n");
 
   try {
@@ -110,7 +110,7 @@ export async function sendInquiryAlimtalk(params: InquiryNotificationParams): Pr
           "#{사업장명}": params.companyName,
           "#{폐기물}": `${wasteList}${more}`,
           "#{접수번호}": params.inquiryId.slice(0, 8).toUpperCase(),
-          "#{전화번호}": "053-781-7667",
+          "#{전화번호}": "010-9084-9480",
         },
       },
     });

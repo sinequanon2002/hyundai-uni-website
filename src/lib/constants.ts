@@ -6,7 +6,7 @@ export const COMPANY = {
   businessNumber: "857-87-03200",
   licenseNumber: "제 대구수집 130호",
   address: "경상북도 경산시 하양읍 하양로 34, 2층 비-04호",
-  tel: "053-781-7667",
+  tel: "010-9084-9480",
   mobile: "010-9084-9480",
   email: "hduni3973@naver.com",
   businessHours: "평일 08:00 - 18:00"

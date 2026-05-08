@@ -18,7 +18,7 @@ const organizationSchema = {
       image: `${SITE_URL}/images/og-image.jpg`,
       description:
         "지정폐기물 수거·운반업 전문. 폐유·폐산·폐알칼리·폐유기용제·폐석면 등 지정폐기물 처리. 경상북도·대구 기반 전국 서비스.",
-      telephone: "053-781-7667",
+      telephone: "010-9084-9480",
       email: "hduni3973@naver.com",
       address: {
         "@type": "PostalAddress",
