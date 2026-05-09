@@ -17,6 +17,26 @@ export function Footer() {
             <p><span className="text-neutral-500 mr-2">이메일</span> {COMPANY.email}</p>
             <p><span className="text-neutral-500 mr-2">업무시간</span> {COMPANY.businessHours}</p>
           </div>
+
+          {/* SNS 링크 */}
+          <div className="mt-6 flex items-center gap-3">
+            <span className="text-xs text-neutral-500">SNS</span>
+            <a
+              href="https://blog.naver.com/hduni2020"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="네이버 블로그 바로가기"
+              className="group flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
+            >
+              {/* 네이버 로고 */}
+              <span className="w-7 h-7 rounded-md overflow-hidden flex items-center justify-center bg-neutral-700 group-hover:bg-[#03C75A] transition-colors">
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
+                  <path d="M13.527 7.2v5.046L10.473 7.2H7.2v9.6h3.073v-5.046l3.054 5.046H16.8V7.2z" />
+                </svg>
+              </span>
+              <span className="text-xs">네이버 블로그</span>
+            </a>
+          </div>
         </div>
         <div>
           <h3 className="text-white font-medium mb-4">빠른 이동</h3>
