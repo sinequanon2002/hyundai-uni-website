@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { TrustStatsSection } from "@/components/sections/TrustStatsSection";
 import { PainPointSection } from "@/components/sections/PainPointSection";
+import { ComparisonSection } from "@/components/sections/ComparisonSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { WhyUsSection } from "@/components/sections/WhyUsSection";
 import { ClientsSection } from "@/components/sections/ClientsSection";
@@ -18,6 +19,7 @@ export default function Home() {
       <HeroSection />
       <TrustStatsSection />
       <PainPointSection />
+      <ComparisonSection />
       <ServicesSection />
       <WhyUsSection />
       <ClientsSection />

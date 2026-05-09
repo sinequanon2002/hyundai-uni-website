@@ -34,23 +34,40 @@ export function HeroSection() {
           <br />
           신뢰를 운반합니다.
         </h1>
-        <p className="max-w-2xl text-lg md:text-xl text-neutral-100/90 mb-10 leading-relaxed font-light">
+        <p className="max-w-2xl text-lg md:text-xl text-neutral-100/90 mb-7 leading-relaxed font-light">
           지정폐기물 수집·운반 전문 기업으로서, 엄격한 법규 준수와 축적된 노하우로
           고객사의 환경 책임을 완벽하게 대행합니다.
         </p>
 
+        {/* 기능 배지 */}
+        <div className="flex flex-wrap justify-center gap-2 mb-9">
+          {[
+            "정식 허가 업체",
+            "올바로시스템 대행",
+            "24h 내 방문 견적",
+            "처리 증빙 즉시 제공",
+          ].map((badge) => (
+            <span
+              key={badge}
+              className="px-3.5 py-1.5 text-xs font-semibold bg-white/15 border border-white/30 rounded-full text-white/90 backdrop-blur-sm tracking-wide"
+            >
+              ✓ {badge}
+            </span>
+          ))}
+        </div>
+
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
             href="/support/inquiry"
-            className="px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary/90 transition-colors"
+            className="px-8 py-4 bg-white text-primary font-bold rounded-lg shadow-lg hover:bg-neutral-100 transition-colors"
           >
-            견적 문의하기
+            무료 방문 견적 신청하기
           </Link>
           <Link
-            href="#services"
-            className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors"
+            href="/company/profile"
+            className="px-8 py-4 bg-transparent border-2 border-white/70 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
           >
-            서비스 알아보기
+            서비스 소개서 보기
           </Link>
         </div>
       </div>
