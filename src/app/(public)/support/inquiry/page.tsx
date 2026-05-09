@@ -31,7 +31,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// ─── Daum Postcode 타입 선언 ──────────────────────────────────────────────────
+// ?�?�?� Daum Postcode ?�???�언 ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
 declare global {
   interface Window {
     daum: {
@@ -46,28 +46,28 @@ declare global {
   }
 }
 
-// ─── 개인정보 전문 ─────────────────────────────────────────────────────────────
-const PRIVACY_FULL_TEXT = `[개인정보 수집·이용 동의서]
+// ?�?�?� 개인?�보 ?�문 ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
+const PRIVACY_FULL_TEXT = `[개인?�보 ?�집·?�용 ?�의??
 
-1. 수집 항목: 사업장명, 소속팀, 담당자명, 연락처, 이메일, 수거 장소, 폐기물 종류, 첨부 사진
+1. ?�집 ??��: ?�업?�명, ?�속?�, ?�당?�명, ?�락�? ?�메?? ?�거 ?�소, ?�기�?종류, 첨�? ?�진
 
-2. 수집 목적: 견적 문의 접수 및 상담, 서비스 안내
+2. ?�집 목적: 견적 문의 ?�수 �??�담, ?�비???�내
 
-3. 보유 기간: 문의 접수일로부터 1년간 보유 후 파기
-   (단, 관계 법령에 따라 보존이 필요한 경우 해당 기간까지 보존)
+3. 보유 기간: 문의 ?�수?�로부??1?�간 보유 ???�기
+   (?? 관�?법령???�라 보존???�요??경우 ?�당 기간까�? 보존)
 
-4. 동의를 거부할 권리가 있으나, 거부 시 견적 문의 접수가 어려울 수 있습니다.
+4. ?�의�?거�???권리가 ?�으?? 거�? ??견적 문의 ?�수가 ?�려?????�습?�다.
 
-위 내용을 확인하였으며, 개인정보 수집·이용에 동의합니다.`;
+???�용???�인?��??�며, 개인?�보 ?�집·?�용???�의?�니??`;
 
-const MARKETING_FULL_TEXT = `[마케팅 수신 동의서]
+const MARKETING_FULL_TEXT = `[마�????�신 ?�의??
 
-수집 항목: 이메일, 전화번호
-수신 내용: 서비스 안내, 이벤트, 업계 정보
-수신 채널: 이메일, 문자(SMS)
-보유 기간: 동의 철회 시까지
+?�집 ??��: ?�메?? ?�화번호
+?�신 ?�용: ?�비???�내, ?�벤?? ?�계 ?�보
+?�신 채널: ?�메?? 문자(SMS)
+보유 기간: ?�의 철회 ?�까지
 
-동의는 선택 사항이며, 동의 거부 시에도 서비스 이용에 불이익이 없습니다.`;
+?�의???�택 ?�항?�며, ?�의 거�? ?�에???�비???�용??불이?�이 ?�습?�다.`;
 
 interface UploadedFile {
   name: string;
@@ -114,7 +114,7 @@ export default function InquiryPage() {
 
   const addressValue = watch("address");
 
-  // ─── 전화번호 자동 하이픈 ───────────────────────────────────────────────────
+  // ?�?�?� ?�화번호 ?�동 ?�이???�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
   const formatPhone = (value: string) => {
     const n = value.replace(/[^\d]/g, "");
     if (n.length <= 3) return n;
@@ -128,10 +128,10 @@ export default function InquiryPage() {
     return `${n.slice(0, 3)}-${n.slice(3, 7)}-${n.slice(7, 11)}`;
   };
 
-  // ─── 주소 검색 ──────────────────────────────────────────────────────────────
+  // ?�?�?� 주소 검???�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
   const handleAddressSearch = () => {
     if (typeof window.daum === "undefined") {
-      alert("주소 검색 서비스를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
+      alert("주소 검???�비?��? 불러?�는 중입?�다. ?�시 ???�시 ?�도?�주?�요.");
       return;
     }
     new window.daum.Postcode({
@@ -143,14 +143,14 @@ export default function InquiryPage() {
     }).open();
   };
 
-  // ─── 파일 업로드 ────────────────────────────────────────────────────────────
+  // ?�?�?� ?�일 ?�로???�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []);
     if (files.length === 0) return;
 
     const remaining = 10 - uploadedFiles.length;
     if (remaining <= 0) {
-      alert("최대 10개의 파일을 첨부할 수 있습니다.");
+      alert("최�? 10개의 ?�일??첨�??????�습?�다.");
       return;
     }
     const toUpload = files.slice(0, remaining);
@@ -167,10 +167,10 @@ export default function InquiryPage() {
         if (res.ok && json.url) {
           results.push({ name: file.name, url: json.url });
         } else {
-          alert(`파일 업로드 실패: ${json.error ?? file.name}`);
+          alert(`?�일 ?�로???�패: ${json.error ?? file.name}`);
         }
       } catch {
-        alert(`파일 업로드 중 오류가 발생했습니다: ${file.name}`);
+        alert(`?�일 ?�로??�??�류가 발생?�습?�다: ${file.name}`);
       }
     }
 
@@ -187,7 +187,7 @@ export default function InquiryPage() {
     setValue("photoUrls", updated.map((f) => f.url));
   };
 
-  // ─── 폼 제출 ────────────────────────────────────────────────────────────────
+  // ?�?�?� ???�출 ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
   const onSubmit = handleSubmit((data) => {
     startTransition(async () => {
       const result = await submitInquiry(data);
@@ -197,16 +197,16 @@ export default function InquiryPage() {
         reset();
         setUploadedFiles([]);
       } else {
-        alert(result.error ?? "접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        alert(result.error ?? "?�수 �??�류가 발생?�습?�다. ?�시 ???�시 ?�도?�주?�요.");
       }
     });
   });
 
-  // ─── 공통 input 스타일 ───────────────────────────────────────────────────────
+  // ?�?�?� 공통 input ?��????�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
   const inputCls = (hasError?: boolean) =>
     cn(
       "w-full border rounded-lg px-4 py-2.5 text-sm outline-none transition-colors",
-      "focus:ring-2 focus:ring-[#1F4E79]/25 focus:border-[#1F4E79]",
+      "focus:ring-2 focus:ring-[#0C5F6B]/25 focus:border-[#0C5F6B]",
       hasError
         ? "border-red-400 bg-red-50/30"
         : "border-gray-200 bg-white hover:border-gray-300"
@@ -224,32 +224,32 @@ export default function InquiryPage() {
 
       <PageBanner
         title="견적 문의"
-        subtitle="지정폐기물 수거·운반 견적을 문의하세요"
-        breadcrumb={["고객지원", "견적 문의"]}
+        subtitle="지?�폐기물 ?�거·?�반 견적??문의?�세??
+        breadcrumb={["고객지??, "견적 문의"]}
       />
       <SubNav items={SUPPORT_SUBNAV_ITEMS} current="/support/inquiry" />
 
-      <section className="py-16 bg-[#F5F8FB]">
+      <section className="py-16 bg-[#F0FAFA]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            {/* ── 좌측 안내 ── */}
+            {/* ?�?� 좌측 ?�내 ?�?� */}
             <aside className="lg:col-span-2 space-y-6">
-              {/* 연락처 카드 */}
+              {/* ?�락�?카드 */}
               <div className="bg-white rounded-2xl shadow-sm p-6">
                 <h3 className="text-base font-bold text-gray-900 mb-4">
-                  직접 문의하기
+                  직접 문의?�기
                 </h3>
                 <div className="space-y-3">
                   <a
                     href={`tel:${COMPANY.tel}`}
                     className="flex items-center gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-full bg-[#1F4E79]/10 flex items-center justify-center shrink-0">
-                      <Phone className="w-4 h-4 text-[#1F4E79]" />
+                    <div className="w-9 h-9 rounded-full bg-[#0C5F6B]/10 flex items-center justify-center shrink-0">
+                      <Phone className="w-4 h-4 text-[#0C5F6B]" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">전화 문의</p>
-                      <p className="text-sm font-semibold text-gray-900 group-hover:text-[#1F4E79] transition-colors">
+                      <p className="text-xs text-gray-400">?�화 문의</p>
+                      <p className="text-sm font-semibold text-gray-900 group-hover:text-[#0C5F6B] transition-colors">
                         {COMPANY.tel}
                       </p>
                     </div>
@@ -258,22 +258,22 @@ export default function InquiryPage() {
                     href={`mailto:${COMPANY.email}`}
                     className="flex items-center gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-full bg-[#1F4E79]/10 flex items-center justify-center shrink-0">
-                      <Mail className="w-4 h-4 text-[#1F4E79]" />
+                    <div className="w-9 h-9 rounded-full bg-[#0C5F6B]/10 flex items-center justify-center shrink-0">
+                      <Mail className="w-4 h-4 text-[#0C5F6B]" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">이메일 문의</p>
-                      <p className="text-sm font-semibold text-gray-900 group-hover:text-[#1F4E79] transition-colors">
+                      <p className="text-xs text-gray-400">?�메??문의</p>
+                      <p className="text-sm font-semibold text-gray-900 group-hover:text-[#0C5F6B] transition-colors">
                         {COMPANY.email}
                       </p>
                     </div>
                   </a>
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#1F4E79]/10 flex items-center justify-center shrink-0">
-                      <Clock className="w-4 h-4 text-[#1F4E79]" />
+                    <div className="w-9 h-9 rounded-full bg-[#0C5F6B]/10 flex items-center justify-center shrink-0">
+                      <Clock className="w-4 h-4 text-[#0C5F6B]" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">운영시간</p>
+                      <p className="text-xs text-gray-400">?�영?�간</p>
                       <p className="text-sm font-semibold text-gray-900">
                         {COMPANY.businessHours}
                       </p>
@@ -282,20 +282,20 @@ export default function InquiryPage() {
                 </div>
               </div>
 
-              {/* 처리 절차 */}
+              {/* 처리 ?�차 */}
               <div className="bg-white rounded-2xl shadow-sm p-6">
                 <h3 className="text-base font-bold text-gray-900 mb-4">
-                  처리 절차
+                  처리 ?�차
                 </h3>
                 <div className="space-y-3">
                   {[
-                    { step: "01", title: "문의 접수", desc: "온라인 양식 또는 전화" },
-                    { step: "02", title: "현장 방문 / 상담", desc: "담당자 직접 연락" },
-                    { step: "03", title: "견적 발송", desc: "맞춤 견적서 이메일 발송" },
+                    { step: "01", title: "문의 ?�수", desc: "?�라???�식 ?�는 ?�화" },
+                    { step: "02", title: "?�장 방문 / ?�담", desc: "?�당??직접 ?�락" },
+                    { step: "03", title: "견적 발송", desc: "맞춤 견적???�메??발송" },
                   ].map(({ step, title, desc }, i, arr) => (
                     <div key={step} className="flex items-start gap-3">
                       <div className="flex flex-col items-center">
-                        <div className="w-7 h-7 rounded-full bg-[#1F4E79] text-white text-xs font-bold flex items-center justify-center shrink-0">
+                        <div className="w-7 h-7 rounded-full bg-[#0C5F6B] text-white text-xs font-bold flex items-center justify-center shrink-0">
                           {step}
                         </div>
                         {i < arr.length - 1 && (
@@ -314,26 +314,26 @@ export default function InquiryPage() {
               </div>
             </aside>
 
-            {/* ── 우측 폼 ── */}
+            {/* ?�?� ?�측 ???�?� */}
             <div className="lg:col-span-3">
               <div className="bg-white rounded-2xl shadow-sm p-8">
                 <h2 className="text-xl font-bold text-gray-900 mb-1">
                   견적 문의
                 </h2>
                 <p className="text-sm text-gray-400 mb-6">
-                  아래 정보를 제출하시면, 빠른 시일 내 연락드리겠습니다.
+                  ?�래 ?�보�??�출?�시�? 빠른 ?�일 ???�락?�리겠습?�다.
                 </p>
 
                 <form onSubmit={onSubmit} noValidate className="space-y-5">
-                  {/* 사업장명 + 소속팀 */}
+                  {/* ?�업?�명 + ?�속?� */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className={labelCls}>
-                        사업장명 <span className="text-red-500">*</span>
+                        ?�업?�명 <span className="text-red-500">*</span>
                       </label>
                       <input
                         {...register("companyName")}
-                        placeholder="회사명을 입력해주세요"
+                        placeholder="?�사명을 ?�력?�주?�요"
                         className={inputCls(!!errors.companyName)}
                       />
                       {errors.companyName && (
@@ -342,26 +342,26 @@ export default function InquiryPage() {
                     </div>
                     <div>
                       <label className={labelCls}>
-                        소속팀{" "}
-                        <span className="text-gray-400 font-normal text-xs">(선택)</span>
+                        ?�속?�{" "}
+                        <span className="text-gray-400 font-normal text-xs">(?�택)</span>
                       </label>
                       <input
                         {...register("department")}
-                        placeholder="예: 환경안전팀"
+                        placeholder="?? ?�경?�전?�"
                         className={inputCls(false)}
                       />
                     </div>
                   </div>
 
-                  {/* 이름 + 전화번호 */}
+                  {/* ?�름 + ?�화번호 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className={labelCls}>
-                        담당자명 <span className="text-red-500">*</span>
+                        ?�당?�명 <span className="text-red-500">*</span>
                       </label>
                       <input
                         {...register("contactName")}
-                        placeholder="담당자 성함"
+                        placeholder="?�당???�함"
                         className={inputCls(!!errors.contactName)}
                       />
                       {errors.contactName && (
@@ -370,7 +370,7 @@ export default function InquiryPage() {
                     </div>
                     <div>
                       <label className={labelCls}>
-                        전화번호 <span className="text-red-500">*</span>
+                        ?�화번호 <span className="text-red-500">*</span>
                       </label>
                       <Controller
                         name="phone"
@@ -393,16 +393,16 @@ export default function InquiryPage() {
                     </div>
                   </div>
 
-                  {/* 이메일 (견적 결과 수신용 — 선택) */}
+                  {/* ?�메??(견적 결과 ?�신?????�택) */}
                   <div>
                     <label className={labelCls}>
-                      <Mail className="inline w-4 h-4 mr-1 mb-0.5 text-[#1F4E79]" />
-                      이메일{" "}
-                      <span className="text-gray-400 font-normal text-xs">(선택)</span>
+                      <Mail className="inline w-4 h-4 mr-1 mb-0.5 text-[#0C5F6B]" />
+                      ?�메??" "}
+                      <span className="text-gray-400 font-normal text-xs">(?�택)</span>
                     </label>
                     <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 mb-2">
-                      입력하시면 접수 확인 및 견적서를 이메일로 발송해드립니다.
-                      미입력 시 담당자가 전화로 연락드립니다.
+                      ?�력?�시�??�수 ?�인 �?견적?��? ?�메?�로 발송?�드립니??
+                      미입?????�당?��? ?�화�??�락?�립?�다.
                     </p>
                     <Controller
                       name="email"
@@ -421,58 +421,58 @@ export default function InquiryPage() {
                     )}
                   </div>
 
-                  {/* 수거 장소 */}
+                  {/* ?�거 ?�소 */}
                   <div>
                     <label className={labelCls}>
-                      <MapPin className="inline w-4 h-4 mr-1 mb-0.5 text-[#1F4E79]" />
-                      수거 장소{" "}
-                      <span className="text-gray-400 font-normal text-xs">(선택)</span>
+                      <MapPin className="inline w-4 h-4 mr-1 mb-0.5 text-[#0C5F6B]" />
+                      ?�거 ?�소{" "}
+                      <span className="text-gray-400 font-normal text-xs">(?�택)</span>
                     </label>
                     <p className="text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2 mb-2 flex items-start gap-1.5">
-                      <span className="shrink-0 mt-0.5">💡</span>
+                      <span className="shrink-0 mt-0.5">?��</span>
                       <span>
-                        정확한 수거 지역을 입력하시면 운반 거리를 반영한 더 정확한 견적을 안내해드릴 수 있습니다.
-                        주소 입력은 필수가 아니며, 미입력 시 담당자 연락 후 확인합니다.
+                        ?�확???�거 지??�� ?�력?�시�??�반 거리�?반영?????�확??견적???�내?�드�????�습?�다.
+                        주소 ?�력?� ?�수가 ?�니�? 미입?????�당???�락 ???�인?�니??
                       </span>
                     </p>
                     <div className="flex gap-2">
                       <input
                         readOnly
                         value={addressValue ?? ""}
-                        placeholder="주소 검색 (선택)"
+                        placeholder="주소 검??(?�택)"
                         className={cn(inputCls(false), "cursor-pointer flex-1 min-w-0")}
                         onClick={handleAddressSearch}
                       />
                       <button
                         type="button"
                         onClick={handleAddressSearch}
-                        className="px-3 py-2.5 border border-gray-200 rounded-lg hover:border-[#1F4E79] hover:text-[#1F4E79] transition-colors shrink-0"
-                        aria-label="주소 검색"
+                        className="px-3 py-2.5 border border-gray-200 rounded-lg hover:border-[#0C5F6B] hover:text-[#0C5F6B] transition-colors shrink-0"
+                        aria-label="주소 검??
                       >
                         <Search className="w-4 h-4" />
                       </button>
                     </div>
                     <input
                       {...register("addressDetail")}
-                      placeholder="상세 주소 (선택)"
+                      placeholder="?�세 주소 (?�택)"
                       className={cn(inputCls(), "mt-2")}
                     />
                   </div>
 
-                  {/* 폐기물 종류 */}
+                  {/* ?�기�?종류 */}
                   <div>
                     <label className={labelCls}>
-                      폐기물 종류 (중복 선택){" "}
+                      ?�기�?종류 (중복 ?�택){" "}
                       <span className="text-red-500">*</span>
                     </label>
                     <div className="relative mb-4">
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
                         type="text"
-                        placeholder="폐기물 명칭 검색 (예: 폐유, 슬러지...)"
+                        placeholder="?�기�?명칭 검??(?? ?�유, ?�러지...)"
                         value={wasteSearch}
                         onChange={(e) => setWasteSearch(e.target.value)}
-                        className="w-full pl-10 pr-10 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1F4E79]/20 transition-all"
+                        className="w-full pl-10 pr-10 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0C5F6B]/20 transition-all"
                       />
                       {wasteSearch && (
                         <button
@@ -498,28 +498,28 @@ export default function InquiryPage() {
                           <div className={cn("space-y-2 p-1", errors.wasteTypes && "border border-red-400 rounded-lg bg-red-50/30")}>
                             {filteredCategories.length === 0 ? (
                               <p className="text-center py-8 text-gray-400 text-sm italic">
-                                검색 결과가 없습니다. 직접 입력하시려면 '기타'를 선택해 주세요.
+                                검??결과가 ?�습?�다. 직접 ?�력?�시?�면 '기�?'�??�택??주세??
                               </p>
                             ) : (
                               filteredCategories.map(([major, minors]) => {
-                                // 검색어가 있을 때, 해당 카테고리가 검색어와 직접 매칭되지 않더라도 
-                                // 하위 아이템이 매칭되면 카테고리를 강제로 확장해서 보여줍니다.
+                                // 검?�어가 ?�을 ?? ?�당 카테고리가 검?�어?� 직접 매칭?��? ?�더?�도 
+                                // ?�위 ?�이?�이 매칭?�면 카테고리�?강제�??�장?�서 보여줍니??
                                 const s = wasteSearch.toLowerCase();
                                 const isMajorMatch = major.toLowerCase().includes(s);
                                 const matchingMinors = minors.filter(m => m.toLowerCase().includes(s));
                                 
-                                // 검색 중이고 하위 아이템이 매칭되거나, 클릭해서 확장된 경우
+                                // 검??중이�??�위 ?�이?�이 매칭?�거?? ?�릭?�서 ?�장??경우
                                 const isExpanded = (wasteSearch && matchingMinors.length > 0) || expandedCategory === major;
                                 const selectedCount = field.value.filter((v) => v.startsWith(`${major} - `) || v === major).length;
 
-                                const isFeatured = major.startsWith("⭐");
+                                const isFeatured = major.startsWith("�?);
                                 return (
                                   <div
                                     key={major}
                                     className={cn(
                                       "border rounded-lg overflow-hidden bg-white",
                                       isFeatured
-                                        ? "border-[#1F4E79]/40 ring-1 ring-[#1F4E79]/20"
+                                        ? "border-[#0C5F6B]/40 ring-1 ring-[#0C5F6B]/20"
                                         : "border-gray-200"
                                     )}
                                   >
@@ -529,35 +529,35 @@ export default function InquiryPage() {
                                       className={cn(
                                         "w-full flex items-center justify-between px-4 py-3 transition-colors",
                                         isFeatured
-                                          ? isExpanded ? "bg-[#1F4E79]/10" : "bg-[#1F4E79]/5 hover:bg-[#1F4E79]/10"
-                                          : isExpanded ? "bg-[#F5F8FB]" : "hover:bg-gray-50",
-                                        selectedCount > 0 && !isExpanded && !isFeatured && "border-l-4 border-l-[#1F4E79]"
+                                          ? isExpanded ? "bg-[#0C5F6B]/10" : "bg-[#0C5F6B]/5 hover:bg-[#0C5F6B]/10"
+                                          : isExpanded ? "bg-[#F0FAFA]" : "hover:bg-gray-50",
+                                        selectedCount > 0 && !isExpanded && !isFeatured && "border-l-4 border-l-[#0C5F6B]"
                                       )}
                                     >
-                                      <span className={cn("font-semibold text-sm", isFeatured ? "text-[#1F4E79]" : "text-gray-800")}>
+                                      <span className={cn("font-semibold text-sm", isFeatured ? "text-[#0C5F6B]" : "text-gray-800")}>
                                         {major}
                                         {isFeatured && (
-                                          <span className="ml-2 text-[10px] bg-[#1F4E79] text-white px-2 py-0.5 rounded-full font-bold">
+                                          <span className="ml-2 text-[10px] bg-[#0C5F6B] text-white px-2 py-0.5 rounded-full font-bold">
                                             집중 처리
                                           </span>
                                         )}
                                         {selectedCount > 0 && (
-                                          <span className="ml-2 text-[#1F4E79] bg-[#1F4E79]/10 px-2 py-0.5 rounded-full text-xs">
-                                            {selectedCount}개 선택됨
+                                          <span className="ml-2 text-[#0C5F6B] bg-[#0C5F6B]/10 px-2 py-0.5 rounded-full text-xs">
+                                            {selectedCount}�??�택??
                                           </span>
                                         )}
                                       </span>
                                       <ChevronDown
-                                        className={cn("w-4 h-4 transition-transform", isFeatured ? "text-[#1F4E79]" : "text-gray-500", isExpanded && "rotate-180")}
+                                        className={cn("w-4 h-4 transition-transform", isFeatured ? "text-[#0C5F6B]" : "text-gray-500", isExpanded && "rotate-180")}
                                       />
                                     </button>
                                     {isExpanded && (
                                       <div className="p-4 bg-white border-t border-gray-100 flex flex-wrap gap-2">
                                         {minors.map((minor) => {
-                                          const valueStr = major === "기타" ? "기타" : `${major} - ${minor}`;
+                                          const valueStr = major === "기�?" ? "기�?" : `${major} - ${minor}`;
                                           const checked = field.value.includes(valueStr);
-                                          // 검색 중일 때 매칭되는 아이템만 강조하거나 필터링할 수 있지만, 
-                                          // 여기서는 전체 리스트를 보여주되 매칭되는 것 위주로 확장했습니다.
+                                          // 검??중일 ??매칭?�는 ?�이?�만 강조?�거???�터링할 ???��?�? 
+                                          // ?�기?�는 ?�체 리스?��? 보여주되 매칭?�는 �??�주�??�장?�습?�다.
                                           return (
                                             <button
                                               key={minor}
@@ -572,9 +572,9 @@ export default function InquiryPage() {
                                               className={cn(
                                                 "px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
                                                 checked
-                                                  ? "bg-[#1F4E79] border-[#1F4E79] text-white"
-                                                  : "bg-white border-gray-200 text-gray-600 hover:border-[#1F4E79]/50",
-                                                wasteSearch && minor.toLowerCase().includes(s) && !checked && "ring-2 ring-[#1F4E79]/30 border-[#1F4E79]/50"
+                                                  ? "bg-[#0C5F6B] border-[#0C5F6B] text-white"
+                                                  : "bg-white border-gray-200 text-gray-600 hover:border-[#0C5F6B]/50",
+                                                wasteSearch && minor.toLowerCase().includes(s) && !checked && "ring-2 ring-[#0C5F6B]/30 border-[#0C5F6B]/50"
                                               )}
                                             >
                                               {minor}
@@ -596,38 +596,38 @@ export default function InquiryPage() {
                     )}
                   </div>
 
-                  {/* 수거 요청일 + 폐기물 수량 */}
+                  {/* ?�거 ?�청??+ ?�기�??�량 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className={labelCls}>수거 요청일</label>
+                      <label className={labelCls}>?�거 ?�청??/label>
                       <input
                         {...register("collectionDate")}
                         type="date"
                         className={inputCls(!!errors.collectionDate)}
                       />
                       <p className="text-[10px] text-gray-400 mt-1">
-                        * 희망하시는 수거 날짜를 선택해주세요.
+                        * ?�망?�시???�거 ?�짜�??�택?�주?�요.
                       </p>
                     </div>
                     <div>
-                      <label className={labelCls}>폐기물 수량/단위</label>
+                      <label className={labelCls}>?�기�??�량/?�위</label>
                       <input
                         {...register("quantity")}
-                        placeholder="예: 약 500kg, 2드럼 등"
+                        placeholder="?? ??500kg, 2?�럼 ??
                         className={inputCls(!!errors.quantity)}
                       />
                       <p className="text-[10px] text-gray-400 mt-1">
-                        * 대략적인 정보를 입력하셔도 괜찮습니다.
+                        * ?�?�적???�보�??�력?�셔??괜찮?�니??
                       </p>
                     </div>
                   </div>
 
-                  {/* 기타 문의사항 */}
+                  {/* 기�? 문의?�항 */}
                   <div>
-                    <label className={labelCls}>기타 문의사항</label>
+                    <label className={labelCls}>기�? 문의?�항</label>
                     <textarea
                       {...register("message")}
-                      placeholder="특이사항이나 추가로 문의하실 내용을 자유롭게 작성해주세요."
+                      placeholder="?�이?�항?�나 추�?�?문의?�실 ?�용???�유�?�� ?�성?�주?�요."
                       rows={3}
                       className={cn(inputCls(!!errors.message), "resize-none")}
                     />
@@ -636,11 +636,11 @@ export default function InquiryPage() {
                     )}
                   </div>
 
-                  {/* 첨부 파일 (사진, 서류) */}
+                  {/* 첨�? ?�일 (?�진, ?�류) */}
                   <div>
-                    <label className={labelCls}>첨부 파일 (사진, 서류 등)</label>
+                    <label className={labelCls}>첨�? ?�일 (?�진, ?�류 ??</label>
                     <p className="text-xs text-gray-400 mb-2">
-                      현장 사진, MSDS 등 관련 서류를 업로드해 주시면 빠르고 정확한 견적이 가능합니다. (이미지, PDF, DOC, HWP 지원 / 파일당 최대 10MB)
+                      ?�장 ?�진, MSDS ??관???�류�??�로?�해 주시�?빠르�??�확??견적??가?�합?�다. (?��?지, PDF, DOC, HWP 지??/ ?�일??최�? 10MB)
                     </p>
 
                     {uploadedFiles.length > 0 && (
@@ -680,7 +680,7 @@ export default function InquiryPage() {
                         <label
                           htmlFor="photo-upload"
                           className={cn(
-                            "inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 cursor-pointer hover:border-[#1F4E79] hover:text-[#1F4E79] transition-colors",
+                            "inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 cursor-pointer hover:border-[#0C5F6B] hover:text-[#0C5F6B] transition-colors",
                             isUploading && "opacity-60 pointer-events-none"
                           )}
                         >
@@ -690,31 +690,31 @@ export default function InquiryPage() {
                             <Paperclip className="w-4 h-4" />
                           )}
                           {isUploading
-                            ? "업로드 중..."
+                            ? "?�로??�?.."
                             : uploadedFiles.length === 0
-                            ? "파일 업로드"
-                            : "파일 추가"}
+                            ? "?�일 ?�로??
+                            : "?�일 추�?"}
                         </label>
                         {uploadedFiles.length === 0 && (
                           <p className="text-xs text-gray-400 mt-1">
-                            선택된 파일이 존재하지 않습니다.
+                            ?�택???�일??존재?��? ?�습?�다.
                           </p>
                         )}
                       </>
                     )}
                   </div>
 
-                  {/* 개인정보 동의 */}
+                  {/* 개인?�보 ?�의 */}
                   <div className="border border-gray-100 rounded-xl p-4 space-y-3">
-                    {/* 필수 동의 */}
+                    {/* ?�수 ?�의 */}
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <button
                           type="button"
                           onClick={() => setPrivacyModalOpen(true)}
-                          className="text-sm font-semibold text-gray-700 hover:text-[#1F4E79] underline decoration-dotted flex items-center gap-1"
+                          className="text-sm font-semibold text-gray-700 hover:text-[#0C5F6B] underline decoration-dotted flex items-center gap-1"
                         >
-                          개인정보 수집 및 이용 동의
+                          개인?�보 ?�집 �??�용 ?�의
                           <ExternalLink className="w-3 h-3" />
                         </button>
                         <span className="text-red-500 text-xs font-bold">*</span>
@@ -728,9 +728,9 @@ export default function InquiryPage() {
                               type="radio"
                               checked={field.value === true}
                               onChange={() => field.onChange(true)}
-                              className="w-4 h-4 accent-[#1F4E79]"
+                              className="w-4 h-4 accent-[#0C5F6B]"
                             />
-                            <span className="text-sm text-gray-600">동의합니다</span>
+                            <span className="text-sm text-gray-600">?�의?�니??/span>
                           </label>
                         )}
                       />
@@ -741,18 +741,18 @@ export default function InquiryPage() {
 
                     <hr className="border-gray-100" />
 
-                    {/* 선택 동의 */}
+                    {/* ?�택 ?�의 */}
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <button
                           type="button"
                           onClick={() => setMarketingModalOpen(true)}
-                          className="text-sm font-semibold text-gray-700 hover:text-[#1F4E79] underline decoration-dotted flex items-center gap-1"
+                          className="text-sm font-semibold text-gray-700 hover:text-[#0C5F6B] underline decoration-dotted flex items-center gap-1"
                         >
-                          마케팅 수신 동의
+                          마�????�신 ?�의
                           <ExternalLink className="w-3 h-3" />
                         </button>
-                        <span className="text-xs text-gray-400">(선택)</span>
+                        <span className="text-xs text-gray-400">(?�택)</span>
                       </div>
                       <Controller
                         name="marketingConsent"
@@ -763,29 +763,29 @@ export default function InquiryPage() {
                               type="radio"
                               checked={field.value === true}
                               onChange={() => field.onChange(true)}
-                              className="w-4 h-4 accent-[#1F4E79]"
+                              className="w-4 h-4 accent-[#0C5F6B]"
                             />
-                            <span className="text-sm text-gray-600">동의합니다</span>
+                            <span className="text-sm text-gray-600">?�의?�니??/span>
                           </label>
                         )}
                       />
                     </div>
                   </div>
 
-                  {/* 제출 버튼 */}
+                  {/* ?�출 버튼 */}
                   <button
                     type="submit"
                     disabled={isPending || isUploading}
-                    className="w-full py-3.5 bg-[#1F4E79] text-white font-bold rounded-xl hover:bg-[#2E75B6] transition-colors disabled:opacity-60 flex items-center justify-center gap-2 text-sm"
+                    className="w-full py-3.5 bg-[#0C5F6B] text-white font-bold rounded-xl hover:bg-[#0E9E7E] transition-colors disabled:opacity-60 flex items-center justify-center gap-2 text-sm"
                   >
                     {isPending ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        제출 중...
+                        ?�출 �?..
                       </>
                     ) : (
                       <>
-                        제출하기
+                        ?�출?�기
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
@@ -797,18 +797,18 @@ export default function InquiryPage() {
         </div>
       </section>
 
-      {/* ── 성공 모달 ── */}
+      {/* ?�?� ?�공 모달 ?�?� */}
       {showSuccessModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
           <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-8 text-center">
-            <CheckCircle2 className="w-14 h-14 text-[#4CAF50] mx-auto mb-4" />
+            <CheckCircle2 className="w-14 h-14 text-[#10B981] mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-900 mb-2">
-              문의가 접수되었습니다
+              문의가 ?�수?�었?�니??
             </h3>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-              빠른 시일 내에 담당자가 연락드리겠습니다.
+              빠른 ?�일 ?�에 ?�당?��? ?�락?�리겠습?�다.
               {submittedEmail && (
-                <><br />접수 확인 이메일을 발송했습니다.</>
+                <><br />?�수 ?�인 ?�메?�을 발송?�습?�다.</>
               )}
             </p>
 
@@ -816,54 +816,54 @@ export default function InquiryPage() {
               <div className="space-y-2">
                 <Link
                   href="/my/inquiries"
-                  className="block w-full py-3 bg-[#1F4E79] text-white font-semibold rounded-xl hover:bg-[#2E75B6] transition-colors text-sm"
+                  className="block w-full py-3 bg-[#0C5F6B] text-white font-semibold rounded-xl hover:bg-[#0E9E7E] transition-colors text-sm"
                   onClick={() => setShowSuccessModal(false)}
                 >
-                  문의 내역 확인하기
+                  문의 ?�역 ?�인?�기
                 </Link>
                 <button
                   onClick={() => setShowSuccessModal(false)}
                   className="block w-full py-2.5 text-sm text-gray-400 hover:text-gray-600 transition-colors"
                 >
-                  닫기
+                  ?�기
                 </button>
               </div>
             ) : (
               <div className="space-y-3">
                 <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-left">
-                  <p className="text-xs font-semibold text-blue-800 mb-1">문의 내역을 온라인으로 확인하세요</p>
+                  <p className="text-xs font-semibold text-blue-800 mb-1">문의 ?�역???�라?�으�??�인?�세??/p>
                   <p className="text-xs text-blue-600 leading-relaxed">
-                    로그인하면 접수 현황·견적 결과를 실시간으로 추적할 수 있습니다.
+                    로그?�하�??�수 ?�황·견적 결과�??�시간으�?추적?????�습?�다.
                   </p>
                 </div>
                 <Link
                   href="/support/inquiry-status"
-                  className="block w-full py-2.5 bg-[#1F4E79] text-white font-semibold rounded-xl hover:bg-[#2E75B6] transition-colors text-sm text-center"
+                  className="block w-full py-2.5 bg-[#0C5F6B] text-white font-semibold rounded-xl hover:bg-[#0E9E7E] transition-colors text-sm text-center"
                   onClick={() => setShowSuccessModal(false)}
                 >
-                  문의현황 조회하기
+                  문의?�황 조회?�기
                 </Link>
                 <div className="flex gap-2">
                   <Link
                     href="/login"
-                    className="flex-1 py-2 border border-[#1F4E79] text-[#1F4E79] font-semibold rounded-xl hover:bg-blue-50 transition-colors text-sm text-center"
+                    className="flex-1 py-2 border border-[#0C5F6B] text-[#0C5F6B] font-semibold rounded-xl hover:bg-blue-50 transition-colors text-sm text-center"
                     onClick={() => setShowSuccessModal(false)}
                   >
-                    로그인
+                    로그??
                   </Link>
                   <Link
                     href="/register"
                     className="flex-1 py-2 border border-gray-300 text-gray-600 font-semibold rounded-xl hover:bg-gray-50 transition-colors text-sm text-center"
                     onClick={() => setShowSuccessModal(false)}
                   >
-                    회원가입
+                    ?�원가??
                   </Link>
                 </div>
                 <button
                   onClick={() => setShowSuccessModal(false)}
                   className="block w-full py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors"
                 >
-                  닫기
+                  ?�기
                 </button>
               </div>
             )}
@@ -871,19 +871,19 @@ export default function InquiryPage() {
         </div>
       )}
 
-      {/* ── 개인정보 모달 ── */}
+      {/* ?�?� 개인?�보 모달 ?�?� */}
       {privacyModalOpen && (
         <PrivacyModal
-          title="개인정보 수집 및 이용 동의"
+          title="개인?�보 ?�집 �??�용 ?�의"
           content={PRIVACY_FULL_TEXT}
           onClose={() => setPrivacyModalOpen(false)}
         />
       )}
 
-      {/* ── 마케팅 모달 ── */}
+      {/* ?�?� 마�???모달 ?�?� */}
       {marketingModalOpen && (
         <PrivacyModal
-          title="마케팅 수신 동의"
+          title="마�????�신 ?�의"
           content={MARKETING_FULL_TEXT}
           onClose={() => setMarketingModalOpen(false)}
         />
@@ -892,7 +892,7 @@ export default function InquiryPage() {
   );
 }
 
-// ─── 이메일 자동완성 ────────────────────────────────────────────────────────────
+// ?�?�?� ?�메???�동?�성 ?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�?�
 
 const EMAIL_DOMAINS = [
   "naver.com",
@@ -922,7 +922,7 @@ function EmailAutocomplete({
 
   const inputCls = cn(
     "w-full border rounded-lg px-4 py-2.5 text-sm outline-none transition-colors",
-    "focus:ring-2 focus:ring-[#1F4E79]/25 focus:border-[#1F4E79]",
+    "focus:ring-2 focus:ring-[#0C5F6B]/25 focus:border-[#0C5F6B]",
     hasError
       ? "border-red-400 bg-red-50/30"
       : "border-gray-200 bg-white hover:border-gray-300"
@@ -934,7 +934,7 @@ function EmailAutocomplete({
     const local = v.slice(0, atIdx);
     const domainTyped = v.slice(atIdx + 1).toLowerCase();
     const matched = EMAIL_DOMAINS.filter((d) => d.startsWith(domainTyped));
-    // 완전히 입력됐으면 숨김
+    // ?�전???�력?�으�??��?
     if (matched.length === 1 && matched[0] === domainTyped) return [];
     return matched.map((d) => `${local}@${d}`);
   }
@@ -1006,8 +1006,8 @@ function EmailAutocomplete({
                 className={cn(
                   "w-full px-4 py-2.5 text-sm text-left flex items-center gap-2 transition-colors",
                   idx === activeIdx
-                    ? "bg-[#1F4E79] text-white"
-                    : "text-gray-700 hover:bg-[#1F4E79]/5 hover:text-[#1F4E79]"
+                    ? "bg-[#0C5F6B] text-white"
+                    : "text-gray-700 hover:bg-[#0C5F6B]/5 hover:text-[#0C5F6B]"
                 )}
               >
                 <Mail className={cn("w-3.5 h-3.5 shrink-0", idx === activeIdx ? "text-white/70" : "text-gray-400")} />
@@ -1050,9 +1050,9 @@ function PrivacyModal({
         <div className="px-6 py-4 border-t border-gray-100">
           <button
             onClick={onClose}
-            className="w-full py-2.5 bg-[#1F4E79] text-white text-sm font-semibold rounded-xl hover:bg-[#2E75B6] transition-colors"
+            className="w-full py-2.5 bg-[#0C5F6B] text-white text-sm font-semibold rounded-xl hover:bg-[#0E9E7E] transition-colors"
           >
-            확인
+            ?�인
           </button>
         </div>
       </div>

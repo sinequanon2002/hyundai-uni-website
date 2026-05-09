@@ -64,15 +64,15 @@
 
   
 
-- primary:       #1F4E79  (신뢰 딥블루)
+- primary:       #0C5F6B  (딥 틸)
 
   
 
-- secondary:     #2E75B6  (포인트 블루)
+- secondary:     #0E9E7E  (에메랄드 틸)
 
   
 
-- accent:        #4CAF50  (환경 그린)
+- accent:        #10B981  (비비드 그린)
 
   
 
@@ -84,7 +84,7 @@
 
   
 
-- neutral-light: #F5F8FB
+- neutral-light: #F0FAFA
 
   
 

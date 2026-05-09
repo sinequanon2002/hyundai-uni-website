@@ -32,8 +32,8 @@ export function InquirySearchInput() {
         type="text"
         defaultValue={searchParams.get("search") ?? ""}
         onChange={handleChange}
-        placeholder="사업장명 또는 담당자명 검색"
-        className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm w-64 focus:outline-none focus:ring-2 focus:ring-[#1F4E79]/30 focus:border-[#1F4E79]"
+        placeholder="?�업?�명 ?�는 ?�당?�명 검??
+        className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm w-64 focus:outline-none focus:ring-2 focus:ring-[#0C5F6B]/30 focus:border-[#0C5F6B]"
       />
     </div>
   );

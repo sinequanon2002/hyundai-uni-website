@@ -16,13 +16,13 @@ const config: Config = {
     },
     extend: {
       colors: {
-        primary: "#1F4E79",
-        secondary: "#2E75B6",
-        accent: "#4CAF50",
+        primary: "#0C5F6B",
+        secondary: "#0E9E7E",
+        accent: "#10B981",
         neutral: {
           900: "#1A1A1A",
           600: "#666666",
-          100: "#F5F8FB",
+          100: "#F0FAFA",
           white: "#FFFFFF"
         }
       },

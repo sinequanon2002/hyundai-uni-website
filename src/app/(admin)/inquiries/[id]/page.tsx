@@ -40,7 +40,7 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
       {/* 뒤로가기 */}
       <Link
         href="/inquiries"
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-[#1F4E79] mb-6 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-[#0C5F6B] mb-6 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         문의 목록으로
