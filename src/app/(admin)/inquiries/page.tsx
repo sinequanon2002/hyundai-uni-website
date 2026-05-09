@@ -13,11 +13,11 @@ interface PageProps {
 }
 
 const STATUS_TABS: { value: string; label: string }[] = [
-  { value: "all",       label: "?�체" },
-  { value: "pending",   label: "?�수?��? },
-  { value: "reviewing", label: "검?�중" },
+  { value: "all",       label: "전체" },
+  { value: "pending",   label: "접수대기" },
+  { value: "reviewing", label: "검토중" },
   { value: "quoted",    label: "견적발송" },
-  { value: "completed", label: "?�료" },
+  { value: "completed", label: "완료" },
   { value: "cancelled", label: "취소" },
 ];
 
@@ -38,16 +38,16 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
 
   return (
     <div>
-      {/* ?�더 */}
+      {/* 헤더 */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">견적 문의 관�?/h1>
-          <p className="text-sm text-gray-500 mt-0.5">?�체 {total}�?/p>
+          <h1 className="text-2xl font-bold text-gray-900">견적 문의 관리</h1>
+          <p className="text-sm text-gray-500 mt-0.5">전체 {total}건</p>
         </div>
         <InquirySearchInput />
       </div>
 
-      {/* ?�태 ?�터 ??*/}
+      {/* 상태 필터 탭 */}
       <div className="flex gap-1 mb-4 border-b border-gray-200">
         {STATUS_TABS.map((tab) => {
           const isActive = status === tab.value;
@@ -67,24 +67,24 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
         })}
       </div>
 
-      {/* ?�이�?*/}
+      {/* 테이블 */}
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         {inquiries.length === 0 ? (
           <div className="py-16 text-center text-gray-400 text-sm">
-            문의 ?�역???�습?�다.
+            문의 내역이 없습니다.
           </div>
         ) : (
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-100">
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 w-36">?�수??/th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">?�업?�명</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">?�속?�</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">?�당??/th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">?�락�?/th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">?�기�?/th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 w-24">?�태</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-600 w-16">?�세</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600 w-36">접수일</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">사업장명</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">소속팀</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">담당자</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">연락처</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600">폐기물</th>
+                <th className="text-left px-4 py-3 font-semibold text-gray-600 w-24">상태</th>
+                <th className="text-center px-4 py-3 font-semibold text-gray-600 w-16">상세</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -127,7 +127,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
         )}
       </div>
 
-      {/* ?�이지?�이??*/}
+      {/* 페이지네이션 */}
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-2 mt-6">
           <Link
