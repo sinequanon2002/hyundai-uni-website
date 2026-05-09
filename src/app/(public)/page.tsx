@@ -1,4 +1,6 @@
 import { HeroSection } from "@/components/sections/HeroSection";
+import { TrustStatsSection } from "@/components/sections/TrustStatsSection";
+import { PainPointSection } from "@/components/sections/PainPointSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { WhyUsSection } from "@/components/sections/WhyUsSection";
 import { ClientsSection } from "@/components/sections/ClientsSection";
@@ -11,9 +13,11 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col font-pretendard pt-16">
       <StructuredData />
-      {/* Header가 상단에 fixed 되어 있다고 가정하고, pt-16 혹시 모르니 부여 
+      {/* Header가 상단에 fixed 되어 있다고 가정하고, pt-16 혹시 모르니 부여
           (여기서는 페이지 전체 구조에서 Header가 밖에 있다고 전제) */}
       <HeroSection />
+      <TrustStatsSection />
+      <PainPointSection />
       <ServicesSection />
       <WhyUsSection />
       <ClientsSection />

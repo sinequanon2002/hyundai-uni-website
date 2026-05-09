@@ -52,13 +52,6 @@ const CLIENT_CATEGORIES: Client[] = [
   },
 ];
 
-const STATS = [
-  { value: "300+", label: "누적 거래처" },
-  { value: "5,000+", label: "연간 처리건수 (톤)" },
-  { value: "99.8%", label: "고객 재계약률" },
-  { value: "24h", label: "평균 견적 응답" },
-];
-
 export function ClientsSection() {
   const fadeInHeader = useFadeIn();
 
@@ -82,28 +75,6 @@ export function ClientsSection() {
             대기업부터 공공기관까지, 다양한 산업군의 고객사가 현대유앤아이의<br className="hidden md:inline" />
             전문적이고 투명한 폐기물 처리 서비스를 신뢰하고 있습니다.
           </p>
-        </div>
-
-        {/* Stats Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {STATS.map((stat, index) => {
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            const fadeStat = useFadeIn(0.1, index * 100);
-            return (
-              <div
-                key={index}
-                {...fadeStat}
-                className={`text-center p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10 ${fadeStat.className}`}
-              >
-                <div className="text-3xl md:text-4xl font-black text-primary mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-neutral-500 font-medium">
-                  {stat.label}
-                </div>
-              </div>
-            );
-          })}
         </div>
 
         {/* Client Categories Grid */}
