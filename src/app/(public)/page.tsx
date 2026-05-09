@@ -6,6 +6,8 @@ import { ServicesSection } from "@/components/sections/ServicesSection";
 import { WhyUsSection } from "@/components/sections/WhyUsSection";
 import { ClientsSection } from "@/components/sections/ClientsSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
+import { WasteTagsSection } from "@/components/sections/WasteTagsSection";
+import { BlogPreviewSection } from "@/components/sections/BlogPreviewSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 
 import { StructuredData } from "@/components/seo/StructuredData";
@@ -24,6 +26,8 @@ export default function Home() {
       <WhyUsSection />
       <ClientsSection />
       <ProcessSection />
+      <WasteTagsSection />
+      <BlogPreviewSection />
       <CtaSection />
     </main>
   );

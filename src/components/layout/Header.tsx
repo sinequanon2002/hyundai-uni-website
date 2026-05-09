@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 interface SubItem {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 interface NavGroup {
@@ -54,6 +55,8 @@ const NAV_GROUPS: NavGroup[] = [
     children: [
       { label: '공지사항', href: '/support/notice' },
       { label: '현장갤러리', href: '/support/gallery' },
+      { label: '견적 문의', href: '/support/inquiry' },
+      { label: '네이버 블로그 ↗', href: 'https://blog.naver.com/hduni2020', external: true },
     ],
   },
 ];
@@ -168,6 +171,7 @@ export function Header() {
                     <Link
                       key={child.href}
                       href={child.href}
+                      {...(child.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       className={cn(
                         "block px-5 py-2.5 text-sm transition-colors hover:bg-primary/5 hover:text-primary",
                         pathname === child.href ? "text-primary bg-primary/5 font-medium" : "text-neutral-600"
@@ -250,10 +254,11 @@ export function Header() {
                       <Link
                         key={child.href}
                         href={child.href}
+                        {...(child.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                         className={cn(
                           "block py-2.5 px-3 rounded-lg text-sm transition-colors",
-                          pathname === child.href 
-                            ? "text-primary bg-primary/5 font-medium" 
+                          pathname === child.href
+                            ? "text-primary bg-primary/5 font-medium"
                             : "text-neutral-600 hover:text-primary hover:bg-neutral-50"
                         )}
                       >

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useFadeIn } from "@/hooks/useFadeIn";
-import { ClipboardList, BookOpen, ShieldCheck, FileCheck } from "lucide-react";
+import { ClipboardList, BookOpen, ShieldCheck, FileCheck, AlertCircle } from "lucide-react";
 
 const PAIN_POINTS = [
   {
@@ -24,6 +24,11 @@ const PAIN_POINTS = [
     icon: FileCheck,
     title: "처리 이력과 증빙 서류, 체계적으로 관리되고 있나요?",
     desc: "환경부 점검이나 감사 시 처리 이력 서류가 필요합니다. 수거 완료 후 처리 확인서와 전자인계서 사본을 빠짐없이 제공해 드립니다.",
+  },
+  {
+    icon: AlertCircle,
+    title: "정기 점검·감사 시 처리 이력 서류가 준비되어 있으신가요?",
+    desc: "환경부 지도·점검이나 ISO 감사에서 3년치 처리 이력을 즉시 제출해야 합니다. 현대유앤아이는 연도별 처리 실적 자료를 언제든 재발급해 드립니다.",
   },
 ];
 
@@ -59,10 +64,12 @@ export function PainPointSection() {
         >
           {PAIN_POINTS.map((point, i) => {
             const Icon = point.icon;
+            const isLast = i === PAIN_POINTS.length - 1;
+            const isOdd = PAIN_POINTS.length % 2 !== 0;
             return (
               <div
                 key={i}
-                className="flex gap-5 p-6 bg-white rounded-2xl border border-neutral-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
+                className={`flex gap-5 p-6 bg-white rounded-2xl border border-neutral-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 ${isLast && isOdd ? "md:col-span-2 md:max-w-[calc(50%-12px)] md:mx-auto" : ""}`}
               >
                 <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mt-0.5">
                   <Icon size={22} strokeWidth={1.8} />
