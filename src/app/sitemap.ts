@@ -14,10 +14,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/waste/types`,           priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
     { url: `${baseUrl}/waste/process`,         priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
     { url: `${baseUrl}/waste/storage`,         priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
+    // 실적사례 (단독 메뉴)
+    { url: `${baseUrl}/support/gallery`,       priority: 0.8, changeFrequency: 'weekly',  lastModified: new Date() },
+    // 블로그
+    { url: `${baseUrl}/support/blog`,          priority: 0.7, changeFrequency: 'weekly',  lastModified: new Date() },
     // 고객센터
     { url: `${baseUrl}/support/notice`,        priority: 0.6, changeFrequency: 'weekly',  lastModified: new Date() },
-    { url: `${baseUrl}/support/blog`,          priority: 0.7, changeFrequency: 'weekly',  lastModified: new Date() },
-    { url: `${baseUrl}/support/gallery`,       priority: 0.6, changeFrequency: 'weekly',  lastModified: new Date() },
     { url: `${baseUrl}/support/inquiry`,       priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
   ];
 

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PageBanner } from "@/components/ui/PageBanner";
-import { SubNav, SUPPORT_SUBNAV_ITEMS } from "@/components/ui/SubNav";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { GalleryFilters } from "@/components/GalleryFilters";
 import { getPortfolioItems } from "@/lib/actions/portfolio";
@@ -38,9 +37,9 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     };
   }
   return {
-    title: "현장갤러리 | 현대유앤아이",
+    title: "실적사례 | 현대유앤아이",
     description:
-      "현대유앤아이의 지정폐기물 수거·운반 현장을 확인하세요. 폐유, 폐산, 폐유기용제, 폐석면 등 다양한 지정폐기물 처리 실적과 보유 장비를 소개합니다.",
+      "현대유앤아이의 지정폐기물 수거·운반 실제 현장을 확인하세요. 폐유, 폐산, 폐유기용제, 폐석면 등 다양한 지정폐기물 처리 실적과 보유 장비를 소개합니다.",
   };
 }
 
@@ -82,27 +81,26 @@ export default async function GalleryPage({ searchParams }: Props) {
   // 동적 헤딩 텍스트
   const headingTitle =
     region && category
-      ? `${region} ${category} 현장`
+      ? `${region} ${category} 실적사례`
       : region
-      ? `${region} 현장갤러리`
+      ? `${region} 실적사례`
       : category
-      ? `${category} 현장갤러리`
-      : "현장갤러리";
+      ? `${category} 실적사례`
+      : "실적사례";
 
   const headingDesc =
     region || category
       ? `${[region, category].filter(Boolean).join(" ")} 지정폐기물 수거·운반 실제 작업 현장을 확인하세요.`
-      : "지정폐기물 수거·운반 현장 사진과 보유 장비를 확인하세요.";
+      : "지정폐기물 수거·운반 실제 현장 사진과 보유 장비를 확인하세요.";
 
   return (
     <main className="min-h-screen bg-neutral-50">
-      <PageBanner title="고객센터" subtitle="Customer Support" />
-      <SubNav items={SUPPORT_SUBNAV_ITEMS} />
+      <PageBanner title="실적사례" subtitle="지정폐기물 수거·운반 현장" />
 
       {/* 히어로 */}
       <section className="bg-white border-b border-neutral-100">
         <div className="max-w-6xl mx-auto px-4 py-10 md:py-14">
-          <span className="text-primary font-bold tracking-wider text-sm mb-2 block">GALLERY</span>
+          <span className="text-primary font-bold tracking-wider text-sm mb-2 block">PORTFOLIO</span>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">{headingTitle}</h2>
