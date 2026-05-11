@@ -20,52 +20,41 @@ const CATEGORY_COLORS: Record<string, string> = {
   "기타": "bg-neutral-50 text-neutral-600 border-neutral-200 hover:bg-neutral-100",
 };
 
-const CATEGORY_DISPLAY = Object.entries(WASTE_CATEGORIES).filter(
-  ([key]) => key !== "기타"
-);
+const CATEGORY_DISPLAY = Object.entries(WASTE_CATEGORIES).filter(([key]) => key !== "기타");
 
 export function WasteTagsSection() {
   const fadeInHeader = useFadeIn();
-  const fadeInContent = useFadeIn(0.15, 150);
+  const fadeInContent = useFadeIn(0.08, 100);
 
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-14 md:py-20 bg-white">
       <div className="container mx-auto px-4 md:px-8">
-        {/* Header */}
-        <div
-          {...fadeInHeader}
-          className={`text-center mb-12 ${fadeInHeader.className}`}
-        >
-          <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
-            수거 대상 품목
-          </h3>
-          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight mb-4">
+        {/* 헤더 */}
+        <div {...fadeInHeader} className={`text-center mb-8 ${fadeInHeader.className}`}>
+          <h3 className="text-xs font-bold text-accent tracking-widest uppercase mb-2">수거 대상 품목</h3>
+          <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 leading-tight mb-3">
             이런 폐기물, 저희가 처리합니다
           </h2>
-          <p className="text-neutral-500 max-w-xl mx-auto leading-relaxed text-sm md:text-base">
-            지정폐기물 전 품목 수거·운반 가능합니다.<br className="hidden md:inline" />
-            처리 가능 여부가 불확실하다면 먼저 문의해 주세요.
+          <p className="text-neutral-500 max-w-lg mx-auto text-sm leading-relaxed">
+            지정폐기물 전 품목 수거·운반 가능합니다. 처리 가능 여부가 불확실하다면 먼저 문의해 주세요.
           </p>
         </div>
 
-        {/* Category Sections */}
-        <div
-          {...fadeInContent}
-          className={`max-w-4xl mx-auto space-y-7 ${fadeInContent.className}`}
-        >
+        {/* 카테고리 태그 */}
+        <div {...fadeInContent} className={`max-w-3xl mx-auto space-y-5 ${fadeInContent.className}`}>
           {CATEGORY_DISPLAY.map(([category, items]) => {
             const tagClass = CATEGORY_COLORS[category] ?? "bg-neutral-50 text-neutral-600 border-neutral-200 hover:bg-neutral-100";
             return (
               <div key={category}>
-                <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-3">
+                <h3 className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest mb-2">
                   {category.replace("⭐ ", "")}
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {(items as readonly string[]).map((item) => (
                     <Link
                       key={item}
                       href={`/support/inquiry?waste=${encodeURIComponent(item)}`}
-                      className={`px-3.5 py-1.5 text-sm font-medium border rounded-full transition-colors cursor-pointer ${tagClass}`}
+                      className={`px-3 py-1 text-xs font-medium border rounded-full transition-colors cursor-pointer ${tagClass}`}
                     >
                       {item}
                     </Link>
@@ -77,16 +66,16 @@ export function WasteTagsSection() {
         </div>
 
         {/* CTA */}
-        <div className="mt-12 text-center">
-          <p className="text-sm text-neutral-500 mb-4">
+        <div className="mt-8 text-center">
+          <p className="text-xs text-neutral-500 mb-3">
             목록에 없는 품목도 문의 주시면 처리 가능 여부를 확인해 드립니다.
           </p>
           <Link
             href="/waste/types"
-            className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline underline-offset-4"
+            className="inline-flex items-center gap-1.5 text-primary font-semibold text-sm hover:underline underline-offset-4"
           >
-            수거대상 폐기물 상세 안내 보기
-            <ArrowRight size={15} />
+            수거 대상 폐기물 상세 안내
+            <ArrowRight size={14} />
           </Link>
         </div>
       </div>

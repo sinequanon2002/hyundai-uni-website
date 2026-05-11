@@ -37,8 +37,9 @@ export function useFadeIn(threshold = 0.1, delay = 0) {
 
   return {
     ref,
-    className: `transition-all duration-1000 transform ${
-      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+    isVisible,
+    className: `transition-all duration-700 ease-out transform ${
+      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
     }`,
   };
 }

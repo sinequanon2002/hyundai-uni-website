@@ -100,10 +100,10 @@ export async function BlogPreviewSection() {
   const posts = result.success && result.data ? result.data.posts : [];
 
   return (
-    <section className="py-20 md:py-28 bg-neutral-light">
+    <section className="py-14 md:py-20 bg-neutral-50">
       <div className="container mx-auto px-4 md:px-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
           <div>
             <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
               폐기물 정보 자료실
