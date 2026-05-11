@@ -1,13 +1,15 @@
 import Link from "next/link";
-import { PageBanner } from "@/components/ui/PageBanner";
 import { SubNav, SUPPORT_SUBNAV_ITEMS } from "@/components/ui/SubNav";
 import { getBlogPosts } from "@/lib/actions/blog";
 import { cn } from "@/lib/utils";
-import { Calendar, Eye, Tag, ArrowRight, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
+import {
+  Calendar, Eye, ArrowRight, ChevronLeft, ChevronRight,
+  BookOpen, ExternalLink,
+} from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "폐기물 정보 자료실 | 현대유앤아이",
+  title: "폐기물 정보 블로그 | 현대유앤아이",
   description:
     "지정폐기물 처리 방법, 법령 개정 안내, 올바로시스템 사용법, 업종별 폐기물 가이드 등 폐기물 관련 전문 정보를 제공합니다.",
 };
@@ -15,10 +17,10 @@ export const metadata: Metadata = {
 const ITEMS_PER_PAGE = 9;
 
 interface Props {
-  searchParams: { category?: string; tag?: string; page?: string; q?: string };
+  searchParams: { category?: string; page?: string };
 }
 
-const categoryColorMap: Record<string, string> = {
+const CATEGORY_COLOR: Record<string, string> = {
   "폐기물 정보":  "bg-blue-100 text-blue-700",
   "법규 안내":    "bg-red-100 text-red-700",
   "처리 사례":    "bg-green-100 text-green-700",
@@ -27,34 +29,29 @@ const categoryColorMap: Record<string, string> = {
 };
 
 function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
+  return new Date(dateStr).toLocaleDateString("ko-KR", {
+    year: "numeric", month: "long", day: "numeric",
+  });
 }
 
 export default async function BlogPage({ searchParams }: Props) {
   const category = searchParams.category ?? "";
-  const tag = searchParams.tag ?? "";
-  const search = searchParams.q ?? "";
   const page = Math.max(1, parseInt(searchParams.page ?? "1", 10));
 
   const result = await getBlogPosts({
     category: category || undefined,
-    tag: tag || undefined,
-    search: search || undefined,
     page,
     pageSize: ITEMS_PER_PAGE,
   });
 
-  const posts = result.success ? result.data!.posts : [];
-  const total = result.success ? result.data!.total : 0;
+  const posts      = result.success ? result.data!.posts      : [];
+  const total      = result.success ? result.data!.total      : 0;
   const totalPages = result.success ? result.data!.totalPages : 1;
   const categories = result.success ? result.data!.categories : [];
-  const allTags = result.success ? result.data!.allTags : [];
 
   function buildUrl(params: Record<string, string | number | undefined>) {
     const merged: Record<string, string> = {
       ...(category && { category }),
-      ...(tag && { tag }),
-      ...(search && { q: search }),
       page: "1",
       ...Object.fromEntries(
         Object.entries(params).map(([k, v]) => [k, String(v ?? "")])
@@ -65,25 +62,29 @@ export default async function BlogPage({ searchParams }: Props) {
     return `/support/blog${qs ? `?${qs}` : ""}`;
   }
 
+  const [featuredPost, ...restPosts] = posts;
+
   return (
     <main className="min-h-screen bg-neutral-50">
-      <PageBanner title="고객센터" subtitle="Customer Support" />
       <SubNav items={SUPPORT_SUBNAV_ITEMS} />
 
-      {/* 히어로 */}
+      {/* ── 블로그 헤더 ── */}
       <section className="bg-white border-b border-neutral-100">
-        <div className="max-w-6xl mx-auto px-4 py-10 md:py-14">
-          <span className="text-primary font-bold tracking-wider text-sm mb-2 block">BLOG &amp; RESOURCES</span>
+        <div className="max-w-5xl mx-auto px-4 py-10 md:py-12">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">폐기물 정보 자료실</h2>
-              <p className="text-neutral-500 text-sm mt-2">
-                지정폐기물 처리 방법 · 법령 안내 · 업종별 가이드 · 올바로시스템 활용법
+              <span className="text-xs font-bold text-accent tracking-widest uppercase mb-2 block">
+                폐기물 정보 블로그
+              </span>
+              <h1 className="text-2xl md:text-3xl font-bold text-neutral-900">
+                담당자가 꼭 알아야 할<br className="hidden md:inline" /> 지정폐기물 정보
+              </h1>
+              <p className="text-neutral-500 text-sm mt-2 leading-relaxed">
+                처리 방법 · 법령 안내 · 올바로시스템 활용 · 업종별 가이드
               </p>
-              <div className="w-12 h-1 bg-accent mt-4" />
             </div>
             {total > 0 && (
-              <p className="text-sm text-neutral-400">
+              <p className="text-sm text-neutral-400 shrink-0">
                 총 <span className="font-semibold text-neutral-700">{total}</span>건
               </p>
             )}
@@ -91,148 +92,179 @@ export default async function BlogPage({ searchParams }: Props) {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 py-8 md:py-12">
-        {/* 필터 바 */}
-        {(categories.length > 0 || allTags.length > 0) && (
-          <div className="bg-white rounded-2xl border border-neutral-200 p-4 mb-8 shadow-sm space-y-3">
-            {/* 카테고리 */}
-            <div>
-              <label className="block text-xs font-semibold text-neutral-500 mb-2 uppercase tracking-wide">카테고리</label>
-              <div className="flex flex-wrap gap-1.5">
-                <Link
-                  href={buildUrl({ category: "", page: 1 })}
-                  className={cn(
-                    "px-3 py-1.5 rounded-full text-xs font-medium transition-all",
-                    !category ? "bg-primary text-white shadow-sm" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-                  )}
-                >
-                  전체
-                </Link>
-                {categories.map((cat) => (
-                  <Link
-                    key={cat}
-                    href={buildUrl({ category: cat, page: 1 })}
-                    className={cn(
-                      "px-3 py-1.5 rounded-full text-xs font-medium transition-all",
-                      category === cat ? "bg-primary text-white shadow-sm" : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-                    )}
-                  >
-                    {cat}
-                  </Link>
-                ))}
-              </div>
-            </div>
+      {/* ── 카테고리 탭 ── */}
+      <div className="bg-white border-b border-neutral-100 sticky top-[128px] z-30">
+        <div className="max-w-5xl mx-auto px-4">
+          <nav className="flex items-center gap-0 overflow-x-auto no-scrollbar">
+            <Link
+              href={buildUrl({ category: "", page: 1 })}
+              className={cn(
+                "shrink-0 px-5 py-3.5 text-sm font-medium border-b-2 transition-colors",
+                !category
+                  ? "border-primary text-primary"
+                  : "border-transparent text-neutral-500 hover:text-neutral-800"
+              )}
+            >
+              전체
+            </Link>
+            {categories.map((cat) => (
+              <Link
+                key={cat}
+                href={buildUrl({ category: cat, page: 1 })}
+                className={cn(
+                  "shrink-0 px-5 py-3.5 text-sm font-medium border-b-2 transition-colors",
+                  category === cat
+                    ? "border-primary text-primary"
+                    : "border-transparent text-neutral-500 hover:text-neutral-800"
+                )}
+              >
+                {cat}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
 
-            {/* 태그 */}
-            {allTags.length > 0 && (
-              <div className="pt-2 border-t border-neutral-100">
-                <label className="block text-xs font-semibold text-neutral-500 mb-2 uppercase tracking-wide">태그</label>
-                <div className="flex flex-wrap gap-1.5">
-                  {allTags.map((t) => (
-                    <Link
-                      key={t}
-                      href={buildUrl({ tag: tag === t ? "" : t, page: 1 })}
-                      className={cn(
-                        "px-3 py-1 rounded-full text-xs border transition-all",
-                        tag === t
-                          ? "bg-accent/20 border-accent text-accent font-semibold"
-                          : "border-neutral-200 text-neutral-500 hover:border-accent hover:text-accent"
-                      )}
-                    >
-                      #{t}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
+      <div className="max-w-5xl mx-auto px-4 py-8 md:py-10">
 
-            {/* 필터 초기화 */}
-            {(category || tag) && (
-              <div className="pt-2 border-t border-neutral-100 flex justify-end">
-                <Link href="/support/blog" className="text-xs text-neutral-400 hover:text-neutral-700 underline">
-                  필터 초기화
-                </Link>
-              </div>
-            )}
+        {/* ── 빈 상태 ── */}
+        {posts.length === 0 && (
+          <div className="text-center py-28 text-neutral-400">
+            <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
+            <p className="font-semibold text-lg text-neutral-500">아직 등록된 글이 없습니다.</p>
+            <p className="text-sm mt-2 mb-8">
+              지정폐기물 정보·법령 안내·처리 사례 등 유용한 자료를 곧 업로드할 예정입니다.
+            </p>
+            <Link
+              href="https://blog.naver.com/hduni2020"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#03C75A] text-white text-sm font-bold rounded-full hover:bg-[#02b350] transition-colors shadow-md"
+            >
+              <ExternalLink size={15} />
+              네이버 블로그에서 먼저 만나보기
+            </Link>
           </div>
         )}
 
-        {/* 글 목록 */}
-        {posts.length === 0 ? (
-          <div className="text-center py-32 text-neutral-400">
-            <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
-            <p className="font-medium text-lg">아직 등록된 글이 없습니다.</p>
-            <p className="text-sm mt-2">폐기물 정보·법령 안내·처리 사례 등 유용한 자료를 곧 업로드할 예정입니다.</p>
-            <Link href="/support/notice" className="mt-6 inline-block text-sm text-primary hover:underline">
-              공지사항 보기
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => (
+        {/* ── 피처드 포스트 ── */}
+        {featuredPost && !category && page === 1 && (
+          <Link
+            href={`/support/blog/${featuredPost.id}`}
+            className="group mb-8 grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-0 bg-white rounded-2xl border border-neutral-200 overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all duration-300 block"
+          >
+            {/* 이미지 */}
+            <div className="aspect-[16/9] md:aspect-auto md:min-h-[260px] overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 relative">
+              {featuredPost.thumbnail_url ? (
+                <img
+                  src={featuredPost.thumbnail_url}
+                  alt={featuredPost.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <BookOpen className="w-16 h-16 text-primary/20" />
+                </div>
+              )}
+              {/* 추천 배지 */}
+              {featuredPost.is_pinned && (
+                <span className="absolute top-3 left-3 px-2.5 py-1 text-xs font-bold bg-accent text-white rounded-full shadow">
+                  추천
+                </span>
+              )}
+            </div>
+            {/* 콘텐츠 */}
+            <div className="p-6 md:p-8 flex flex-col justify-center">
+              <span className={cn(
+                "self-start text-xs font-bold px-2.5 py-1 rounded-full mb-3",
+                CATEGORY_COLOR[featuredPost.category] ?? "bg-gray-100 text-gray-600"
+              )}>
+                {featuredPost.category}
+              </span>
+              <h2 className="text-xl md:text-2xl font-bold text-neutral-900 leading-snug mb-3 group-hover:text-primary transition-colors line-clamp-3">
+                {featuredPost.title}
+              </h2>
+              {featuredPost.excerpt && (
+                <p className="text-sm text-neutral-500 line-clamp-3 mb-5 leading-relaxed">
+                  {featuredPost.excerpt}
+                </p>
+              )}
+              <div className="flex items-center justify-between text-xs text-neutral-400 pt-4 border-t border-neutral-100">
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-3.5 h-3.5" />
+                    {formatDate(featuredPost.created_at)}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Eye className="w-3.5 h-3.5" />
+                    {featuredPost.views.toLocaleString()}
+                  </span>
+                </div>
+                <span className="flex items-center gap-1 text-primary font-semibold text-xs group-hover:gap-2 transition-all">
+                  읽기 <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        )}
+
+        {/* ── 나머지 글 목록 ── */}
+        {((!category && page === 1 ? restPosts : posts).length > 0) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {(!category && page === 1 ? restPosts : posts).map((post) => (
               <Link
                 key={post.id}
                 href={`/support/blog/${post.id}`}
-                className="group bg-white rounded-2xl border border-neutral-200 overflow-hidden hover:border-primary/40 hover:shadow-md transition-all"
+                className="group bg-white rounded-2xl border border-neutral-200 overflow-hidden hover:border-primary/40 hover:shadow-md transition-all duration-300"
               >
                 {/* 썸네일 */}
-                {post.thumbnail_url ? (
-                  <div className="aspect-[16/9] overflow-hidden bg-neutral-100">
+                <div className="aspect-[16/9] overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 relative">
+                  {post.thumbnail_url ? (
                     <img
                       src={post.thumbnail_url}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                  </div>
-                ) : (
-                  <div className="aspect-[16/9] bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                    <BookOpen className="w-10 h-10 text-primary/30" />
-                  </div>
-                )}
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <BookOpen className="w-10 h-10 text-primary/20" />
+                    </div>
+                  )}
+                  {post.is_pinned && (
+                    <span className="absolute top-2 left-2 px-2 py-0.5 text-[10px] font-bold bg-accent text-white rounded-full">추천</span>
+                  )}
+                </div>
 
                 <div className="p-5">
-                  {/* 카테고리 배지 */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={cn(
-                      "inline-block px-2.5 py-0.5 rounded-full text-xs font-bold",
-                      categoryColorMap[post.category] ?? "bg-gray-100 text-gray-600"
-                    )}>
-                      {post.category}
-                    </span>
-                    {post.is_pinned && (
-                      <span className="inline-block px-2 py-0.5 rounded-full text-xs font-bold bg-accent/10 text-accent">추천</span>
-                    )}
-                  </div>
+                  <span className={cn(
+                    "inline-block text-xs font-bold px-2.5 py-0.5 rounded-full mb-2.5",
+                    CATEGORY_COLOR[post.category] ?? "bg-gray-100 text-gray-600"
+                  )}>
+                    {post.category}
+                  </span>
 
-                  <h3 className="font-bold text-neutral-900 leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                  <h3 className="font-bold text-neutral-900 leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-2 text-sm">
                     {post.title}
                   </h3>
 
                   {post.excerpt && (
-                    <p className="text-sm text-neutral-500 line-clamp-2 mb-3">{post.excerpt}</p>
+                    <p className="text-xs text-neutral-500 line-clamp-2 mb-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
                   )}
 
-                  {/* 태그 */}
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {post.tags.slice(0, 3).map((t) => (
-                        <span key={t} className="text-xs text-neutral-400 bg-neutral-100 px-2 py-0.5 rounded-full">#{t}</span>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="flex items-center justify-between text-xs text-neutral-400 mt-auto pt-3 border-t border-neutral-100">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-neutral-100">
+                    <div className="flex items-center gap-2.5">
                       <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5" />
+                        <Calendar className="w-3 h-3" />
                         {formatDate(post.created_at)}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Eye className="w-3.5 h-3.5" />
+                        <Eye className="w-3 h-3" />
                         {post.views.toLocaleString()}
                       </span>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ArrowRight className="w-3.5 h-3.5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
                 </div>
               </Link>
@@ -240,12 +272,15 @@ export default async function BlogPage({ searchParams }: Props) {
           </div>
         )}
 
-        {/* 페이지네이션 */}
+        {/* ── 페이지네이션 ── */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mt-10">
+          <div className="flex justify-center items-center gap-1.5 mt-10">
             <Link
               href={buildUrl({ page: page - 1 })}
-              className={cn("p-2 rounded-lg hover:bg-neutral-200 transition-colors", page === 1 && "opacity-30 pointer-events-none")}
+              className={cn(
+                "p-2 rounded-lg hover:bg-neutral-200 transition-colors",
+                page === 1 && "opacity-30 pointer-events-none"
+              )}
               aria-label="이전 페이지"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -256,7 +291,7 @@ export default async function BlogPage({ searchParams }: Props) {
                 href={buildUrl({ page: p })}
                 className={cn(
                   "w-9 h-9 rounded-lg text-sm font-medium transition-all flex items-center justify-center",
-                  p === page ? "bg-primary text-white shadow-md" : "text-neutral-600 hover:bg-neutral-200"
+                  p === page ? "bg-primary text-white shadow-sm" : "text-neutral-600 hover:bg-neutral-200"
                 )}
               >
                 {p}
@@ -264,14 +299,35 @@ export default async function BlogPage({ searchParams }: Props) {
             ))}
             <Link
               href={buildUrl({ page: page + 1 })}
-              className={cn("p-2 rounded-lg hover:bg-neutral-200 transition-colors", page === totalPages && "opacity-30 pointer-events-none")}
+              className={cn(
+                "p-2 rounded-lg hover:bg-neutral-200 transition-colors",
+                page === totalPages && "opacity-30 pointer-events-none"
+              )}
               aria-label="다음 페이지"
             >
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
         )}
-      </section>
+
+        {/* ── 네이버 블로그 CTA ── */}
+        {posts.length > 0 && (
+          <div className="mt-10 pt-8 border-t border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-neutral-500">
+              더 많은 지정폐기물 정보는 네이버 블로그에서 확인하세요.
+            </p>
+            <Link
+              href="https://blog.naver.com/hduni2020"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 border border-neutral-200 rounded-full text-sm text-neutral-600 hover:border-primary hover:text-primary transition-colors"
+            >
+              <ExternalLink size={14} />
+              네이버 블로그 바로가기
+            </Link>
+          </div>
+        )}
+      </div>
     </main>
   );
 }
