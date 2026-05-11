@@ -20,8 +20,7 @@ export const WASTE_SUBNAV_ITEMS = [
 
 export const SUPPORT_SUBNAV_ITEMS = [
   { label: "공지사항", href: "/support/notice" },
-  { label: "자료실", href: "/support/blog" },
-  { label: "현장갤러리", href: "/support/gallery" },
+  { label: "자료실 바로가기", href: "/resources/brochure" },
   { label: "견적문의", href: "/support/inquiry" },
   { label: "문의현황 조회", href: "/support/inquiry-status" },
 ];
