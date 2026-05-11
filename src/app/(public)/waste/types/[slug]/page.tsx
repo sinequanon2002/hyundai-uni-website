@@ -101,7 +101,7 @@ export default function WasteTypeDetailPage({ params }: Props) {
           </Link>
           {detail.galleryCategory && (
             <Link
-              href={`/support/gallery?category=${encodeURIComponent(detail.galleryCategory)}`}
+              href={`/gallery?category=${encodeURIComponent(detail.galleryCategory)}`}
               className="inline-flex items-center justify-center gap-2 bg-neutral-100 text-neutral-700 px-6 py-3 rounded-xl font-semibold hover:bg-neutral-200 transition-colors"
             >
               <Images className="w-4 h-4" />
@@ -178,7 +178,7 @@ export default function WasteTypeDetailPage({ params }: Props) {
             현대유앤아이가 직접 수거·운반한 {detail.name} 작업 현장 사진을 확인하세요.
           </p>
           <Link
-            href={`/support/gallery?category=${encodeURIComponent(detail.galleryCategory)}`}
+            href={`/gallery?category=${encodeURIComponent(detail.galleryCategory)}`}
             className="inline-flex items-center gap-2 bg-white text-neutral-900 px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-neutral-100 transition-colors"
           >
             <Images className="w-4 h-4" />

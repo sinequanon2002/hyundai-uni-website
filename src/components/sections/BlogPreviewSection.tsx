@@ -21,7 +21,7 @@ function formatDate(dateStr: string) {
 function PostCard({ post }: { post: BlogPost }) {
   return (
     <Link
-      href={`/support/blog/${post.id}`}
+      href={`/blog/${post.id}`}
       className="group flex flex-col bg-white rounded-2xl border border-neutral-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 overflow-hidden"
     >
       {/* Thumbnail or fallback */}
@@ -83,7 +83,7 @@ function EmptyState() {
         곧 유용한 지정폐기물 정보 콘텐츠가 업로드될 예정입니다.
       </p>
       <Link
-        href="/support/blog"
+        href="/blog"
         className="inline-flex items-center gap-1.5 text-sm text-primary font-semibold hover:underline underline-offset-4"
       >
         블로그 바로가기
@@ -111,7 +111,7 @@ export async function BlogPreviewSection() {
             </h2>
           </div>
           <Link
-            href="/support/blog"
+            href="/blog"
             className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline underline-offset-4"
           >
             전체 글 보기
@@ -131,7 +131,7 @@ export async function BlogPreviewSection() {
         {/* 전체 글 보기 CTA */}
         <div className="mt-10 text-center">
           <Link
-            href="/support/blog"
+            href="/blog"
             className="inline-flex items-center gap-2 px-5 py-2.5 border border-neutral-200 rounded-full text-sm text-neutral-600 hover:border-primary hover:text-primary transition-colors"
           >
             전체 글 보기

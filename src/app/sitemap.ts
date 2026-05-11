@@ -14,9 +14,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/waste/types`,           priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
     { url: `${baseUrl}/waste/storage`,         priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
     // 실적사례 (단독 메뉴)
-    { url: `${baseUrl}/support/gallery`,       priority: 0.8, changeFrequency: 'weekly',  lastModified: new Date() },
+    { url: `${baseUrl}/gallery`,       priority: 0.8, changeFrequency: 'weekly',  lastModified: new Date() },
     // 블로그
-    { url: `${baseUrl}/support/blog`,          priority: 0.7, changeFrequency: 'weekly',  lastModified: new Date() },
+    { url: `${baseUrl}/blog`,          priority: 0.7, changeFrequency: 'weekly',  lastModified: new Date() },
     // 고객센터
     { url: `${baseUrl}/support/notice`,        priority: 0.6, changeFrequency: 'weekly',  lastModified: new Date() },
     { url: `${baseUrl}/support/inquiry`,       priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
@@ -36,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const blogResult = await getBlogPosts({ pageSize: 200 });
     if (blogResult.success && blogResult.data) {
       blogPages = blogResult.data.posts.map((post) => ({
-        url: `${baseUrl}/support/blog/${post.id}`,
+        url: `${baseUrl}/blog/${post.id}`,
         priority: 0.7,
         changeFrequency: 'monthly' as const,
         lastModified: post.updated_at ? new Date(post.updated_at) : new Date(post.created_at),

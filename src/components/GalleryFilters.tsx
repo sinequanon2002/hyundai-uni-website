@@ -15,7 +15,7 @@ export function GalleryFilters({ category, region, year, availableYears, regions
     if (newRegion) params.set("region", newRegion);
     if (newYear) params.set("year", newYear);
     const qs = params.toString();
-    window.location.href = `/support/gallery${qs ? `?${qs}` : ""}`;
+    window.location.href = `/gallery${qs ? `?${qs}` : ""}`;
   }
 
   return (

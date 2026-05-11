@@ -251,7 +251,7 @@ export async function createPortfolioItem(payload: {
   }
 
   revalidatePath("/gallery");
-  revalidatePath("/support/gallery");
+  revalidatePath("/gallery");
   return { success: true, data: { id: data.id } };
 }
 
@@ -296,7 +296,7 @@ export async function updatePortfolioItem(
 
   revalidatePath("/gallery");
   revalidatePath(`/gallery/${id}/edit`);
-  revalidatePath("/support/gallery");
+  revalidatePath("/gallery");
   return { success: true };
 }
 
@@ -319,7 +319,7 @@ export async function deletePortfolioItem(id: string): Promise<ActionResult> {
   }
 
   revalidatePath("/gallery");
-  revalidatePath("/support/gallery");
+  revalidatePath("/gallery");
   return { success: true };
 }
 

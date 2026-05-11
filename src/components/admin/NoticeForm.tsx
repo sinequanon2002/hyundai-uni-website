@@ -83,7 +83,7 @@ export function NoticeForm({ notice }: Props) {
           </div>
           {postType === "blog" && (
             <p className="mt-2 text-xs text-neutral-500">
-              블로그 자료실은 /support/blog 에 노출됩니다. 발췌문과 태그를 입력하면 SEO에 유리합니다.
+              블로그 자료실은 /blog 에 노출됩니다. 발췌문과 태그를 입력하면 SEO에 유리합니다.
             </p>
           )}
         </div>

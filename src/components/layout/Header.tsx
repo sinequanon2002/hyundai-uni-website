@@ -47,12 +47,12 @@ const NAV_ITEMS: NavItem[] = [
   {
     type: 'direct',
     label: '블로그',
-    href: '/support/blog',
+    href: '/blog',
   },
   {
     type: 'direct',
     label: '실적사례',
-    href: '/support/gallery',
+    href: '/gallery',
   },
   {
     type: 'group',

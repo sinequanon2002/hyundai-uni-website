@@ -190,7 +190,7 @@ export default function ServicePage() {
               ))}
             </div>
             <Link
-              href="/support/blog?category=올바로시스템"
+              href="/blog?category=올바로시스템"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-secondary hover:underline underline-offset-4"
             >
               올바로시스템 작성 가이드 보기
