@@ -330,7 +330,7 @@ export function Header() {
               className="flex items-center justify-center gap-2 w-full py-4 text-center bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors"
             >
               <ArrowRight size={18} />
-              무료 견적 신청하기
+              견적 문의하기
             </Link>
             <div className="mt-10 space-y-2 text-sm text-neutral-500">
               <p>주식회사 현대유앤아이</p>

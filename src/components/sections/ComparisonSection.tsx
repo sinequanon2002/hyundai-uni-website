@@ -135,10 +135,10 @@ export function ComparisonSection() {
           </p>
           <Link
             href="/support/inquiry"
-            className="cta-shimmer inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary text-white text-sm font-bold rounded-full hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.03]"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary text-white text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
           >
             <ArrowRight size={16} />
-            무료 방문 견적 신청하기
+            견적 문의
           </Link>
         </div>
       </div>

@@ -27,16 +27,13 @@ export function CtaSection() {
 
           {/* 이중 CTA */}
           <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 shrink-0">
-            <div className="relative inline-flex group">
-              <span className="absolute inset-0 rounded-xl bg-white opacity-25 animate-ping pointer-events-none" />
-              <Link
-                href="/support/inquiry"
-                className="cta-shimmer relative inline-flex items-center justify-center gap-2.5 bg-white text-primary px-7 py-4 rounded-xl font-bold text-base shadow-xl hover:bg-neutral-50 hover:scale-[1.04] transition-all duration-300"
-              >
-                무료 방문 견적 신청하기
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+            <Link
+              href="/support/inquiry"
+              className="group inline-flex items-center justify-center gap-2.5 bg-white text-primary px-7 py-4 rounded-xl font-bold text-base shadow-xl hover:bg-neutral-100 transition-colors"
+            >
+              견적 문의
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
             <Link
               href="/resources/brochure"
               className="inline-flex items-center justify-center gap-2.5 bg-white/10 border border-white/40 text-white px-7 py-4 rounded-xl font-semibold text-base hover:bg-white/20 transition-colors"

@@ -60,18 +60,13 @@ export function HeroSection() {
 
         {/* CTA 버튼 그룹 */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          {/* 주 CTA — pulse ring + shimmer */}
-          <div className="relative inline-flex group">
-            {/* 외부 pulse ring */}
-            <span className="absolute inset-0 rounded-lg bg-white opacity-20 animate-ping pointer-events-none" />
-            <Link
-              href="/support/inquiry"
-              className="cta-shimmer relative px-8 py-4 bg-white text-primary font-bold rounded-lg shadow-xl hover:bg-neutral-50 transition-all duration-300 flex items-center gap-2.5 group-hover:shadow-2xl group-hover:scale-[1.03]"
-            >
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
-              무료 방문 견적 신청하기
-            </Link>
-          </div>
+          <Link
+            href="/support/inquiry"
+            className="px-8 py-4 bg-white text-primary font-bold rounded-lg shadow-xl hover:bg-neutral-50 transition-colors flex items-center gap-2.5"
+          >
+            <ArrowRight size={18} />
+            견적 문의
+          </Link>
 
           {/* 보조 CTA */}
           <Link
