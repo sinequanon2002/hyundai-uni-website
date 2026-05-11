@@ -12,7 +12,7 @@ import { COMPANY } from "@/lib/constants";
 import {
   inquiryFormSchema,
   type InquiryFormValues,
-  WASTE_CATEGORIES,
+  WASTE_TYPES,
 } from "@/lib/schemas/inquiry";
 import { submitInquiry } from "@/lib/actions/inquiry";
 import {
@@ -748,12 +748,7 @@ export default function InquiryPage() {
 
 // ─── 폐기물 종류 콤보박스 ──────────────────────────────────────────────────────
 
-const ALL_WASTE_TYPES: string[] = Object.entries(WASTE_CATEGORIES).flatMap(
-  ([major, minors]) =>
-    (minors as readonly string[]).map((minor) =>
-      major === "기타" ? "기타" : `${major} - ${minor}`
-    )
-);
+const ALL_WASTE_TYPES: string[] = [...WASTE_TYPES];
 
 function WasteTypeCombobox({
   value,
