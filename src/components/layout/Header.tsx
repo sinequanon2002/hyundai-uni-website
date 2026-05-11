@@ -10,70 +10,64 @@ interface SubItem {
   label: string;
   href: string;
   external?: boolean;
-  /** 우측 뱃지 텍스트 (예: "준비중") */
   badge?: string;
-  /** 다운로드·액션 아이템 강조 스타일 */
   highlight?: boolean;
 }
 
+/** 드롭다운이 있는 그룹 메뉴 */
 interface NavGroup {
+  type: 'group';
   label: string;
-  /** 상태 키 및 active 감지용 기본 경로 (가상 경로 허용) */
   basePath: string;
   children: SubItem[];
 }
 
-/** 드롭다운 없는 단독 상단 링크 */
+/** 드롭다운 없는 단독 링크 */
 interface NavDirect {
+  type: 'direct';
   label: string;
   href: string;
 }
 
-const NAV_GROUPS: NavGroup[] = [
+type NavItem = NavGroup | NavDirect;
+
+const NAV_ITEMS: NavItem[] = [
   {
+    type: 'group',
     label: '서비스 소개',
     basePath: '/service',
     children: [
-      { label: '서비스 안내', href: '/waste/types' },
+      { label: '서비스 안내',    href: '/waste/types' },
       { label: '보관·법적 의무', href: '/waste/storage' },
-      { label: '서비스 소개서', href: '/resources/brochure', highlight: true },
-      // Phase 3 업종별 솔루션 페이지 완성 시 href 교체
-      { label: '업종별 솔루션', href: '/support/inquiry', badge: '준비중' },
-      { label: '회사 소개', href: '/company' },
+      { label: '서비스 소개서',  href: '/resources/brochure', highlight: true },
+      { label: '업종별 솔루션',  href: '/support/inquiry', badge: '준비중' },
+      { label: '회사 소개',      href: '/company' },
     ],
   },
   {
+    type: 'direct',
     label: '블로그',
-    basePath: '/support/blog',
-    children: [
-      { label: '전체 보기', href: '/support/blog' },
-      { label: '폐기물 정보', href: '/support/blog?category=폐기물+정보' },
-      { label: '법규 안내', href: '/support/blog?category=법규+안내' },
-      { label: '처리 사례', href: '/support/blog?category=처리+사례' },
-      { label: '올바로시스템', href: '/support/blog?category=올바로시스템' },
-      { label: '회사 소식', href: '/support/blog?category=회사+소식' },
-      { label: '네이버 블로그 ↗', href: 'https://blog.naver.com/hduni2020', external: true },
-    ],
+    href: '/support/blog',
   },
   {
+    type: 'direct',
+    label: '실적사례',
+    href: '/support/gallery',
+  },
+  {
+    type: 'group',
     label: '고객센터',
     basePath: '/support',
     children: [
-      { label: '공지사항', href: '/support/notice' },
-      { label: '견적문의', href: '/support/inquiry' },
-      { label: '문의현황 조회', href: '/support/inquiry-status' },
+      { label: '공지사항',       href: '/support/notice' },
+      { label: '견적문의',       href: '/support/inquiry' },
+      { label: '문의현황 조회',  href: '/support/inquiry-status' },
     ],
   },
-];
-
-/** 드롭다운 없이 단독으로 표시되는 상단 링크 목록 (순서: 블로그 뒤, 고객센터 앞) */
-const NAV_DIRECT: NavDirect[] = [
-  { label: '실적사례', href: '/support/gallery' },
 ];
 
 const CTA_ITEM = { label: '견적 문의', href: '/support/inquiry' };
 
-/** 현재 경로가 그룹 내 자식 항목 중 하나와 일치하는지 확인 */
 function isGroupActive(group: NavGroup, pathname: string): boolean {
   return group.children.some(
     (child) => !child.external && pathname.startsWith(child.href.split('?')[0])
@@ -132,118 +126,106 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1 text-sm font-medium">
-            {NAV_GROUPS.map((group) => {
-              const active = isGroupActive(group, pathname);
-              const isDropdownOpen = activeDropdown === group.basePath;
+            {NAV_ITEMS.map((item) => {
+              if (item.type === 'direct') {
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "px-4 py-5 transition-colors hover:text-primary",
+                      pathname.startsWith(item.href) ? "text-primary font-semibold" : "text-neutral-600"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
 
-              // 블로그 그룹 다음에 단독 링크(실적사례) 삽입
-              const showDirectAfter = group.basePath === '/support/blog';
+              // NavGroup
+              const active = isGroupActive(item, pathname);
+              const isDropdownOpen = activeDropdown === item.basePath;
 
               return (
-                <>
+                <div
+                  key={item.basePath}
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnter(item.basePath)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <button
+                    className={cn(
+                      "flex items-center gap-1 px-4 py-5 transition-colors hover:text-primary",
+                      active ? "text-primary" : "text-neutral-600"
+                    )}
+                    onClick={() =>
+                      setActiveDropdown((prev) =>
+                        prev === item.basePath ? null : item.basePath
+                      )
+                    }
+                    aria-expanded={isDropdownOpen}
+                    aria-haspopup="true"
+                  >
+                    {item.label}
+                    <ChevronDown
+                      size={14}
+                      className={cn(
+                        "transition-transform duration-200",
+                        isDropdownOpen ? "rotate-180" : ""
+                      )}
+                    />
+                  </button>
+
+                  {/* Dropdown */}
                   <div
-                    key={group.basePath}
-                    className="relative"
-                    onMouseEnter={() => handleMouseEnter(group.basePath)}
+                    className={cn(
+                      "absolute top-full left-0 min-w-[200px] bg-white rounded-xl shadow-xl border border-neutral-100 py-2 transition-all duration-200 origin-top",
+                      isDropdownOpen
+                        ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 scale-y-95 -translate-y-1 pointer-events-none"
+                    )}
+                    onMouseEnter={() => handleMouseEnter(item.basePath)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <button
-                      className={cn(
-                        "flex items-center gap-1 px-4 py-5 transition-colors hover:text-primary",
-                        active ? "text-primary" : "text-neutral-600"
-                      )}
-                      onClick={() =>
-                        setActiveDropdown((prev) =>
-                          prev === group.basePath ? null : group.basePath
-                        )
-                      }
-                      aria-expanded={isDropdownOpen}
-                      aria-haspopup="true"
-                    >
-                      {group.label}
-                      <ChevronDown
-                        size={14}
-                        className={cn(
-                          "transition-transform duration-200",
-                          isDropdownOpen ? "rotate-180" : ""
-                        )}
-                      />
-                    </button>
+                    {item.children.map((child, idx) => {
+                      // 서비스 소개: highlight 항목 앞에 구분선
+                      const showDivider = item.basePath === '/service' && child.highlight;
 
-                    {/* Dropdown */}
-                    <div
-                      className={cn(
-                        "absolute top-full left-0 min-w-[210px] bg-white rounded-xl shadow-xl border border-neutral-100 py-2 transition-all duration-200 origin-top",
-                        isDropdownOpen
-                          ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
-                          : "opacity-0 scale-y-95 -translate-y-1 pointer-events-none"
-                      )}
-                      onMouseEnter={() => handleMouseEnter(group.basePath)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {group.children.map((child, idx) => {
-                        // 블로그에서 전체보기 ↔ 카테고리 구분선
-                        const showBlogDivider =
-                          group.basePath === '/support/blog' && idx === 1;
-                        // 서비스 소개에서 highlight 항목 ↔ 일반 항목 구분선
-                        const showServiceDivider =
-                          group.basePath === '/service' && child.highlight;
-
-                        return (
-                          <div key={child.href}>
-                            {showBlogDivider && (
-                              <div className="my-1.5 mx-4 border-t border-neutral-100" />
+                      return (
+                        <div key={child.href}>
+                          {showDivider && (
+                            <div className="my-1.5 mx-4 border-t border-neutral-100" />
+                          )}
+                          <Link
+                            href={child.href}
+                            {...(child.external
+                              ? { target: '_blank', rel: 'noopener noreferrer' }
+                              : {})}
+                            className={cn(
+                              "flex items-center justify-between px-5 py-2.5 text-sm transition-colors",
+                              child.highlight
+                                ? "hover:bg-accent/5 hover:text-accent text-accent/80 font-medium"
+                                : "hover:bg-primary/5 hover:text-primary",
+                              pathname === child.href && !child.external
+                                ? "bg-primary/5 text-primary font-medium"
+                                : !child.highlight && "text-neutral-600"
                             )}
-                            {showServiceDivider && (
-                              <div className="my-1.5 mx-4 border-t border-neutral-100" />
-                            )}
-                            <Link
-                              href={child.href}
-                              {...(child.external
-                                ? { target: '_blank', rel: 'noopener noreferrer' }
-                                : {})}
-                              className={cn(
-                                "flex items-center justify-between px-5 py-2.5 text-sm transition-colors",
-                                child.highlight
-                                  ? "hover:bg-accent/5 hover:text-accent text-accent/80 font-medium"
-                                  : "hover:bg-primary/5 hover:text-primary",
-                                pathname === child.href && !child.external
-                                  ? "bg-primary/5 text-primary font-medium"
-                                  : !child.highlight && "text-neutral-600"
-                              )}
-                            >
-                              <span className="flex items-center gap-2">
-                                {child.highlight && (
-                                  <Download size={13} className="shrink-0" />
-                                )}
-                                {child.label}
+                          >
+                            <span className="flex items-center gap-2">
+                              {child.highlight && <Download size={13} className="shrink-0" />}
+                              {child.label}
+                            </span>
+                            {child.badge && (
+                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-neutral-100 text-neutral-400">
+                                {child.badge}
                               </span>
-                              {child.badge && (
-                                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-neutral-100 text-neutral-400">
-                                  {child.badge}
-                                </span>
-                              )}
-                            </Link>
-                          </div>
-                        );
-                      })}
-                    </div>
+                            )}
+                          </Link>
+                        </div>
+                      );
+                    })}
                   </div>
-
-                  {/* 블로그 뒤에 단독 링크(실적사례) 렌더링 */}
-                  {showDirectAfter && NAV_DIRECT.map((direct) => (
-                    <Link
-                      key={direct.href}
-                      href={direct.href}
-                      className={cn(
-                        "px-4 py-5 transition-colors hover:text-primary",
-                        pathname.startsWith(direct.href) ? "text-primary" : "text-neutral-600"
-                      )}
-                    >
-                      {direct.label}
-                    </Link>
-                  ))}
-                </>
+                </div>
               );
             })}
 
@@ -284,21 +266,40 @@ export function Header() {
       >
         <nav className="flex flex-col p-6 md:p-8">
           <div className="flex flex-col">
-            {NAV_GROUPS.map((group) => {
-              const active = isGroupActive(group, pathname);
-              const isAccordionOpen = mobileAccordion === group.basePath;
+            {NAV_ITEMS.map((item) => {
+              if (item.type === 'direct') {
+                return (
+                  <div key={item.href} className="border-b border-neutral-100">
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "block py-4 text-lg font-bold transition-colors",
+                        pathname.startsWith(item.href)
+                          ? "text-primary"
+                          : "text-neutral-900 hover:text-primary"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </div>
+                );
+              }
+
+              // NavGroup
+              const active = isGroupActive(item, pathname);
+              const isAccordionOpen = mobileAccordion === item.basePath;
 
               return (
-                <div key={group.basePath} className="border-b border-neutral-100">
+                <div key={item.basePath} className="border-b border-neutral-100">
                   <button
                     className={cn(
                       "w-full flex items-center justify-between py-4 text-left text-lg font-bold transition-colors",
                       active ? "text-primary" : "text-neutral-900"
                     )}
-                    onClick={() => toggleMobileAccordion(group.basePath)}
+                    onClick={() => toggleMobileAccordion(item.basePath)}
                     aria-expanded={isAccordionOpen}
                   >
-                    {group.label}
+                    {item.label}
                     <ChevronDown
                       size={20}
                       className={cn(
@@ -311,13 +312,11 @@ export function Header() {
                   <div
                     className={cn(
                       "overflow-hidden transition-all duration-300 ease-in-out",
-                      isAccordionOpen
-                        ? "max-h-[500px] opacity-100"
-                        : "max-h-0 opacity-0"
+                      isAccordionOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                     )}
                   >
                     <div className="pl-4 pb-4 space-y-1">
-                      {group.children.map((child) => (
+                      {item.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
@@ -349,21 +348,6 @@ export function Header() {
                 </div>
               );
             })}
-
-            {/* 단독 링크 (실적사례) */}
-            {NAV_DIRECT.map((direct) => (
-              <div key={direct.href} className="border-b border-neutral-100">
-                <Link
-                  href={direct.href}
-                  className={cn(
-                    "block py-4 text-lg font-bold transition-colors",
-                    pathname.startsWith(direct.href) ? "text-primary" : "text-neutral-900 hover:text-primary"
-                  )}
-                >
-                  {direct.label}
-                </Link>
-              </div>
-            ))}
           </div>
 
           <div className="pt-8 pb-12">
