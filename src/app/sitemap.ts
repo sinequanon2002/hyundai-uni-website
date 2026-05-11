@@ -12,7 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/company`,               priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
     // 지정폐기물 서비스 (핵심 SEO)
     { url: `${baseUrl}/waste/types`,           priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
-    { url: `${baseUrl}/waste/process`,         priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
     { url: `${baseUrl}/waste/storage`,         priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
     // 실적사례 (단독 메뉴)
     { url: `${baseUrl}/support/gallery`,       priority: 0.8, changeFrequency: 'weekly',  lastModified: new Date() },

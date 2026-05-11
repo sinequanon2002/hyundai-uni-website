@@ -13,8 +13,7 @@ export const COMPANY_SUBNAV_ITEMS = [
 ];
 
 export const WASTE_SUBNAV_ITEMS = [
-  { label: "처리 가능 폐기물", href: "/waste/types" },
-  { label: "처리 절차 안내", href: "/waste/process" },
+  { label: "서비스 안내", href: "/waste/types" },
   { label: "보관·법적 의무", href: "/waste/storage" },
 ];
 

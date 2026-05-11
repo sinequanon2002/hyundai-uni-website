@@ -34,8 +34,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: '서비스 소개',
     basePath: '/service',
     children: [
-      { label: '처리 가능 폐기물', href: '/waste/types' },
-      { label: '처리 절차 안내', href: '/waste/process' },
+      { label: '서비스 안내', href: '/waste/types' },
       { label: '보관·법적 의무', href: '/waste/storage' },
       { label: '서비스 소개서', href: '/resources/brochure', highlight: true },
       // Phase 3 업종별 솔루션 페이지 완성 시 href 교체
