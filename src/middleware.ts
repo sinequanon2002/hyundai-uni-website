@@ -5,7 +5,7 @@ import { type NextRequest, NextResponse } from "next/server";
  * 관리자 백오피스 URL 패턴
  * (admin) 라우트 그룹은 URL에 영향 없음 → 실제 경로로 나열
  */
-const ADMIN_PATHS = ["/inquiries", "/users", "/notices", "/admin/gallery", "/settings"];
+const ADMIN_PATHS = ["/inquiries", "/users", "/notices", "/admin/gallery", "/settings", "/brochures"];
 const CUSTOMER_PATHS = ["/my"];
 
 function isAdminPath(pathname: string): boolean {
