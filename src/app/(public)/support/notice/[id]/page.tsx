@@ -17,10 +17,10 @@ function extractDescription(html: string, maxLength = 155): string {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const result = await getNoticeById(params.id);
-  if (!result.success || !result.data) return { title: "공지사항 | 현대유앤아이" };
+  if (!result.success || !result.data) return { title: "공지사항" };
   const { title, content } = result.data;
   return {
-    title: `${title} | 현대유앤아이`,
+    title: `${title}`,
     description: extractDescription(content),
   };
 }

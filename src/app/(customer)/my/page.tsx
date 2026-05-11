@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getMyProfile, getMyInquiries } from "@/lib/actions/customer";
 
 export const metadata: Metadata = {
-  title: "마이페이지 | 현대유앤아이",
+  title: "마이페이지",
   robots: { index: false, follow: false },
 };
 

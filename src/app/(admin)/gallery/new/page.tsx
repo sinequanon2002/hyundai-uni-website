@@ -6,7 +6,7 @@ import { getPortfolioWriteRoles } from "@/lib/actions/settings";
 import { GalleryForm } from "@/components/admin/GalleryForm";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "갤러리 등록 | 현대유앤아이" };
+export const metadata: Metadata = { title: "갤러리 등록" };
 
 export default async function NewGalleryPage() {
   const supabase = createClient();

@@ -7,7 +7,7 @@ import { getNoticeWriteRoles } from "@/lib/actions/settings";
 import { NoticeForm } from "@/components/admin/NoticeForm";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "공지 수정 | 현대유앤아이" };
+export const metadata: Metadata = { title: "공지 수정" };
 
 interface Props {
   params: { id: string };

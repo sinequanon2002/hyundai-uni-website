@@ -5,7 +5,7 @@ import { ContentMeta } from "@/components/ui/ContentMeta";
 import { AuthorityLinks } from "@/components/ui/AuthorityLinks";
 
 export const metadata: Metadata = {
-  title: "지정폐기물 보관기준·법적 의무·벌칙 | 현대유앤아이",
+  title: "지정폐기물 보관기준·법적 의무·벌칙",
   description:
     "지정폐기물 법정 보관기간(45일), 보관 창고·용기 기준, 표지판 설치 방법, 위반 시 처벌 규정(7년 이하 징역·과태료)까지 폐기물관리법 기준으로 정리했습니다.",
 };

@@ -7,7 +7,7 @@ import { PageBanner } from "@/components/ui/PageBanner";
 import { SubNav, SUPPORT_SUBNAV_ITEMS } from "@/components/ui/SubNav";
 
 export const metadata: Metadata = {
-  title: "문의현황 조회 | 현대유앤아이",
+  title: "문의현황 조회",
   robots: { index: false, follow: false },
 };
 

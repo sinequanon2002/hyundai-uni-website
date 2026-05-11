@@ -7,7 +7,7 @@ import { isStaff } from "@/lib/auth/roles";
 import { logout } from "@/lib/actions/auth";
 
 export const metadata: Metadata = {
-  title: "마이페이지 | 현대유앤아이",
+  title: "마이페이지",
   robots: { index: false, follow: false },
 };
 

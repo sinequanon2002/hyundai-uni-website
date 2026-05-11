@@ -7,7 +7,7 @@ import { Pin, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "공지사항 | 현대유앤아이",
+  title: "공지사항",
 };
 
 const categoryColorMap: Record<string, string> = {

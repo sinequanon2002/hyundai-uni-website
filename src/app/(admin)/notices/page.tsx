@@ -6,7 +6,7 @@ import { isStaff } from "@/lib/auth/roles";
 import { getNoticesAdmin, deleteNotice, canWriteNotice } from "@/lib/actions/notices";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "공지사항 관리 | 현대유앤아이" };
+export const metadata: Metadata = { title: "공지사항 관리" };
 
 interface Props {
   searchParams: { page?: string; search?: string; category?: string };

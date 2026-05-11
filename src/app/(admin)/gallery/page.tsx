@@ -7,7 +7,7 @@ import { isStaff } from "@/lib/auth/roles";
 import { getPortfolioItemsAdmin, deletePortfolioItem, canWritePortfolio } from "@/lib/actions/portfolio";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "현장갤러리 관리 | 현대유앤아이" };
+export const metadata: Metadata = { title: "현장갤러리 관리" };
 
 interface Props {
   searchParams: { page?: string; category?: string };

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "로그인 | 현대유앤아이",
+  title: "로그인",
   robots: { index: false, follow: false },
 };
 

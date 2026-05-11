@@ -7,7 +7,7 @@ import { getPortfolioItemById } from "@/lib/actions/portfolio";
 import { GalleryForm } from "@/components/admin/GalleryForm";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "갤러리 수정 | 현대유앤아이" };
+export const metadata: Metadata = { title: "갤러리 수정" };
 
 interface Props { params: { id: string } }
 

@@ -10,7 +10,7 @@ import {
 } from "@/lib/actions/settings";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "설정 | 현대유앤아이" };
+export const metadata: Metadata = { title: "설정" };
 
 const STAFF_ROLE_OPTIONS: UserRole[] = USER_ROLES.filter((r) => r !== "customer");
 

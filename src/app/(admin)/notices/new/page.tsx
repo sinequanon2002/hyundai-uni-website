@@ -6,7 +6,7 @@ import { getNoticeWriteRoles } from "@/lib/actions/settings";
 import { NoticeForm } from "@/components/admin/NoticeForm";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "공지 작성 | 현대유앤아이" };
+export const metadata: Metadata = { title: "공지 작성" };
 
 export default async function NewNoticePage() {
   const supabase = createClient();

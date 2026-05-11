@@ -19,24 +19,24 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 
   if (region && category) {
     return {
-      title: `${region} ${category} 수거·운반 현장 | 현대유앤아이`,
+      title: `${region} ${category} 수거·운반 현장`,
       description: `${region} 지역 ${category} 수거·운반 실제 현장 사진. 현대유앤아이의 ${region} 지정폐기물 처리 실적을 확인하세요.`,
     };
   }
   if (region) {
     return {
-      title: `${region} 지정폐기물 수거·운반 현장 | 현대유앤아이`,
+      title: `${region} 지정폐기물 수거·운반 현장`,
       description: `${region} 지역 지정폐기물 수거·운반 실제 현장 사진. 경상북도·대구 기반 전국 서비스를 제공하는 현대유앤아이의 처리 실적을 확인하세요.`,
     };
   }
   if (category) {
     return {
-      title: `${category} 수거·운반 현장 | 현대유앤아이`,
+      title: `${category} 수거·운반 현장`,
       description: `${category} 수거·운반 실제 현장 사진. 현대유앤아이의 전문 지정폐기물 처리 실적과 보유 장비를 확인하세요.`,
     };
   }
   return {
-    title: "실적사례 | 현대유앤아이",
+    title: "실적사례",
     description:
       "현대유앤아이의 지정폐기물 수거·운반 실제 현장을 확인하세요. 폐유, 폐산, 폐유기용제, 폐석면 등 다양한 지정폐기물 처리 실적과 보유 장비를 소개합니다.",
   };

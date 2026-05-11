@@ -47,9 +47,9 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const detail = wasteTypeDetailBySlug[params.slug];
-  if (!detail) return { title: "지정폐기물 | 현대유앤아이" };
+  if (!detail) return { title: "지정폐기물" };
   return {
-    title: `${detail.name} 수거·운반 전문 | 현대유앤아이`,
+    title: `${detail.name} 수거·운반 전문`,
     description: `${detail.name} 전문 수거·운반. ${detail.summary}. 경상북도·대구 기반 전국 서비스. 허가 업체 현대유앤아이에 문의하세요.`,
   };
 }

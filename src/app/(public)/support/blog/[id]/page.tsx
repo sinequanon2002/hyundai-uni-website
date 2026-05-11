@@ -16,14 +16,14 @@ function extractDescription(html: string, maxLength = 155): string {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const result = await getBlogPostById(params.id);
-  if (!result.success || !result.data) return { title: "폐기물 정보 자료실 | 현대유앤아이" };
+  if (!result.success || !result.data) return { title: "폐기물 정보 자료실" };
   const { title, excerpt, content, thumbnail_url } = result.data;
   const description = excerpt || extractDescription(content);
   return {
-    title: `${title} | 현대유앤아이`,
+    title: `${title}`,
     description,
     openGraph: {
-      title: `${title} | 현대유앤아이`,
+      title: `${title}`,
       description,
       ...(thumbnail_url && { images: [{ url: thumbnail_url }] }),
     },
