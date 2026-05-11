@@ -26,7 +26,6 @@ import {
   Mail,
   Clock,
   ArrowRight,
-  ChevronDown,
   MapPin,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -91,8 +90,6 @@ export default function InquiryPage() {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
-  const [wasteSearch, setWasteSearch] = useState("");
 
   const {
     register,
@@ -393,16 +390,14 @@ export default function InquiryPage() {
                     </div>
                   </div>
 
-                  {/* 이메일 (견적 결과 수신용 — 선택) */}
+                  {/* 이메일 (필수 — 접수 확인 및 견적서 수신) */}
                   <div>
                     <label className={labelCls}>
                       <Mail className="inline w-4 h-4 mr-1 mb-0.5 text-[#0C5F6B]" />
-                      이메일{" "}
-                      <span className="text-gray-400 font-normal text-xs">(선택)</span>
+                      이메일 <span className="text-red-500">*</span>
                     </label>
                     <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 mb-2">
-                      입력하시면 접수 확인 및 견적서를 이메일로 발송해드립니다.
-                      미입력 시 담당자가 전화로 연락드립니다.
+                      접수 확인 및 견적서를 이메일로 발송해드립니다.
                     </p>
                     <Controller
                       name="email"
@@ -462,164 +457,23 @@ export default function InquiryPage() {
                   {/* 폐기물 종류 */}
                   <div>
                     <label className={labelCls}>
-                      폐기물 종류 (중복 선택){" "}
+                      폐기물 종류 (중복 선택 가능){" "}
                       <span className="text-red-500">*</span>
                     </label>
-                    <div className="relative mb-4">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input
-                        type="text"
-                        placeholder="폐기물 명칭 검색 (예: 폐유, 슬러지...)"
-                        value={wasteSearch}
-                        onChange={(e) => setWasteSearch(e.target.value)}
-                        className="w-full pl-10 pr-10 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0C5F6B]/20 transition-all"
-                      />
-                      {wasteSearch && (
-                        <button
-                          type="button"
-                          onClick={() => setWasteSearch("")}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      )}
-                    </div>
                     <Controller
                       name="wasteTypes"
                       control={control}
-                      render={({ field }) => {
-                        const filteredCategories = Object.entries(WASTE_CATEGORIES).filter(([major, minors]) => {
-                          if (!wasteSearch) return true;
-                          const s = wasteSearch.toLowerCase();
-                          return major.toLowerCase().includes(s) || minors.some(m => m.toLowerCase().includes(s));
-                        });
-
-                        return (
-                          <div className={cn("space-y-2 p-1", errors.wasteTypes && "border border-red-400 rounded-lg bg-red-50/30")}>
-                            {filteredCategories.length === 0 ? (
-                              <p className="text-center py-8 text-gray-400 text-sm italic">
-                                검색 결과가 없습니다. 직접 입력하시려면 '기타'를 선택해 주세요.
-                              </p>
-                            ) : (
-                              filteredCategories.map(([major, minors]) => {
-                                // 검색어가 있을 때, 해당 카테고리가 검색어와 직접 매칭되지 않더라도 
-                                // 하위 아이템이 매칭되면 카테고리를 강제로 확장해서 보여줍니다.
-                                const s = wasteSearch.toLowerCase();
-                                const isMajorMatch = major.toLowerCase().includes(s);
-                                const matchingMinors = minors.filter(m => m.toLowerCase().includes(s));
-                                
-                                // 검색 중이고 하위 아이템이 매칭되거나, 클릭해서 확장된 경우
-                                const isExpanded = (wasteSearch && matchingMinors.length > 0) || expandedCategory === major;
-                                const selectedCount = field.value.filter((v) => v.startsWith(`${major} - `) || v === major).length;
-
-                                const isFeatured = major.startsWith("⭐");
-                                return (
-                                  <div
-                                    key={major}
-                                    className={cn(
-                                      "border rounded-lg overflow-hidden bg-white",
-                                      isFeatured
-                                        ? "border-[#0C5F6B]/40 ring-1 ring-[#0C5F6B]/20"
-                                        : "border-gray-200"
-                                    )}
-                                  >
-                                    <button
-                                      type="button"
-                                      onClick={() => setExpandedCategory(isExpanded ? null : major)}
-                                      className={cn(
-                                        "w-full flex items-center justify-between px-4 py-3 transition-colors",
-                                        isFeatured
-                                          ? isExpanded ? "bg-[#0C5F6B]/10" : "bg-[#0C5F6B]/5 hover:bg-[#0C5F6B]/10"
-                                          : isExpanded ? "bg-[#F0FAFA]" : "hover:bg-gray-50",
-                                        selectedCount > 0 && !isExpanded && !isFeatured && "border-l-4 border-l-[#0C5F6B]"
-                                      )}
-                                    >
-                                      <span className={cn("font-semibold text-sm", isFeatured ? "text-[#0C5F6B]" : "text-gray-800")}>
-                                        {major}
-                                        {isFeatured && (
-                                          <span className="ml-2 text-[10px] bg-[#0C5F6B] text-white px-2 py-0.5 rounded-full font-bold">
-                                            집중 처리
-                                          </span>
-                                        )}
-                                        {selectedCount > 0 && (
-                                          <span className="ml-2 text-[#0C5F6B] bg-[#0C5F6B]/10 px-2 py-0.5 rounded-full text-xs">
-                                            {selectedCount}개 선택됨
-                                          </span>
-                                        )}
-                                      </span>
-                                      <ChevronDown
-                                        className={cn("w-4 h-4 transition-transform", isFeatured ? "text-[#0C5F6B]" : "text-gray-500", isExpanded && "rotate-180")}
-                                      />
-                                    </button>
-                                    {isExpanded && (
-                                      <div className="p-4 bg-white border-t border-gray-100 flex flex-wrap gap-2">
-                                        {minors.map((minor) => {
-                                          const valueStr = major === "기타" ? "기타" : `${major} - ${minor}`;
-                                          const checked = field.value.includes(valueStr);
-                                          // 검색 중일 때 매칭되는 아이템만 강조하거나 필터링할 수 있지만, 
-                                          // 여기서는 전체 리스트를 보여주되 매칭되는 것 위주로 확장했습니다.
-                                          return (
-                                            <button
-                                              key={minor}
-                                              type="button"
-                                              onClick={() => {
-                                                field.onChange(
-                                                  checked
-                                                    ? field.value.filter((v) => v !== valueStr)
-                                                    : [...field.value, valueStr]
-                                                );
-                                              }}
-                                              className={cn(
-                                                "px-3 py-1.5 rounded-full text-xs font-medium border transition-colors",
-                                                checked
-                                                  ? "bg-[#0C5F6B] border-[#0C5F6B] text-white"
-                                                  : "bg-white border-gray-200 text-gray-600 hover:border-[#0C5F6B]/50",
-                                                wasteSearch && minor.toLowerCase().includes(s) && !checked && "ring-2 ring-[#0C5F6B]/30 border-[#0C5F6B]/50"
-                                              )}
-                                            >
-                                              {minor}
-                                            </button>
-                                          );
-                                        })}
-                                      </div>
-                                    )}
-                                  </div>
-                                );
-                              })
-                            )}
-                          </div>
-                        );
-                      }}
+                      render={({ field }) => (
+                        <WasteTypeCombobox
+                          value={field.value}
+                          onChange={field.onChange}
+                          hasError={!!errors.wasteTypes}
+                        />
+                      )}
                     />
                     {errors.wasteTypes && (
                       <p className={errorCls}>{errors.wasteTypes.message}</p>
                     )}
-                  </div>
-
-                  {/* 수거 요청일 + 폐기물 수량 */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className={labelCls}>수거 요청일</label>
-                      <input
-                        {...register("collectionDate")}
-                        type="date"
-                        className={inputCls(!!errors.collectionDate)}
-                      />
-                      <p className="text-[10px] text-gray-400 mt-1">
-                        * 희망하시는 수거 날짜를 선택해주세요.
-                      </p>
-                    </div>
-                    <div>
-                      <label className={labelCls}>폐기물 수량/단위</label>
-                      <input
-                        {...register("quantity")}
-                        placeholder="예: 약 500kg, 2드럼 등"
-                        className={inputCls(!!errors.quantity)}
-                      />
-                      <p className="text-[10px] text-gray-400 mt-1">
-                        * 대략적인 정보를 입력하셔도 괜찮습니다.
-                      </p>
-                    </div>
                   </div>
 
                   {/* 기타 문의사항 */}
@@ -627,8 +481,8 @@ export default function InquiryPage() {
                     <label className={labelCls}>기타 문의사항</label>
                     <textarea
                       {...register("message")}
-                      placeholder="특이사항이나 추가로 문의하실 내용을 자유롭게 작성해주세요."
-                      rows={3}
+                      placeholder={"수거 희망일, 폐기물 수량·단위, 보관 상태 등을 자유롭게 적어주세요.\n예) 폐황산 약 500kg (드럼 3개), 수거 희망일 6월 초, 옥외 탱크 보관 중"}
+                      rows={4}
                       className={cn(inputCls(!!errors.message), "resize-none")}
                     />
                     {errors.message && (
@@ -889,6 +743,175 @@ export default function InquiryPage() {
         />
       )}
     </>
+  );
+}
+
+// ─── 폐기물 종류 콤보박스 ──────────────────────────────────────────────────────
+
+const ALL_WASTE_TYPES: string[] = Object.entries(WASTE_CATEGORIES).flatMap(
+  ([major, minors]) =>
+    (minors as readonly string[]).map((minor) =>
+      major === "기타" ? "기타" : `${major} - ${minor}`
+    )
+);
+
+function WasteTypeCombobox({
+  value,
+  onChange,
+  hasError,
+}: {
+  value: string[];
+  onChange: (v: string[]) => void;
+  hasError?: boolean;
+}) {
+  const [input, setInput] = useState("");
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const lc = input.toLowerCase();
+  const filtered = ALL_WASTE_TYPES.filter(
+    (t) => !value.includes(t) && (!input || t.toLowerCase().includes(lc))
+  );
+  const showCustomAdd =
+    input.trim().length > 0 &&
+    !ALL_WASTE_TYPES.some((t) => t === input.trim()) &&
+    !value.includes(input.trim());
+
+  const add = (v: string) => {
+    const trimmed = v.trim();
+    if (trimmed && !value.includes(trimmed)) {
+      onChange([...value, trimmed]);
+    }
+    setInput("");
+  };
+
+  const remove = (v: string) => onChange(value.filter((t) => t !== v));
+
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div ref={containerRef} className="space-y-2">
+      {/* 선택된 항목 chips */}
+      {value.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {value.map((v) => (
+            <span
+              key={v}
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#0C5F6B] text-white"
+            >
+              {v}
+              <button
+                type="button"
+                onClick={() => remove(v)}
+                className="hover:opacity-70 transition-opacity"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* 검색/입력창 */}
+      <div className="relative">
+        <div
+          className={cn(
+            "flex items-center gap-2 border rounded-lg px-3 py-2.5 bg-white transition-colors",
+            hasError
+              ? "border-red-400 bg-red-50/30"
+              : "border-gray-200 hover:border-gray-300",
+            open && "ring-2 ring-[#0C5F6B]/25 border-[#0C5F6B]"
+          )}
+        >
+          <Search className="w-4 h-4 text-gray-400 shrink-0" />
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              setOpen(true);
+            }}
+            onFocus={() => setOpen(true)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                if (showCustomAdd) {
+                  add(input.trim());
+                  setOpen(false);
+                } else if (filtered[0]) {
+                  add(filtered[0]);
+                  setOpen(false);
+                }
+              }
+              if (e.key === "Escape") setOpen(false);
+            }}
+            placeholder="폐기물 종류 검색 또는 직접 입력 후 Enter"
+            className="flex-1 text-sm outline-none bg-transparent min-w-0"
+          />
+          {input && (
+            <button
+              type="button"
+              onClick={() => {
+                setInput("");
+                setOpen(false);
+              }}
+            >
+              <X className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+            </button>
+          )}
+        </div>
+
+        {open && (
+          <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-y-auto max-h-56">
+            {showCustomAdd && (
+              <li>
+                <button
+                  type="button"
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    add(input.trim());
+                    setOpen(false);
+                  }}
+                  className="w-full px-4 py-2.5 text-sm text-left flex items-center gap-2 bg-[#0C5F6B]/5 text-[#0C5F6B] hover:bg-[#0C5F6B]/10 border-b border-gray-100"
+                >
+                  <span className="font-semibold">직접 입력:</span>
+                  <span>"{input.trim()}" 추가</span>
+                </button>
+              </li>
+            )}
+            {filtered.length > 0 ? (
+              filtered.map((t) => (
+                <li key={t}>
+                  <button
+                    type="button"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      add(t);
+                      setOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-[#0C5F6B]/5 hover:text-[#0C5F6B] transition-colors"
+                  >
+                    {t}
+                  </button>
+                </li>
+              ))
+            ) : !showCustomAdd ? (
+              <li className="px-4 py-3 text-sm text-gray-400 italic">
+                검색 결과가 없습니다.
+              </li>
+            ) : null}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 }
 

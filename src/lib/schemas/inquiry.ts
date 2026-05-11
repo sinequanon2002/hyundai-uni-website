@@ -54,12 +54,8 @@ export const inquiryFormSchema = z.object({
   notificationMethod: z.literal("email").default("email"),
   email: z
     .string()
-    .optional()
-    .or(z.literal(""))
-    .refine(
-      (v) => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
-      "올바른 이메일 형식이 아닙니다"
-    ),
+    .min(1, "이메일을 입력해주세요")
+    .email("올바른 이메일 형식이 아닙니다"),
   phone: z
     .string()
     .regex(
@@ -71,8 +67,6 @@ export const inquiryFormSchema = z.object({
   wasteTypes: z
     .array(z.string())
     .min(1, "폐기물 종류를 최소 하나 이상 선택해주세요"),
-  collectionDate: z.string().optional().or(z.literal("")),
-  quantity: z.string().optional().or(z.literal("")),
   message: z.string().optional().or(z.literal("")),
   photoUrls: z.array(z.string()).optional().default([]),
   agreement: z.literal(true, {
