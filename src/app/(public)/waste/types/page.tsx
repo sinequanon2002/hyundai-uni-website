@@ -128,29 +128,19 @@ export default function ServicePage() {
           })}
         </div>
 
-        {/* 품목별 전문 서비스 바로가기 */}
-        <div className="mt-10 bg-primary/5 rounded-2xl border border-primary/15 p-6 md:p-8">
-          <h3 className="text-base font-bold text-neutral-900 mb-1.5">품목별 전문 서비스 안내</h3>
-          <p className="text-sm text-neutral-600 mb-4">
-            주요 품목은 수거·운반 절차, 발생 업종, 현장 사진까지 자세히 확인할 수 있습니다.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {[
-              { slug: "폐유",    label: "폐유 수거·운반" },
-              { slug: "폐산",    label: "폐산·폐알칼리 수거·운반" },
-              { slug: "폐유기용제", label: "폐유기용제 수거·운반" },
-              { slug: "폐석면",  label: "폐석면 수거·운반" },
-            ].map(({ slug, label }) => (
-              <Link
-                key={slug}
-                href={`/waste/types/${slug}`}
-                className="inline-flex items-center gap-1.5 bg-white border border-primary/30 text-primary px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition-all"
-              >
-                {label}
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            ))}
+        {/* 견적 문의 CTA */}
+        <div className="mt-10 bg-primary/5 rounded-2xl border border-primary/15 p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 className="text-base font-bold text-neutral-900 mb-1">처리 가능 여부가 불확실한 폐기물도 문의해 주세요</h3>
+            <p className="text-sm text-neutral-600">목록에 없는 품목도 담당자가 검토 후 안내해 드립니다.</p>
           </div>
+          <Link
+            href="/support/inquiry"
+            className="shrink-0 inline-flex items-center gap-1.5 bg-primary text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            견적 문의
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
         {/* ══════════ SECTION 2: 처리 절차 ══════════ */}
@@ -199,19 +189,6 @@ export default function ServicePage() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="mt-12 max-w-4xl mx-auto bg-primary/5 border border-primary/15 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-neutral-700">
-            처리 가능 여부가 불확실한 폐기물도 문의 주시면 검토해드립니다.
-          </p>
-          <Link
-            href="/support/inquiry"
-            className="shrink-0 inline-flex items-center gap-1.5 bg-primary text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-primary/90 transition-colors"
-          >
-            견적 문의
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
 
       </div>
     </>
