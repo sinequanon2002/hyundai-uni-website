@@ -25,7 +25,7 @@ interface NavGroup {
 
 const NAV_GROUPS: NavGroup[] = [
   {
-    label: '서비스',
+    label: '서비스 소개',
     basePath: '/service',
     children: [
       { label: '처리 가능 폐기물', href: '/waste/types' },
@@ -33,27 +33,17 @@ const NAV_GROUPS: NavGroup[] = [
       { label: '보관기준', href: '/waste/storage' },
       // Phase 3 업종별 솔루션 페이지 완성 시 href 교체
       { label: '업종별 솔루션', href: '/support/inquiry', badge: '준비중' },
+      { label: '회사 소개', href: '/company' },
     ],
   },
   {
-    label: '정보·법규',
+    label: '법규·정보',
     basePath: '/info',
     children: [
       { label: '지정폐기물이란', href: '/waste/about' },
-      { label: '법적의무', href: '/waste/compliance' },
+      { label: '법적 의무', href: '/waste/compliance' },
       { label: '올바로시스템 소개', href: '/allbaro/about' },
       { label: '올바로시스템 가이드', href: '/allbaro/guide' },
-    ],
-  },
-  {
-    label: '회사소개',
-    basePath: '/company',
-    children: [
-      { label: '인사말', href: '/company/greeting' },
-      { label: '회사개요', href: '/company/profile' },
-      { label: '연혁', href: '/company/history' },
-      { label: '인허가현황', href: '/company/certifications' },
-      { label: '오시는 길', href: '/company/location' },
     ],
   },
   {
@@ -70,7 +60,7 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-const CTA_ITEM = { label: '무료 견적 신청', href: '/support/inquiry' };
+const CTA_ITEM = { label: '견적 문의', href: '/support/inquiry' };
 
 /** 현재 경로가 그룹 내 자식 항목 중 하나와 일치하는지 확인 */
 function isGroupActive(group: NavGroup, pathname: string): boolean {

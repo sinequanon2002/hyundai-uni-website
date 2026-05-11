@@ -8,12 +8,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/`,                     priority: 1.0, changeFrequency: 'weekly',  lastModified: new Date() },
-    // 회사소개
-    { url: `${baseUrl}/company/greeting`,      priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
-    { url: `${baseUrl}/company/profile`,       priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
-    { url: `${baseUrl}/company/history`,       priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
-    { url: `${baseUrl}/company/certifications`,priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
-    { url: `${baseUrl}/company/location`,      priority: 0.6, changeFrequency: 'monthly', lastModified: new Date() },
+    // 회사소개 (단일 페이지로 통합)
+    { url: `${baseUrl}/company`,               priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
     // 지정폐기물 정보 (핵심 SEO)
     { url: `${baseUrl}/waste/about`,           priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
     { url: `${baseUrl}/waste/types`,           priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },

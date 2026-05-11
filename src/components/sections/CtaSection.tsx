@@ -35,7 +35,7 @@ export function CtaSection() {
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/company/profile"
+              href="/resources/brochure"
               className="inline-flex items-center justify-center gap-2.5 bg-white/10 border border-white/40 text-white px-7 py-4 rounded-xl font-semibold text-base hover:bg-white/20 transition-colors"
             >
               <FileText size={18} />

@@ -64,7 +64,7 @@ export function HeroSection() {
             무료 방문 견적 신청하기
           </Link>
           <Link
-            href="/company/profile"
+            href="/resources/brochure"
             className="px-8 py-4 bg-transparent border-2 border-white/70 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
           >
             서비스 소개서 보기
