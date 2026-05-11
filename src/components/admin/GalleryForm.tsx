@@ -65,7 +65,7 @@ export function GalleryForm({ item }: Props) {
         setError(result.error ?? "저장 중 오류가 발생했습니다");
         return;
       }
-      router.push("/gallery");
+      router.push("/admin/gallery");
       router.refresh();
     });
   }

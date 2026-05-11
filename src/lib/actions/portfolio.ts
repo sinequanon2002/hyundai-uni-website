@@ -250,8 +250,8 @@ export async function createPortfolioItem(payload: {
     return { success: false, error: "저장 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/gallery");
-  revalidatePath("/gallery");
+  revalidatePath("/gallery"); revalidatePath("/admin/gallery");
+  revalidatePath("/gallery"); revalidatePath("/admin/gallery");
   return { success: true, data: { id: data.id } };
 }
 
@@ -294,9 +294,9 @@ export async function updatePortfolioItem(
     return { success: false, error: "수정 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/gallery");
+  revalidatePath("/gallery"); revalidatePath("/admin/gallery");
   revalidatePath(`/gallery/${id}/edit`);
-  revalidatePath("/gallery");
+  revalidatePath("/gallery"); revalidatePath("/admin/gallery");
   return { success: true };
 }
 
@@ -318,8 +318,8 @@ export async function deletePortfolioItem(id: string): Promise<ActionResult> {
     return { success: false, error: "삭제 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/gallery");
-  revalidatePath("/gallery");
+  revalidatePath("/gallery"); revalidatePath("/admin/gallery");
+  revalidatePath("/gallery"); revalidatePath("/admin/gallery");
   return { success: true };
 }
 
