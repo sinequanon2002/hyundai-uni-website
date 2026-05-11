@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { PageBanner } from "@/components/ui/PageBanner";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { GalleryFilters } from "@/components/GalleryFilters";
 import { getPortfolioItems } from "@/lib/actions/portfolio";
@@ -62,7 +61,6 @@ export default async function GalleryPage({ searchParams }: Props) {
   const totalPages = result.success ? result.data!.totalPages : 1;
   const availableYears = result.success ? result.data!.availableYears : [];
 
-  // Link용 URL 빌더 (서버에서만 사용 — 이벤트 핸들러 없음)
   function buildUrl(params: Record<string, string | number | undefined>) {
     const merged: Record<string, string> = {
       ...(category && { category }),
@@ -78,7 +76,6 @@ export default async function GalleryPage({ searchParams }: Props) {
     return `/support/gallery${qs ? `?${qs}` : ""}`;
   }
 
-  // 동적 헤딩 텍스트
   const headingTitle =
     region && category
       ? `${region} ${category} 실적사례`
@@ -88,27 +85,24 @@ export default async function GalleryPage({ searchParams }: Props) {
       ? `${category} 실적사례`
       : "실적사례";
 
-  const headingDesc =
-    region || category
-      ? `${[region, category].filter(Boolean).join(" ")} 지정폐기물 수거·운반 실제 작업 현장을 확인하세요.`
-      : "지정폐기물 수거·운반 실제 현장 사진과 보유 장비를 확인하세요.";
-
   return (
-    <main className="min-h-screen bg-neutral-50">
-      <PageBanner title="실적사례" subtitle="지정폐기물 수거·운반 현장" />
+    <main className="min-h-screen bg-white">
 
-      {/* 히어로 */}
-      <section className="bg-white border-b border-neutral-100">
-        <div className="max-w-6xl mx-auto px-4 py-10 md:py-14">
-          <span className="text-primary font-bold tracking-wider text-sm mb-2 block">PORTFOLIO</span>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+      {/* ── 페이지 헤더 ── */}
+      <section className="border-b border-neutral-100 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+          <p className="text-sm font-semibold text-primary mb-3">현장 실적사례</p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">{headingTitle}</h2>
-              <p className="text-neutral-500 text-sm mt-2">{headingDesc}</p>
-              <div className="w-12 h-1 bg-accent mt-4" />
+              <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight mb-3">
+                {headingTitle}
+              </h1>
+              <p className="text-neutral-500 text-base leading-relaxed">
+                지정폐기물 수거·운반 실제 현장 사진과 보유 장비를 확인하세요.
+              </p>
             </div>
             {total > 0 && (
-              <p className="text-sm text-neutral-400">
+              <p className="text-sm text-neutral-400 shrink-0">
                 총 <span className="font-semibold text-neutral-700">{total}</span>건
               </p>
             )}
@@ -116,71 +110,56 @@ export default async function GalleryPage({ searchParams }: Props) {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 py-8 md:py-12">
-        {/* ── 필터 바 ── */}
-        <div className="bg-white rounded-2xl border border-neutral-200 p-4 mb-8 shadow-sm">
-          <div className="flex flex-wrap gap-4 items-end">
-            {/* 폐기물 종류: Link 탭 (Server) */}
-            <div className="flex-1 min-w-[140px]">
-              <label className="block text-xs font-semibold text-neutral-500 mb-1.5 uppercase tracking-wide">
-                폐기물 종류
-              </label>
-              <div className="flex flex-wrap gap-1.5">
-                <Link
-                  href={buildUrl({ category: "", page: 1 })}
-                  className={cn(
-                    "px-3 py-1.5 rounded-full text-xs font-medium transition-all",
-                    !category
-                      ? "bg-primary text-white shadow-sm"
-                      : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-                  )}
-                >
-                  전체
-                </Link>
-                {PORTFOLIO_CATEGORIES.map((cat) => (
-                  <Link
-                    key={cat}
-                    href={buildUrl({ category: cat, page: 1 })}
-                    className={cn(
-                      "px-3 py-1.5 rounded-full text-xs font-medium transition-all",
-                      category === cat
-                        ? "bg-primary text-white shadow-sm"
-                        : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-                    )}
-                  >
-                    {cat}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* 지역·연도: Client Component (onChange 필요) */}
-            <GalleryFilters
-              category={category}
-              region={region}
-              year={year}
-              availableYears={availableYears}
-              regions={PORTFOLIO_REGIONS}
-            />
-
-            {/* 필터 초기화 */}
-            {(category || region || year) && (
+      {/* ── 카테고리 탭 (sticky) ── */}
+      <div className="bg-white border-b border-neutral-100 sticky top-16 z-30">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3">
+          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
+            <Link
+              href={buildUrl({ category: "", page: 1 })}
+              className={cn(
+                "shrink-0 px-4 py-2 rounded-md text-sm font-medium transition-all",
+                !category
+                  ? "bg-[#f3f4f6] text-neutral-900 font-semibold"
+                  : "text-[#415160] hover:bg-neutral-100"
+              )}
+            >
+              전체
+            </Link>
+            {PORTFOLIO_CATEGORIES.map((cat) => (
               <Link
-                href="/support/gallery"
-                className="text-xs text-neutral-400 hover:text-neutral-700 transition-colors underline self-end pb-1.5"
+                key={cat}
+                href={buildUrl({ category: cat, page: 1 })}
+                className={cn(
+                  "shrink-0 px-4 py-2 rounded-md text-sm font-medium transition-all",
+                  category === cat
+                    ? "bg-[#f3f4f6] text-neutral-900 font-semibold"
+                    : "text-[#415160] hover:bg-neutral-100"
+                )}
               >
-                필터 초기화
+                {cat}
               </Link>
-            )}
+            ))}
           </div>
+        </div>
+      </div>
 
-          {/* 활성 필터 배지 */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-14">
+
+        {/* ── 지역·연도 필터 ── */}
+        <div className="flex flex-wrap items-end gap-4 mb-8">
+          <GalleryFilters
+            category={category}
+            region={region}
+            year={year}
+            availableYears={availableYears}
+            regions={PORTFOLIO_REGIONS}
+          />
           {(category || region || year) && (
-            <div className="mt-3 pt-3 border-t border-neutral-100 flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {category && (
                 <Link
                   href={buildUrl({ category: "", page: 1 })}
-                  className="flex items-center gap-1 text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full hover:bg-primary/20 transition-colors"
+                  className="flex items-center gap-1 text-xs bg-[#f0f1f3] text-neutral-600 px-2.5 py-1 rounded-full hover:bg-neutral-200 transition-colors"
                 >
                   {category} ×
                 </Link>
@@ -188,7 +167,7 @@ export default async function GalleryPage({ searchParams }: Props) {
               {region && (
                 <Link
                   href={buildUrl({ region: "", page: 1 })}
-                  className="flex items-center gap-1 text-xs bg-secondary/10 text-secondary px-2.5 py-1 rounded-full hover:bg-secondary/20 transition-colors"
+                  className="flex items-center gap-1 text-xs bg-[#f0f1f3] text-neutral-600 px-2.5 py-1 rounded-full hover:bg-neutral-200 transition-colors"
                 >
                   {region} ×
                 </Link>
@@ -196,20 +175,26 @@ export default async function GalleryPage({ searchParams }: Props) {
               {year && (
                 <Link
                   href={buildUrl({ year: "", page: 1 })}
-                  className="flex items-center gap-1 text-xs bg-accent/10 text-accent px-2.5 py-1 rounded-full hover:bg-accent/20 transition-colors"
+                  className="flex items-center gap-1 text-xs bg-[#f0f1f3] text-neutral-600 px-2.5 py-1 rounded-full hover:bg-neutral-200 transition-colors"
                 >
                   {year}년 ×
                 </Link>
               )}
+              <Link
+                href="/support/gallery"
+                className="text-xs text-neutral-400 hover:text-neutral-700 transition-colors underline"
+              >
+                전체 초기화
+              </Link>
             </div>
           )}
         </div>
 
         {/* ── 갤러리 그리드 ── */}
         {items.length === 0 ? (
-          <div className="text-center py-24 text-neutral-400">
+          <div className="text-center py-28 text-neutral-400">
             <div className="text-5xl mb-4">📷</div>
-            <p className="font-medium">해당 조건의 갤러리 항목이 없습니다.</p>
+            <p className="font-semibold text-lg text-neutral-500">해당 조건의 실적사례가 없습니다.</p>
             <Link href="/support/gallery" className="mt-4 inline-block text-sm text-primary hover:underline">
               전체 보기
             </Link>
@@ -220,10 +205,13 @@ export default async function GalleryPage({ searchParams }: Props) {
 
         {/* ── 페이지네이션 ── */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mt-10">
+          <div className="flex justify-center items-center gap-1.5 mt-16">
             <Link
               href={buildUrl({ page: page - 1 })}
-              className={cn("p-2 rounded-lg hover:bg-neutral-200 transition-colors", page === 1 && "opacity-30 pointer-events-none")}
+              className={cn(
+                "p-2 rounded-lg hover:bg-neutral-100 transition-colors text-neutral-600",
+                page === 1 && "opacity-30 pointer-events-none"
+              )}
               aria-label="이전 페이지"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -234,7 +222,9 @@ export default async function GalleryPage({ searchParams }: Props) {
                 href={buildUrl({ page: p })}
                 className={cn(
                   "w-9 h-9 rounded-lg text-sm font-medium transition-all flex items-center justify-center",
-                  p === page ? "bg-primary text-white shadow-md" : "text-neutral-600 hover:bg-neutral-200"
+                  p === page
+                    ? "bg-primary text-white"
+                    : "text-neutral-600 hover:bg-neutral-100"
                 )}
               >
                 {p}
@@ -242,7 +232,10 @@ export default async function GalleryPage({ searchParams }: Props) {
             ))}
             <Link
               href={buildUrl({ page: page + 1 })}
-              className={cn("p-2 rounded-lg hover:bg-neutral-200 transition-colors", page === totalPages && "opacity-30 pointer-events-none")}
+              className={cn(
+                "p-2 rounded-lg hover:bg-neutral-100 transition-colors text-neutral-600",
+                page === totalPages && "opacity-30 pointer-events-none"
+              )}
               aria-label="다음 페이지"
             >
               <ChevronRight className="w-4 h-4" />
@@ -251,9 +244,9 @@ export default async function GalleryPage({ searchParams }: Props) {
         )}
 
         {/* ── 지역별 현장 링크 허브 ── */}
-        <section className="mt-16 bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm">
+        <section className="mt-16 border-t border-neutral-100 pt-10">
           <h3 className="text-base font-bold text-neutral-800 mb-1">지역별 현장 현황</h3>
-          <p className="text-xs text-neutral-500 mb-4">
+          <p className="text-sm text-neutral-500 mb-4">
             경상북도·대구 기반으로 전국 지정폐기물 수거·운반 서비스를 제공합니다.
           </p>
           <div className="flex flex-wrap gap-2">
@@ -262,10 +255,10 @@ export default async function GalleryPage({ searchParams }: Props) {
                 key={r}
                 href={buildUrl({ region: r, page: 1 })}
                 className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all border",
+                  "px-4 py-2 rounded-md text-sm font-medium transition-all border",
                   region === r
-                    ? "bg-primary text-white border-primary shadow-sm"
-                    : "bg-white text-neutral-700 border-neutral-200 hover:border-primary hover:text-primary"
+                    ? "bg-[#f3f4f6] text-neutral-900 font-semibold border-neutral-300"
+                    : "bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-100"
                 )}
               >
                 {r} 현장
@@ -273,7 +266,7 @@ export default async function GalleryPage({ searchParams }: Props) {
             ))}
           </div>
         </section>
-      </section>
+      </div>
     </main>
   );
 }
