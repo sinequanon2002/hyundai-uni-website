@@ -1,9 +1,15 @@
 export const PORTFOLIO_CATEGORIES = [
-  "폐유",
-  "폐산·폐알칼리",
-  "폐유기용제",
-  "폐석면",
-  "보유장비",
+  "폐시약",
+  "폐산",
+  "폐황산",
+  "폐불산",
+  "폐질산",
+  "그밖의폐산",
+  "폐알칼리",
+  "폐유독물",
+  "폐윤활유",
+  "폐페인트",
+  "폐유해화학물질",
 ] as const;
 
 export const PORTFOLIO_REGIONS = [
