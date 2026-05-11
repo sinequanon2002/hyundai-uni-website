@@ -30,20 +30,23 @@ const NAV_GROUPS: NavGroup[] = [
     children: [
       { label: '처리 가능 폐기물', href: '/waste/types' },
       { label: '처리 절차 안내', href: '/waste/process' },
-      { label: '보관기준', href: '/waste/storage' },
+      { label: '보관·법적 의무', href: '/waste/storage' },
       // Phase 3 업종별 솔루션 페이지 완성 시 href 교체
       { label: '업종별 솔루션', href: '/support/inquiry', badge: '준비중' },
       { label: '회사 소개', href: '/company' },
     ],
   },
   {
-    label: '법규·정보',
-    basePath: '/info',
+    label: '블로그',
+    basePath: '/support/blog',
     children: [
-      { label: '지정폐기물이란', href: '/waste/about' },
-      { label: '법적 의무', href: '/waste/compliance' },
-      { label: '올바로시스템 소개', href: '/allbaro/about' },
-      { label: '올바로시스템 가이드', href: '/allbaro/guide' },
+      { label: '전체 보기', href: '/support/blog' },
+      { label: '폐기물 정보', href: '/support/blog?category=폐기물+정보' },
+      { label: '법규 안내', href: '/support/blog?category=법규+안내' },
+      { label: '처리 사례', href: '/support/blog?category=처리+사례' },
+      { label: '올바로시스템', href: '/support/blog?category=올바로시스템' },
+      { label: '회사 소식', href: '/support/blog?category=회사+소식' },
+      { label: '네이버 블로그 ↗', href: 'https://blog.naver.com/hduni2020', external: true },
     ],
   },
   {
@@ -53,7 +56,6 @@ const NAV_GROUPS: NavGroup[] = [
       { label: '서비스 소개서', href: '/resources/brochure', highlight: true },
       { label: '올바로 체크리스트', href: '/resources/allbaro-checklist', highlight: true },
       { label: '현장갤러리', href: '/support/gallery' },
-      { label: '정보 블로그', href: '/support/blog' },
       { label: '공지사항', href: '/support/notice' },
       { label: '네이버 블로그 ↗', href: 'https://blog.naver.com/hduni2020', external: true },
     ],
@@ -65,7 +67,7 @@ const CTA_ITEM = { label: '견적 문의', href: '/support/inquiry' };
 /** 현재 경로가 그룹 내 자식 항목 중 하나와 일치하는지 확인 */
 function isGroupActive(group: NavGroup, pathname: string): boolean {
   return group.children.some(
-    (child) => !child.external && pathname.startsWith(child.href)
+    (child) => !child.external && pathname.startsWith(child.href.split('?')[0])
   );
 }
 
@@ -176,13 +178,16 @@ export function Header() {
                     )}
 
                     {group.children.map((child, idx) => {
-                      // 자료실에서 무료자료 ↔ 일반 항목 구분선
+                      // 자료실에서 무료자료 ↔ 일반 항목 구분선 (highlight 2개 이후)
                       const showDivider =
                         group.basePath === '/resources' && idx === 2;
+                      // 블로그에서 전체보기 ↔ 카테고리 구분선
+                      const showBlogDivider =
+                        group.basePath === '/support/blog' && idx === 1;
 
                       return (
                         <div key={child.href}>
-                          {showDivider && (
+                          {(showDivider || showBlogDivider) && (
                             <div className="my-1.5 mx-4 border-t border-neutral-100" />
                           )}
                           <Link

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Warehouse, Package, Calendar } from 'lucide-react';
+import Link from "next/link";
+import { Warehouse, Package, Calendar, AlertTriangle, Scale, ClipboardX, FileWarning, ArrowRight } from 'lucide-react';
 import { ContentMeta } from "@/components/ui/ContentMeta";
 import { AuthorityLinks } from "@/components/ui/AuthorityLinks";
 
 export const metadata: Metadata = {
-  title: "지정폐기물 보관방법·보관기간·표지판 기준 | 현대유앤아이",
+  title: "지정폐기물 보관기준·법적 의무·벌칙 | 현대유앤아이",
   description:
-    "지정폐기물 법정 보관기간(일반 45일·의료 7~60일), 보관 창고 기준, 용기 기준, 표지판 설치 방법을 폐기물관리법 기준으로 정리했습니다.",
+    "지정폐기물 법정 보관기간(45일), 보관 창고·용기 기준, 표지판 설치 방법, 위반 시 처벌 규정(7년 이하 징역·과태료)까지 폐기물관리법 기준으로 정리했습니다.",
 };
 
 const faqSchema = {
@@ -188,6 +189,73 @@ export default function WasteStoragePage() {
             <div className="mt-8 pt-4 border-t-2 border-black border-dashed text-center text-sm text-gray-500 font-medium">
               * 표지판 규격: 가로 60cm 이상 × 세로 40cm 이상 (노란색 바탕에 검은색 글자)
             </div>
+          </div>
+        </div>
+
+        {/* ── 법적 의무 및 벌칙 ── */}
+        <div className="mt-16 mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900 text-center md:text-left">법적 의무 및 처벌 규정</h2>
+          <p className="text-gray-500 text-sm mb-8 text-center md:text-left">보관기준 위반 시 행정처분 외 형사처벌까지 받을 수 있습니다.</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {[
+              {
+                icon: AlertTriangle,
+                color: "bg-red-50 border-red-200 text-red-700",
+                iconColor: "text-red-500",
+                title: "무단 투기·매립",
+                penalty: "7년 이하 징역 또는 5천만원 이하 벌금",
+                basis: "폐기물관리법 제63조",
+              },
+              {
+                icon: Scale,
+                color: "bg-orange-50 border-orange-200 text-orange-700",
+                iconColor: "text-orange-500",
+                title: "보관기간 초과·보관기준 미준수",
+                penalty: "1천만원 이하 과태료 + 개선명령",
+                basis: "폐기물관리법 시행령 별표5",
+              },
+              {
+                icon: ClipboardX,
+                color: "bg-amber-50 border-amber-200 text-amber-700",
+                iconColor: "text-amber-500",
+                title: "올바로시스템 전자인계서 미작성",
+                penalty: "300만원 이하 과태료",
+                basis: "폐기물관리법 제38조의2",
+              },
+              {
+                icon: FileWarning,
+                color: "bg-yellow-50 border-yellow-200 text-yellow-700",
+                iconColor: "text-yellow-600",
+                title: "미허가 업체를 통한 처리",
+                penalty: "5년 이하 징역 또는 3천만원 이하 벌금",
+                basis: "폐기물관리법 제65조",
+              },
+            ].map(({ icon: Icon, color, iconColor, title, penalty, basis }) => (
+              <div key={title} className={`rounded-xl border p-5 ${color}`}>
+                <div className="flex items-start gap-3">
+                  <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${iconColor}`} />
+                  <div>
+                    <p className="font-bold text-sm mb-1">{title}</p>
+                    <p className="text-sm font-semibold">{penalty}</p>
+                    <p className="text-xs opacity-60 mt-1">{basis}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-primary/5 border border-primary/15 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <p className="text-sm text-neutral-700">
+              보관기준 준수 여부가 걱정되신다면 현대유앤아이에 문의하세요. 법적 요건을 함께 검토해드립니다.
+            </p>
+            <Link
+              href="/support/inquiry"
+              className="shrink-0 inline-flex items-center gap-1.5 bg-primary text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              견적 문의
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
 

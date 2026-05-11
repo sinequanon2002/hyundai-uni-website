@@ -10,15 +10,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/`,                     priority: 1.0, changeFrequency: 'weekly',  lastModified: new Date() },
     // 회사소개 (단일 페이지로 통합)
     { url: `${baseUrl}/company`,               priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
-    // 지정폐기물 정보 (핵심 SEO)
-    { url: `${baseUrl}/waste/about`,           priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
+    // 지정폐기물 서비스 (핵심 SEO)
     { url: `${baseUrl}/waste/types`,           priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
+    { url: `${baseUrl}/waste/process`,         priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
     { url: `${baseUrl}/waste/storage`,         priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
-    { url: `${baseUrl}/waste/process`,         priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
-    { url: `${baseUrl}/waste/compliance`,      priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
-    // 올바로시스템
-    { url: `${baseUrl}/allbaro/about`,         priority: 0.5, changeFrequency: 'monthly', lastModified: new Date() },
-    { url: `${baseUrl}/allbaro/guide`,         priority: 0.5, changeFrequency: 'monthly', lastModified: new Date() },
     // 고객센터
     { url: `${baseUrl}/support/notice`,        priority: 0.6, changeFrequency: 'weekly',  lastModified: new Date() },
     { url: `${baseUrl}/support/blog`,          priority: 0.7, changeFrequency: 'weekly',  lastModified: new Date() },

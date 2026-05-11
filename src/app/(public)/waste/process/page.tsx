@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ProcessClient } from "./ProcessClient";
 import { ContentMeta } from "@/components/ui/ContentMeta";
 import { AuthorityLinks } from "@/components/ui/AuthorityLinks";
+import { Monitor, RefreshCw, FileText, CheckCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "지정폐기물 처리절차 6단계 | 현대유앤아이",
@@ -81,6 +83,41 @@ export default function WasteProcessPage() {
         </div>
 
         <ProcessClient />
+
+        {/* ── 올바로시스템 소개 ── */}
+        <div className="mt-16 bg-white rounded-2xl border border-neutral-200 overflow-hidden">
+          <div className="bg-secondary px-8 py-6">
+            <span className="text-xs font-bold text-white/70 tracking-widest uppercase block mb-1">3단계 필수 도구</span>
+            <h2 className="text-xl md:text-2xl font-bold text-white">올바로시스템이란?</h2>
+          </div>
+          <div className="p-6 md:p-8">
+            <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+              한국환경공단이 운영하는 지정폐기물 전자 인계·관리 시스템으로, 배출부터 운반·처리까지 전 과정을 전산으로 추적합니다.
+              지정폐기물 배출 전 <strong>전자인계서 작성은 법적 의무</strong>이며, 미작성 시 과태료 처분을 받습니다.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              {[
+                { icon: Monitor,    label: "전자 인계서", desc: "종이 서류 없이 온라인으로 작성·제출" },
+                { icon: RefreshCw,  label: "실시간 추적", desc: "배출→운반→처리 전 과정 현황 확인" },
+                { icon: FileText,   label: "법적 증빙", desc: "처리 완료 증빙서류 자동 보관" },
+                { icon: CheckCircle,label: "처리 결과", desc: "최종 처리 결과 통보 및 이력 관리" },
+              ].map(({ icon: Icon, label, desc }) => (
+                <div key={label} className="bg-secondary/5 border border-secondary/15 rounded-xl p-4">
+                  <Icon className="w-5 h-5 text-secondary mb-2" />
+                  <p className="text-xs font-bold text-neutral-800 mb-0.5">{label}</p>
+                  <p className="text-[11px] text-neutral-500 leading-snug">{desc}</p>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/support/blog?category=올바로시스템"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-secondary hover:underline underline-offset-4"
+            >
+              올바로시스템 작성 가이드 보기
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
 
         <AuthorityLinks className="mt-4" />
         <ContentMeta

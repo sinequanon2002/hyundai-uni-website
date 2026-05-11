@@ -17,6 +17,10 @@ import {
   Stethoscope,
   ChevronDown,
   ArrowRight,
+  ShieldAlert,
+  Truck,
+  FileCheck,
+  Eye,
 } from 'lucide-react';
 
 const iconMap: Record<string, React.ElementType> = {
@@ -41,6 +45,35 @@ export default function WasteTypesPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 md:py-20 animate-fade-in-up">
+
+      {/* ── 지정폐기물이란? ── */}
+      <div className="mb-14 bg-white rounded-2xl border border-neutral-200 overflow-hidden">
+        <div className="bg-primary px-8 py-6">
+          <span className="text-xs font-bold text-white/70 tracking-widest uppercase block mb-1">법적 정의</span>
+          <h2 className="text-xl md:text-2xl font-bold text-white">지정폐기물이란?</h2>
+        </div>
+        <div className="p-6 md:p-8">
+          <blockquote className="border-l-4 border-primary/40 pl-5 py-1 mb-6 text-neutral-700 text-sm leading-relaxed">
+            사업장에서 발생하는 폐기물 중 주변 환경을 오염시킬 수 있거나 인체에 위해를 줄 수 있는 유해한 물질로서 대통령령으로 정하는 폐기물
+            <span className="block text-xs text-neutral-400 mt-1">— 폐기물관리법 제2조 제4호</span>
+          </blockquote>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { icon: ShieldAlert, label: "무단투기 시", value: "7년 이하 징역 / 5천만원 벌금", color: "text-red-600 bg-red-50 border-red-100" },
+              { icon: FileCheck,  label: "처리 전 필수", value: "올바로시스템 전자인계서 작성", color: "text-blue-600 bg-blue-50 border-blue-100" },
+              { icon: Truck,      label: "운반 가능 업체", value: "환경부 허가 수집·운반업체만", color: "text-amber-600 bg-amber-50 border-amber-100" },
+              { icon: Eye,        label: "관리 방식", value: "전 과정 전자 추적·기록 의무", color: "text-primary bg-primary/5 border-primary/15" },
+            ].map(({ icon: Icon, label, value, color }) => (
+              <div key={label} className={`rounded-xl border p-4 ${color}`}>
+                <Icon className="w-5 h-5 mb-2" />
+                <p className="text-[11px] font-bold uppercase tracking-wide opacity-70 mb-0.5">{label}</p>
+                <p className="text-xs font-semibold leading-snug">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="text-center mb-12">
         <h2 className="text-2xl md:text-4xl font-bold mb-4 text-gray-900">지정폐기물 종류</h2>
         <p className="text-lg text-gray-600 inline-flex items-center px-4 py-2 bg-gray-100 rounded-full font-medium">

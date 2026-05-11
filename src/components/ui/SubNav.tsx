@@ -13,11 +13,9 @@ export const COMPANY_SUBNAV_ITEMS = [
 ];
 
 export const WASTE_SUBNAV_ITEMS = [
-  { label: "지정폐기물이란", href: "/waste/about" },
-  { label: "지정폐기물 종류", href: "/waste/types" },
-  { label: "보관방법", href: "/waste/storage" },
-  { label: "처리절차", href: "/waste/process" },
-  { label: "자가점검·벌칙", href: "/waste/compliance" }
+  { label: "처리 가능 폐기물", href: "/waste/types" },
+  { label: "처리 절차 안내", href: "/waste/process" },
+  { label: "보관·법적 의무", href: "/waste/storage" },
 ];
 
 export const SUPPORT_SUBNAV_ITEMS = [
