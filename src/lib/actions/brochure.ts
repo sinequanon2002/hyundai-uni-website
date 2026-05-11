@@ -154,26 +154,22 @@ export async function approveBrochureRequest(id: string): Promise<ActionResult> 
 
   // 이메일 발송 (PDF 첨부)
   try {
-    const attachments: { filename: string; content: Buffer }[] = [];
     const pdfUrl = process.env.BROCHURE_PDF_URL;
-
-    if (pdfUrl) {
-      const res = await fetch(pdfUrl);
-      if (res.ok) {
-        const arrayBuffer = await res.arrayBuffer();
-        attachments.push({
-          filename: "현대유앤아이_서비스소개서.pdf",
-          content: Buffer.from(arrayBuffer),
-        });
-      }
-    }
+    const fromAddress = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
 
     const emailResult = await getResend().emails.send({
-      from: "현대유앤아이 <onboarding@resend.dev>",
+      from: `현대유앤아이 <${fromAddress}>`,
       to: [req.email],
       subject: "[현대유앤아이] 서비스 소개서를 보내드립니다",
       react: BrochureApprovalEmail({ name: req.name, companyName: req.company_name }),
-      ...(attachments.length > 0 && { attachments }),
+      ...(pdfUrl && {
+        attachments: [
+          {
+            filename: "현대유앤아이_서비스소개서.pdf",
+            path: pdfUrl,
+          },
+        ],
+      }),
     });
 
     if (emailResult.error) {

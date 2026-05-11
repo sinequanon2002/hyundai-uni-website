@@ -121,7 +121,7 @@ export async function submitInquiry(
     // 관리자 알림
     try {
       const r1 = await getResend().emails.send({
-        from: "현대유앤아이 <onboarding@resend.dev>",
+        from: `현대유앤아이 <${process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev"}>`,
         to: ["snbhwmc@gmail.com"],
         subject: `[신규 견적 문의] ${data.companyName} - ${data.contactName}님`,
         react: InquiryNotificationEmail({
@@ -155,7 +155,7 @@ export async function submitInquiry(
     if (data.email) {
       try {
         const r2 = await getResend().emails.send({
-          from: "현대유앤아이 <onboarding@resend.dev>",
+          from: `현대유앤아이 <${process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev"}>`,
           to: [data.email],
           subject: "견적 문의가 접수되었습니다 - 현대유앤아이",
           react: InquiryConfirmationEmail({
