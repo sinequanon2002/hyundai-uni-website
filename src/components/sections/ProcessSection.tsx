@@ -20,7 +20,7 @@ export function ProcessSection() {
       <div className="container mx-auto px-4 md:px-8">
         <div {...fadeInHeader} className={`text-center mb-16 md:mb-24 ${fadeInHeader.className}`}>
           <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
-            Process
+            처리 절차
           </h3>
           <h2 className="text-3xl md:text-4xl font-bold text-neutral-900">
             체계적인 6단계 처리 프로세스
@@ -52,7 +52,7 @@ export function ProcessSection() {
                   </div>
                   <div className="text-left lg:text-center">
                     <p className="text-sm font-bold text-primary mb-1">
-                      STEP 0{index + 1}
+                      {index + 1}단계
                     </p>
                     <h3 className="text-lg font-bold text-neutral-900">
                       {process.title}

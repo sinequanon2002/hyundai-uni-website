@@ -34,7 +34,7 @@ export function ServicesSection() {
       <div className="container mx-auto px-4 md:px-8">
         <div {...fadeInHeader} className={`text-center mb-16 md:mb-20 ${fadeInHeader.className}`}>
           <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
-            Our Services
+            주요 서비스
           </h3>
           <h2 className="text-3xl md:text-4xl font-bold text-neutral-900">
             전문성으로 완성하는 지정폐기물 관리

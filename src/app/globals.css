@@ -34,10 +34,46 @@ body {
   .animate-bounce-slow {
     animation: bounce 2s infinite;
   }
-  
+
   .opacity-0 {
     opacity: 0;
   }
+
+  /* CTA shimmer 효과 */
+  .cta-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.18) 50%,
+      transparent 100%
+    );
+    animation: cta-shimmer 2.8s ease-in-out infinite;
+  }
+
+  /* 스크롤 안내 화살표 */
+  .animate-scroll-arrow {
+    animation: scroll-arrow 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes cta-shimmer {
+  0% { left: -100%; }
+  60%, 100% { left: 140%; }
+}
+
+@keyframes scroll-arrow {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(6px); opacity: 1; }
 }
 
 @keyframes slow-zoom {

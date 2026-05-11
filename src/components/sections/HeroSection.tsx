@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronsDown, ArrowRight, FileText } from "lucide-react";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
 export function HeroSection() {
@@ -26,9 +26,11 @@ export function HeroSection() {
         {...fadeIn}
         className={`relative z-10 container mx-auto px-4 md:px-8 flex flex-col items-center text-center text-white ${fadeIn.className}`}
       >
+        {/* 상단 배지 */}
         <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-sm font-medium tracking-wide">
-          ENVIRONMENTAL WASTE MANAGEMENT
+          지정폐기물 수집·운반 전문기업
         </div>
+
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6">
           환경을 지키는 책임,
           <br />
@@ -40,11 +42,11 @@ export function HeroSection() {
         </p>
 
         {/* 기능 배지 */}
-        <div className="flex flex-wrap justify-center gap-2 mb-9">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {[
             "정식 허가 업체",
             "올바로시스템 대행",
-            "24h 내 방문 견적",
+            "24시간 내 방문 견적",
             "처리 증빙 즉시 제공",
           ].map((badge) => (
             <span
@@ -56,28 +58,40 @@ export function HeroSection() {
           ))}
         </div>
 
+        {/* CTA 버튼 그룹 */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <Link
-            href="/support/inquiry"
-            className="px-8 py-4 bg-white text-primary font-bold rounded-lg shadow-lg hover:bg-neutral-100 transition-colors"
-          >
-            무료 방문 견적 신청하기
-          </Link>
+          {/* 주 CTA — pulse ring + shimmer */}
+          <div className="relative inline-flex group">
+            {/* 외부 pulse ring */}
+            <span className="absolute inset-0 rounded-lg bg-white opacity-20 animate-ping pointer-events-none" />
+            <Link
+              href="/support/inquiry"
+              className="cta-shimmer relative px-8 py-4 bg-white text-primary font-bold rounded-lg shadow-xl hover:bg-neutral-50 transition-all duration-300 flex items-center gap-2.5 group-hover:shadow-2xl group-hover:scale-[1.03]"
+            >
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
+              무료 방문 견적 신청하기
+            </Link>
+          </div>
+
+          {/* 보조 CTA */}
           <Link
             href="/resources/brochure"
-            className="px-8 py-4 bg-transparent border-2 border-white/70 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
+            className="px-8 py-4 bg-transparent border-2 border-white/70 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2.5"
           >
+            <FileText size={17} />
             서비스 소개서 보기
           </Link>
         </div>
       </div>
 
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-white flex flex-col items-center animate-bounce-slow">
-        <span className="text-xs uppercase tracking-widest mb-2 opacity-80">
-          Scroll Down
+      {/* 스크롤 안내 */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-white flex flex-col items-center gap-1.5 cursor-pointer select-none"
+        onClick={() => window.scrollBy({ top: window.innerHeight * 0.85, behavior: 'smooth' })}
+      >
+        <span className="text-xs tracking-widest opacity-70 font-medium">
+          스크롤해서 자세히 보기
         </span>
-        <ChevronDown size={24} className="opacity-80" />
+        <ChevronsDown size={22} className="animate-scroll-arrow opacity-80" />
       </div>
     </section>
   );

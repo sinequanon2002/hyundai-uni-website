@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useFadeIn } from "@/hooks/useFadeIn";
-import { ClipboardList, BookOpen, ShieldCheck, FileCheck, AlertCircle } from "lucide-react";
+import { ClipboardList, BookOpen, ShieldCheck, FileCheck, AlertCircle, ArrowRight } from "lucide-react";
 
 const PAIN_POINTS = [
   {
@@ -46,7 +46,7 @@ export function PainPointSection() {
           className={`text-center mb-14 ${fadeInHeader.className}`}
         >
           <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
-            Pain Points
+            담당자 주요 고민
           </h3>
           <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight mb-4">
             지정폐기물 관리, 혼자 감당하기엔<br className="hidden md:inline" /> 놓치는 부분이 생깁니다
@@ -98,8 +98,9 @@ export function PainPointSection() {
           </p>
           <Link
             href="/support/inquiry"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+            className="cta-shimmer inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary text-white text-sm font-bold rounded-full hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.03]"
           >
+            <ArrowRight size={16} />
             무료 방문 견적 신청하기
           </Link>
         </div>

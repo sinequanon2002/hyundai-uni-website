@@ -66,7 +66,7 @@ export function ClientsSection() {
         {/* Header */}
         <div {...fadeInHeader} className={`text-center mb-16 ${fadeInHeader.className}`}>
           <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
-            Trusted Partners
+            함께하는 고객사
           </h3>
           <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight mb-4">
             국내 유수 기업·기관이<br className="md:hidden" /> 선택한 파트너

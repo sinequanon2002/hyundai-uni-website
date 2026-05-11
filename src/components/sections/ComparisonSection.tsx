@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check, X } from "lucide-react";
+import { Check, X, ArrowRight } from "lucide-react";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
 const ROWS = [
@@ -61,7 +61,7 @@ export function ComparisonSection() {
           className={`text-center mb-12 ${fadeInHeader.className}`}
         >
           <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
-            Why Us
+            현대유앤아이를 선택해야 하는 이유
           </h3>
           <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight mb-4">
             지정폐기물은 아무 업체에나<br className="hidden md:inline" /> 맡길 수 없습니다
@@ -135,8 +135,9 @@ export function ComparisonSection() {
           </p>
           <Link
             href="/support/inquiry"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+            className="cta-shimmer inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary text-white text-sm font-bold rounded-full hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.03]"
           >
+            <ArrowRight size={16} />
             무료 방문 견적 신청하기
           </Link>
         </div>

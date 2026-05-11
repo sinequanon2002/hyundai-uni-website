@@ -21,7 +21,7 @@ const REASONS = [
   {
     num: "04",
     title: "투명한 처리이력",
-    description: "올바로시스템(Allbaro)을 통한 신속하고 투명한 실시간 내역 관리를 제공합니다.",
+    description: "올바로시스템을 통한 신속하고 투명한 실시간 처리 이력 관리를 제공합니다.",
   },
 ];
 
@@ -34,12 +34,12 @@ export function WhyUsSection() {
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
           <div {...fadeInHeader} className={`lg:w-1/3 flex flex-col justify-center ${fadeInHeader.className}`}>
             <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
-              Why Choose Us
+              선택 이유
             </h3>
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight mb-6">
-              왜 저희를
+              현대유앤아이를
               <br />
-              선택해야 할까요?
+              선택하는 이유
             </h2>
             <div className="w-16 h-1 bg-primary rounded-full" />
           </div>
