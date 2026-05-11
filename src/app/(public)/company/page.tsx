@@ -4,7 +4,7 @@ import { Award, ShieldCheck, Leaf, MapPin, Phone, Car, ExternalLink } from 'luci
 import { CertificationCards } from '@/components/company/CertificationCards';
 
 export const metadata = {
-  title: `회사 소개 | ${COMPANY.shortName}`,
+  title: "회사 소개",
   description: `${COMPANY.name} 회사 소개 — 인사말, 핵심가치, 연혁, 인허가현황, 오시는 길`,
 };
 
