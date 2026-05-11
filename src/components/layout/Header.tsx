@@ -55,9 +55,18 @@ const NAV_GROUPS: NavGroup[] = [
     children: [
       { label: '서비스 소개서', href: '/resources/brochure', highlight: true },
       { label: '올바로 체크리스트', href: '/resources/allbaro-checklist', highlight: true },
-      { label: '현장갤러리', href: '/support/gallery' },
-      { label: '공지사항', href: '/support/notice' },
+      { label: '실적사례', href: '/support/gallery' },
       { label: '네이버 블로그 ↗', href: 'https://blog.naver.com/hduni2020', external: true },
+    ],
+  },
+  {
+    label: '고객센터',
+    basePath: '/support',
+    children: [
+      { label: '자료실', href: '/resources/brochure' },
+      { label: '공지사항', href: '/support/notice' },
+      { label: '견적문의', href: '/support/inquiry' },
+      { label: '문의현황 조회', href: '/support/inquiry-status' },
     ],
   },
 ];
