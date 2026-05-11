@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getBlogPosts, type BlogPost } from "@/lib/actions/blog";
-import { Calendar, ArrowRight, BookOpen, ExternalLink } from "lucide-react";
+import { Calendar, ArrowRight, BookOpen } from "lucide-react";
 
 const CATEGORY_COLOR: Record<string, string> = {
   "폐기물 정보": "bg-blue-100 text-blue-700",
@@ -83,13 +83,11 @@ function EmptyState() {
         곧 유용한 지정폐기물 정보 콘텐츠가 업로드될 예정입니다.
       </p>
       <Link
-        href="https://blog.naver.com/hduni2020"
-        target="_blank"
-        rel="noopener noreferrer"
+        href="/support/blog"
         className="inline-flex items-center gap-1.5 text-sm text-primary font-semibold hover:underline underline-offset-4"
       >
-        네이버 블로그에서 먼저 만나보기
-        <ExternalLink size={13} />
+        블로그 바로가기
+        <ArrowRight size={13} />
       </Link>
     </div>
   );
@@ -130,16 +128,14 @@ export async function BlogPreviewSection() {
           )}
         </div>
 
-        {/* Naver Blog CTA */}
+        {/* 전체 글 보기 CTA */}
         <div className="mt-10 text-center">
           <Link
-            href="https://blog.naver.com/hduni2020"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/support/blog"
             className="inline-flex items-center gap-2 px-5 py-2.5 border border-neutral-200 rounded-full text-sm text-neutral-600 hover:border-primary hover:text-primary transition-colors"
           >
-            <ExternalLink size={14} />
-            네이버 블로그에서 더 많은 정보 보기
+            전체 글 보기
+            <ArrowRight size={14} />
           </Link>
         </div>
       </div>
