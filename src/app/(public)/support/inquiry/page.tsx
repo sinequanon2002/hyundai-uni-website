@@ -27,6 +27,7 @@ import {
   Clock,
   ArrowRight,
   MapPin,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -71,6 +72,7 @@ const MARKETING_FULL_TEXT = `[마케팅 수신 동의서]
 interface UploadedFile {
   name: string;
   url: string;
+  isImage: boolean;
 }
 
 export default function InquiryPage() {
@@ -162,7 +164,7 @@ export default function InquiryPage() {
         const res = await fetch("/api/inquiry/upload", { method: "POST", body: fd });
         const json = await res.json();
         if (res.ok && json.url) {
-          results.push({ name: file.name, url: json.url });
+          results.push({ name: file.name, url: json.url, isImage: file.type.startsWith("image/") });
         } else {
           alert(`파일 업로드 실패: ${json.error ?? file.name}`);
         }
@@ -498,25 +500,60 @@ export default function InquiryPage() {
                     </p>
 
                     {uploadedFiles.length > 0 && (
-                      <div className="space-y-1.5 mb-2">
-                        {uploadedFiles.map((file, i) => (
-                          <div
-                            key={i}
-                            className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 text-sm"
-                          >
-                            <Paperclip className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                            <span className="flex-1 truncate text-gray-700 text-xs">
-                              {file.name}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => removeFile(i)}
-                              className="text-gray-400 hover:text-red-500 transition-colors"
-                            >
-                              <X className="w-3.5 h-3.5" />
-                            </button>
+                      <div className="mb-3 space-y-2">
+                        {/* 이미지: 썸네일 그리드 */}
+                        {uploadedFiles.some((f) => f.isImage) && (
+                          <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
+                            {uploadedFiles.map((file, i) =>
+                              file.isImage ? (
+                                <div
+                                  key={i}
+                                  className="relative group aspect-square rounded-lg overflow-hidden border border-gray-200 bg-gray-100"
+                                >
+                                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                                  <img
+                                    src={file.url}
+                                    alt={file.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+                                  <button
+                                    type="button"
+                                    onClick={() => removeFile(i)}
+                                    className="absolute top-1 right-1 bg-black/50 rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                                  >
+                                    <X className="w-3 h-3 text-white" />
+                                  </button>
+                                </div>
+                              ) : null
+                            )}
                           </div>
-                        ))}
+                        )}
+                        {/* 문서: 파일명 목록 */}
+                        {uploadedFiles.some((f) => !f.isImage) && (
+                          <div className="space-y-1.5">
+                            {uploadedFiles.map((file, i) =>
+                              !file.isImage ? (
+                                <div
+                                  key={i}
+                                  className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2"
+                                >
+                                  <FileText className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                                  <span className="flex-1 truncate text-gray-700 text-xs">
+                                    {file.name}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() => removeFile(i)}
+                                    className="text-gray-400 hover:text-red-500 transition-colors"
+                                  >
+                                    <X className="w-3.5 h-3.5" />
+                                  </button>
+                                </div>
+                              ) : null
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
 

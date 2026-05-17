@@ -4,7 +4,16 @@ import { notFound } from "next/navigation";
 import { getInquiryById, type InquiryStatus } from "@/lib/actions/inquiry";
 import { InquiryStatusBadge } from "@/components/admin/InquiryStatusBadge";
 import { InquiryStatusUpdateForm } from "@/components/admin/InquiryStatusUpdateForm";
-import { ArrowLeft, Building2, User, Phone, Mail, MapPin, Package, Camera, Calendar } from "lucide-react";
+import { ArrowLeft, Building2, User, Phone, Mail, MapPin, Package, Camera, Calendar, FileText, ExternalLink } from "lucide-react";
+
+function isImageUrl(url: string): boolean {
+  const ext = url.split(".").pop()?.split("?")[0].toLowerCase();
+  return ["jpg", "jpeg", "png", "webp", "heic"].includes(ext ?? "");
+}
+
+function getFileExt(url: string): string {
+  return (url.split(".").pop()?.split("?")[0].toUpperCase()) ?? "FILE";
+}
 
 interface PageProps {
   params: { id: string };
@@ -98,27 +107,53 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* 사진 */}
+          {/* 첨부 파일 */}
           {inq.photo_urls && inq.photo_urls.length > 0 && (
             <div className="bg-white rounded-xl shadow-sm p-6">
               <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3 flex items-center gap-2">
                 <Camera className="w-4 h-4 text-gray-400" />
-                첨부 사진 ({inq.photo_urls.length}장)
+                첨부 파일 ({inq.photo_urls.length}개)
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {inq.photo_urls.map((url, i) => (
-                  <a key={i} href={url} target="_blank" rel="noreferrer">
-                    <div className="relative aspect-square rounded-lg overflow-hidden border border-gray-100 hover:opacity-90 transition-opacity">
-                      <Image
-                        src={url}
-                        alt={`첨부사진 ${i + 1}`}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </a>
-                ))}
-              </div>
+              {/* 이미지 썸네일 */}
+              {inq.photo_urls.some(isImageUrl) && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-3">
+                  {inq.photo_urls.filter(isImageUrl).map((url, i) => (
+                    <a key={i} href={url} target="_blank" rel="noreferrer">
+                      <div className="relative aspect-square rounded-lg overflow-hidden border border-gray-100 hover:opacity-90 transition-opacity">
+                        <Image
+                          src={url}
+                          alt={`첨부사진 ${i + 1}`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+              {/* 문서 파일 목록 */}
+              {inq.photo_urls.some((u) => !isImageUrl(u)) && (
+                <div className="space-y-2">
+                  {inq.photo_urls.filter((u) => !isImageUrl(u)).map((url, i) => (
+                    <a
+                      key={i}
+                      href={url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 px-3 py-2.5 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                      <FileText className="w-4 h-4 text-gray-400 shrink-0" />
+                      <span className="flex-1 text-sm text-gray-700">
+                        첨부 문서 {i + 1}
+                        <span className="ml-1.5 text-xs text-gray-400 font-medium">
+                          ({getFileExt(url)})
+                        </span>
+                      </span>
+                      <ExternalLink className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
