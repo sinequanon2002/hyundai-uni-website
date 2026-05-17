@@ -38,7 +38,7 @@ export async function login(formData: FormData) {
   }
 
   // 역할별 기본 리다이렉트
-  redirect(isStaff(role) ? "/inquiries" : "/my");
+  redirect(isStaff(role) ? "/admin/inquiries" : "/my");
 }
 
 export async function logout() {

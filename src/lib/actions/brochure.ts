@@ -179,7 +179,7 @@ export async function approveBrochureRequest(id: string): Promise<ActionResult> 
     console.error("[approveBrochureRequest] Email exception:", err);
   }
 
-  revalidatePath("/brochures");
+  revalidatePath("/admin/brochures");
   return { success: true };
 }
 
@@ -199,6 +199,6 @@ export async function rejectBrochureRequest(id: string): Promise<ActionResult> {
 
   if (error) return { success: false, error: "상태 업데이트 중 오류가 발생했습니다" };
 
-  revalidatePath("/brochures");
+  revalidatePath("/admin/brochures");
   return { success: true };
 }

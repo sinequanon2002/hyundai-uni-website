@@ -315,8 +315,8 @@ export async function updateInquiryStatus(
     return { success: false, error: "상태 업데이트 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/inquiries");
-  revalidatePath(`/inquiries/${id}`);
+  revalidatePath("/admin/inquiries");
+  revalidatePath(`/admin/inquiries/${id}`);
 
   return { success: true };
 }

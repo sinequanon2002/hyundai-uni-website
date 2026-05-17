@@ -86,7 +86,7 @@ export async function updateNoticeWriteRoles(
     return { success: false, error: "설정 저장 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/settings");
+  revalidatePath("/admin/settings");
   return { success: true };
 }
 
@@ -139,6 +139,6 @@ export async function updatePortfolioWriteRoles(
     return { success: false, error: "설정 저장 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/settings");
+  revalidatePath("/admin/settings");
   return { success: true };
 }

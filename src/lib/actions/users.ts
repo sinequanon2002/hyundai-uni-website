@@ -126,7 +126,7 @@ export async function updateUserRole(
       return { success: false, error: "역할 변경 중 오류가 발생했습니다" };
     }
 
-    revalidatePath("/users");
+    revalidatePath("/admin/users");
     return { success: true };
   } catch (err) {
     const msg = err instanceof Error ? err.message : "오류가 발생했습니다";
@@ -185,7 +185,7 @@ export async function createStaffUser(
       };
     }
 
-    revalidatePath("/users");
+    revalidatePath("/admin/users");
     return { success: true, data: { id: authData.user.id } };
   } catch (err) {
     const msg = err instanceof Error ? err.message : "오류가 발생했습니다";
@@ -215,7 +215,7 @@ export async function deleteStaffUser(targetUserId: string): Promise<ActionResul
       return { success: false, error: "계정 삭제 중 오류가 발생했습니다" };
     }
 
-    revalidatePath("/users");
+    revalidatePath("/admin/users");
     return { success: true };
   } catch (err) {
     const msg = err instanceof Error ? err.message : "오류가 발생했습니다";

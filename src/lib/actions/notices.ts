@@ -244,7 +244,7 @@ export async function createNotice(payload: {
     return { success: false, error: "공지사항 저장 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/notices");
+  revalidatePath("/admin/notices");
   revalidatePath("/support/notice");
   return { success: true, data: { id: data.id } };
 }
@@ -281,8 +281,8 @@ export async function updateNotice(
     return { success: false, error: "공지사항 수정 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/notices");
-  revalidatePath(`/notices/${id}/edit`);
+  revalidatePath("/admin/notices");
+  revalidatePath(`/admin/notices/${id}/edit`);
   revalidatePath("/support/notice");
   revalidatePath(`/support/notice/${id}`);
   return { success: true };
@@ -303,7 +303,7 @@ export async function deleteNotice(id: string): Promise<ActionResult> {
     return { success: false, error: "공지사항 삭제 중 오류가 발생했습니다" };
   }
 
-  revalidatePath("/notices");
+  revalidatePath("/admin/notices");
   revalidatePath("/support/notice");
   return { success: true };
 }

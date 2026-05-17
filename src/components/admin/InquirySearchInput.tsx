@@ -4,10 +4,11 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useRef } from "react";
 import { Search } from "lucide-react";
 
-export function InquirySearchInput() {
+export function InquirySearchInput({ basePath }: { basePath?: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const targetPath = basePath ?? pathname;
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +22,7 @@ export function InquirySearchInput() {
         params.delete("search");
       }
       params.set("page", "1");
-      router.replace(`${pathname}?${params.toString()}`);
+      router.replace(`${targetPath}?${params.toString()}`);
     }, 300);
   };
 

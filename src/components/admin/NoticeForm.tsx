@@ -45,7 +45,7 @@ export function NoticeForm({ notice }: Props) {
         return;
       }
 
-      router.push("/notices");
+      router.push("/admin/notices");
       router.refresh();
     });
   }

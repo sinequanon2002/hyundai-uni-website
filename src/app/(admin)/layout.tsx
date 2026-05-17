@@ -46,18 +46,18 @@ export default async function AdminLayout({
       {/* 관리자 헤더 */}
       <header className="bg-primary text-white px-6 py-3 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-6">
-          <a href="/inquiries" className="font-bold text-sm tracking-tight hover:opacity-80 transition-opacity">
+          <a href="/admin/inquiries" className="font-bold text-sm tracking-tight hover:opacity-80 transition-opacity">
             현대유앤아이 · 관리자
           </a>
           <nav className="hidden sm:flex items-center gap-4 text-xs text-white/70">
-            <a href="/inquiries" className="hover:text-white transition-colors">견적 문의</a>
-            <a href="/brochures" className="hover:text-white transition-colors">소개서 신청</a>
-            <a href="/notices" className="hover:text-white transition-colors">공지사항</a>
+            <a href="/admin/inquiries" className="hover:text-white transition-colors">견적 문의</a>
+            <a href="/admin/brochures" className="hover:text-white transition-colors">소개서 신청</a>
+            <a href="/admin/notices" className="hover:text-white transition-colors">공지사항</a>
             <a href="/admin/gallery" className="hover:text-white transition-colors">현장갤러리</a>
             {isAdmin(profile.role) && (
               <>
-                <a href="/users" className="hover:text-white transition-colors">사용자 관리</a>
-                <a href="/settings" className="hover:text-white transition-colors">설정</a>
+                <a href="/admin/users" className="hover:text-white transition-colors">사용자 관리</a>
+                <a href="/admin/settings" className="hover:text-white transition-colors">설정</a>
               </>
             )}
           </nav>
