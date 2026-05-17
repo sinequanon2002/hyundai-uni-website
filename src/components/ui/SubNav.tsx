@@ -30,16 +30,16 @@ export function SubNav({ items = COMPANY_SUBNAV_ITEMS }: { items?: {label: strin
   return (
     <div className="w-full border-b border-gray-200 bg-white sticky top-16 z-40">
       <div className="max-w-6xl mx-auto px-4">
-        <nav className="flex overflow-x-auto no-scrollbar justify-start md:justify-center">
-          <ul className="flex space-x-2 md:space-x-8 whitespace-nowrap">
+        <nav className="w-full">
+          <ul className="grid grid-cols-2 md:flex md:justify-center md:space-x-8">
             {items.map((item) => {
               const isActive = pathname === item.href;
               return (
-                <li key={item.href}>
-                  <Link 
+                <li key={item.href} className="flex border-b border-gray-100 md:border-none">
+                  <Link
                     href={item.href}
                     className={cn(
-                      "block px-4 py-4 text-sm md:text-base font-medium transition-colors relative",
+                      "flex-1 flex items-center justify-center px-2 py-3 md:px-4 md:py-4 text-sm md:text-base font-medium transition-colors relative text-center",
                       isActive ? "text-primary font-bold" : "text-neutral-600 hover:text-primary"
                     )}
                   >
