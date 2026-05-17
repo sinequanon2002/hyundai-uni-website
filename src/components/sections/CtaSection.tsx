@@ -8,7 +8,7 @@ export function CtaSection() {
   const fadeIn = useFadeIn();
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-r from-primary to-secondary">
+    <section className="py-20 md:py-28 bg-gradient-to-r from-[#0A1B20] to-[#0F2830] border-t-2 border-primary">
       <div className="container mx-auto px-4 md:px-8">
         <div
           {...fadeIn}

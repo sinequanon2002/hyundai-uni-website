@@ -49,7 +49,7 @@ export function TrustStatsSection() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-primary py-10 md:py-12">
+    <section ref={ref} className="bg-[#0F2830] py-10 md:py-12">
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-0 md:divide-x md:divide-white/15">
           {STATS.map((stat, i) => (

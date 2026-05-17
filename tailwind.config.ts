@@ -19,6 +19,11 @@ const config: Config = {
         primary: "#0C5F6B",
         secondary: "#0E9E7E",
         accent: "#10B981",
+        "bg-hero": "#0A1B20",
+        "bg-dark": "#0F2830",
+        "bg-section": "#132D35",
+        surface: "#1C3A44",
+        "text-on-dark": "#E8F4F6",
         neutral: {
           900: "#1A1A1A",
           600: "#666666",

@@ -118,9 +118,9 @@ export function Header() {
 
   return (
     <>
-      <header ref={headerRef} className="sticky top-0 z-[60] w-full border-b border-neutral-100 bg-white/80 backdrop-blur-md">
+      <header ref={headerRef} className="sticky top-0 z-[60] w-full border-b border-white/10 bg-[#0A1B20]/95 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="font-bold text-xl text-primary shrink-0">
+          <Link href="/" className="font-bold text-xl text-white shrink-0">
             현대유앤아이
           </Link>
 
@@ -133,8 +133,8 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "px-4 py-5 transition-colors hover:text-primary",
-                      pathname.startsWith(item.href) ? "text-primary font-semibold" : "text-neutral-600"
+                      "px-4 py-5 transition-colors hover:text-secondary",
+                      pathname.startsWith(item.href) ? "text-secondary font-semibold" : "text-white/70"
                     )}
                   >
                     {item.label}
@@ -155,8 +155,8 @@ export function Header() {
                 >
                   <button
                     className={cn(
-                      "flex items-center gap-1 px-4 py-5 transition-colors hover:text-primary",
-                      active ? "text-primary" : "text-neutral-600"
+                      "flex items-center gap-1 px-4 py-5 transition-colors hover:text-secondary",
+                      active ? "text-secondary" : "text-white/70"
                     )}
                     onClick={() =>
                       setActiveDropdown((prev) =>
@@ -179,7 +179,7 @@ export function Header() {
                   {/* Dropdown */}
                   <div
                     className={cn(
-                      "absolute top-full left-0 min-w-[200px] bg-white rounded-xl shadow-xl border border-neutral-100 py-2 transition-all duration-200 origin-top",
+                      "absolute top-full left-0 min-w-[200px] bg-[#0F2830] rounded-xl shadow-xl border border-white/10 py-2 transition-all duration-200 origin-top",
                       isDropdownOpen
                         ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
                         : "opacity-0 scale-y-95 -translate-y-1 pointer-events-none"
@@ -194,7 +194,7 @@ export function Header() {
                       return (
                         <div key={child.href}>
                           {showDivider && (
-                            <div className="my-1.5 mx-4 border-t border-neutral-100" />
+                            <div className="my-1.5 mx-4 border-t border-white/10" />
                           )}
                           <Link
                             href={child.href}
@@ -204,11 +204,11 @@ export function Header() {
                             className={cn(
                               "flex items-center justify-between px-5 py-2.5 text-sm transition-colors",
                               child.highlight
-                                ? "hover:bg-accent/5 hover:text-accent text-accent/80 font-medium"
-                                : "hover:bg-primary/5 hover:text-primary",
+                                ? "hover:bg-accent/10 hover:text-accent text-accent/80 font-medium"
+                                : "hover:bg-white/5 hover:text-white",
                               pathname === child.href && !child.external
-                                ? "bg-primary/5 text-primary font-medium"
-                                : !child.highlight && "text-neutral-600"
+                                ? "bg-white/5 text-white font-medium"
+                                : !child.highlight && "text-white/60"
                             )}
                           >
                             <span className="flex items-center gap-2">
@@ -216,7 +216,7 @@ export function Header() {
                               {child.label}
                             </span>
                             {child.badge && (
-                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-neutral-100 text-neutral-400">
+                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-white/10 text-white/40">
                                 {child.badge}
                               </span>
                             )}
@@ -245,7 +245,7 @@ export function Header() {
           {/* Mobile Menu Button */}
           <div className="lg:hidden">
             <button
-              className="p-2 text-neutral-900 focus:outline-none relative z-[70]"
+              className="p-2 text-white focus:outline-none relative z-[70]"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
             >
@@ -258,7 +258,7 @@ export function Header() {
       {/* Mobile Navigation Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-[50] bg-white transition-all duration-300 ease-in-out lg:hidden overflow-y-auto pt-20",
+          "fixed inset-0 z-[50] bg-[#0A1B20] transition-all duration-300 ease-in-out lg:hidden overflow-y-auto pt-20",
           isOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-4"
@@ -269,14 +269,14 @@ export function Header() {
             {NAV_ITEMS.map((item) => {
               if (item.type === 'direct') {
                 return (
-                  <div key={item.href} className="border-b border-neutral-100">
+                  <div key={item.href} className="border-b border-white/10">
                     <Link
                       href={item.href}
                       className={cn(
                         "block py-4 text-lg font-bold transition-colors",
                         pathname.startsWith(item.href)
-                          ? "text-primary"
-                          : "text-neutral-900 hover:text-primary"
+                          ? "text-secondary"
+                          : "text-white hover:text-secondary"
                       )}
                     >
                       {item.label}
@@ -290,11 +290,11 @@ export function Header() {
               const isAccordionOpen = mobileAccordion === item.basePath;
 
               return (
-                <div key={item.basePath} className="border-b border-neutral-100">
+                <div key={item.basePath} className="border-b border-white/10">
                   <button
                     className={cn(
                       "w-full flex items-center justify-between py-4 text-left text-lg font-bold transition-colors",
-                      active ? "text-primary" : "text-neutral-900"
+                      active ? "text-secondary" : "text-white"
                     )}
                     onClick={() => toggleMobileAccordion(item.basePath)}
                     aria-expanded={isAccordionOpen}
@@ -303,8 +303,8 @@ export function Header() {
                     <ChevronDown
                       size={20}
                       className={cn(
-                        "transition-transform duration-300 text-neutral-400",
-                        isAccordionOpen ? "rotate-180 text-primary" : ""
+                        "transition-transform duration-300 text-white/40",
+                        isAccordionOpen ? "rotate-180 text-secondary" : ""
                       )}
                     />
                   </button>
@@ -326,10 +326,10 @@ export function Header() {
                           className={cn(
                             "flex items-center justify-between py-2.5 px-3 rounded-lg text-sm transition-colors",
                             child.highlight
-                              ? "text-accent/80 font-medium hover:bg-accent/5 hover:text-accent"
+                              ? "text-accent/80 font-medium hover:bg-accent/10 hover:text-accent"
                               : pathname === child.href
-                              ? "text-primary bg-primary/5 font-medium"
-                              : "text-neutral-600 hover:text-primary hover:bg-neutral-50"
+                              ? "text-secondary bg-white/5 font-medium"
+                              : "text-white/60 hover:text-white hover:bg-white/5"
                           )}
                         >
                           <span className="flex items-center gap-2">
@@ -358,12 +358,12 @@ export function Header() {
               <ArrowRight size={18} />
               견적 문의하기
             </Link>
-            <div className="mt-10 space-y-2 text-sm text-neutral-500">
+            <div className="mt-10 space-y-2 text-sm text-white/40">
               <p>주식회사 현대유앤아이</p>
               <p>대표전화: 010-9084-9480</p>
               <p>이메일: hduni3973@naver.com</p>
             </div>
-            <p className="text-neutral-400 text-xs mt-8">
+            <p className="text-white/25 text-xs mt-8">
               © 2025 주식회사 현대유앤아이. All rights reserved.
             </p>
           </div>
