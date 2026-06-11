@@ -15,10 +15,12 @@ export const COMPANY_SUBNAV_ITEMS = [
 export const WASTE_SUBNAV_ITEMS = [
   { label: "서비스 안내", href: "/waste/types" },
   { label: "보관·법적 의무", href: "/waste/storage" },
+  { label: "비용 안내", href: "/waste/pricing" },
 ];
 
 export const SUPPORT_SUBNAV_ITEMS = [
   { label: "공지사항", href: "/support/notice" },
+  { label: "자주 묻는 질문", href: "/support/faq" },
   { label: "자료실 바로가기", href: "/resources/brochure" },
   { label: "견적문의", href: "/support/inquiry" },
   { label: "문의현황 조회", href: "/support/inquiry-status" },

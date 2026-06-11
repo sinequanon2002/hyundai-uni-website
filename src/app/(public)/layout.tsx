@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnnouncementBanner } from "@/components/layout/AnnouncementBanner";
+import { MobileBottomBar } from "@/components/layout/MobileBottomBar";
 
 export default function PublicLayout({
   children,
@@ -13,6 +14,7 @@ export default function PublicLayout({
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <MobileBottomBar />
     </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronsDown, ArrowRight, FileText } from "lucide-react";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
@@ -9,14 +10,15 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Background Image & Overlay */}
+      {/* Background Image & Overlay — 실제 보관 현장 (IBC 용기) */}
       <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center animate-slow-zoom"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')",
-          }}
+        <Image
+          src="/images/hero-site.jpg"
+          alt="현대유앤아이 지정폐기물 보관 용기(IBC) 현장"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover animate-slow-zoom"
         />
         <div className="absolute inset-0 bg-[#0A1B20]/75" />
       </div>

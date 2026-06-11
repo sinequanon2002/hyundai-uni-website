@@ -15,6 +15,7 @@ import {
   WASTE_TYPES,
 } from "@/lib/schemas/inquiry";
 import { submitInquiry } from "@/lib/actions/inquiry";
+import { trackInquirySubmit } from "@/lib/analytics";
 import {
   Search,
   Paperclip,
@@ -191,6 +192,7 @@ export default function InquiryPage() {
     startTransition(async () => {
       const result = await submitInquiry(data);
       if (result.success) {
+        trackInquirySubmit();
         setSubmittedEmail(data.email ?? "");
         setShowSuccessModal(true);
         reset();
@@ -224,11 +226,11 @@ export default function InquiryPage() {
       <PageBanner
         title="견적 문의"
         subtitle="지정폐기물 수거·운반 견적을 문의하세요"
-        breadcrumb={["고객지원", "견적 문의"]}
+        compact
       />
       <SubNav items={SUPPORT_SUBNAV_ITEMS} current="/support/inquiry" />
 
-      <section className="py-16 bg-[#F0FAFA]">
+      <section className="py-8 md:py-10 bg-[#F0FAFA]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* ── 좌측 안내 ── */}

@@ -48,7 +48,7 @@ export function PainPointSection() {
           <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 leading-tight mb-3">
             지정폐기물 관리, 혼자 감당하기엔<br className="hidden md:inline" /> 놓치는 부분이 생깁니다
           </h2>
-          <p className="text-neutral-500 max-w-lg mx-auto text-sm leading-relaxed">
+          <p className="text-neutral-500 max-w-lg mx-auto text-[15px] leading-relaxed">
             복잡한 규정과 서류 절차로 어려움을 겪는 담당자분들을 위해 현대유앤아이가 돕습니다.
           </p>
         </div>
@@ -68,8 +68,8 @@ export function PainPointSection() {
                   <Icon size={18} strokeWidth={1.8} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-neutral-800 mb-1 leading-snug">{point.title}</h3>
-                  <p className="text-xs text-neutral-500 leading-relaxed">{point.desc}</p>
+                  <h3 className="text-[15px] font-bold text-neutral-800 mb-1 leading-snug">{point.title}</h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed">{point.desc}</p>
                 </div>
               </div>
             );

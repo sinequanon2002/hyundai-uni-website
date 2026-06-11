@@ -75,27 +75,12 @@ function PostCard({ post }: { post: BlogPost }) {
   );
 }
 
-function EmptyState() {
-  return (
-    <div className="col-span-3 py-16 text-center">
-      <BookOpen size={40} className="text-neutral-300 mx-auto mb-4" />
-      <p className="text-neutral-400 text-sm mb-4">
-        곧 유용한 지정폐기물 정보 콘텐츠가 업로드될 예정입니다.
-      </p>
-      <Link
-        href="/blog"
-        className="inline-flex items-center gap-1.5 text-sm text-primary font-semibold hover:underline underline-offset-4"
-      >
-        블로그 바로가기
-        <ArrowRight size={13} />
-      </Link>
-    </div>
-  );
-}
-
 export async function BlogPreviewSection() {
   const result = await getBlogPosts({ pageSize: 3 });
   const posts = result.success && result.data ? result.data.posts : [];
+
+  // 게시글이 없으면 빈 섹션을 노출하지 않음 (콘텐츠 확보 후 자동 표시)
+  if (posts.length === 0) return null;
 
   return (
     <section className="py-14 md:py-20 bg-neutral-50">
@@ -121,11 +106,9 @@ export async function BlogPreviewSection() {
 
         {/* Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {posts.length > 0 ? (
-            posts.map((post) => <PostCard key={post.id} post={post} />)
-          ) : (
-            <EmptyState />
-          )}
+          {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
         </div>
 
         {/* 전체 글 보기 CTA */}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@/components/analytics/Analytics";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://hyundaiuni.kr";
 
@@ -141,6 +142,7 @@ export default function RootLayout({
         )}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );

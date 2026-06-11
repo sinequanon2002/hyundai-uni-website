@@ -27,8 +27,8 @@ function StatItem({ stat, active }: { stat: typeof STATS[0]; active: boolean }) 
       >
         {display}
       </div>
-      <div className="text-sm font-semibold text-white/85 mb-0.5">{stat.label}</div>
-      <div className="text-xs text-white/50">{stat.sub}</div>
+      <div className="text-[15px] font-semibold text-white/85 mb-0.5">{stat.label}</div>
+      <div className="text-sm text-white/55">{stat.sub}</div>
     </div>
   );
 }

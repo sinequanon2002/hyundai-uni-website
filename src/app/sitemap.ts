@@ -13,13 +13,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 지정폐기물 서비스 (핵심 SEO)
     { url: `${baseUrl}/waste/types`,           priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
     { url: `${baseUrl}/waste/storage`,         priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
+    { url: `${baseUrl}/waste/pricing`,         priority: 0.8, changeFrequency: 'monthly', lastModified: new Date() },
     // 실적사례 (단독 메뉴)
     { url: `${baseUrl}/gallery`,       priority: 0.8, changeFrequency: 'weekly',  lastModified: new Date() },
     // 블로그
     { url: `${baseUrl}/blog`,          priority: 0.7, changeFrequency: 'weekly',  lastModified: new Date() },
     // 고객센터
     { url: `${baseUrl}/support/notice`,        priority: 0.6, changeFrequency: 'weekly',  lastModified: new Date() },
+    { url: `${baseUrl}/support/faq`,           priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
     { url: `${baseUrl}/support/inquiry`,       priority: 0.9, changeFrequency: 'monthly', lastModified: new Date() },
+    // 자료실 (리드 마그넷)
+    { url: `${baseUrl}/resources/brochure`,           priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
+    { url: `${baseUrl}/resources/allbaro-checklist`,  priority: 0.7, changeFrequency: 'monthly', lastModified: new Date() },
   ];
 
   // 폐기물 유형별 랜딩 페이지 (SSG, 고우선순위)

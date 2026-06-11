@@ -43,6 +43,7 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             <li><Link href="/company" className="hover:text-white transition-colors">회사 소개</Link></li>
             <li><Link href="/waste/types" className="hover:text-white transition-colors">수거 대상 폐기물</Link></li>
+            <li><Link href="/waste/pricing" className="hover:text-white transition-colors">비용 안내</Link></li>
             <li><Link href="/allbaro/about" className="hover:text-white transition-colors">올바로시스템</Link></li>
           </ul>
         </div>
@@ -50,6 +51,7 @@ export function Footer() {
           <h3 className="text-white font-medium mb-4">고객지원</h3>
            <ul className="space-y-2 text-sm">
             <li><Link href="/support/inquiry" className="hover:text-white transition-colors">온라인 견적문의</Link></li>
+            <li><Link href="/support/faq" className="hover:text-white transition-colors">자주 묻는 질문</Link></li>
             <li><Link href="/support/notice" className="hover:text-white transition-colors">공지사항</Link></li>
             <li><Link href="/gallery" className="hover:text-white transition-colors">현장갤러리</Link></li>
             <li><Link href="/company#location" className="hover:text-white transition-colors">오시는 길</Link></li>

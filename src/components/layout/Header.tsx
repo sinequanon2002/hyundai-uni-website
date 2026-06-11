@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ChevronDown, FileText, Download, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, FileText, Download, ArrowRight, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { COMPANY } from '@/lib/constants';
+import { trackPhoneClick } from '@/lib/analytics';
 
 interface SubItem {
   label: string;
@@ -39,8 +41,8 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       { label: '서비스 안내',    href: '/waste/types' },
       { label: '보관·법적 의무', href: '/waste/storage' },
+      { label: '비용 안내',      href: '/waste/pricing' },
       { label: '서비스 소개서',  href: '/resources/brochure', highlight: true },
-      { label: '업종별 솔루션',  href: '/support/inquiry', badge: '준비중' },
       { label: '회사 소개',      href: '/company' },
     ],
   },
@@ -60,6 +62,7 @@ const NAV_ITEMS: NavItem[] = [
     basePath: '/support',
     children: [
       { label: '공지사항',       href: '/support/notice' },
+      { label: '자주 묻는 질문', href: '/support/faq' },
       { label: '견적문의',       href: '/support/inquiry' },
       { label: '문의현황 조회',  href: '/support/inquiry-status' },
     ],
@@ -229,6 +232,16 @@ export function Header() {
               );
             })}
 
+            {/* 대표전화 — 상시 노출 */}
+            <a
+              href={`tel:${COMPANY.tel}`}
+              onClick={() => trackPhoneClick('header')}
+              className="ml-4 hidden xl:flex items-center gap-2 text-white/90 hover:text-secondary transition-colors font-semibold tabular-nums"
+            >
+              <Phone size={15} className="text-secondary" />
+              {COMPANY.tel}
+            </a>
+
             {/* CTA 버튼 */}
             <Link
               href={CTA_ITEM.href}
@@ -243,7 +256,15 @@ export function Header() {
           </nav>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center gap-1">
+            <a
+              href={`tel:${COMPANY.tel}`}
+              onClick={() => trackPhoneClick('header_mobile')}
+              aria-label="전화 문의"
+              className="p-2 text-white"
+            >
+              <Phone size={20} />
+            </a>
             <button
               className="p-2 text-white focus:outline-none relative z-[70]"
               onClick={() => setIsOpen(!isOpen)}
@@ -359,9 +380,18 @@ export function Header() {
               견적 문의하기
             </Link>
             <div className="mt-10 space-y-2 text-sm text-white/40">
-              <p>주식회사 현대유앤아이</p>
-              <p>대표전화: 010-9084-9480</p>
-              <p>이메일: hduni3973@naver.com</p>
+              <p>{COMPANY.name}</p>
+              <p>
+                대표전화:{' '}
+                <a
+                  href={`tel:${COMPANY.tel}`}
+                  onClick={() => trackPhoneClick('mobile_menu')}
+                  className="text-white/60 underline underline-offset-2"
+                >
+                  {COMPANY.tel}
+                </a>
+              </p>
+              <p>이메일: {COMPANY.email}</p>
             </div>
             <p className="text-white/25 text-xs mt-8">
               © 2025 주식회사 현대유앤아이. All rights reserved.

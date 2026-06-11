@@ -10,6 +10,7 @@ import {
   ExternalLink, Loader2,
 } from "lucide-react";
 import { submitBrochureRequest } from "@/lib/actions/brochure";
+import { trackBrochureSubmit } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 const HIGHLIGHTS = [
@@ -105,6 +106,7 @@ export default function BrochurePage() {
     startTransition(async () => {
       const result = await submitBrochureRequest(data);
       if (result.success) {
+        trackBrochureSubmit();
         setSubmitted(true);
       } else {
         alert(result.error ?? "신청 중 오류가 발생했습니다.");
