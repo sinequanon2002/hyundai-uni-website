@@ -56,21 +56,21 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
       </Link>
 
       {/* 헤더 */}
-      <div className="flex items-start justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{inq.company_name}</h1>
+      <div className="flex items-start justify-between gap-3 flex-wrap mb-6">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 break-keep">{inq.company_name}</h1>
           <p className="text-sm text-gray-400 mt-1">
-            문의 ID: <span className="font-mono text-xs">{inq.id}</span>
+            문의 ID: <span className="font-mono text-xs break-all">{inq.id}</span>
           </p>
         </div>
-        <InquiryStatusBadge status={inq.status as InquiryStatus} className="text-sm px-3 py-1.5" />
+        <InquiryStatusBadge status={inq.status as InquiryStatus} className="text-sm px-3 py-1.5 shrink-0" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 좌측: 문의 상세 */}
         <div className="lg:col-span-2 space-y-4">
           {/* 연락처 정보 */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
             <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">연락처 정보</h2>
             <DetailRow label="사업장명" value={inq.company_name} icon={Building2} />
             <DetailRow label="소속팀" value={inq.department} icon={Building2} />
@@ -80,7 +80,7 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
           </div>
 
           {/* 수거 정보 */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
             <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">수거 정보</h2>
             <DetailRow
               label="수거 장소"
@@ -109,7 +109,7 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
 
           {/* 첨부 파일 */}
           {inq.photo_urls && inq.photo_urls.length > 0 && (
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
               <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3 flex items-center gap-2">
                 <Camera className="w-4 h-4 text-gray-400" />
                 첨부 파일 ({inq.photo_urls.length}개)
@@ -158,9 +158,9 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
           )}
 
           {/* 동의 정보 */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
             <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">동의 정보</h2>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-2">
               <span className={`text-xs px-2 py-1 rounded-full font-medium ${inq.agreement ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>
                 개인정보 수집·이용 동의: {inq.agreement ? "동의" : "미동의"}
               </span>
@@ -173,7 +173,7 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
 
         {/* 우측: 상태 관리 */}
         <div className="space-y-4">
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
             <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">상태 관리</h2>
             <InquiryStatusUpdateForm
               inquiryId={inq.id}

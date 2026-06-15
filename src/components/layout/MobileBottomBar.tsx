@@ -14,8 +14,12 @@ export function MobileBottomBar() {
 
   return (
     <>
-      {/* 고정 바가 푸터 하단을 가리지 않도록 하는 스페이서 */}
-      <div className="h-16 lg:hidden" aria-hidden />
+      {/* 고정 바가 푸터 하단을 가리지 않도록 하는 스페이서 — 고정 바 높이(4rem) + iOS 홈 인디케이터 영역 */}
+      <div
+        className="lg:hidden"
+        style={{ height: "calc(4rem + env(safe-area-inset-bottom))" }}
+        aria-hidden
+      />
 
       <nav
         aria-label="빠른 문의"

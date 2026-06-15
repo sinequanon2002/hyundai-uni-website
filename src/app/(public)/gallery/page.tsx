@@ -86,7 +86,7 @@ export default async function GalleryPage({ searchParams }: Props) {
       : "실적사례";
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh bg-white">
 
       {/* ── 페이지 헤더 ── */}
       <section className="border-b border-neutral-100 bg-white">

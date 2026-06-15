@@ -9,7 +9,7 @@ export default function WasteLayout({ children }: { children: React.ReactNode })
         subtitle="신뢰와 책임을 바탕으로 안전하게 처리합니다"
       />
       <SubNav items={WASTE_SUBNAV_ITEMS} />
-      <div className="bg-gray-50/30 min-h-screen">
+      <div className="bg-gray-50/30 min-h-dvh">
         {children}
       </div>
     </>

@@ -138,7 +138,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "min-h-screen bg-background font-pretendard antialiased flex flex-col"
+          "min-h-dvh bg-background font-pretendard antialiased flex flex-col"
         )}
       >
         {children}

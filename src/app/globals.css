@@ -13,6 +13,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* 가로 오버플로우 안전장치: 어떤 요소가 뷰포트보다 넓어도 가로 스크롤/축소 렌더링을 막는다.
+       (clip은 hidden과 달리 스크롤 컨테이너를 만들지 않아 position:sticky가 정상 동작)
+       iOS Safari의 100vh(주소창 숨김 기준)로 인한 하단 블랭크는 min-h-dvh 유틸로 대응 */
+    overflow-x: clip;
   }
 }
 

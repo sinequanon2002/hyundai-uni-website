@@ -100,7 +100,7 @@ export default async function GalleryAdminPage({ searchParams }: Props) {
                 {canWrite && (
                   <div className="flex items-center gap-2 border-t border-neutral-100 pt-2">
                     <Link
-                      href={`/gallery/${item.id}/edit`}
+                      href={`/admin/gallery/${item.id}/edit`}
                       className="text-xs text-secondary hover:text-primary transition-colors"
                     >
                       수정

@@ -83,7 +83,7 @@ export default async function NoticeDetailPage({ params }: Props) {
   const nextTitle = nextId ? adjacentData?.find((n) => n.id === nextId)?.title : null;
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

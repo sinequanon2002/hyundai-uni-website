@@ -140,6 +140,7 @@ export function ComplianceClient() {
       {activeTab === 'penalty' && (
         <div className="animate-fade-in-up">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
                 <tr className="bg-gray-800 text-white">
@@ -156,6 +157,7 @@ export function ComplianceClient() {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
 
           <div className="mt-6 p-4 bg-gray-50 rounded-xl flex gap-3 text-sm text-gray-500 border border-gray-200">

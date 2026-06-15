@@ -67,71 +67,115 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
         })}
       </div>
 
-      {/* 테이블 */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        {!result.success ? (
-          <div className="py-16 text-center text-red-400 text-sm">
-            데이터를 불러오는 중 오류가 발생했습니다.
-          </div>
-        ) : inquiries.length === 0 ? (
-          <div className="py-16 text-center text-gray-400 text-sm">
-            문의 내역이 없습니다.
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-          <table className="w-full text-sm min-w-[560px]">
-            <thead>
-              <tr className="bg-gray-50 border-b border-gray-100">
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 w-36">접수일</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">사업장명</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden md:table-cell">소속팀</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">담당자</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">연락처</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden sm:table-cell">폐기물</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 w-24">상태</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-600 w-16">상세</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50">
-              {inquiries.map((inq) => (
-                <tr key={inq.id} className="hover:bg-gray-50/50 transition-colors">
-                  <td className="px-4 py-3 text-gray-500">
-                    {new Date(inq.created_at).toLocaleDateString("ko-KR")}
-                  </td>
-                  <td className="px-4 py-3 font-medium text-gray-900">
-                    {inq.company_name}
-                  </td>
-                  <td className="px-4 py-3 text-gray-600 hidden md:table-cell">
-                    {inq.department ?? "-"}
-                  </td>
-                  <td className="px-4 py-3 text-gray-600">{inq.contact_name}</td>
-                  <td className="px-4 py-3 text-gray-600 hidden lg:table-cell">{inq.phone}</td>
-                  <td className="px-4 py-3 text-gray-600 hidden sm:table-cell">
-                    {inq.waste_types[0]}
-                    {inq.waste_types.length > 1 && (
-                      <span className="text-gray-400 text-xs ml-1">
-                        +{inq.waste_types.length - 1}
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3">
+      {/* 목록 */}
+      {!result.success ? (
+        <div className="bg-white rounded-xl shadow-sm py-16 text-center text-red-400 text-sm">
+          데이터를 불러오는 중 오류가 발생했습니다.
+        </div>
+      ) : inquiries.length === 0 ? (
+        <div className="bg-white rounded-xl shadow-sm py-16 text-center text-gray-400 text-sm">
+          문의 내역이 없습니다.
+        </div>
+      ) : (
+        <>
+          {/* 모바일: 카드 리스트 */}
+          <ul className="md:hidden space-y-3">
+            {inquiries.map((inq) => (
+              <li key={inq.id}>
+                <Link
+                  href={`/admin/inquiries/${inq.id}`}
+                  className="block bg-white rounded-xl shadow-sm p-4 active:bg-gray-50 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-2.5">
+                    <span className="font-bold text-gray-900 text-[15px] leading-tight">
+                      {inq.company_name}
+                    </span>
                     <InquiryStatusBadge status={inq.status as InquiryStatus} />
-                  </td>
-                  <td className="px-4 py-3 text-center">
-                    <Link
-                      href={`/admin/inquiries/${inq.id}`}
-                      className="text-[#0E9E7E] hover:text-[#0C5F6B] font-medium text-xs"
-                    >
-                      보기
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                  <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[13px]">
+                    <dt className="text-gray-400">담당자</dt>
+                    <dd className="text-gray-700">
+                      {inq.contact_name}
+                      {inq.department ? ` · ${inq.department}` : ""}
+                    </dd>
+                    <dt className="text-gray-400">연락처</dt>
+                    <dd className="text-gray-700 tabular-nums">{inq.phone}</dd>
+                    <dt className="text-gray-400">폐기물</dt>
+                    <dd className="text-gray-700">
+                      {inq.waste_types[0]}
+                      {inq.waste_types.length > 1 && (
+                        <span className="text-gray-400"> +{inq.waste_types.length - 1}</span>
+                      )}
+                    </dd>
+                  </dl>
+                  <div className="mt-2.5 pt-2.5 border-t border-gray-50 flex items-center justify-between">
+                    <span className="text-xs text-gray-400">
+                      {new Date(inq.created_at).toLocaleDateString("ko-KR")}
+                    </span>
+                    <span className="text-xs font-medium text-[#0E9E7E]">상세 보기 →</span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* 데스크톱: 테이블 */}
+          <div className="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 border-b border-gray-100">
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 w-36">접수일</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600">사업장명</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden md:table-cell">소속팀</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600">담당자</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">연락처</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600">폐기물</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 w-24">상태</th>
+                    <th className="text-center px-4 py-3 font-semibold text-gray-600 w-16">상세</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {inquiries.map((inq) => (
+                    <tr key={inq.id} className="hover:bg-gray-50/50 transition-colors">
+                      <td className="px-4 py-3 text-gray-500">
+                        {new Date(inq.created_at).toLocaleDateString("ko-KR")}
+                      </td>
+                      <td className="px-4 py-3 font-medium text-gray-900">
+                        {inq.company_name}
+                      </td>
+                      <td className="px-4 py-3 text-gray-600 hidden md:table-cell">
+                        {inq.department ?? "-"}
+                      </td>
+                      <td className="px-4 py-3 text-gray-600">{inq.contact_name}</td>
+                      <td className="px-4 py-3 text-gray-600 hidden lg:table-cell">{inq.phone}</td>
+                      <td className="px-4 py-3 text-gray-600">
+                        {inq.waste_types[0]}
+                        {inq.waste_types.length > 1 && (
+                          <span className="text-gray-400 text-xs ml-1">
+                            +{inq.waste_types.length - 1}
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        <InquiryStatusBadge status={inq.status as InquiryStatus} />
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <Link
+                          href={`/admin/inquiries/${inq.id}`}
+                          className="text-[#0E9E7E] hover:text-[#0C5F6B] font-medium text-xs"
+                        >
+                          보기
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        )}
-      </div>
+        </>
+      )}
 
       {/* 페이지네이션 */}
       {totalPages > 1 && (

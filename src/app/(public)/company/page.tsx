@@ -75,7 +75,7 @@ function SectionHeader({ tag, title }: { tag: string; title: string }) {
 
 export default function CompanyPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh bg-white">
       <PageBanner title="회사 소개" subtitle="About Us" />
 
       {/* 인페이지 앵커 내비게이션 */}
@@ -235,7 +235,7 @@ export default function CompanyPage() {
                   className={`relative flex flex-col md:flex-row items-start md:items-center ${!isEven ? 'md:flex-row-reverse' : ''}`}
                 >
                   <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-primary transform -translate-x-[7px] md:-translate-x-1/2 mt-2 md:mt-0 ring-4 ring-white z-10 shadow-sm" />
-                  <div className={`ml-12 md:ml-0 md:w-1/2 w-full pt-0.5 md:pt-4 pb-4 ${isEven ? 'md:pl-16' : 'md:pr-16 md:text-right'}`}>
+                  <div className={`ml-12 md:ml-0 w-[calc(100%-3rem)] md:w-1/2 pt-0.5 md:pt-4 pb-4 ${isEven ? 'md:pl-16' : 'md:pr-16 md:text-right'}`}>
                     <h3 className="text-4xl font-extrabold text-primary mb-4 tracking-tighter opacity-90">
                       {item.year}
                     </h3>

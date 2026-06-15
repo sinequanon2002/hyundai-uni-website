@@ -177,7 +177,7 @@ export default async function UsersPage() {
         </p>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-100 p-6">
+      <div className="bg-white rounded-xl border border-gray-100 p-4 sm:p-6">
         <h2 className="text-base font-semibold text-neutral-dark mb-4">새 직원 계정 생성</h2>
         <CreateUserForm />
       </div>
@@ -193,21 +193,13 @@ export default async function UsersPage() {
             등록된 직원이 없습니다.
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-50">
-                  <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3">이름 / 이메일</th>
-                  <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3">역할</th>
-                  <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3 hidden md:table-cell">마지막 로그인</th>
-                  <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3 hidden md:table-cell">가입일</th>
-                  <th className="px-6 py-3"></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-50">
-                {users.map((u) => (
-                  <tr key={u.id} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="px-6 py-4">
+          <>
+            {/* 모바일: 카드 리스트 */}
+            <ul className="md:hidden divide-y divide-gray-50">
+              {users.map((u) => (
+                <li key={u.id} className="p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
                       <div className="font-medium text-neutral-dark">
                         {u.full_name ?? (
                           <span className="text-neutral-mid italic text-xs">이름 없음</span>
@@ -216,29 +208,73 @@ export default async function UsersPage() {
                           <span className="ml-2 text-xs text-primary font-normal">(나)</span>
                         )}
                       </div>
-                      <div className="text-xs text-neutral-mid mt-0.5">{u.email}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <RoleSelect
-                        userId={u.id}
-                        currentRole={u.role}
-                        currentUserId={user.id}
-                      />
-                    </td>
-                    <td className="px-6 py-4 text-neutral-mid text-xs hidden md:table-cell">
-                      {formatDate(u.last_sign_in_at)}
-                    </td>
-                    <td className="px-6 py-4 text-neutral-mid text-xs hidden md:table-cell">
-                      {formatDate(u.created_at)}
-                    </td>
-                    <td className="px-6 py-4">
-                      <DeleteButton userId={u.id} currentUserId={user.id} />
-                    </td>
+                      <div className="text-xs text-neutral-mid mt-0.5 break-all">{u.email}</div>
+                    </div>
+                    <DeleteButton userId={u.id} currentUserId={user.id} />
+                  </div>
+                  <div className="mt-3">
+                    <RoleSelect
+                      userId={u.id}
+                      currentRole={u.role}
+                      currentUserId={user.id}
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-neutral-mid">
+                    <span>로그인 {formatDate(u.last_sign_in_at)}</span>
+                    <span>가입 {formatDate(u.created_at)}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            {/* 데스크톱: 테이블 */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-50">
+                    <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3">이름 / 이메일</th>
+                    <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3">역할</th>
+                    <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3 hidden lg:table-cell">마지막 로그인</th>
+                    <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3 hidden lg:table-cell">가입일</th>
+                    <th className="px-6 py-3"></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {users.map((u) => (
+                    <tr key={u.id} className="hover:bg-gray-50/50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="font-medium text-neutral-dark">
+                          {u.full_name ?? (
+                            <span className="text-neutral-mid italic text-xs">이름 없음</span>
+                          )}
+                          {u.id === user.id && (
+                            <span className="ml-2 text-xs text-primary font-normal">(나)</span>
+                          )}
+                        </div>
+                        <div className="text-xs text-neutral-mid mt-0.5">{u.email}</div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <RoleSelect
+                          userId={u.id}
+                          currentRole={u.role}
+                          currentUserId={user.id}
+                        />
+                      </td>
+                      <td className="px-6 py-4 text-neutral-mid text-xs hidden lg:table-cell">
+                        {formatDate(u.last_sign_in_at)}
+                      </td>
+                      <td className="px-6 py-4 text-neutral-mid text-xs hidden lg:table-cell">
+                        {formatDate(u.created_at)}
+                      </td>
+                      <td className="px-6 py-4">
+                        <DeleteButton userId={u.id} currentUserId={user.id} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
     </div>
