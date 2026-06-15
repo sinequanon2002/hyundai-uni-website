@@ -39,7 +39,7 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">소개서 신청 관리</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">소개서 신청 관리</h1>
           <p className="text-sm text-gray-500 mt-0.5">전체 {total}건</p>
         </div>
       </div>
@@ -70,7 +70,8 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
         {requests.length === 0 ? (
           <div className="py-16 text-center text-gray-400 text-sm">신청 내역이 없습니다.</div>
         ) : (
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+          <table className="w-full text-sm min-w-[560px]">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-100">
                 <th className="text-left px-4 py-3 font-semibold text-gray-600 w-32">신청일</th>
@@ -117,12 +118,13 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
               })}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 
       {/* 페이지네이션 */}
       {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-1.5 mt-6">
+        <div className="flex flex-wrap justify-center items-center gap-1.5 mt-6">
           <Link
             href={buildHref({ page: String(page - 1) })}
             className={cn("p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-600", page === 1 && "opacity-30 pointer-events-none")}

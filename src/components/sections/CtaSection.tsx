@@ -12,7 +12,7 @@ export function CtaSection() {
       <div className="container mx-auto px-4 md:px-8">
         <div
           {...fadeIn}
-          className={`flex flex-col lg:flex-row items-center justify-between gap-10 ${fadeIn.className}`}
+          className={`flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 ${fadeIn.className}`}
         >
           {/* 텍스트 */}
           <div className="text-center lg:text-left text-white max-w-2xl">

@@ -352,7 +352,7 @@ export default function CompanyPage() {
             <div className="space-y-4 text-neutral-600 leading-relaxed">
               <div>
                 <strong className="text-neutral-900 block mb-1">네비게이션</strong>
-                <p>'{COMPANY.shortName}' 또는 '하양로 34' 검색</p>
+                <p>&apos;{COMPANY.shortName}&apos; 또는 &apos;하양로 34&apos; 검색</p>
               </div>
               <div>
                 <strong className="text-neutral-900 block mb-1">고속도로</strong>

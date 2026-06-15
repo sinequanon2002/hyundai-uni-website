@@ -78,7 +78,7 @@ export function ClientsSection() {
         </div>
 
         {/* Client Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {CLIENT_CATEGORIES.map((cat, index) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const fadeCard = useFadeIn(0.1, index * 120);

@@ -39,7 +39,7 @@ export default async function InquiryStatusPage() {
 
     return (
       <>
-        <PageBanner title="문의현황 조회" breadcrumb={["고객지원", "문의현황 조회"]} />
+        <PageBanner title="문의현황 조회" />
         <SubNav items={SUPPORT_SUBNAV_ITEMS} />
         <div className="max-w-3xl mx-auto px-4 py-10">
           <div className="flex items-center justify-between mb-6">
@@ -104,7 +104,7 @@ export default async function InquiryStatusPage() {
   // 비로그인: 전화번호 검색 + 로그인 유도
   return (
     <>
-      <PageBanner title="문의현황 조회" breadcrumb={["고객지원", "문의현황 조회"]} />
+      <PageBanner title="문의현황 조회" />
       <SubNav items={SUPPORT_SUBNAV_ITEMS} />
       <div className="max-w-3xl mx-auto px-4 py-10 space-y-8">
 

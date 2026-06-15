@@ -98,7 +98,8 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
 
       {/* 테이블 */}
       <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-        <table className="w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="w-full text-sm min-w-[480px]">
           <thead className="bg-neutral-50 border-b border-neutral-200">
             <tr>
               <th className="px-4 py-3 text-left font-medium text-neutral-600">제목</th>
@@ -155,11 +156,12 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
             )}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* 페이지네이션 */}
       {totalPages > 1 && (
-        <div className="flex justify-center gap-1 mt-6">
+        <div className="flex flex-wrap justify-center gap-1 mt-6">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
             <Link
               key={p}

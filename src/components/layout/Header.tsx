@@ -190,7 +190,7 @@ export function Header() {
                     onMouseEnter={() => handleMouseEnter(item.basePath)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    {item.children.map((child, idx) => {
+                    {item.children.map((child) => {
                       // 서비스 소개: highlight 항목 앞에 구분선
                       const showDivider = item.basePath === '/service' && child.highlight;
 

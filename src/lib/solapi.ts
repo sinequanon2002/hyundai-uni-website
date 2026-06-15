@@ -60,7 +60,7 @@ export async function sendInquirySms(params: InquiryNotificationParams): Promise
   ].join("\n");
 
   try {
-    await client.sendOne({
+    await client.send({
       to: params.to.replace(/-/g, ""),
       from: sender.replace(/-/g, ""),
       text,
@@ -97,7 +97,7 @@ export async function sendInquiryAlimtalk(params: InquiryNotificationParams): Pr
   const more = params.wasteTypes.length > 3 ? ` 외 ${params.wasteTypes.length - 3}건` : "";
 
   try {
-    await client.sendOne({
+    await client.send({
       to: params.to.replace(/-/g, ""),
       from: sender.replace(/-/g, ""),
       // 알림톡 미전달 시 SMS로 자동 대체

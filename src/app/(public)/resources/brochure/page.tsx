@@ -41,10 +41,11 @@ const formSchema = z.object({
   email: z.string().min(1, "이메일을 입력해주세요").email("올바른 이메일 형식이 아닙니다"),
   companyName: z.string().min(1, "회사명을 입력해주세요"),
   phone: z.string().regex(/^\d{2,3}-\d{3,4}-\d{4}$/, "올바른 전화번호 형식 (예: 010-1234-5678)"),
-  agreement: z.literal(true, { errorMap: () => ({ message: "개인정보 수집·이용에 동의하셔야 합니다" }) }),
+  agreement: z.literal(true, { message: "개인정보 수집·이용에 동의하셔야 합니다" }),
   marketingConsent: z.boolean().optional().default(false),
 });
 
+type FormInput = z.input<typeof formSchema>;
 type FormValues = z.infer<typeof formSchema>;
 
 function formatPhone(value: string) {
@@ -90,7 +91,7 @@ export default function BrochurePage() {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<FormInput, unknown, FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: { marketingConsent: false },
   });
