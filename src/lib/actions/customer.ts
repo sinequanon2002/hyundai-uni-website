@@ -167,7 +167,7 @@ export async function getMyProfile(): Promise<ActionResult<CustomerProfile>> {
   const userId = await requireCustomer();
   const supabase = createClient();
 
-  const { data: { user } } = await supabase.auth.getUser();
+  await supabase.auth.getUser();
   const adminClient = createAdminClient();
 
   const { data: profile, error } = await adminClient

@@ -54,11 +54,13 @@ export const inquiryFormSchema = z.object({
   message: z.string().optional().or(z.literal("")),
   photoUrls: z.array(z.string()).optional().default([]),
   agreement: z.literal(true, {
-    errorMap: () => ({ message: "개인정보 수집·이용에 동의하셔야 합니다" }),
+    message: "개인정보 수집·이용에 동의하셔야 합니다",
   }),
   marketingConsent: z.boolean().optional().default(false),
 });
 
+/** 폼 입력 타입 — .default() 필드가 입력 시 optional (react-hook-form resolver용) */
+export type InquiryFormInput = z.input<typeof inquiryFormSchema>;
 export type InquiryFormValues = z.infer<typeof inquiryFormSchema>;
 
 /**

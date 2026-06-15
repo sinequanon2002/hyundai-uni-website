@@ -41,7 +41,7 @@ export function ServicesSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {SERVICES.map((service, index) => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const fadeCard = useFadeIn(0.1, index * 100);
@@ -49,9 +49,9 @@ export function ServicesSection() {
               <div
                 key={index}
                 {...fadeCard}
-                className={`group bg-white rounded-2xl p-8 shadow-md border border-neutral-100 hover:shadow-xl hover:-translate-y-4 transition-all duration-300 ${fadeCard.className}`}
+                className={`group bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-neutral-100 hover:shadow-xl hover:-translate-y-4 transition-all duration-300 ${fadeCard.className}`}
               >
-                <div className="w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-300 text-primary">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-300 text-primary">
                   <service.icon size={36} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-neutral-900">

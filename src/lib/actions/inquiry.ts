@@ -126,11 +126,11 @@ export async function submitInquiry(
         subject: `[신규 견적 문의] ${data.companyName} - ${data.contactName}님`,
         react: InquiryNotificationEmail({
           companyName: data.companyName,
-          department: data.department,
+          department: data.department ?? "",
           contactName: data.contactName,
           email: data.email,
           phone: data.phone,
-          address: data.address,
+          address: data.address ?? "",
           addressDetail: data.addressDetail,
           wasteTypes: data.wasteTypes,
           marketingConsent: data.marketingConsent ?? false,

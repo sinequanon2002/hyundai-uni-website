@@ -39,21 +39,21 @@ export function ComparisonSection() {
         {/* 비교표 */}
         <div {...fadeInTable} className={`max-w-3xl mx-auto rounded-xl overflow-hidden border border-neutral-200 shadow-sm ${fadeInTable.className}`}>
           <div className="grid grid-cols-[1fr_1fr_1fr] bg-neutral-800 text-white text-xs font-semibold">
-            <div className="px-4 py-3 text-neutral-400">확인 항목</div>
-            <div className="px-4 py-3 text-center border-l border-neutral-700 text-neutral-300">일반 업체</div>
-            <div className="px-4 py-3 text-center border-l border-neutral-700 text-white">현대유앤아이</div>
+            <div className="px-2.5 sm:px-4 py-3 text-neutral-400">확인 항목</div>
+            <div className="px-2.5 sm:px-4 py-3 text-center border-l border-neutral-700 text-neutral-300">일반 업체</div>
+            <div className="px-2.5 sm:px-4 py-3 text-center border-l border-neutral-700 text-white">현대유앤아이</div>
           </div>
           {ROWS.map((row, i) => (
             <div
               key={i}
               className={`grid grid-cols-[1fr_1fr_1fr] text-xs border-t border-neutral-100 ${i % 2 === 0 ? "bg-white" : "bg-neutral-50/60"}`}
             >
-              <div className="px-4 py-3 font-medium text-neutral-700 flex items-center">{row.item}</div>
-              <div className="px-4 py-3 border-l border-neutral-100 flex items-center gap-1.5 text-neutral-500">
+              <div className="px-2.5 sm:px-4 py-3 font-medium text-neutral-700 flex items-center">{row.item}</div>
+              <div className="px-2.5 sm:px-4 py-3 border-l border-neutral-100 flex items-center gap-1.5 text-neutral-500">
                 <X size={13} className="shrink-0 text-rose-400" strokeWidth={2.5} />
                 <span>{row.others}</span>
               </div>
-              <div className="px-4 py-3 border-l border-neutral-100 flex items-center gap-1.5 text-primary font-medium bg-primary/[0.03]">
+              <div className="px-2.5 sm:px-4 py-3 border-l border-neutral-100 flex items-center gap-1.5 text-primary font-medium bg-primary/[0.03]">
                 <Check size={13} className="shrink-0 text-accent" strokeWidth={2.5} />
                 <span>{row.us}</span>
               </div>

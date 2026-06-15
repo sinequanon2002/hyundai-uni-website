@@ -35,9 +35,10 @@ export function useFadeIn(threshold = 0.1, delay = 0) {
     };
   }, [threshold, delay]);
 
+  // 주의: 반환 객체는 컴포넌트에서 {...fadeIn}으로 DOM 요소에 spread되므로
+  // ref·className 등 DOM 유효 속성만 포함한다. (isVisible은 className으로만 내부 반영)
   return {
     ref,
-    isVisible,
     className: `transition-all duration-700 ease-out transform ${
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
     }`,

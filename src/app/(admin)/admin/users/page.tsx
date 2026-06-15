@@ -82,7 +82,7 @@ function CreateUserForm() {
 
   return (
     <form action={handleCreate} className="space-y-3">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label className="block text-xs font-medium text-neutral-mid mb-1">이메일 *</label>
           <input

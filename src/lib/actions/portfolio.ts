@@ -5,7 +5,6 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { isStaff, type UserRole } from "@/lib/auth/roles";
 import type { ActionResult } from "./inquiry";
-import { PORTFOLIO_CATEGORIES, PORTFOLIO_REGIONS } from "@/lib/constants/portfolio";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

@@ -39,23 +39,23 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
   return (
     <div>
       {/* 헤더 */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">견적 문의 관리</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">견적 문의 관리</h1>
           <p className="text-sm text-gray-500 mt-0.5">전체 {total}건</p>
         </div>
         <InquirySearchInput basePath="/admin/inquiries" />
       </div>
 
       {/* 상태 필터 탭 */}
-      <div className="flex gap-1 mb-4 border-b border-gray-200">
+      <div className="flex gap-1 mb-4 border-b border-gray-200 overflow-x-auto">
         {STATUS_TABS.map((tab) => {
           const isActive = status === tab.value;
           return (
             <Link
               key={tab.value}
               href={buildHref({ status: tab.value, page: "1" })}
-              className={`px-4 py-2 text-sm font-medium rounded-t border-b-2 transition-colors ${
+              className={`shrink-0 whitespace-nowrap px-4 py-2 text-sm font-medium rounded-t border-b-2 transition-colors ${
                 isActive
                   ? "border-[#0C5F6B] text-[#0C5F6B]"
                   : "border-transparent text-gray-500 hover:text-gray-700"
@@ -78,7 +78,8 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
             문의 내역이 없습니다.
           </div>
         ) : (
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+          <table className="w-full text-sm min-w-[560px]">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-100">
                 <th className="text-left px-4 py-3 font-semibold text-gray-600 w-36">접수일</th>
@@ -128,6 +129,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 

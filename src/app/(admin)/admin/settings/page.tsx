@@ -24,7 +24,7 @@ function RoleCheckboxGroup({
   options: UserRole[];
 }) {
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
       {options.map((role) => (
         <label key={role} className="flex items-center gap-2 cursor-pointer select-none">
           <input

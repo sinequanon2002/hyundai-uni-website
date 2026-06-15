@@ -19,15 +19,15 @@ function StatItem({ stat, active }: { stat: typeof STATS[0]; active: boolean }) 
     : `${count.toLocaleString()}${stat.suffix}`;
 
   return (
-    <div className="text-center px-4 md:px-8">
+    <div className="text-center px-2 sm:px-4 md:px-8">
       <div
-        className={`text-3xl md:text-4xl font-black text-white mb-1 tabular-nums transition-all duration-700 ${
+        className={`text-2xl sm:text-3xl md:text-4xl font-black text-white mb-1 tabular-nums transition-all duration-700 ${
           active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
         }`}
       >
         {display}
       </div>
-      <div className="text-[15px] font-semibold text-white/85 mb-0.5">{stat.label}</div>
+      <div className="text-sm sm:text-[15px] font-semibold text-white/85 mb-0.5">{stat.label}</div>
       <div className="text-sm text-white/55">{stat.sub}</div>
     </div>
   );

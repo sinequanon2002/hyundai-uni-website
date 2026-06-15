@@ -34,14 +34,22 @@ export function SubNav({ items = COMPANY_SUBNAV_ITEMS }: { items?: {label: strin
       <div className="max-w-6xl mx-auto px-4">
         <nav className="w-full">
           <ul className="grid grid-cols-2 md:flex md:justify-center md:space-x-8">
-            {items.map((item) => {
+            {items.map((item, index) => {
               const isActive = pathname === item.href;
+              // 홀수 개수의 마지막 항목은 모바일에서 한 행을 가득 채워 외톨이 셀 방지
+              const isLastOdd = items.length % 2 === 1 && index === items.length - 1;
               return (
-                <li key={item.href} className="flex border-b border-gray-100 md:border-none">
+                <li
+                  key={item.href}
+                  className={cn(
+                    "flex border-b border-gray-100 md:border-none",
+                    isLastOdd && "col-span-2 md:col-span-1"
+                  )}
+                >
                   <Link
                     href={item.href}
                     className={cn(
-                      "flex-1 flex items-center justify-center px-2 py-3 md:px-4 md:py-4 text-sm md:text-base font-medium transition-colors relative text-center",
+                      "flex-1 flex items-center justify-center min-h-[48px] px-2 py-3 md:px-4 md:py-4 text-sm md:text-base font-medium leading-tight transition-colors relative text-center",
                       isActive ? "text-primary font-bold" : "text-neutral-600 hover:text-primary"
                     )}
                   >
