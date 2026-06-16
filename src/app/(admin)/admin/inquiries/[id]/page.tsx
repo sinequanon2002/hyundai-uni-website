@@ -13,7 +13,7 @@ import { AssigneeSelect } from "@/components/admin/AssigneeSelect";
 import { ActivityTimeline } from "@/components/admin/ActivityTimeline";
 import {
   ArrowLeft, Building2, User, Phone, Mail, MapPin,
-  Package, Camera, Calendar, FileText, ExternalLink,
+  Package, Camera, Calendar, FileText, ExternalLink, PenLine,
 } from "lucide-react";
 
 function isImageUrl(url: string): boolean {
@@ -88,7 +88,16 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
             문의 ID: <span className="font-mono text-xs break-all">{inq.id}</span>
           </p>
         </div>
-        <InquiryStatusBadge status={inq.status as InquiryStatus} className="text-sm px-3 py-1.5 shrink-0" />
+        <div className="flex items-center gap-2 shrink-0 flex-wrap">
+          <InquiryStatusBadge status={inq.status as InquiryStatus} className="text-sm px-3 py-1.5" />
+          <Link
+            href={`/admin/quotes/new?inquiry_id=${inq.id}`}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-primary text-white rounded-lg hover:bg-secondary transition-colors"
+          >
+            <PenLine className="w-3.5 h-3.5" />
+            견적서 작성
+          </Link>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
