@@ -1,10 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getInquiryById, type InquiryStatus } from "@/lib/actions/inquiry";
+import {
+  getInquiryById,
+  getInquiryActivities,
+  getAssignableStaff,
+  type InquiryStatus,
+} from "@/lib/actions/inquiry";
 import { InquiryStatusBadge } from "@/components/admin/InquiryStatusBadge";
 import { InquiryStatusUpdateForm } from "@/components/admin/InquiryStatusUpdateForm";
-import { ArrowLeft, Building2, User, Phone, Mail, MapPin, Package, Camera, Calendar, FileText, ExternalLink } from "lucide-react";
+import { AssigneeSelect } from "@/components/admin/AssigneeSelect";
+import { ActivityTimeline } from "@/components/admin/ActivityTimeline";
+import {
+  ArrowLeft, Building2, User, Phone, Mail, MapPin,
+  Package, Camera, Calendar, FileText, ExternalLink,
+} from "lucide-react";
 
 function isImageUrl(url: string): boolean {
   const ext = url.split(".").pop()?.split("?")[0].toLowerCase();
@@ -19,7 +29,15 @@ interface PageProps {
   params: { id: string };
 }
 
-function DetailRow({ label, value, icon: Icon }: { label: string; value: string | null | undefined; icon?: React.ElementType }) {
+function DetailRow({
+  label,
+  value,
+  icon: Icon,
+}: {
+  label: string;
+  value: string | null | undefined;
+  icon?: React.ElementType;
+}) {
   if (!value) return null;
   return (
     <div className="flex gap-3 py-3 border-b border-gray-50 last:border-0">
@@ -33,13 +51,20 @@ function DetailRow({ label, value, icon: Icon }: { label: string; value: string 
 }
 
 export default async function AdminInquiryDetailPage({ params }: PageProps) {
-  const result = await getInquiryById(params.id);
+  const [result, activitiesResult, staffResult] = await Promise.all([
+    getInquiryById(params.id),
+    getInquiryActivities(params.id),
+    getAssignableStaff(),
+  ]);
 
   if (!result.success || !result.data) {
     notFound();
   }
 
   const inq = result.data;
+  const activities = activitiesResult.data ?? [];
+  const staffList = staffResult.data ?? [];
+
   const fullAddress = inq.address_detail
     ? `${inq.address} ${inq.address_detail}`
     : inq.address;
@@ -114,7 +139,6 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
                 <Camera className="w-4 h-4 text-gray-400" />
                 첨부 파일 ({inq.photo_urls.length}개)
               </h2>
-              {/* 이미지 썸네일 */}
               {inq.photo_urls.some(isImageUrl) && (
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-3">
                   {inq.photo_urls.filter(isImageUrl).map((url, i) => (
@@ -131,7 +155,6 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
                   ))}
                 </div>
               )}
-              {/* 문서 파일 목록 */}
               {inq.photo_urls.some((u) => !isImageUrl(u)) && (
                 <div className="space-y-2">
                   {inq.photo_urls.filter((u) => !isImageUrl(u)).map((url, i) => (
@@ -169,10 +192,20 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
               </span>
             </div>
           </div>
+
+          {/* 활동 이력 */}
+          <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+            <ActivityTimeline
+              activities={activities}
+              createdAt={inq.created_at}
+              companyName={inq.company_name}
+            />
+          </div>
         </div>
 
-        {/* 우측: 상태 관리 */}
+        {/* 우측: 상태 관리 + 담당자 + 빠른 연락 */}
         <div className="space-y-4">
+          {/* 상태 관리 */}
           <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
             <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">상태 관리</h2>
             <InquiryStatusUpdateForm
@@ -180,6 +213,37 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
               currentStatus={inq.status as InquiryStatus}
               currentNotes={inq.notes}
             />
+          </div>
+
+          {/* 담당자 배정 */}
+          <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+            <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">담당자 배정</h2>
+            <AssigneeSelect
+              inquiryId={inq.id}
+              currentAssigneeId={inq.assigned_to}
+              staffList={staffList}
+            />
+          </div>
+
+          {/* 빠른 연락 */}
+          <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
+            <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">빠른 연락</h2>
+            <div className="space-y-2">
+              <a
+                href={`tel:${inq.phone}`}
+                className="flex items-center gap-2 px-3 py-2.5 bg-primary/5 rounded-lg text-sm text-primary font-medium hover:bg-primary/10 transition-colors"
+              >
+                <Phone className="w-4 h-4 shrink-0" />
+                {inq.phone}
+              </a>
+              <a
+                href={`mailto:${inq.email}`}
+                className="flex items-center gap-2 px-3 py-2.5 bg-gray-50 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <Mail className="w-4 h-4 shrink-0 text-gray-400" />
+                <span className="truncate">{inq.email}</span>
+              </a>
+            </div>
           </div>
 
           {/* 타임스탬프 */}

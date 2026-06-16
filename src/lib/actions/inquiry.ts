@@ -22,6 +22,8 @@ export type InquiryStatus =
   | "completed"
   | "cancelled";
 
+export type ActivityType = "status_change" | "assigned" | "note_added";
+
 export interface Inquiry {
   id: string;
   created_at: string;
@@ -39,6 +41,7 @@ export interface Inquiry {
   agreement: boolean;
   status: InquiryStatus;
   notes: string | null;
+  assigned_to: string | null;
   // legacy
   region_sido: string | null;
   region_sigungu: string | null;
@@ -47,6 +50,18 @@ export interface Inquiry {
   collection_date: string | null;
   frequency: string | null;
   message: string | null;
+}
+
+export interface InquiryActivity {
+  id: string;
+  inquiry_id: string;
+  actor_id: string | null;
+  actor_name: string | null;
+  action_type: ActivityType;
+  from_status: string | null;
+  to_status: string | null;
+  note: string | null;
+  created_at: string;
 }
 
 export interface InquiryFilters {
@@ -181,7 +196,7 @@ export async function submitInquiry(
 
 // ─── 관리자 전용: 역할 검증 헬퍼 ─────────────────────────────────────────────────
 
-async function requireStaff(): Promise<void> {
+async function requireStaff(): Promise<{ id: string; full_name: string | null }> {
   const supabase = createClient();
   const {
     data: { user },
@@ -194,13 +209,15 @@ async function requireStaff(): Promise<void> {
   const adminClient = createAdminClient();
   const { data: profile } = await adminClient
     .from("profiles")
-    .select("role")
+    .select("role, full_name")
     .eq("id", user.id)
     .single();
 
   if (!profile || !isStaff(profile.role)) {
     throw new Error("접근 권한이 없습니다");
   }
+
+  return { id: user.id, full_name: (profile as { role: string; full_name: string | null }).full_name ?? null };
 }
 
 // ─── 관리자 액션 ───────────────────────────────────────────────────────────────
@@ -288,8 +305,9 @@ export async function updateInquiryStatus(
   status: InquiryStatus,
   notes?: string
 ): Promise<ActionResult> {
+  let actor: { id: string; full_name: string | null };
   try {
-    await requireStaff();
+    actor = await requireStaff();
   } catch {
     return { success: false, error: "접근 권한이 없습니다" };
   }
@@ -302,6 +320,14 @@ export async function updateInquiryStatus(
   }
 
   const supabase = createAdminClient();
+
+  // 현재 상태 조회 (이력 기록용)
+  const { data: current } = await supabase
+    .from("inquiries")
+    .select("status, notes")
+    .eq("id", id)
+    .single();
+
   const updateData: Record<string, unknown> = { status };
   if (notes !== undefined) updateData.notes = notes;
 
@@ -315,8 +341,162 @@ export async function updateInquiryStatus(
     return { success: false, error: "상태 업데이트 중 오류가 발생했습니다" };
   }
 
+  // 활동 이력 기록
+  const activities: Array<Record<string, unknown>> = [];
+
+  if (current?.status !== status) {
+    activities.push({
+      inquiry_id: id,
+      actor_id: actor.id,
+      actor_name: actor.full_name,
+      action_type: "status_change",
+      from_status: current?.status ?? null,
+      to_status: status,
+    });
+  }
+
+  if (notes !== undefined && notes.trim() && notes !== (current as { notes?: string } | null)?.notes) {
+    activities.push({
+      inquiry_id: id,
+      actor_id: actor.id,
+      actor_name: actor.full_name,
+      action_type: "note_added",
+      note: notes,
+    });
+  }
+
+  if (activities.length > 0) {
+    const { error: actErr } = await supabase
+      .from("inquiry_activities")
+      .insert(activities);
+    if (actErr) console.error("[updateInquiryStatus] activity log error:", actErr);
+  }
+
   revalidatePath("/admin/inquiries");
   revalidatePath(`/admin/inquiries/${id}`);
 
   return { success: true };
+}
+
+export async function assignInquiry(
+  inquiryId: string,
+  staffId: string | null
+): Promise<ActionResult> {
+  let actor: { id: string; full_name: string | null };
+  try {
+    actor = await requireStaff();
+  } catch {
+    return { success: false, error: "접근 권한이 없습니다" };
+  }
+
+  const supabase = createAdminClient();
+
+  const { data: current } = await supabase
+    .from("inquiries")
+    .select("assigned_to")
+    .eq("id", inquiryId)
+    .single();
+
+  const { error } = await supabase
+    .from("inquiries")
+    .update({ assigned_to: staffId })
+    .eq("id", inquiryId);
+
+  if (error) {
+    console.error("[assignInquiry] error:", error);
+    return { success: false, error: "담당자 배정 중 오류가 발생했습니다" };
+  }
+
+  if ((current as { assigned_to?: string | null } | null)?.assigned_to !== staffId) {
+    let note: string;
+    if (!staffId) {
+      note = "담당자 배정 해제";
+    } else {
+      const { data: staffProfile } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", staffId)
+        .single();
+      const name = (staffProfile as { full_name?: string | null } | null)?.full_name;
+      note = `담당자 배정: ${name ?? staffId}`;
+    }
+
+    const { error: actErr } = await supabase
+      .from("inquiry_activities")
+      .insert({
+        inquiry_id: inquiryId,
+        actor_id: actor.id,
+        actor_name: actor.full_name,
+        action_type: "assigned",
+        note,
+      });
+    if (actErr) console.error("[assignInquiry] activity log error:", actErr);
+  }
+
+  revalidatePath(`/admin/inquiries/${inquiryId}`);
+  revalidatePath("/admin/inquiries");
+
+  return { success: true };
+}
+
+export interface AssignableStaff {
+  id: string;
+  full_name: string | null;
+  email: string;
+  role: string;
+}
+
+export async function getAssignableStaff(): Promise<ActionResult<AssignableStaff[]>> {
+  try {
+    await requireStaff();
+  } catch {
+    return { success: false, error: "접근 권한이 없습니다" };
+  }
+
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, full_name, role")
+    .neq("role", "customer")
+    .order("full_name");
+
+  if (error) {
+    return { success: false, error: "직원 목록을 불러오는 중 오류가 발생했습니다" };
+  }
+
+  // email은 auth.users 테이블에 있으므로 profiles에서 가져올 수 없음
+  // AssigneeSelect에서 full_name을 우선 표시하므로 email 없이도 충분
+  return {
+    success: true,
+    data: (data ?? []).map((p) => ({
+      id: (p as { id: string }).id,
+      full_name: (p as { full_name: string | null }).full_name,
+      email: "",
+      role: (p as { role: string }).role,
+    })),
+  };
+}
+
+export async function getInquiryActivities(
+  inquiryId: string
+): Promise<ActionResult<InquiryActivity[]>> {
+  try {
+    await requireStaff();
+  } catch {
+    return { success: false, error: "접근 권한이 없습니다" };
+  }
+
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("inquiry_activities")
+    .select("*")
+    .eq("inquiry_id", inquiryId)
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error("[getInquiryActivities] error:", error);
+    return { success: false, error: "이력을 불러오는 중 오류가 발생했습니다" };
+  }
+
+  return { success: true, data: (data ?? []) as InquiryActivity[] };
 }

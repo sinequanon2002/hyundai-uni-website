@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getInquiries, type InquiryStatus } from "@/lib/actions/inquiry";
+import { getInquiries, getAssignableStaff, type InquiryStatus } from "@/lib/actions/inquiry";
 import { InquiryStatusBadge } from "@/components/admin/InquiryStatusBadge";
 import { InquirySearchInput } from "@/components/admin/InquirySearchInput";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, UserCircle } from "lucide-react";
 
 interface PageProps {
   searchParams: {
@@ -26,9 +26,15 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
   const page = Math.max(1, parseInt(searchParams.page ?? "1", 10));
   const search = searchParams.search ?? "";
 
-  const result = await getInquiries({ status, page, search, pageSize: 20 });
+  const [result, staffResult] = await Promise.all([
+    getInquiries({ status, page, search, pageSize: 20 }),
+    getAssignableStaff(),
+  ]);
   const { inquiries = [], total = 0, totalPages = 1 } =
     result.success && result.data ? result.data : {};
+  const staffMap = Object.fromEntries(
+    (staffResult.data ?? []).map((s) => [s.id, s.full_name ?? "이름없음"])
+  );
 
   const buildHref = (params: Record<string, string>) => {
     const base = new URLSearchParams(searchParams as Record<string, string>);
@@ -93,7 +99,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
                     <InquiryStatusBadge status={inq.status as InquiryStatus} />
                   </div>
                   <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[13px]">
-                    <dt className="text-gray-400">담당자</dt>
+                    <dt className="text-gray-400">고객사 담당</dt>
                     <dd className="text-gray-700">
                       {inq.contact_name}
                       {inq.department ? ` · ${inq.department}` : ""}
@@ -106,6 +112,10 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
                       {inq.waste_types.length > 1 && (
                         <span className="text-gray-400"> +{inq.waste_types.length - 1}</span>
                       )}
+                    </dd>
+                    <dt className="text-gray-400">배정</dt>
+                    <dd className={inq.assigned_to ? "text-primary font-medium" : "text-gray-400 italic"}>
+                      {inq.assigned_to ? (staffMap[inq.assigned_to] ?? "알수없음") : "미배정"}
                     </dd>
                   </dl>
                   <div className="mt-2.5 pt-2.5 border-t border-gray-50 flex items-center justify-between">
@@ -128,9 +138,12 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
                     <th className="text-left px-4 py-3 font-semibold text-gray-600 w-36">접수일</th>
                     <th className="text-left px-4 py-3 font-semibold text-gray-600">사업장명</th>
                     <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden md:table-cell">소속팀</th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600">담당자</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600">고객사 담당</th>
                     <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">연락처</th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600">폐기물</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden xl:table-cell">폐기물</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">
+                      <span className="flex items-center gap-1"><UserCircle className="w-3.5 h-3.5" />배정</span>
+                    </th>
                     <th className="text-left px-4 py-3 font-semibold text-gray-600 w-24">상태</th>
                     <th className="text-center px-4 py-3 font-semibold text-gray-600 w-16">상세</th>
                   </tr>
@@ -149,12 +162,21 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
                       </td>
                       <td className="px-4 py-3 text-gray-600">{inq.contact_name}</td>
                       <td className="px-4 py-3 text-gray-600 hidden lg:table-cell">{inq.phone}</td>
-                      <td className="px-4 py-3 text-gray-600">
+                      <td className="px-4 py-3 text-gray-600 hidden xl:table-cell">
                         {inq.waste_types[0]}
                         {inq.waste_types.length > 1 && (
                           <span className="text-gray-400 text-xs ml-1">
                             +{inq.waste_types.length - 1}
                           </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 hidden lg:table-cell">
+                        {inq.assigned_to ? (
+                          <span className="text-xs font-medium text-primary">
+                            {staffMap[inq.assigned_to] ?? "알수없음"}
+                          </span>
+                        ) : (
+                          <span className="text-xs text-gray-400 italic">미배정</span>
                         )}
                       </td>
                       <td className="px-4 py-3">
