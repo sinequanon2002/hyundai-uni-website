@@ -8,6 +8,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { isStaff } from "@/lib/auth/roles";
 import { InquiryNotificationEmail } from "@/emails/InquiryNotificationEmail";
 import { InquiryConfirmationEmail } from "@/emails/InquiryConfirmationEmail";
+import { InquiryStatusUpdateEmail, type NotifiableStatus } from "@/emails/InquiryStatusUpdateEmail";
 
 function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
@@ -321,10 +322,10 @@ export async function updateInquiryStatus(
 
   const supabase = createAdminClient();
 
-  // 현재 상태 조회 (이력 기록용)
+  // 현재 상태 조회 (이력 기록 + 이메일용)
   const { data: current } = await supabase
     .from("inquiries")
-    .select("status, notes")
+    .select("status, notes, email, contact_name, company_name, waste_types")
     .eq("id", id)
     .single();
 
@@ -370,6 +371,52 @@ export async function updateInquiryStatus(
       .from("inquiry_activities")
       .insert(activities);
     if (actErr) console.error("[updateInquiryStatus] activity log error:", actErr);
+  }
+
+  // 상태 전환 시 고객 이메일 알림 (비동기 fire-and-forget)
+  const NOTIFY_STATUSES: NotifiableStatus[] = ["reviewing", "quoted", "completed"];
+  const statusChanged = current?.status !== status;
+  const shouldNotify = statusChanged && NOTIFY_STATUSES.includes(status as NotifiableStatus);
+
+  if (shouldNotify && current) {
+    const inq = current as {
+      email?: string;
+      contact_name?: string;
+      company_name?: string;
+      waste_types?: string[];
+    };
+
+    if (inq.email) {
+      const SUBJECT_MAP: Record<NotifiableStatus, string> = {
+        reviewing: `[검토 시작] ${inq.company_name ?? ""} 견적 문의 - 현대유앤아이`,
+        quoted:    `[견적 준비 완료] ${inq.company_name ?? ""} 견적 문의 - 현대유앤아이`,
+        completed: `[처리 완료] ${inq.company_name ?? ""} - 현대유앤아이`,
+      };
+
+      void (async () => {
+        try {
+          const result = await getResend().emails.send({
+            from: `현대유앤아이 <${process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev"}>`,
+            to: [inq.email!],
+            subject: SUBJECT_MAP[status as NotifiableStatus],
+            react: InquiryStatusUpdateEmail({
+              status: status as NotifiableStatus,
+              contactName: inq.contact_name ?? "",
+              companyName: inq.company_name ?? "",
+              wasteTypes: inq.waste_types ?? [],
+              inquiryId: id,
+            }),
+          });
+          if (result.error) {
+            console.error("[updateInquiryStatus] status email error:", result.error);
+          } else {
+            console.log(`[updateInquiryStatus] status email sent (${status}):`, result.data?.id);
+          }
+        } catch (err) {
+          console.error("[updateInquiryStatus] status email exception:", err);
+        }
+      })();
+    }
   }
 
   revalidatePath("/admin/inquiries");
