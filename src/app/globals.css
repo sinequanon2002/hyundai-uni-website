@@ -4,21 +4,24 @@
 
 @layer base {
   :root {
-    /* ── 디자인 시스템 색상 토큰 ── */
-    --navy-900: #0F172A;
-    --navy-800: #1E293B;
-    --navy-700: #334155;
-    --navy-600: #475569;
-    --cobalt-700: #1D4ED8;
-    --cobalt-600: #2563EB;
-    --cobalt-500: #3B82F6;
-    --cobalt-100: #DBEAFE;
-    --cobalt-50:  #EFF6FF;
-    --mint-600: #059669;
-    --mint-500: #10B981;
-    --mint-400: #34D399;
-    --mint-100: #D1FAE5;
-    --mint-50:  #ECFDF5;
+    /* ── ClickUp 디자인 시스템 색상 토큰 ── */
+    --navy-900: #090c1d;   /* Midnight Ink */
+    --navy-800: #292d34;   /* Charcoal */
+    --navy-700: #646464;   /* Slate */
+    --navy-600: #9ea3ae;   /* Muted */
+    --cobalt-700: #6647f0; /* Ultra Violet */
+    --cobalt-600: #7b68ee; /* Brand Violet */
+    --cobalt-500: #9b8ff6; /* Light Violet */
+    --cobalt-100: #ede9ff; /* Violet 100 */
+    --cobalt-50:  #f5f3ff; /* Violet 50 */
+    --mint-600: #6647f0;   /* Ultra Violet (alias) */
+    --mint-500: #7b68ee;   /* Brand Violet (alias) */
+    --mint-400: #9b8ff6;   /* Light Violet (alias) */
+    --mint-100: #ede9ff;
+    --mint-50:  #f5f3ff;
+    --carbon:   #202023;   /* Primary CTA Dark */
+    --linen:    #e9ebf0;   /* Section bg alternating */
+    --paper:    #f8f9fa;   /* Card bg */
     --slate-50:  #F8FAFC;
     --slate-100: #F1F5F9;
     --slate-200: #E2E8F0;
@@ -28,19 +31,19 @@
 
     /* ── 시맨틱 토큰 ── */
     --text-strong:   var(--navy-900);
-    --text-body:     var(--navy-700);
+    --text-body:     var(--navy-800);
     --text-muted:    var(--slate-500);
     --text-inverse:  #FFFFFF;
     --text-link:     var(--cobalt-600);
-    --surface-page:  var(--slate-50);
-    --surface-card:  #FFFFFF;
-    --surface-sunken: var(--slate-100);
+    --surface-page:  #ffffff;
+    --surface-card:  #ffffff;
+    --surface-sunken: var(--linen);
     --border-subtle: var(--slate-200);
     --border-default: var(--slate-300);
-    --action-primary: var(--cobalt-600);
-    --action-primary-hover: var(--cobalt-700);
-    --accent-cta: var(--mint-500);
-    --accent-cta-hover: var(--mint-600);
+    --action-primary: var(--carbon);
+    --action-primary-hover: var(--navy-800);
+    --accent-cta: var(--cobalt-600);
+    --accent-cta-hover: var(--cobalt-700);
 
     /* ── 글래스 효과 ── */
     --glass-bg:     rgba(255,255,255,0.85);
@@ -54,7 +57,7 @@
 
     /* ── 기존 호환 ── */
     --background: #ffffff;
-    --foreground: #1a1a1a;
+    --foreground: #090c1d;
   }
 
   html {
@@ -69,7 +72,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Pretendard Variable', 'Pretendard', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   line-height: 1.6;
   letter-spacing: -0.01em;
 }

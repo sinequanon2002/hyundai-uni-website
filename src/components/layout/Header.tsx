@@ -242,12 +242,12 @@ export function Header() {
               {COMPANY.tel}
             </a>
 
-            {/* CTA 버튼 — mint 액센트 */}
+            {/* CTA 버튼 — Carbon 프라이머리 액션 */}
             <Link
               href={CTA_ITEM.href}
               className={cn(
-                "ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-pill text-sm font-bold transition-all duration-200 shadow-ds-md hover:shadow-glow-cta hover:-translate-y-px bg-mint-500 text-white hover:bg-mint-600",
-                pathname === CTA_ITEM.href && "bg-mint-600"
+                "ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-[9px] text-sm font-bold transition-all duration-200 shadow-ds-md hover:-translate-y-px bg-[#202023] text-white hover:opacity-90",
+                pathname === CTA_ITEM.href && "opacity-90"
               )}
             >
               <FileText size={16} />
@@ -374,7 +374,7 @@ export function Header() {
           <div className="pt-8 pb-12">
             <Link
               href="/support/inquiry"
-              className="flex items-center justify-center gap-2 w-full py-4 text-center bg-mint-500 text-white rounded-xl font-bold shadow-glow-cta hover:bg-mint-600 transition-colors"
+              className="flex items-center justify-center gap-2 w-full py-4 text-center bg-[#202023] text-white rounded-[9px] font-bold hover:opacity-90 transition-opacity shadow-ds-md"
             >
               <ArrowRight size={18} />
               견적 문의하기
