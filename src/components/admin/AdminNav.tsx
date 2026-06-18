@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   Menu, X, ClipboardList, FileText, Users, Truck, Receipt,
   BookOpen, Bell, Image as GalleryIcon, UserCog, Settings,
-  LogOut, Globe, ChevronRight,
+  LogOut, Globe, ChevronRight, ClipboardCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { logout } from "@/lib/actions/auth";
@@ -40,9 +40,10 @@ const BASE_GROUPS: NavGroup[] = [
   {
     title: "콘텐츠",
     items: [
-      { href: "/admin/brochures", label: "소개서 신청", icon: BookOpen },
-      { href: "/admin/notices",   label: "공지사항",    icon: Bell },
-      { href: "/admin/gallery",   label: "현장갤러리",  icon: GalleryIcon },
+      { href: "/admin/brochures",        label: "소개서 신청",    icon: BookOpen },
+      { href: "/admin/checklist-leads",  label: "체크리스트 리드", icon: ClipboardCheck },
+      { href: "/admin/notices",          label: "공지사항",        icon: Bell },
+      { href: "/admin/gallery",          label: "현장갤러리",      icon: GalleryIcon },
     ],
   },
 ];
