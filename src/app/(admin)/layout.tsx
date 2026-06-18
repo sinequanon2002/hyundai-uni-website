@@ -42,18 +42,17 @@ export default async function AdminLayout({
   const roleLabel   = ROLE_LABELS[profile.role as UserRole] ?? profile.role;
 
   return (
-    <div className="min-h-dvh bg-gray-50 flex flex-col">
-      {/* 관리자 헤더 */}
+    <div className="min-h-dvh bg-gray-50 lg:flex">
       <AdminNav
         isAdmin={isAdmin(profile.role)}
         displayName={displayName}
         roleLabel={roleLabel}
       />
-
-      {/* 컨텐츠 */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {children}
-      </main>
+      <div className="flex-1 flex flex-col min-w-0">
+        <main className="flex-1 px-4 sm:px-6 py-6 sm:py-8">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }
