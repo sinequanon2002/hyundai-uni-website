@@ -12,11 +12,14 @@ interface NavLink {
 }
 
 const BASE_LINKS: NavLink[] = [
-  { href: "/admin/inquiries", label: "견적 문의" },
-  { href: "/admin/quotes",    label: "견적서" },
-  { href: "/admin/brochures", label: "소개서 신청" },
-  { href: "/admin/notices",   label: "공지사항" },
-  { href: "/admin/gallery",   label: "현장갤러리" },
+  { href: "/admin/inquiries",  label: "견적 문의" },
+  { href: "/admin/quotes",     label: "견적서" },
+  { href: "/admin/customers",  label: "고객 관리" },
+  { href: "/admin/dispatches", label: "수거 건" },
+  { href: "/admin/invoices",   label: "세금계산서" },
+  { href: "/admin/brochures",  label: "소개서 신청" },
+  { href: "/admin/notices",    label: "공지사항" },
+  { href: "/admin/gallery",    label: "현장갤러리" },
 ];
 
 const ADMIN_LINKS: NavLink[] = [

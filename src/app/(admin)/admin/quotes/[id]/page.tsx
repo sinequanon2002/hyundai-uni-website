@@ -4,7 +4,7 @@ import { getQuotationById, generateQuotePdf, sendQuotation } from "@/lib/actions
 import type { QuoteStatus } from "@/lib/actions/quotes";
 import {
   ArrowLeft, Download, Send, FileText, Building2,
-  User, Phone, Mail, MapPin, Calendar,
+  User, Phone, Mail, MapPin, Calendar, Truck,
 } from "lucide-react";
 import { SendQuoteButton } from "@/components/admin/SendQuoteButton";
 import { GeneratePdfButton } from "@/components/admin/GeneratePdfButton";
@@ -79,6 +79,13 @@ export default async function QuoteDetailPage({ params }: PageProps) {
           {q.status === "draft" && (
             <SendQuoteButton quoteId={q.id} email={q.email} />
           )}
+          <Link
+            href={`/admin/dispatches/new?quotation_id=${q.id}`}
+            className="inline-flex items-center gap-2 px-3 py-2 text-sm border border-primary/30 bg-primary/5 text-primary rounded-lg hover:bg-primary/10 transition-colors"
+          >
+            <Truck className="w-4 h-4" />
+            수거 건 생성
+          </Link>
           <Link
             href={`/admin/inquiries/${q.inquiry_id}`}
             className="inline-flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"

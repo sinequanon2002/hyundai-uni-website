@@ -91,6 +91,13 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
         <div className="flex items-center gap-2 shrink-0 flex-wrap">
           <InquiryStatusBadge status={inq.status as InquiryStatus} className="text-sm px-3 py-1.5" />
           <Link
+            href={`/admin/customers/new?inquiry_id=${inq.id}`}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium border border-gray-200 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+          >
+            <Building2 className="w-3.5 h-3.5" />
+            고객 등록
+          </Link>
+          <Link
             href={`/admin/quotes/new?inquiry_id=${inq.id}`}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-primary text-white rounded-lg hover:bg-secondary transition-colors"
           >
