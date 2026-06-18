@@ -47,13 +47,13 @@ export default function ServicePage() {
       <div className="max-w-6xl mx-auto px-4 py-12 md:py-20 animate-fade-in-up">
 
         {/* ── 지정폐기물이란? ── */}
-        <div className="mb-14 bg-white rounded-2xl border border-neutral-200 overflow-hidden">
-          <div className="bg-primary px-8 py-6">
+        <div className="mb-14 bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <div className="bg-cobalt-600 px-8 py-6">
             <span className="text-xs font-bold text-white/70 tracking-widest uppercase block mb-1">법적 정의</span>
             <h2 className="text-xl md:text-2xl font-bold text-white">지정폐기물이란?</h2>
           </div>
           <div className="p-6 md:p-8">
-            <blockquote className="border-l-4 border-primary/40 pl-5 py-1 mb-6 text-neutral-700 text-sm leading-relaxed">
+            <blockquote className="border-l-4 border-cobalt-600/40 pl-5 py-1 mb-6 text-navy-700 text-sm leading-relaxed">
               사업장에서 발생하는 폐기물 중 주변 환경을 오염시킬 수 있거나 인체에 위해를 줄 수 있는 유해한 물질로서 대통령령으로 정하는 폐기물
               <span className="block text-xs text-neutral-400 mt-1">— 폐기물관리법 제2조 제4호</span>
             </blockquote>
@@ -62,7 +62,7 @@ export default function ServicePage() {
                 { icon: ShieldAlert, label: "무단투기 시", value: "7년 이하 징역 / 5천만원 벌금", color: "text-red-600 bg-red-50 border-red-100" },
                 { icon: FileCheck,   label: "처리 전 필수", value: "올바로시스템 전자인계서 작성", color: "text-blue-600 bg-blue-50 border-blue-100" },
                 { icon: Truck,       label: "운반 가능 업체", value: "환경부 허가 수집·운반업체만", color: "text-amber-600 bg-amber-50 border-amber-100" },
-                { icon: Eye,         label: "관리 방식", value: "전 과정 전자 추적·기록 의무", color: "text-primary bg-primary/5 border-primary/15" },
+                { icon: Eye,         label: "관리 방식", value: "전 과정 전자 추적·기록 의무", color: "text-cobalt-600 bg-cobalt-50 border-cobalt-600/15" },
               ].map(({ icon: Icon, label, value, color }) => (
                 <div key={label} className={`rounded-xl border p-4 ${color}`}>
                   <Icon className="w-5 h-5 mb-2" />
@@ -76,9 +76,9 @@ export default function ServicePage() {
 
         {/* ══════════ SECTION 1: 서비스 영역 ══════════ */}
         <div className="text-center mb-12">
-          <span className="text-xs font-bold text-accent tracking-widest uppercase block mb-2">서비스 영역</span>
-          <h2 className="text-2xl md:text-4xl font-bold mb-4 text-gray-900">처리 가능 폐기물</h2>
-          <p className="text-gray-600 inline-flex items-center px-4 py-2 bg-gray-100 rounded-full font-medium text-sm md:text-base">
+          <span className="text-xs font-bold text-cobalt-600 tracking-widest uppercase block mb-2">서비스 영역</span>
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 text-navy-900">처리 가능 폐기물</h2>
+          <p className="text-slate-500 inline-flex items-center px-4 py-2 bg-slate-100 rounded-full font-medium text-sm md:text-base">
             「폐기물관리법 시행령」 별표1 기준 분류체계
           </p>
         </div>
@@ -92,29 +92,29 @@ export default function ServicePage() {
             return (
               <div
                 key={waste.id}
-                className={`bg-white rounded-2xl shadow-sm border overflow-hidden transition-all duration-300 ${isOpen ? 'ring-2 ring-primary border-transparent' : 'border-gray-200 hover:border-primary/50 hover:shadow-md'}`}
+                className={`bg-white rounded-xl shadow-ds-sm border overflow-hidden transition-all duration-300 ${isOpen ? 'ring-2 ring-cobalt-600 border-transparent' : 'border-slate-200 hover:border-cobalt-600/50 hover:shadow-ds-md'}`}
               >
                 <button
                   onClick={() => setOpenId(openId === waste.id ? null : waste.id)}
-                  className="w-full text-left p-6 flex flex-col items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                  className="w-full text-left p-6 flex flex-col items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt-600/50"
                 >
                   <div className="w-full flex justify-between items-start mb-4">
-                    <div className={`w-14 h-14 rounded-full flex items-center justify-center transition-colors ${isOpen ? 'bg-primary text-white' : 'bg-primary/10 text-primary'}`}>
+                    <div className={`w-14 h-14 rounded-full flex items-center justify-center transition-colors ${isOpen ? 'bg-cobalt-600 text-white' : 'bg-cobalt-50 text-cobalt-600'}`}>
                       <Icon className="w-7 h-7" />
                     </div>
-                    <ChevronDown className={`w-6 h-6 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-6 h-6 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{waste.name}</h3>
-                  <p className="text-gray-500 text-sm font-medium">{waste.summary}</p>
+                  <h3 className="text-xl font-bold text-navy-900 mb-2">{waste.name}</h3>
+                  <p className="text-slate-500 text-sm font-medium">{waste.summary}</p>
                 </button>
 
                 <div className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-56 opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <div className="px-6 pb-6 pt-0 text-gray-600 leading-relaxed border-t border-gray-100 mt-2">
+                  <div className="px-6 pb-6 pt-0 text-slate-500 leading-relaxed border-t border-slate-200 mt-2">
                     <div className="pt-4 text-sm">{waste.details}</div>
                     {slug && (
                       <Link
                         href={`/waste/types/${slug}`}
-                        className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                        className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-cobalt-600 hover:underline"
                         onClick={(e) => e.stopPropagation()}
                       >
                         수거·운반 서비스 자세히 보기
@@ -129,14 +129,14 @@ export default function ServicePage() {
         </div>
 
         {/* 견적 문의 CTA */}
-        <div className="mt-10 bg-primary/5 rounded-2xl border border-primary/15 p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-10 bg-cobalt-50 rounded-xl border border-cobalt-600/15 p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <h3 className="text-base font-bold text-neutral-900 mb-1">처리 가능 여부가 불확실한 폐기물도 문의해 주세요</h3>
-            <p className="text-sm text-neutral-600">목록에 없는 품목도 담당자가 검토 후 안내해 드립니다.</p>
+            <h3 className="text-base font-bold text-navy-900 mb-1">처리 가능 여부가 불확실한 폐기물도 문의해 주세요</h3>
+            <p className="text-sm text-slate-500">목록에 없는 품목도 담당자가 검토 후 안내해 드립니다.</p>
           </div>
           <Link
             href="/support/inquiry"
-            className="shrink-0 inline-flex items-center gap-1.5 bg-primary text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-primary/90 transition-colors"
+            className="shrink-0 inline-flex items-center gap-1.5 bg-mint-500 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-mint-600 transition-colors"
           >
             견적 문의
             <ArrowRight className="w-4 h-4" />
@@ -145,9 +145,9 @@ export default function ServicePage() {
 
         {/* ══════════ SECTION 2: 처리 절차 ══════════ */}
         <div className="mt-20 mb-12 text-center" id="process">
-          <span className="text-xs font-bold text-accent tracking-widest uppercase block mb-2">처리 절차</span>
-          <h2 className="text-2xl md:text-4xl font-bold mb-4 text-gray-900">6단계 처리 프로세스</h2>
-          <p className="text-gray-600 text-sm md:text-base">배출부터 최종 처리까지, 완벽한 적법 절차를 준수합니다.</p>
+          <span className="text-xs font-bold text-cobalt-600 tracking-widest uppercase block mb-2">처리 절차</span>
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 text-navy-900">6단계 처리 프로세스</h2>
+          <p className="text-slate-500 text-sm md:text-base">배출부터 최종 처리까지, 완벽한 적법 절차를 준수합니다.</p>
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -155,13 +155,13 @@ export default function ServicePage() {
         </div>
 
         {/* 올바로시스템 소개 */}
-        <div className="mt-16 max-w-4xl mx-auto bg-white rounded-2xl border border-neutral-200 overflow-hidden">
-          <div className="bg-secondary px-8 py-6">
+        <div className="mt-16 max-w-4xl mx-auto bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <div className="bg-cobalt-500 px-8 py-6">
             <span className="text-xs font-bold text-white/70 tracking-widest uppercase block mb-1">3단계 필수 도구</span>
             <h2 className="text-xl md:text-2xl font-bold text-white">올바로시스템이란?</h2>
           </div>
           <div className="p-6 md:p-8">
-            <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+            <p className="text-sm text-slate-500 leading-relaxed mb-6">
               한국환경공단이 운영하는 지정폐기물 전자 인계·관리 시스템으로, 배출부터 운반·처리까지 전 과정을 전산으로 추적합니다.
               지정폐기물 배출 전 <strong>전자인계서 작성은 법적 의무</strong>이며, 미작성 시 과태료 처분을 받습니다.
             </p>
@@ -172,16 +172,16 @@ export default function ServicePage() {
                 { icon: FileText,    label: "법적 증빙",   desc: "처리 완료 증빙서류 자동 보관" },
                 { icon: CheckCircle, label: "처리 결과",   desc: "최종 처리 결과 통보 및 이력 관리" },
               ].map(({ icon: Icon, label, desc }) => (
-                <div key={label} className="bg-secondary/5 border border-secondary/15 rounded-xl p-4">
-                  <Icon className="w-5 h-5 text-secondary mb-2" />
-                  <p className="text-xs font-bold text-neutral-800 mb-0.5">{label}</p>
-                  <p className="text-[11px] text-neutral-500 leading-snug">{desc}</p>
+                <div key={label} className="bg-cobalt-500/5 border border-cobalt-500/15 rounded-xl p-4">
+                  <Icon className="w-5 h-5 text-cobalt-500 mb-2" />
+                  <p className="text-xs font-bold text-navy-900 mb-0.5">{label}</p>
+                  <p className="text-[11px] text-slate-500 leading-snug">{desc}</p>
                 </div>
               ))}
             </div>
             <Link
               href="/blog?category=올바로시스템"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-secondary hover:underline underline-offset-4"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-cobalt-500 hover:underline underline-offset-4"
             >
               올바로시스템 작성 가이드 보기
               <ArrowRight className="w-4 h-4" />

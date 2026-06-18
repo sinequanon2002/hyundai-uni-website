@@ -70,7 +70,7 @@ export default async function BlogDetailPage({ params }: Props) {
         {/* 뒤로가기 */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-cobalt-600 transition-colors mb-8"
         >
           <ChevronLeft className="w-4 h-4" />
           블로그 목록
@@ -78,37 +78,37 @@ export default async function BlogDetailPage({ params }: Props) {
 
         {/* 썸네일 */}
         {post.thumbnail_url && (
-          <div className="rounded-2xl overflow-hidden mb-8 aspect-[16/9] bg-neutral-100">
+          <div className="rounded-xl overflow-hidden mb-8 aspect-[16/9] bg-slate-100">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={post.thumbnail_url} alt={post.title} className="w-full h-full object-cover" />
           </div>
         )}
 
         {/* 헤더 */}
-        <div className="border-t-2 border-primary pt-8 pb-6 border-b border-neutral-200">
+        <div className="border-t-2 border-cobalt-600 pt-8 pb-6 border-b border-slate-200">
           <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${categoryColorMap[post.category] ?? "bg-gray-100 text-gray-600"}`}>
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${categoryColorMap[post.category] ?? "bg-slate-100 text-slate-500"}`}>
               {post.category}
             </span>
             {post.tags?.map((t) => (
-              <span key={t} className="inline-flex items-center gap-1 text-xs text-neutral-500 bg-neutral-100 px-2.5 py-1 rounded-full">
+              <span key={t} className="inline-flex items-center gap-1 text-xs text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
                 <Tag className="w-3 h-3" />
                 {t}
               </span>
             ))}
           </div>
 
-          <h1 className="text-xl md:text-2xl font-bold text-neutral-900 leading-tight mb-4 break-keep">
+          <h1 className="text-xl md:text-2xl font-bold text-navy-900 leading-tight mb-4 break-keep">
             {post.title}
           </h1>
 
           {post.excerpt && (
-            <p className="text-neutral-500 text-sm leading-relaxed mb-4 bg-neutral-50 rounded-xl p-4 border border-neutral-100">
+            <p className="text-slate-500 text-sm leading-relaxed mb-4 bg-slate-50 rounded-xl p-4 border border-slate-200">
               {post.excerpt}
             </p>
           )}
 
-          <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-400">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
               {new Date(post.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
@@ -128,20 +128,20 @@ export default async function BlogDetailPage({ params }: Props) {
 
         {/* 본문 */}
         <div
-          className="py-10 md:py-14 prose prose-neutral max-w-none leading-relaxed text-neutral-700
-                     prose-headings:text-neutral-900 prose-p:mb-4 prose-ul:pl-5 prose-ol:pl-5 prose-li:mb-1
+          className="py-10 md:py-14 prose prose-neutral max-w-none leading-relaxed text-navy-700
+                     prose-headings:text-navy-900 prose-p:mb-4 prose-ul:pl-5 prose-ol:pl-5 prose-li:mb-1
                      min-h-[200px]"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
         {/* 하단 CTA */}
-        <div className="mt-10 bg-primary/5 rounded-2xl border border-primary/15 p-6 text-center">
-          <p className="text-sm text-neutral-600 mb-4">
+        <div className="mt-10 bg-cobalt-50/50 rounded-xl border border-cobalt-50 p-6 text-center">
+          <p className="text-sm text-slate-500 mb-4">
             지정폐기물 처리가 필요하시면 무료 상담을 요청하세요.
           </p>
           <Link
             href="/support/inquiry"
-            className="inline-flex items-center gap-2 bg-primary text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center gap-2 bg-mint-500 text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-mint-600 transition-colors"
           >
             무료 견적 문의
           </Link>
@@ -151,7 +151,7 @@ export default async function BlogDetailPage({ params }: Props) {
         <div className="mt-8 flex justify-center">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 px-6 py-2.5 border border-neutral-300 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:border-primary hover:text-primary transition-all"
+            className="inline-flex items-center gap-2 px-6 py-2.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:border-cobalt-600 hover:text-cobalt-600 transition-all"
           >
             <ChevronLeft className="w-4 h-4" />
             블로그 목록으로

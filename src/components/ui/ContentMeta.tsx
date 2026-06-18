@@ -17,19 +17,19 @@ export function ContentMeta({ reviewDate, legalBasis, author = "현대유앤아�
   const displayDate = `${year}년 ${parseInt(month, 10)}월`;
 
   return (
-    <div className={`mt-10 pt-6 border-t border-neutral-200 flex flex-wrap gap-4 text-xs text-neutral-500 ${className}`}>
+    <div className={`mt-10 pt-6 border-t border-slate-200 flex flex-wrap gap-4 text-xs text-slate-500 ${className}`}>
       <span className="flex items-center gap-1.5">
         <Building2 className="w-3.5 h-3.5 shrink-0" />
-        작성·관리: <strong className="text-neutral-700">{author}</strong>
+        작성·관리: <strong className="text-navy-700">{author}</strong>
       </span>
       <span className="flex items-center gap-1.5">
         <CalendarDays className="w-3.5 h-3.5 shrink-0" />
-        최종 검토: <strong className="text-neutral-700">{displayDate}</strong>
+        최종 검토: <strong className="text-navy-700">{displayDate}</strong>
       </span>
       {legalBasis && (
         <span className="flex items-center gap-1.5">
           <BookOpen className="w-3.5 h-3.5 shrink-0" />
-          법령 근거: <strong className="text-neutral-700">{legalBasis}</strong>
+          법령 근거: <strong className="text-navy-700">{legalBasis}</strong>
         </span>
       )}
     </div>

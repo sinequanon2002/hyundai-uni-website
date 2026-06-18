@@ -56,9 +56,9 @@ export default async function NoticePage({ searchParams }: Props) {
 
       <section className="max-w-6xl mx-auto px-4 py-12 md:py-20">
         <div className="mb-10">
-          <span className="text-primary font-bold tracking-wider text-sm mb-2 block">NOTICE</span>
-          <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">공지사항</h2>
-          <div className="w-12 h-1 bg-accent mt-4" />
+          <span className="text-cobalt-600 font-bold tracking-wider text-sm mb-2 block">NOTICE</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-navy-900">공지사항</h2>
+          <div className="w-12 h-1 bg-mint-500 mt-4" />
         </div>
 
         {/* 검색 + 카테고리 */}
@@ -72,8 +72,8 @@ export default async function NoticePage({ searchParams }: Props) {
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
                   (cat === "전체" ? !category : category === cat)
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-neutral-100 text-neutral-600 hover:bg-gray-200"
+                    ? "bg-cobalt-600 text-white shadow-md"
+                    : "bg-slate-100 text-slate-500 hover:bg-slate-200"
                 )}
               >
                 {cat}
@@ -84,7 +84,7 @@ export default async function NoticePage({ searchParams }: Props) {
           {/* 검색 */}
           <form method="GET" action="/support/notice" className="relative w-full md:w-72">
             {category && <input type="hidden" name="category" value={category} />}
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
@@ -92,7 +92,7 @@ export default async function NoticePage({ searchParams }: Props) {
               name="search"
               defaultValue={search}
               placeholder="제목 검색..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 focus:border-cobalt-500 focus:ring-2 focus:ring-cobalt-500/20 outline-none text-sm transition-all"
             />
           </form>
         </div>
@@ -101,18 +101,18 @@ export default async function NoticePage({ searchParams }: Props) {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-t-2 border-primary border-b border-gray-200">
-                <th className="py-3 px-3 text-center w-16 font-semibold text-neutral-900">번호</th>
-                <th className="py-3 px-3 text-center w-24 font-semibold text-neutral-900">분류</th>
-                <th className="py-3 px-3 text-left font-semibold text-neutral-900">제목</th>
-                <th className="py-3 px-3 text-center w-28 font-semibold text-neutral-900 hidden md:table-cell">작성일</th>
-                <th className="py-3 px-3 text-center w-20 font-semibold text-neutral-900 hidden md:table-cell">조회수</th>
+              <tr className="border-t-2 border-cobalt-600 border-b border-slate-200">
+                <th className="py-3 px-3 text-center w-16 font-semibold text-navy-900">번호</th>
+                <th className="py-3 px-3 text-center w-24 font-semibold text-navy-900">분류</th>
+                <th className="py-3 px-3 text-left font-semibold text-navy-900">제목</th>
+                <th className="py-3 px-3 text-center w-28 font-semibold text-navy-900 hidden md:table-cell">작성일</th>
+                <th className="py-3 px-3 text-center w-20 font-semibold text-navy-900 hidden md:table-cell">조회수</th>
               </tr>
             </thead>
             <tbody>
               {notices.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-16 text-center text-gray-400">
+                  <td colSpan={5} className="py-16 text-center text-slate-400">
                     게시글이 없습니다.
                   </td>
                 </tr>
@@ -121,13 +121,13 @@ export default async function NoticePage({ searchParams }: Props) {
                   <tr
                     key={notice.id}
                     className={cn(
-                      "border-b border-gray-100 hover:bg-blue-50/50 transition-colors",
-                      notice.is_pinned && "bg-primary/5"
+                      "border-b border-slate-200 hover:bg-cobalt-50/30 transition-colors",
+                      notice.is_pinned && "bg-cobalt-50/50"
                     )}
                   >
-                    <td className="py-3.5 px-3 text-center text-gray-500">
+                    <td className="py-3.5 px-3 text-center text-slate-400">
                       {notice.is_pinned ? (
-                        <Pin className="w-4 h-4 mx-auto text-primary fill-primary" />
+                        <Pin className="w-4 h-4 mx-auto text-cobalt-600 fill-cobalt-600" />
                       ) : (
                         total - (page - 1) * ITEMS_PER_PAGE - idx
                       )}
@@ -136,7 +136,7 @@ export default async function NoticePage({ searchParams }: Props) {
                       <span
                         className={cn(
                           "inline-block px-2.5 py-1 rounded-full text-xs font-medium",
-                          categoryColorMap[notice.category] ?? "bg-gray-100 text-gray-600"
+                          categoryColorMap[notice.category] ?? "bg-slate-100 text-slate-500"
                         )}
                       >
                         {notice.category}
@@ -145,21 +145,21 @@ export default async function NoticePage({ searchParams }: Props) {
                     <td className="py-3.5 px-3">
                       <Link
                         href={`/support/notice/${notice.id}`}
-                        className="text-neutral-900 hover:text-primary font-medium transition-colors hover:underline"
+                        className="text-navy-900 hover:text-cobalt-600 font-medium transition-colors hover:underline"
                       >
                         {notice.is_pinned && (
                           <span className="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded mr-2 font-bold">공지</span>
                         )}
                         {notice.title}
                       </Link>
-                      <span className="block md:hidden text-xs text-gray-400 mt-1">
+                      <span className="block md:hidden text-xs text-slate-400 mt-1">
                         {new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })} · 조회 {notice.views}
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 text-center text-gray-500 hidden md:table-cell">
+                    <td className="py-3.5 px-3 text-center text-slate-400 hidden md:table-cell">
                       {new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </td>
-                    <td className="py-3.5 px-3 text-center text-gray-500 hidden md:table-cell">
+                    <td className="py-3.5 px-3 text-center text-slate-400 hidden md:table-cell">
                       {notice.views.toLocaleString()}
                     </td>
                   </tr>
@@ -175,7 +175,7 @@ export default async function NoticePage({ searchParams }: Props) {
             <Link
               href={buildUrl({ page: page - 1 })}
               className={cn(
-                "p-2 rounded-lg hover:bg-gray-100 transition-colors",
+                "p-2 rounded-lg hover:bg-slate-100 transition-colors",
                 page === 1 && "opacity-30 pointer-events-none"
               )}
               aria-label="이전 페이지"
@@ -189,8 +189,8 @@ export default async function NoticePage({ searchParams }: Props) {
                 className={cn(
                   "w-9 h-9 rounded-lg text-sm font-medium transition-all flex items-center justify-center",
                   p === page
-                    ? "bg-primary text-white shadow-md"
-                    : "text-gray-600 hover:bg-gray-100"
+                    ? "bg-cobalt-600 text-white shadow-md"
+                    : "text-slate-500 hover:bg-slate-100"
                 )}
               >
                 {p}
@@ -199,7 +199,7 @@ export default async function NoticePage({ searchParams }: Props) {
             <Link
               href={buildUrl({ page: page + 1 })}
               className={cn(
-                "p-2 rounded-lg hover:bg-gray-100 transition-colors",
+                "p-2 rounded-lg hover:bg-slate-100 transition-colors",
                 page === totalPages && "opacity-30 pointer-events-none"
               )}
               aria-label="다음 페이지"

@@ -13,7 +13,7 @@ export function PageBanner({ title, subtitle, backgroundImage, compact }: PageBa
   return (
     <div
       className={cn(
-        "relative w-full bg-primary flex items-center justify-center overflow-hidden",
+        "relative w-full bg-navy-900 flex items-center justify-center overflow-hidden",
         compact ? "h-[120px] sm:h-[140px] md:h-[160px]" : "h-[200px] sm:h-[240px] md:h-[320px]"
       )}
     >
@@ -23,9 +23,9 @@ export function PageBanner({ title, subtitle, backgroundImage, compact }: PageBa
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary z-0" />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-800 to-cobalt-700 z-0" />
       )}
-      <div className="absolute inset-0 bg-black/40 z-10" />
+      <div className="absolute inset-0 bg-black/30 z-10" />
       <div className="z-20 text-center px-4 sm:px-6">
         <h1
           className={cn(

@@ -34,7 +34,7 @@ export function MobileBottomBar() {
         <a
           href={`tel:${COMPANY.tel}`}
           onClick={() => trackPhoneClick("mobile_bottom_bar")}
-          className="flex flex-col items-center justify-center gap-0.5 text-primary active:bg-neutral-50"
+          className="flex flex-col items-center justify-center gap-0.5 text-cobalt-600 active:bg-slate-50"
         >
           <Phone size={19} />
           <span className="text-[11px] font-bold">전화 문의</span>
@@ -55,7 +55,7 @@ export function MobileBottomBar() {
 
         <Link
           href="/support/inquiry"
-          className="flex flex-col items-center justify-center gap-0.5 bg-primary text-white active:bg-primary/90"
+          className="flex flex-col items-center justify-center gap-0.5 bg-mint-500 text-white active:bg-mint-600"
         >
           <FileText size={19} />
           <span className="text-[11px] font-bold">견적 문의</span>

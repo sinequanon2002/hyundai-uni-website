@@ -69,8 +69,8 @@ export function ComplianceClient() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 md:py-20 animate-fade-in-up">
       <div className="text-center mb-12">
-        <h2 className="text-2xl md:text-4xl font-bold mb-4 text-gray-900">자가점검 및 벌칙사항</h2>
-        <p className="text-lg text-gray-600">위반 시 강력한 처벌이 따르므로 주기적인 점검이 필수적입니다.</p>
+        <h2 className="text-2xl md:text-4xl font-bold mb-4 text-navy-900">자가점검 및 벌칙사항</h2>
+        <p className="text-lg text-slate-500">위반 시 강력한 처벌이 따르므로 주기적인 점검이 필수적입니다.</p>
       </div>
 
       {/* Tabs */}
@@ -78,13 +78,13 @@ export function ComplianceClient() {
         <div className="bg-white rounded-full p-1 shadow-sm border inline-flex">
           <button
             onClick={() => setActiveTab('checklist')}
-            className={`px-6 md:px-8 py-3 rounded-full text-base md:text-lg font-bold transition-colors ${activeTab === 'checklist' ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`px-6 md:px-8 py-3 rounded-full text-base md:text-lg font-bold transition-colors ${activeTab === 'checklist' ? 'bg-cobalt-600 text-white shadow-md' : 'text-slate-500 hover:text-navy-900'}`}
           >
             자가점검 체크리스트
           </button>
           <button
             onClick={() => setActiveTab('penalty')}
-            className={`px-6 md:px-8 py-3 rounded-full text-base md:text-lg font-bold transition-colors ${activeTab === 'penalty' ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`px-6 md:px-8 py-3 rounded-full text-base md:text-lg font-bold transition-colors ${activeTab === 'penalty' ? 'bg-cobalt-600 text-white shadow-md' : 'text-slate-500 hover:text-navy-900'}`}
           >
             주요 위반 벌칙
           </button>
@@ -93,20 +93,20 @@ export function ComplianceClient() {
 
       {/* Tab 1: 자가점검 체크리스트 */}
       {activeTab === 'checklist' && (
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-10">
-          <div className="mb-6 pb-6 border-b border-gray-100 flex justify-between items-end">
-            <h3 className="text-xl font-bold text-gray-900">배출자 필수 점검 항목</h3>
-            <span className="text-primary font-bold">{checkedItems.size} / 7 완료</span>
+        <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 p-6 md:p-10">
+          <div className="mb-6 pb-6 border-b border-slate-200 flex justify-between items-end">
+            <h3 className="text-xl font-bold text-navy-900">배출자 필수 점검 항목</h3>
+            <span className="text-cobalt-600 font-bold">{checkedItems.size} / 7 완료</span>
           </div>
 
           <div className="space-y-4 mb-10">
             {checklistItems.map((item) => (
               <label
                 key={item.id}
-                className={`flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${checkedItems.has(item.id) ? 'border-primary bg-primary/5' : 'border-gray-100 bg-white hover:border-primary/30'}`}
+                className={`flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${checkedItems.has(item.id) ? 'border-cobalt-600 bg-cobalt-50' : 'border-slate-200 bg-white hover:border-cobalt-600/30'}`}
               >
                 <div className="flex-shrink-0 mt-0.5">
-                  <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${checkedItems.has(item.id) ? 'border-primary bg-primary' : 'border-gray-300'}`}>
+                  <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${checkedItems.has(item.id) ? 'border-cobalt-600 bg-cobalt-600' : 'border-slate-400'}`}>
                     {checkedItems.has(item.id) && <CheckCircle2 className="w-4 h-4 text-white" />}
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export function ComplianceClient() {
                   checked={checkedItems.has(item.id)}
                   onChange={() => handleCheck(item.id)}
                 />
-                <span className={`ml-4 text-lg md:text-xl font-medium ${checkedItems.has(item.id) ? 'text-gray-900' : 'text-gray-600'}`}>
+                <span className={`ml-4 text-lg md:text-xl font-medium ${checkedItems.has(item.id) ? 'text-navy-900' : 'text-slate-500'}`}>
                   {item.label}
                 </span>
               </label>
@@ -139,7 +139,7 @@ export function ComplianceClient() {
       {/* Tab 2: 벌칙사항 테이블 */}
       {activeTab === 'penalty' && (
         <div className="animate-fade-in-up">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden">
             <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
@@ -160,7 +160,7 @@ export function ComplianceClient() {
             </div>
           </div>
 
-          <div className="mt-6 p-4 bg-gray-50 rounded-xl flex gap-3 text-sm text-gray-500 border border-gray-200">
+          <div className="mt-6 p-4 bg-slate-50 rounded-xl flex gap-3 text-sm text-slate-500 border border-slate-200">
             <AlertCircle className="w-5 h-5 shrink-0" />
             <p>
               ※ 본 벌칙 사항은 「폐기물관리법」 기준을 축약하여 안내한 것으로, 실제 위반 사례의 세부 요건과 양형 기준에 따라 형량이나 과태료 금액이 다르게 적용될 수 있습니다. 법적 구속력을 갖는 유권해석의 근거로 사용할 수 없습니다.

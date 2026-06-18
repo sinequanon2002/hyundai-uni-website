@@ -66,23 +66,23 @@ export default function WasteStoragePage() {
       />
       <div className="max-w-5xl mx-auto px-4 py-12 md:py-20 animate-fade-in-up">
         <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">지정폐기물 보관방법</h2>
-          <p className="text-lg text-gray-600">안전하고 적법한 보관은 사고 예방의 첫걸음입니다.</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-navy-900">지정폐기물 보관방법</h2>
+          <p className="text-lg text-slate-500">안전하고 적법한 보관은 사고 예방의 첫걸음입니다.</p>
         </div>
 
         {/* Section A: 3개 카테고리 카드 */}
         <div className="flex flex-col gap-8 mb-20">
 
           {/* Card 1 */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-shadow">
-            <div className="bg-blue-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 text-center">
+          <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
+            <div className="bg-blue-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 text-center">
               <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600">
                 <Warehouse className="w-10 h-10" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900">보관장소 기준</h3>
+              <h3 className="text-xl font-bold text-navy-900">보관장소 기준</h3>
             </div>
             <div className="p-8 md:w-2/3 flex flex-col justify-center">
-              <ul className="space-y-4 text-gray-600 text-lg">
+              <ul className="space-y-4 text-slate-500 text-lg">
                 <li className="flex items-start">
                   <span className="text-blue-500 mr-3 text-xl font-bold">•</span>
                   폐기물이 흩날리거나 누출되지 않도록 전용 보관 시설(창고 등)을 갖출 것
@@ -100,15 +100,15 @@ export default function WasteStoragePage() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-shadow">
-            <div className="bg-emerald-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 text-center">
+          <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
+            <div className="bg-emerald-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 text-center">
               <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-4 text-emerald-600">
                 <Package className="w-10 h-10" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900">보관용기 기준</h3>
+              <h3 className="text-xl font-bold text-navy-900">보관용기 기준</h3>
             </div>
             <div className="p-8 md:w-2/3 flex flex-col justify-center">
-              <ul className="space-y-4 text-gray-600 text-lg">
+              <ul className="space-y-4 text-slate-500 text-lg">
                 <li className="flex items-start">
                   <span className="text-emerald-500 mr-3 text-xl font-bold">•</span>
                   폐기물의 성상(액체, 고체 등)에 따라 부식되거나 파손되지 않는 재질을 사용할 것
@@ -126,15 +126,15 @@ export default function WasteStoragePage() {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-shadow">
-            <div className="bg-orange-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 text-center">
+          <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
+            <div className="bg-orange-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 text-center">
               <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-orange-600">
                 <Calendar className="w-10 h-10" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900">보관기간 기준</h3>
+              <h3 className="text-xl font-bold text-navy-900">보관기간 기준</h3>
             </div>
             <div className="p-8 md:w-2/3 flex flex-col justify-center">
-              <ul className="space-y-4 text-gray-600 text-lg">
+              <ul className="space-y-4 text-slate-500 text-lg">
                 <li className="flex items-start">
                   <span className="text-orange-500 mr-3 text-xl font-bold">•</span>
                   <div>
@@ -158,13 +158,13 @@ export default function WasteStoragePage() {
         </div>
 
         {/* Section B: 보관표지판 예시 */}
-        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 text-center md:text-left">보관표지판 설치 예시</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-navy-900 text-center md:text-left">보관표지판 설치 예시</h2>
         <div className="bg-yellow-400 p-2 md:p-4 rounded-xl shadow-lg max-w-3xl mx-auto rotate-1 hover:rotate-0 transition-transform duration-300">
           <div className="bg-white border-4 border-black p-6 md:p-10 rounded">
             <div className="text-center border-b-4 border-black pb-4 mb-6">
               <h3 className="text-3xl md:text-4xl font-black tracking-widest">지 정 폐 기 물</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-lg font-bold text-gray-800">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-lg font-bold text-navy-900">
               <div className="flex flex-col border-b border-gray-300 pb-2">
                 <span className="text-sm text-gray-500 mb-1">폐기물의 종류</span>
                 <span>폐유 (기계유)</span>
@@ -194,8 +194,8 @@ export default function WasteStoragePage() {
 
         {/* ── 법적 의무 및 벌칙 ── */}
         <div className="mt-16 mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900 text-center md:text-left">법적 의무 및 처벌 규정</h2>
-          <p className="text-gray-500 text-sm mb-8 text-center md:text-left">보관기준 위반 시 행정처분 외 형사처벌까지 받을 수 있습니다.</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-navy-900 text-center md:text-left">법적 의무 및 처벌 규정</h2>
+          <p className="text-slate-500 text-sm mb-8 text-center md:text-left">보관기준 위반 시 행정처분 외 형사처벌까지 받을 수 있습니다.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             {[
@@ -245,13 +245,13 @@ export default function WasteStoragePage() {
             ))}
           </div>
 
-          <div className="bg-primary/5 border border-primary/15 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <p className="text-sm text-neutral-700">
+          <div className="bg-cobalt-50 border border-cobalt-600/15 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <p className="text-sm text-navy-700">
               보관기준 준수 여부가 걱정되신다면 현대유앤아이에 문의하세요. 법적 요건을 함께 검토해드립니다.
             </p>
             <Link
               href="/support/inquiry"
-              className="shrink-0 inline-flex items-center gap-1.5 bg-primary text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-primary/90 transition-colors"
+              className="shrink-0 inline-flex items-center gap-1.5 bg-mint-500 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-mint-600 transition-colors"
             >
               견적 문의
               <ArrowRight className="w-4 h-4" />

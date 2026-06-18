@@ -65,15 +65,15 @@ function PrivacyModal({ title, content, onClose }: { title: string; content: str
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
       <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h3 className="font-bold text-gray-900">{title}</h3>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-100 transition-colors text-gray-500">✕</button>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
+          <h3 className="font-bold text-navy-900">{title}</h3>
+          <button onClick={onClose} className="p-1 rounded-full hover:bg-slate-100 transition-colors text-slate-500">✕</button>
         </div>
         <div className="overflow-y-auto px-6 py-4">
-          <pre className="text-xs text-gray-600 whitespace-pre-wrap leading-relaxed font-sans">{content}</pre>
+          <pre className="text-xs text-slate-500 whitespace-pre-wrap leading-relaxed font-sans">{content}</pre>
         </div>
-        <div className="px-6 py-4 border-t border-gray-100">
-          <button onClick={onClose} className="w-full py-2.5 bg-[#0C5F6B] text-white text-sm font-semibold rounded-xl hover:bg-[#0E9E7E] transition-colors">확인</button>
+        <div className="px-6 py-4 border-t border-slate-200">
+          <button onClick={onClose} className="w-full py-2.5 bg-cobalt-600 text-white text-sm font-semibold rounded-xl hover:bg-cobalt-700 transition-colors">확인</button>
         </div>
       </div>
     </div>
@@ -99,8 +99,8 @@ export default function BrochurePage() {
   const inputCls = (hasError?: boolean) =>
     cn(
       "w-full border rounded-lg px-4 py-2.5 text-sm outline-none transition-colors",
-      "focus:ring-2 focus:ring-[#0C5F6B]/25 focus:border-[#0C5F6B]",
-      hasError ? "border-red-400 bg-red-50/30" : "border-gray-200 bg-white hover:border-gray-300"
+      "focus:ring-2 focus:ring-cobalt-500/25 focus:border-cobalt-500",
+      hasError ? "border-red-400 bg-red-50/30" : "border-slate-200 bg-white hover:border-slate-300"
     );
 
   const onSubmit = handleSubmit((data) => {
@@ -128,7 +128,7 @@ export default function BrochurePage() {
 
             {/* 소개서 미리보기 */}
             <div>
-              <div className="bg-white rounded-2xl shadow-md border border-neutral-100 overflow-hidden">
+              <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden">
                 <div className="bg-gradient-to-br from-primary to-secondary aspect-[3/4] flex flex-col items-center justify-center text-white p-8">
                   <FileText size={64} className="mb-4 opacity-80" />
                   <p className="text-sm font-medium uppercase tracking-widest opacity-70 mb-2">COMPANY BROCHURE</p>
@@ -141,8 +141,8 @@ export default function BrochurePage() {
                   <p className="text-sm text-neutral-mid mb-4 font-medium">소개서 주요 내용</p>
                   <ul className="space-y-2.5">
                     {HIGHLIGHTS.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5 text-sm text-neutral-600">
-                        <CheckCircle size={16} className="text-accent shrink-0 mt-0.5" />
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-slate-500">
+                        <CheckCircle size={16} className="text-mint-500 shrink-0 mt-0.5" />
                         {item}
                       </li>
                     ))}
@@ -154,27 +154,27 @@ export default function BrochurePage() {
             {/* 다운로드 폼 */}
             <div>
               {submitted ? (
-                <div className="bg-white rounded-2xl shadow-md border border-neutral-100 p-8 text-center">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle size={32} className="text-accent" />
+                <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 p-8 text-center">
+                  <div className="w-16 h-16 bg-cobalt-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle size={32} className="text-mint-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-neutral-900 mb-2">신청이 완료되었습니다</h3>
+                  <h3 className="text-xl font-bold text-navy-900 mb-2">신청이 완료되었습니다</h3>
                   <p className="text-neutral-mid text-sm leading-relaxed mb-6">
                     담당자 검토 후 <strong>영업일 1일 이내</strong>에<br />
                     입력하신 이메일로 소개서를 보내드립니다.
                   </p>
-                  <div className="bg-neutral-light rounded-xl p-4 text-sm text-neutral-600 space-y-1 text-left">
-                    <p className="flex items-center gap-2"><Phone size={14} className="text-primary shrink-0" /> 빠른 문의: 054-973-3973</p>
-                    <p className="flex items-center gap-2"><Mail size={14} className="text-primary shrink-0" /> hduni3973@naver.com</p>
+                  <div className="bg-neutral-light rounded-xl p-4 text-sm text-slate-500 space-y-1 text-left">
+                    <p className="flex items-center gap-2"><Phone size={14} className="text-cobalt-600 shrink-0" /> 빠른 문의: 054-973-3973</p>
+                    <p className="flex items-center gap-2"><Mail size={14} className="text-cobalt-600 shrink-0" /> hduni3973@naver.com</p>
                   </div>
                 </div>
               ) : (
-                <div className="bg-white rounded-2xl shadow-md border border-neutral-100 p-8">
+                <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 p-8">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
-                      <Download size={20} className="text-primary" />
+                    <div className="w-10 h-10 bg-cobalt-50 rounded-xl flex items-center justify-center">
+                      <Download size={20} className="text-cobalt-600" />
                     </div>
-                    <h2 className="text-xl font-bold text-neutral-900">소개서 무료 신청</h2>
+                    <h2 className="text-xl font-bold text-navy-900">소개서 무료 신청</h2>
                   </div>
                   <p className="text-sm text-neutral-mid mb-6">
                     간단한 정보를 입력하시면 이메일로 소개서를 보내드립니다.
@@ -183,7 +183,7 @@ export default function BrochurePage() {
                   <form onSubmit={onSubmit} noValidate className="space-y-4">
                     {/* 이름 */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                      <label className="block text-sm font-semibold text-navy-700 mb-1.5">
                         이름 <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -196,7 +196,7 @@ export default function BrochurePage() {
 
                     {/* 이메일 */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                      <label className="block text-sm font-semibold text-navy-700 mb-1.5">
                         이메일 <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -210,7 +210,7 @@ export default function BrochurePage() {
 
                     {/* 회사명 */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                      <label className="block text-sm font-semibold text-navy-700 mb-1.5">
                         회사명 <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -223,7 +223,7 @@ export default function BrochurePage() {
 
                     {/* 연락처 */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                      <label className="block text-sm font-semibold text-navy-700 mb-1.5">
                         연락처 <span className="text-red-500">*</span>
                       </label>
                       <Controller
@@ -243,11 +243,11 @@ export default function BrochurePage() {
                     </div>
 
                     {/* 동의 섹션 */}
-                    <div className="border border-gray-100 rounded-xl p-4 space-y-3">
+                    <div className="border border-slate-200 rounded-xl p-4 space-y-3">
                       {/* 개인정보 동의 (필수) */}
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <button type="button" onClick={() => setPrivacyOpen(true)} className="text-sm font-semibold text-gray-700 hover:text-[#0C5F6B] underline decoration-dotted flex items-center gap-1">
+                          <button type="button" onClick={() => setPrivacyOpen(true)} className="text-sm font-semibold text-navy-700 hover:text-cobalt-600 underline decoration-dotted flex items-center gap-1">
                             개인정보 수집 및 이용 동의
                             <ExternalLink className="w-3 h-3" />
                           </button>
@@ -264,23 +264,23 @@ export default function BrochurePage() {
                                 onChange={() => field.onChange(true)}
                                 className="w-4 h-4 accent-[#0C5F6B]"
                               />
-                              <span className="text-sm text-gray-600">동의합니다</span>
+                              <span className="text-sm text-slate-500">동의합니다</span>
                             </label>
                           )}
                         />
                         {errors.agreement && <p className="text-xs text-red-500 mt-1">{errors.agreement.message}</p>}
                       </div>
 
-                      <hr className="border-gray-100" />
+                      <hr className="border-slate-200" />
 
                       {/* 마케팅 동의 (선택) */}
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <button type="button" onClick={() => setMarketingOpen(true)} className="text-sm font-semibold text-gray-700 hover:text-[#0C5F6B] underline decoration-dotted flex items-center gap-1">
+                          <button type="button" onClick={() => setMarketingOpen(true)} className="text-sm font-semibold text-navy-700 hover:text-cobalt-600 underline decoration-dotted flex items-center gap-1">
                             마케팅 수신 동의
                             <ExternalLink className="w-3 h-3" />
                           </button>
-                          <span className="text-xs text-gray-400">(선택)</span>
+                          <span className="text-xs text-slate-400">(선택)</span>
                         </div>
                         <Controller
                           name="marketingConsent"
@@ -293,7 +293,7 @@ export default function BrochurePage() {
                                 onChange={() => field.onChange(true)}
                                 className="w-4 h-4 accent-[#0C5F6B]"
                               />
-                              <span className="text-sm text-gray-600">동의합니다</span>
+                              <span className="text-sm text-slate-500">동의합니다</span>
                             </label>
                           )}
                         />
@@ -303,7 +303,7 @@ export default function BrochurePage() {
                     <button
                       type="submit"
                       disabled={isPending}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 bg-primary text-white rounded-xl font-bold text-sm hover:bg-primary/90 transition-colors shadow-md shadow-primary/20 disabled:opacity-60"
+                      className="w-full flex items-center justify-center gap-2 py-3.5 bg-mint-500 text-white rounded-xl font-bold text-sm hover:bg-mint-600 transition-colors shadow-ds-sm disabled:opacity-60"
                     >
                       {isPending ? (
                         <><Loader2 size={16} className="animate-spin" /> 신청 중...</>
@@ -313,7 +313,7 @@ export default function BrochurePage() {
                     </button>
                   </form>
 
-                  <p className="mt-4 text-xs text-neutral-400 text-center leading-relaxed">
+                  <p className="mt-4 text-xs text-slate-400 text-center leading-relaxed">
                     입력하신 정보는 소개서 발송 목적으로만 사용되며,<br />
                     제3자에게 제공되지 않습니다.
                   </p>

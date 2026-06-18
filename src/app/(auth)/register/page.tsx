@@ -12,7 +12,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full mt-2 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
+      className="w-full mt-2 py-2.5 rounded-lg bg-mint-500 text-white text-sm font-semibold hover:bg-mint-600 transition-colors focus:outline-none focus:ring-2 focus:ring-cobalt-500/40 disabled:opacity-60"
     >
       {pending ? "처리 중..." : "가입하기"}
     </button>
@@ -29,7 +29,7 @@ function RegisterForm() {
     return (
       <div className="min-h-dvh bg-neutral-light flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-mint-500 mb-4">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -46,7 +46,7 @@ function RegisterForm() {
               이메일이 오지 않는 경우 스팸함을 확인하거나 잠시 후 다시 시도해주세요.
             </p>
           </div>
-          <Link href="/login" className="block w-full py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-secondary transition-colors text-center">
+          <Link href="/login" className="block w-full py-2.5 rounded-lg bg-mint-500 text-white text-sm font-semibold hover:bg-mint-600 transition-colors text-center">
             로그인 페이지로 이동
           </Link>
         </div>
@@ -58,7 +58,7 @@ function RegisterForm() {
     <div className="min-h-dvh bg-neutral-light flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-cobalt-600 mb-4">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -68,7 +68,7 @@ function RegisterForm() {
           <p className="text-sm text-neutral-mid mt-1">고객 포털 회원가입</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="bg-white rounded-2xl shadow-ds-sm border border-slate-200 p-8">
           <h2 className="text-base font-semibold text-neutral-dark mb-6">회원가입</h2>
 
           {error && (
@@ -84,7 +84,7 @@ function RegisterForm() {
               </label>
               <input id="email" name="email" type="email" required autoComplete="email"
                 placeholder="example@company.com"
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition" />
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition" />
             </div>
 
             <div>
@@ -93,7 +93,7 @@ function RegisterForm() {
               </label>
               <input id="password" name="password" type="password" required autoComplete="new-password"
                 placeholder="8자 이상"
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition" />
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition" />
             </div>
 
             <div>
@@ -102,7 +102,7 @@ function RegisterForm() {
               </label>
               <input id="full_name" name="full_name" type="text" required
                 placeholder="홍길동"
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition" />
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition" />
             </div>
 
             <div>
@@ -111,16 +111,16 @@ function RegisterForm() {
               </label>
               <input id="company_name" name="company_name" type="text" required
                 placeholder="주식회사 예시"
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition" />
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition" />
             </div>
 
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-neutral-dark mb-1.5">
-                연락처 <span className="text-gray-400 font-normal text-xs">(선택)</span>
+                연락처 <span className="text-slate-400 font-normal text-xs">(선택)</span>
               </label>
               <input id="phone" name="phone" type="tel"
                 placeholder="010-0000-0000"
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition" />
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition" />
             </div>
 
             <SubmitButton />
@@ -129,7 +129,7 @@ function RegisterForm() {
 
         <p className="text-center text-sm text-neutral-mid mt-6">
           이미 계정이 있으신가요?{" "}
-          <Link href="/login" className="text-primary font-medium hover:underline">
+          <Link href="/login" className="text-cobalt-600 font-medium hover:underline">
             로그인
           </Link>
         </p>

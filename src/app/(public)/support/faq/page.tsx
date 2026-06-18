@@ -88,30 +88,30 @@ export default function FaqPage() {
       />
       <SubNav items={SUPPORT_SUBNAV_ITEMS} />
 
-      <section className="py-12 md:py-16 bg-[#F0FAFA]">
+      <section className="py-12 md:py-16 bg-slate-50">
         <div className="max-w-3xl mx-auto px-4">
           <div className="space-y-3">
             {FAQ_ITEMS.map((item, i) => (
               <details
                 key={i}
-                className="group bg-white rounded-xl border border-neutral-100 shadow-sm open:shadow-md open:border-primary/20 transition-shadow"
+                className="group bg-white rounded-xl border border-slate-200 shadow-sm open:shadow-md open:border-cobalt-600/20 transition-shadow"
               >
                 <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                  <span className="text-[15px] font-bold text-neutral-800 leading-snug">
-                    <span className="text-primary mr-2">Q.</span>
+                  <span className="text-[15px] font-bold text-navy-900 leading-snug">
+                    <span className="text-cobalt-600 mr-2">Q.</span>
                     {item.q}
                   </span>
                   <ChevronDown
                     size={18}
-                    className="shrink-0 text-neutral-400 transition-transform duration-200 group-open:rotate-180"
+                    className="shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-180"
                   />
                 </summary>
-                <div className="px-5 pb-5 pt-1 border-t border-neutral-50">
-                  <p className="text-sm text-neutral-600 leading-relaxed">{item.a}</p>
+                <div className="px-5 pb-5 pt-1 border-t border-slate-200">
+                  <p className="text-sm text-slate-500 leading-relaxed">{item.a}</p>
                   {item.link && (
                     <Link
                       href={item.link.href}
-                      className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-primary hover:underline underline-offset-4"
+                      className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-cobalt-600 hover:underline underline-offset-4"
                     >
                       {item.link.label}
                       <ArrowRight size={13} />
@@ -123,24 +123,24 @@ export default function FaqPage() {
           </div>
 
           {/* 하단 CTA */}
-          <div className="mt-10 bg-white rounded-2xl border border-neutral-100 shadow-sm p-6 md:p-8 text-center">
-            <h2 className="text-lg md:text-xl font-bold text-neutral-900 mb-2">
+          <div className="mt-10 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 text-center">
+            <h2 className="text-lg md:text-xl font-bold text-navy-900 mb-2">
               원하는 답변을 찾지 못하셨나요?
             </h2>
-            <p className="text-sm text-neutral-500 mb-5">
+            <p className="text-sm text-slate-500 mb-5">
               담당자가 직접 확인하고 답변드립니다. 부담 없이 문의해 주세요.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/support/inquiry"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-mint-500 text-white text-sm font-bold rounded-lg hover:bg-mint-600 transition-colors shadow-md shadow-mint-500/20"
               >
                 <ArrowRight size={15} />
                 견적 문의하기
               </Link>
               <a
                 href={`tel:${COMPANY.tel}`}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-neutral-200 text-neutral-700 text-sm font-semibold rounded-lg hover:border-primary hover:text-primary transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-slate-200 text-navy-700 text-sm font-semibold rounded-lg hover:border-cobalt-600 hover:text-cobalt-600 transition-colors"
               >
                 <Phone size={15} />
                 {COMPANY.tel}

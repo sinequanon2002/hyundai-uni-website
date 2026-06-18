@@ -208,13 +208,13 @@ export default function InquiryPage() {
   const inputCls = (hasError?: boolean) =>
     cn(
       "w-full border rounded-lg px-4 py-2.5 text-sm outline-none transition-colors",
-      "focus:ring-2 focus:ring-[#0C5F6B]/25 focus:border-[#0C5F6B]",
+      "focus:ring-2 focus:ring-cobalt-500/25 focus:border-cobalt-500",
       hasError
         ? "border-red-400 bg-red-50/30"
-        : "border-gray-200 bg-white hover:border-gray-300"
+        : "border-slate-200 bg-white hover:border-slate-300"
     );
 
-  const labelCls = "block text-sm font-semibold text-gray-700 mb-1.5";
+  const labelCls = "block text-sm font-semibold text-navy-700 mb-1.5";
   const errorCls = "text-xs text-red-500 mt-1";
 
   return (
@@ -231,14 +231,14 @@ export default function InquiryPage() {
       />
       <SubNav items={SUPPORT_SUBNAV_ITEMS} />
 
-      <section className="py-8 md:py-10 bg-[#F0FAFA]">
+      <section className="py-8 md:py-10 bg-slate-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* ── 좌측 안내 ── */}
             <aside className="lg:col-span-2 space-y-6">
               {/* 연락처 카드 */}
               <div className="bg-white rounded-2xl shadow-sm p-6">
-                <h3 className="text-base font-bold text-gray-900 mb-4">
+                <h3 className="text-base font-bold text-navy-900 mb-4">
                   직접 문의하기
                 </h3>
                 <div className="space-y-3">
@@ -246,12 +246,12 @@ export default function InquiryPage() {
                     href={`tel:${COMPANY.tel}`}
                     className="flex items-center gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-full bg-[#0C5F6B]/10 flex items-center justify-center shrink-0">
-                      <Phone className="w-4 h-4 text-[#0C5F6B]" />
+                    <div className="w-9 h-9 rounded-full bg-cobalt-50 flex items-center justify-center shrink-0">
+                      <Phone className="w-4 h-4 text-cobalt-600" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">전화 문의</p>
-                      <p className="text-sm font-semibold text-gray-900 group-hover:text-[#0C5F6B] transition-colors">
+                      <p className="text-xs text-slate-400">전화 문의</p>
+                      <p className="text-sm font-semibold text-navy-900 group-hover:text-cobalt-600 transition-colors">
                         {COMPANY.tel}
                       </p>
                     </div>
@@ -260,23 +260,23 @@ export default function InquiryPage() {
                     href={`mailto:${COMPANY.email}`}
                     className="flex items-center gap-3 group"
                   >
-                    <div className="w-9 h-9 rounded-full bg-[#0C5F6B]/10 flex items-center justify-center shrink-0">
-                      <Mail className="w-4 h-4 text-[#0C5F6B]" />
+                    <div className="w-9 h-9 rounded-full bg-cobalt-50 flex items-center justify-center shrink-0">
+                      <Mail className="w-4 h-4 text-cobalt-600" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">이메일 문의</p>
-                      <p className="text-sm font-semibold text-gray-900 group-hover:text-[#0C5F6B] transition-colors">
+                      <p className="text-xs text-slate-400">이메일 문의</p>
+                      <p className="text-sm font-semibold text-navy-900 group-hover:text-cobalt-600 transition-colors">
                         {COMPANY.email}
                       </p>
                     </div>
                   </a>
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#0C5F6B]/10 flex items-center justify-center shrink-0">
-                      <Clock className="w-4 h-4 text-[#0C5F6B]" />
+                    <div className="w-9 h-9 rounded-full bg-cobalt-50 flex items-center justify-center shrink-0">
+                      <Clock className="w-4 h-4 text-cobalt-600" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">운영시간</p>
-                      <p className="text-sm font-semibold text-gray-900">
+                      <p className="text-xs text-slate-400">운영시간</p>
+                      <p className="text-sm font-semibold text-navy-900">
                         {COMPANY.businessHours}
                       </p>
                     </div>
@@ -286,7 +286,7 @@ export default function InquiryPage() {
 
               {/* 처리 절차 */}
               <div className="bg-white rounded-2xl shadow-sm p-6">
-                <h3 className="text-base font-bold text-gray-900 mb-4">
+                <h3 className="text-base font-bold text-navy-900 mb-4">
                   처리 절차
                 </h3>
                 <div className="space-y-3">
@@ -297,18 +297,18 @@ export default function InquiryPage() {
                   ].map(({ step, title, desc }, i, arr) => (
                     <div key={step} className="flex items-start gap-3">
                       <div className="flex flex-col items-center">
-                        <div className="w-7 h-7 rounded-full bg-[#0C5F6B] text-white text-xs font-bold flex items-center justify-center shrink-0">
+                        <div className="w-7 h-7 rounded-full bg-cobalt-600 text-white text-xs font-bold flex items-center justify-center shrink-0">
                           {step}
                         </div>
                         {i < arr.length - 1 && (
-                          <div className="w-px h-6 bg-gray-200 mt-1" />
+                          <div className="w-px h-6 bg-slate-200 mt-1" />
                         )}
                       </div>
                       <div className="pt-0.5">
-                        <p className="text-sm font-semibold text-gray-800">
+                        <p className="text-sm font-semibold text-navy-900">
                           {title}
                         </p>
-                        <p className="text-xs text-gray-400">{desc}</p>
+                        <p className="text-xs text-slate-400">{desc}</p>
                       </div>
                     </div>
                   ))}
@@ -319,10 +319,10 @@ export default function InquiryPage() {
             {/* ── 우측 폼 ── */}
             <div className="lg:col-span-3">
               <div className="bg-white rounded-2xl shadow-sm p-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-1">
+                <h2 className="text-xl font-bold text-navy-900 mb-1">
                   견적 문의
                 </h2>
-                <p className="text-sm text-gray-400 mb-6">
+                <p className="text-sm text-slate-400 mb-6">
                   아래 정보를 제출하시면, 빠른 시일 내 연락드리겠습니다.
                 </p>
 
@@ -345,7 +345,7 @@ export default function InquiryPage() {
                     <div>
                       <label className={labelCls}>
                         소속팀{" "}
-                        <span className="text-gray-400 font-normal text-xs">(선택)</span>
+                        <span className="text-slate-400 font-normal text-xs">(선택)</span>
                       </label>
                       <input
                         {...register("department")}
@@ -398,10 +398,10 @@ export default function InquiryPage() {
                   {/* 이메일 (필수 — 접수 확인 및 견적서 수신) */}
                   <div>
                     <label className={labelCls}>
-                      <Mail className="inline w-4 h-4 mr-1 mb-0.5 text-[#0C5F6B]" />
+                      <Mail className="inline w-4 h-4 mr-1 mb-0.5 text-cobalt-600" />
                       이메일 <span className="text-red-500">*</span>
                     </label>
-                    <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 mb-2">
+                    <p className="text-xs text-slate-500 bg-slate-50 rounded-lg px-3 py-2 mb-2">
                       접수 확인 및 견적서를 이메일로 발송해드립니다.
                     </p>
                     <Controller
@@ -424,9 +424,9 @@ export default function InquiryPage() {
                   {/* 수거 장소 */}
                   <div>
                     <label className={labelCls}>
-                      <MapPin className="inline w-4 h-4 mr-1 mb-0.5 text-[#0C5F6B]" />
+                      <MapPin className="inline w-4 h-4 mr-1 mb-0.5 text-cobalt-600" />
                       수거 장소{" "}
-                      <span className="text-gray-400 font-normal text-xs">(선택)</span>
+                      <span className="text-slate-400 font-normal text-xs">(선택)</span>
                     </label>
                     <p className="text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2 mb-2 flex items-start gap-1.5">
                       <span className="shrink-0 mt-0.5">💡</span>
@@ -446,7 +446,7 @@ export default function InquiryPage() {
                       <button
                         type="button"
                         onClick={handleAddressSearch}
-                        className="px-3 py-2.5 border border-gray-200 rounded-lg hover:border-[#0C5F6B] hover:text-[#0C5F6B] transition-colors shrink-0"
+                        className="px-3 py-2.5 border border-slate-200 rounded-lg hover:border-cobalt-600 hover:text-cobalt-600 transition-colors shrink-0"
                         aria-label="주소 검색"
                       >
                         <Search className="w-4 h-4" />
@@ -498,7 +498,7 @@ export default function InquiryPage() {
                   {/* 첨부 파일 (사진, 서류) */}
                   <div>
                     <label className={labelCls}>첨부 파일 (사진, 서류 등)</label>
-                    <p className="text-xs text-gray-400 mb-2">
+                    <p className="text-xs text-slate-400 mb-2">
                       현장 사진, MSDS 등 관련 서류를 업로드해 주시면 빠르고 정확한 견적이 가능합니다. (이미지, PDF, DOC, HWP 지원 / 파일당 최대 10MB)
                     </p>
 
@@ -511,7 +511,7 @@ export default function InquiryPage() {
                               file.isImage ? (
                                 <div
                                   key={i}
-                                  className="relative group aspect-square rounded-lg overflow-hidden border border-gray-200 bg-gray-100"
+                                  className="relative group aspect-square rounded-lg overflow-hidden border border-slate-200 bg-slate-100"
                                 >
                                   {/* eslint-disable-next-line @next/next/no-img-element */}
                                   <img
@@ -539,16 +539,16 @@ export default function InquiryPage() {
                               !file.isImage ? (
                                 <div
                                   key={i}
-                                  className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2"
+                                  className="flex items-center gap-2 bg-slate-50 rounded-lg px-3 py-2"
                                 >
-                                  <FileText className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                                  <span className="flex-1 truncate text-gray-700 text-xs">
+                                  <FileText className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                                  <span className="flex-1 truncate text-navy-700 text-xs">
                                     {file.name}
                                   </span>
                                   <button
                                     type="button"
                                     onClick={() => removeFile(i)}
-                                    className="text-gray-400 hover:text-red-500 transition-colors"
+                                    className="text-slate-400 hover:text-red-500 transition-colors"
                                   >
                                     <X className="w-3.5 h-3.5" />
                                   </button>
@@ -574,7 +574,7 @@ export default function InquiryPage() {
                         <label
                           htmlFor="photo-upload"
                           className={cn(
-                            "inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 cursor-pointer hover:border-[#0C5F6B] hover:text-[#0C5F6B] transition-colors",
+                            "inline-flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm text-slate-500 cursor-pointer hover:border-cobalt-600 hover:text-cobalt-600 transition-colors",
                             isUploading && "opacity-60 pointer-events-none"
                           )}
                         >
@@ -590,7 +590,7 @@ export default function InquiryPage() {
                             : "파일 추가"}
                         </label>
                         {uploadedFiles.length === 0 && (
-                          <p className="text-xs text-gray-400 mt-1">
+                          <p className="text-xs text-slate-400 mt-1">
                             선택된 파일이 존재하지 않습니다.
                           </p>
                         )}
@@ -599,14 +599,14 @@ export default function InquiryPage() {
                   </div>
 
                   {/* 개인정보 동의 */}
-                  <div className="border border-gray-100 rounded-xl p-4 space-y-3">
+                  <div className="border border-slate-200 rounded-xl p-4 space-y-3">
                     {/* 필수 동의 */}
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <button
                           type="button"
                           onClick={() => setPrivacyModalOpen(true)}
-                          className="text-sm font-semibold text-gray-700 hover:text-[#0C5F6B] underline decoration-dotted flex items-center gap-1"
+                          className="text-sm font-semibold text-navy-700 hover:text-cobalt-600 underline decoration-dotted flex items-center gap-1"
                         >
                           개인정보 수집 및 이용 동의
                           <ExternalLink className="w-3 h-3" />
@@ -622,9 +622,9 @@ export default function InquiryPage() {
                               type="radio"
                               checked={field.value === true}
                               onChange={() => field.onChange(true)}
-                              className="w-4 h-4 accent-[#0C5F6B]"
+                              className="w-4 h-4 accent-cobalt-600"
                             />
-                            <span className="text-sm text-gray-600">동의합니다</span>
+                            <span className="text-sm text-slate-500">동의합니다</span>
                           </label>
                         )}
                       />
@@ -633,7 +633,7 @@ export default function InquiryPage() {
                       )}
                     </div>
 
-                    <hr className="border-gray-100" />
+                    <hr className="border-slate-200" />
 
                     {/* 선택 동의 */}
                     <div>
@@ -641,12 +641,12 @@ export default function InquiryPage() {
                         <button
                           type="button"
                           onClick={() => setMarketingModalOpen(true)}
-                          className="text-sm font-semibold text-gray-700 hover:text-[#0C5F6B] underline decoration-dotted flex items-center gap-1"
+                          className="text-sm font-semibold text-navy-700 hover:text-cobalt-600 underline decoration-dotted flex items-center gap-1"
                         >
                           마케팅 수신 동의
                           <ExternalLink className="w-3 h-3" />
                         </button>
-                        <span className="text-xs text-gray-400">(선택)</span>
+                        <span className="text-xs text-slate-400">(선택)</span>
                       </div>
                       <Controller
                         name="marketingConsent"
@@ -657,9 +657,9 @@ export default function InquiryPage() {
                               type="radio"
                               checked={field.value === true}
                               onChange={() => field.onChange(true)}
-                              className="w-4 h-4 accent-[#0C5F6B]"
+                              className="w-4 h-4 accent-cobalt-600"
                             />
-                            <span className="text-sm text-gray-600">동의합니다</span>
+                            <span className="text-sm text-slate-500">동의합니다</span>
                           </label>
                         )}
                       />
@@ -670,7 +670,7 @@ export default function InquiryPage() {
                   <button
                     type="submit"
                     disabled={isPending || isUploading}
-                    className="w-full py-3.5 bg-[#0C5F6B] text-white font-bold rounded-xl hover:bg-[#0E9E7E] transition-colors disabled:opacity-60 flex items-center justify-center gap-2 text-sm"
+                    className="w-full py-3.5 bg-mint-500 text-white font-bold rounded-xl hover:bg-mint-600 transition-colors disabled:opacity-60 flex items-center justify-center gap-2 text-sm"
                   >
                     {isPending ? (
                       <>
@@ -695,11 +695,11 @@ export default function InquiryPage() {
       {showSuccessModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
           <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-8 text-center">
-            <CheckCircle2 className="w-14 h-14 text-[#10B981] mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
+            <CheckCircle2 className="w-14 h-14 text-mint-500 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-navy-900 mb-2">
               문의가 접수되었습니다
             </h3>
-            <p className="text-sm text-gray-500 mb-6 leading-relaxed">
+            <p className="text-sm text-slate-500 mb-6 leading-relaxed">
               빠른 시일 내에 담당자가 연락드리겠습니다.
               {submittedEmail && (
                 <><br />접수 확인 이메일을 발송했습니다.</>
@@ -710,14 +710,14 @@ export default function InquiryPage() {
               <div className="space-y-2">
                 <Link
                   href="/my/inquiries"
-                  className="block w-full py-3 bg-[#0C5F6B] text-white font-semibold rounded-xl hover:bg-[#0E9E7E] transition-colors text-sm"
+                  className="block w-full py-3 bg-mint-500 text-white font-semibold rounded-xl hover:bg-mint-600 transition-colors text-sm"
                   onClick={() => setShowSuccessModal(false)}
                 >
                   문의 내역 확인하기
                 </Link>
                 <button
                   onClick={() => setShowSuccessModal(false)}
-                  className="block w-full py-2.5 text-sm text-gray-400 hover:text-gray-600 transition-colors"
+                  className="block w-full py-2.5 text-sm text-slate-400 hover:text-slate-500 transition-colors"
                 >
                   닫기
                 </button>
@@ -732,7 +732,7 @@ export default function InquiryPage() {
                 </div>
                 <Link
                   href="/support/inquiry-status"
-                  className="block w-full py-2.5 bg-[#0C5F6B] text-white font-semibold rounded-xl hover:bg-[#0E9E7E] transition-colors text-sm text-center"
+                  className="block w-full py-2.5 bg-mint-500 text-white font-semibold rounded-xl hover:bg-mint-600 transition-colors text-sm text-center"
                   onClick={() => setShowSuccessModal(false)}
                 >
                   문의현황 조회하기
@@ -740,14 +740,14 @@ export default function InquiryPage() {
                 <div className="flex gap-2">
                   <Link
                     href="/login"
-                    className="flex-1 py-2 border border-[#0C5F6B] text-[#0C5F6B] font-semibold rounded-xl hover:bg-blue-50 transition-colors text-sm text-center"
+                    className="flex-1 py-2 border border-cobalt-600 text-cobalt-600 font-semibold rounded-xl hover:bg-cobalt-50 transition-colors text-sm text-center"
                     onClick={() => setShowSuccessModal(false)}
                   >
                     로그인
                   </Link>
                   <Link
                     href="/register"
-                    className="flex-1 py-2 border border-gray-300 text-gray-600 font-semibold rounded-xl hover:bg-gray-50 transition-colors text-sm text-center"
+                    className="flex-1 py-2 border border-slate-200 text-slate-500 font-semibold rounded-xl hover:bg-slate-50 transition-colors text-sm text-center"
                     onClick={() => setShowSuccessModal(false)}
                   >
                     회원가입
@@ -755,7 +755,7 @@ export default function InquiryPage() {
                 </div>
                 <button
                   onClick={() => setShowSuccessModal(false)}
-                  className="block w-full py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors"
+                  className="block w-full py-2 text-sm text-slate-400 hover:text-slate-500 transition-colors"
                 >
                   닫기
                 </button>
@@ -840,7 +840,7 @@ function WasteTypeCombobox({
           {value.map((v) => (
             <span
               key={v}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#0C5F6B] text-white"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-cobalt-600 text-white"
             >
               {v}
               <button
@@ -862,11 +862,11 @@ function WasteTypeCombobox({
             "flex items-center gap-2 border rounded-lg px-3 py-2.5 bg-white transition-colors",
             hasError
               ? "border-red-400 bg-red-50/30"
-              : "border-gray-200 hover:border-gray-300",
-            open && "ring-2 ring-[#0C5F6B]/25 border-[#0C5F6B]"
+              : "border-slate-200 hover:border-slate-300",
+            open && "ring-2 ring-cobalt-500/25 border-cobalt-500"
           )}
         >
-          <Search className="w-4 h-4 text-gray-400 shrink-0" />
+          <Search className="w-4 h-4 text-slate-400 shrink-0" />
           <input
             type="text"
             value={input}
@@ -899,13 +899,13 @@ function WasteTypeCombobox({
                 setOpen(false);
               }}
             >
-              <X className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+              <X className="w-4 h-4 text-slate-400 hover:text-slate-500" />
             </button>
           )}
         </div>
 
         {open && (
-          <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-y-auto max-h-56">
+          <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-y-auto max-h-56">
             {showCustomAdd && (
               <li>
                 <button
@@ -915,7 +915,7 @@ function WasteTypeCombobox({
                     add(input.trim());
                     setOpen(false);
                   }}
-                  className="w-full px-4 py-2.5 text-sm text-left flex items-center gap-2 bg-[#0C5F6B]/5 text-[#0C5F6B] hover:bg-[#0C5F6B]/10 border-b border-gray-100"
+                  className="w-full px-4 py-2.5 text-sm text-left flex items-center gap-2 bg-cobalt-50/50 text-cobalt-600 hover:bg-cobalt-50 border-b border-slate-200"
                 >
                   <span className="font-semibold">직접 입력:</span>
                   <span>&ldquo;{input.trim()}&rdquo; 추가</span>
@@ -932,14 +932,14 @@ function WasteTypeCombobox({
                       add(t);
                       setOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-[#0C5F6B]/5 hover:text-[#0C5F6B] transition-colors"
+                    className="w-full px-4 py-2 text-sm text-left text-navy-700 hover:bg-cobalt-50/50 hover:text-cobalt-600 transition-colors"
                   >
                     {t}
                   </button>
                 </li>
               ))
             ) : !showCustomAdd ? (
-              <li className="px-4 py-3 text-sm text-gray-400 italic">
+              <li className="px-4 py-3 text-sm text-slate-400 italic">
                 검색 결과가 없습니다.
               </li>
             ) : null}
@@ -980,10 +980,10 @@ function EmailAutocomplete({
 
   const inputCls = cn(
     "w-full border rounded-lg px-4 py-2.5 text-sm outline-none transition-colors",
-    "focus:ring-2 focus:ring-[#0C5F6B]/25 focus:border-[#0C5F6B]",
+    "focus:ring-2 focus:ring-cobalt-500/25 focus:border-cobalt-500",
     hasError
       ? "border-red-400 bg-red-50/30"
-      : "border-gray-200 bg-white hover:border-gray-300"
+      : "border-slate-200 bg-white hover:border-slate-300"
   );
 
   function getSuggestions(v: string): string[] {
@@ -1052,7 +1052,7 @@ function EmailAutocomplete({
         className={inputCls}
       />
       {suggestions.length > 0 && (
-        <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+        <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
           {suggestions.map((s, idx) => (
             <li key={s}>
               <button
@@ -1064,11 +1064,11 @@ function EmailAutocomplete({
                 className={cn(
                   "w-full px-4 py-2.5 text-sm text-left flex items-center gap-2 transition-colors",
                   idx === activeIdx
-                    ? "bg-[#0C5F6B] text-white"
-                    : "text-gray-700 hover:bg-[#0C5F6B]/5 hover:text-[#0C5F6B]"
+                    ? "bg-cobalt-600 text-white"
+                    : "text-navy-700 hover:bg-cobalt-50/50 hover:text-cobalt-600"
                 )}
               >
-                <Mail className={cn("w-3.5 h-3.5 shrink-0", idx === activeIdx ? "text-white/70" : "text-gray-400")} />
+                <Mail className={cn("w-3.5 h-3.5 shrink-0", idx === activeIdx ? "text-white/70" : "text-slate-400")} />
                 <span>{s}</span>
               </button>
             </li>
@@ -1091,24 +1091,24 @@ function PrivacyModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
       <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h3 className="font-bold text-gray-900">{title}</h3>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
+          <h3 className="font-bold text-navy-900">{title}</h3>
           <button
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+            className="p-1 rounded-full hover:bg-slate-100 transition-colors"
           >
-            <X className="w-5 h-5 text-gray-500" />
+            <X className="w-5 h-5 text-slate-500" />
           </button>
         </div>
         <div className="overflow-y-auto px-6 py-4">
-          <pre className="text-xs text-gray-600 whitespace-pre-wrap leading-relaxed font-sans">
+          <pre className="text-xs text-slate-500 whitespace-pre-wrap leading-relaxed font-sans">
             {content}
           </pre>
         </div>
-        <div className="px-6 py-4 border-t border-gray-100">
+        <div className="px-6 py-4 border-t border-slate-200">
           <button
             onClick={onClose}
-            className="w-full py-2.5 bg-[#0C5F6B] text-white text-sm font-semibold rounded-xl hover:bg-[#0E9E7E] transition-colors"
+            className="w-full py-2.5 bg-mint-500 text-white text-sm font-semibold rounded-xl hover:bg-mint-600 transition-colors"
           >
             확인
           </button>

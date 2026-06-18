@@ -86,22 +86,22 @@ export default function PricingPage() {
         <div className="max-w-4xl mx-auto px-4">
           {/* 안내 문구 */}
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 leading-tight mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-navy-900 leading-tight mb-4">
               왜 정해진 단가표가 없나요?
             </h2>
-            <p className="text-[15px] text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[15px] text-slate-500 leading-relaxed max-w-2xl mx-auto">
               지정폐기물은 같은 품목이라도 성상·수량·보관 상태에 따라 처리 조건이 크게 달라져
               일률적인 단가를 안내하기 어렵습니다. 대신 비용이 결정되는 기준을 투명하게 공개하고,
-              <span className="font-semibold text-primary"> 무료 방문 견적</span>으로 정확한 금액을
+              <span className="font-semibold text-cobalt-600"> 무료 방문 견적</span>으로 정확한 금액을
               안내해 드립니다.
             </p>
           </div>
 
           {/* 비용 결정 5요인 */}
-          <h3 className="text-xs font-bold text-accent tracking-widest uppercase mb-3 text-center">
+          <h3 className="text-xs font-bold text-cobalt-600 tracking-widest uppercase mb-3 text-center">
             비용 결정 요인
           </h3>
-          <h2 className="text-xl md:text-2xl font-bold text-neutral-900 text-center mb-8">
+          <h2 className="text-xl md:text-2xl font-bold text-navy-900 text-center mb-8">
             견적은 이 5가지로 결정됩니다
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
@@ -111,18 +111,18 @@ export default function PricingPage() {
               return (
                 <div
                   key={factor.title}
-                  className={`flex gap-4 p-5 bg-neutral-50 rounded-xl border border-neutral-100 ${
+                  className={`flex gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200 ${
                     isLast ? "md:col-span-2" : ""
                   }`}
                 >
-                  <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-cobalt-50 text-cobalt-600 flex items-center justify-center">
                     <Icon size={20} strokeWidth={1.8} />
                   </div>
                   <div>
-                    <h4 className="text-[15px] font-bold text-neutral-800 mb-1">
+                    <h4 className="text-[15px] font-bold text-navy-900 mb-1">
                       {factor.title}
                     </h4>
-                    <p className="text-sm text-neutral-500 leading-relaxed">{factor.desc}</p>
+                    <p className="text-sm text-slate-500 leading-relaxed">{factor.desc}</p>
                   </div>
                 </div>
               );
@@ -130,10 +130,10 @@ export default function PricingPage() {
           </div>
 
           {/* 견적 절차 */}
-          <h3 className="text-xs font-bold text-accent tracking-widest uppercase mb-3 text-center">
+          <h3 className="text-xs font-bold text-cobalt-600 tracking-widest uppercase mb-3 text-center">
             견적 절차
           </h3>
-          <h2 className="text-xl md:text-2xl font-bold text-neutral-900 text-center mb-8">
+          <h2 className="text-xl md:text-2xl font-bold text-navy-900 text-center mb-8">
             문의부터 견적서까지, 비용 없이 진행됩니다
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
@@ -142,14 +142,14 @@ export default function PricingPage() {
               return (
                 <div
                   key={s.step}
-                  className="p-6 bg-white rounded-xl border border-neutral-100 shadow-sm text-center"
+                  className="p-6 bg-white rounded-xl border border-slate-200 shadow-ds-sm text-center"
                 >
-                  <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 mx-auto rounded-full bg-cobalt-50 text-cobalt-600 flex items-center justify-center mb-4">
                     <Icon size={22} strokeWidth={1.8} />
                   </div>
-                  <div className="text-xs font-black text-primary/40 mb-1">STEP {s.step}</div>
-                  <h4 className="text-[15px] font-bold text-neutral-800 mb-2">{s.title}</h4>
-                  <p className="text-sm text-neutral-500 leading-relaxed">{s.desc}</p>
+                  <div className="text-xs font-black text-cobalt-600/40 mb-1">STEP {s.step}</div>
+                  <h4 className="text-[15px] font-bold text-navy-900 mb-2">{s.title}</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
                 </div>
               );
             })}
@@ -158,16 +158,16 @@ export default function PricingPage() {
           {/* 비용 절감 팁 */}
           <div className="bg-[#F0FAFA] rounded-2xl p-6 md:p-8 mb-16">
             <div className="flex items-center gap-2.5 mb-5">
-              <Lightbulb size={20} className="text-primary" />
-              <h2 className="text-lg md:text-xl font-bold text-neutral-900">
+              <Lightbulb size={20} className="text-cobalt-600" />
+              <h2 className="text-lg md:text-xl font-bold text-navy-900">
                 처리 비용을 줄이는 4가지 방법
               </h2>
             </div>
             <ul className="space-y-3">
               {SAVING_TIPS.map((tip) => (
                 <li key={tip} className="flex items-start gap-2.5">
-                  <CheckCircle2 size={17} className="shrink-0 text-secondary mt-0.5" />
-                  <span className="text-sm text-neutral-700 leading-relaxed">{tip}</span>
+                  <CheckCircle2 size={17} className="shrink-0 text-cobalt-500 mt-0.5" />
+                  <span className="text-sm text-navy-700 leading-relaxed">{tip}</span>
                 </li>
               ))}
             </ul>
@@ -185,7 +185,7 @@ export default function PricingPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/support/inquiry"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-primary text-sm font-bold rounded-lg hover:bg-neutral-100 transition-colors shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-cobalt-600 text-sm font-bold rounded-lg hover:bg-slate-100 transition-colors shadow-xl"
               >
                 <ArrowRight size={16} />
                 무료 견적 문의
