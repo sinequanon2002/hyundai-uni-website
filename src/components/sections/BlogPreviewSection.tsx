@@ -22,10 +22,10 @@ function PostCard({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/blog/${post.id}`}
-      className="group flex flex-col bg-white rounded-2xl border border-neutral-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 overflow-hidden"
+      className="group flex flex-col bg-white rounded-xl border border-slate-200 shadow-ds-sm hover:shadow-ds-md hover:border-cobalt-100 transition-all duration-200 overflow-hidden"
     >
       {/* Thumbnail or fallback */}
-      <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
+      <div className="aspect-video bg-gradient-to-br from-cobalt-50 to-mint-50 relative overflow-hidden">
         {post.thumbnail_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -35,7 +35,7 @@ function PostCard({ post }: { post: BlogPost }) {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <BookOpen size={36} className="text-primary/30" />
+            <BookOpen size={36} className="text-cobalt-200" />
           </div>
         )}
       </div>
@@ -43,29 +43,29 @@ function PostCard({ post }: { post: BlogPost }) {
       <div className="flex flex-col flex-1 p-5">
         {/* Category badge */}
         <span
-          className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-3 ${
-            CATEGORY_COLOR[post.category] ?? "bg-neutral-100 text-neutral-600"
+          className={`self-start text-xs font-semibold px-2.5 py-1 rounded-pill mb-3 ${
+            CATEGORY_COLOR[post.category] ?? "bg-slate-100 text-slate-600"
           }`}
         >
           {post.category}
         </span>
 
-        <h3 className="font-bold text-neutral-900 leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-2">
+        <h3 className="font-bold text-navy-900 leading-snug mb-2 group-hover:text-cobalt-600 transition-colors line-clamp-2">
           {post.title}
         </h3>
 
         {post.excerpt && (
-          <p className="text-sm text-neutral-500 leading-relaxed line-clamp-2 flex-1">
+          <p className="text-sm text-slate-500 leading-relaxed line-clamp-2 flex-1">
             {post.excerpt}
           </p>
         )}
 
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-neutral-50">
-          <span className="flex items-center gap-1.5 text-xs text-neutral-400">
+        <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100">
+          <span className="flex items-center gap-1.5 text-xs text-slate-400">
             <Calendar size={12} />
             {formatDate(post.created_at)}
           </span>
-          <span className="text-xs font-semibold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+          <span className="text-xs font-semibold text-cobalt-600 flex items-center gap-1 group-hover:gap-2 transition-all">
             읽기
             <ArrowRight size={12} />
           </span>
@@ -88,16 +88,16 @@ export async function BlogPreviewSection() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
           <div>
-            <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
+            <h3 className="text-sm font-bold text-cobalt-600 tracking-widest uppercase mb-3">
               폐기물 정보 자료실
             </h3>
-            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy-900 leading-tight">
               담당자가 꼭 알아야 할<br className="hidden md:inline" /> 지정폐기물 정보
             </h2>
           </div>
           <Link
             href="/blog"
-            className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline underline-offset-4"
+            className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-cobalt-600 hover:underline underline-offset-4"
           >
             전체 글 보기
             <ArrowRight size={14} />
@@ -115,7 +115,7 @@ export async function BlogPreviewSection() {
         <div className="mt-10 text-center">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border border-neutral-200 rounded-full text-sm text-neutral-600 hover:border-primary hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 border border-slate-200 rounded-pill text-sm text-slate-600 hover:border-cobalt-300 hover:text-cobalt-600 transition-colors"
           >
             전체 글 보기
             <ArrowRight size={14} />

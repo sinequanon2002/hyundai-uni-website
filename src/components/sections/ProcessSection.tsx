@@ -20,8 +20,8 @@ export function ProcessSection() {
     <section className="py-14 md:py-20 bg-neutral-50 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         <div {...fadeInHeader} className={`text-center mb-12 ${fadeInHeader.className}`}>
-          <h3 className="text-xs font-bold text-accent tracking-widest uppercase mb-2">처리 절차</h3>
-          <h2 className="text-2xl md:text-3xl font-bold text-neutral-900">체계적인 6단계 처리 프로세스</h2>
+          <h3 className="text-xs font-bold text-cobalt-600 tracking-widest uppercase mb-2">처리 절차</h3>
+          <h2 className="text-2xl md:text-3xl font-bold text-navy-900">체계적인 6단계 처리 프로세스</h2>
         </div>
 
         <div {...fadeInSteps} className={`relative ${fadeInSteps.className}`}>
@@ -39,15 +39,15 @@ export function ProcessSection() {
                   className="flex flex-row lg:flex-col items-center gap-4 lg:gap-5"
                   style={{ transitionDelay: `${index * 80}ms` }}
                 >
-                  <div className="w-[72px] h-[72px] shrink-0 rounded-full bg-white border-4 border-neutral-100 shadow-md flex items-center justify-center text-secondary relative">
+                  <div className="w-[72px] h-[72px] shrink-0 rounded-full bg-cobalt-50 border-4 border-cobalt-100 shadow-ds-md flex items-center justify-center text-cobalt-600 relative">
                     <Icon size={28} strokeWidth={1.5} />
-                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-[11px] font-bold">
+                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-mint-500 text-white rounded-full flex items-center justify-center text-[11px] font-bold font-mono">
                       {index + 1}
                     </div>
                   </div>
                   <div className="text-left lg:text-center">
-                    <p className="text-xs font-bold text-primary mb-0.5">{index + 1}단계</p>
-                    <h3 className="text-sm font-bold text-neutral-900">{process.title}</h3>
+                    <p className="text-xs font-bold text-cobalt-600 mb-0.5">{index + 1}단계</p>
+                    <h3 className="text-sm font-bold text-navy-900">{process.title}</h3>
                   </div>
                 </div>
               );

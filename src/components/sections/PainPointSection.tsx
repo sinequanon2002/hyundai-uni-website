@@ -42,13 +42,13 @@ export function PainPointSection() {
       <div className="container mx-auto px-4 md:px-8">
         {/* 헤더 */}
         <div {...fadeInHeader} className={`text-center mb-10 ${fadeInHeader.className}`}>
-          <h3 className="text-xs font-bold text-accent tracking-widest uppercase mb-2">
+          <h3 className="text-xs font-bold text-cobalt-600 tracking-widest uppercase mb-2">
             담당자 주요 고민
           </h3>
-          <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 leading-tight mb-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-navy-900 leading-tight mb-3">
             지정폐기물 관리, 혼자 감당하기엔<br className="hidden md:inline" /> 놓치는 부분이 생깁니다
           </h2>
-          <p className="text-neutral-500 max-w-lg mx-auto text-[15px] leading-relaxed">
+          <p className="text-slate-500 max-w-lg mx-auto text-[15px] leading-relaxed">
             복잡한 규정과 서류 절차로 어려움을 겪는 담당자분들을 위해 현대유앤아이가 돕습니다.
           </p>
         </div>
@@ -62,14 +62,14 @@ export function PainPointSection() {
             return (
               <div
                 key={i}
-                className={`flex gap-4 p-4 bg-white rounded-xl border border-neutral-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 ${isLast && isOdd ? "md:col-span-2 md:max-w-[calc(50%-8px)] md:mx-auto" : ""}`}
+                className={`flex gap-4 p-4 bg-white rounded-xl border border-slate-200 shadow-ds-sm hover:shadow-ds-md hover:border-cobalt-100 transition-all duration-200 ${isLast && isOdd ? "md:col-span-2 md:max-w-[calc(50%-8px)] md:mx-auto" : ""}`}
               >
-                <div className="shrink-0 w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center mt-0.5">
+                <div className="shrink-0 w-9 h-9 rounded-lg bg-cobalt-50 text-cobalt-600 flex items-center justify-center mt-0.5">
                   <Icon size={18} strokeWidth={1.8} />
                 </div>
                 <div>
-                  <h3 className="text-[15px] font-bold text-neutral-800 mb-1 leading-snug">{point.title}</h3>
-                  <p className="text-sm text-neutral-500 leading-relaxed">{point.desc}</p>
+                  <h3 className="text-[15px] font-bold text-navy-900 mb-1 leading-snug">{point.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{point.desc}</p>
                 </div>
               </div>
             );
@@ -78,13 +78,13 @@ export function PainPointSection() {
 
         {/* CTA */}
         <div {...fadeInCta} className={`mt-8 text-center ${fadeInCta.className}`}>
-          <p className="text-neutral-600 text-sm mb-4">
+          <p className="text-slate-600 text-sm mb-4">
             전자인계서 대행부터 처리 이력 관리까지 —{" "}
-            <span className="font-semibold text-primary">현대유앤아이</span>가 모든 과정을 함께합니다.
+            <span className="font-semibold text-cobalt-600">현대유앤아이</span>가 모든 과정을 함께합니다.
           </p>
           <Link
             href="/support/inquiry"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-mint-500 text-white text-sm font-semibold rounded-pill hover:bg-mint-600 transition-colors shadow-glow-cta"
           >
             <ArrowRight size={15} />
             견적 문의

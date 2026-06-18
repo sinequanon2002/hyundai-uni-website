@@ -43,12 +43,18 @@ export function HeroSection() {
           고객사의 환경 책임을 완벽하게 대행합니다.
         </p>
 
+        {/* 2영업일 강조 배지 — 디자인 시스템 cobalt-50 */}
+        <div className="inline-flex items-center gap-2 bg-cobalt-50/90 border border-cobalt-100/80 text-cobalt-700 rounded-md px-4 py-2.5 mb-8 text-sm font-semibold backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-mint-500 shrink-0"></span>
+          별도 비용 없이 &nbsp;·&nbsp; 영업일 2일 이내 정확한 견적서 회신
+        </div>
+
         {/* 기능 배지 */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {[
             "정식 허가 업체",
             "올바로시스템 대행",
-            "24시간 내 방문 견적",
+            "영업일 2일 이내 견적 회신",
             "처리 증빙 즉시 제공",
           ].map((badge) => (
             <span
@@ -60,22 +66,22 @@ export function HeroSection() {
           ))}
         </div>
 
-        {/* CTA 버튼 그룹 */}
+        {/* CTA 버튼 그룹 — 디자인 시스템 mint CTA + ghost */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link
             href="/support/inquiry"
-            className="px-8 py-4 bg-white text-primary font-bold rounded-lg shadow-xl hover:bg-neutral-50 transition-colors flex items-center gap-2.5"
+            className="px-8 py-4 bg-mint-500 text-white font-bold rounded-md shadow-glow-cta hover:bg-mint-600 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2.5"
           >
-            <ArrowRight size={18} />
-            견적 문의
+            <FileText size={18} />
+            견적 요청하기
           </Link>
 
           {/* 보조 CTA */}
           <Link
             href="/resources/brochure"
-            className="px-8 py-4 bg-transparent border-2 border-white/70 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2.5"
+            className="px-8 py-4 bg-white/10 border border-white/60 text-white font-semibold rounded-md hover:bg-white/20 transition-colors flex items-center justify-center gap-2.5"
           >
-            <FileText size={17} />
+            <ArrowRight size={17} />
             서비스 소개서 보기
           </Link>
         </div>
