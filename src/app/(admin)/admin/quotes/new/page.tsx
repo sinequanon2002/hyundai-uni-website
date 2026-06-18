@@ -47,16 +47,16 @@ export default async function NewQuotePage({ searchParams }: PageProps) {
     <div>
       <Link
         href={inquiry_id ? `/admin/inquiries/${inquiry_id}` : "/admin/quotes"}
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-[#0C5F6B] mb-6 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-cobalt-600 mb-6 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         {inquiry_id ? "문의 상세로 돌아가기" : "견적서 목록으로"}
       </Link>
 
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-gray-900">견적서 작성</h1>
+        <h1 className="text-xl font-bold text-navy-900">견적서 작성</h1>
         {inquiry_id && (
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-slate-500 mt-1">
             문의 번호 <span className="font-mono text-xs">{inquiry_id}</span> 기반 작성
           </p>
         )}

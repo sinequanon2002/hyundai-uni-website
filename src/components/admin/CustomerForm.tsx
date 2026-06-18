@@ -96,8 +96,8 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* 기본 정보 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
-        <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">기본 정보</h2>
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">기본 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="사업장명 *" error={errors.company_name?.message} className="sm:col-span-2">
             <input {...register("company_name")} className={inputCls(!!errors.company_name)} placeholder="(주)예시기업" />
@@ -115,8 +115,8 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
       </div>
 
       {/* 담당자 정보 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
-        <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">담당자 정보</h2>
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">담당자 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="담당자명" error={errors.contact_name?.message}>
             <input {...register("contact_name")} className={inputCls(false)} placeholder="김담당" />
@@ -131,8 +131,8 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
       </div>
 
       {/* 폐기물 종류 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
-        <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">주요 폐기물 종류</h2>
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">주요 폐기물 종류</h2>
         <div className="flex flex-wrap gap-2">
           {WASTE_OPTIONS.map((type) => (
             <button
@@ -142,8 +142,8 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
               className={[
                 "px-3 py-1.5 text-xs font-medium rounded-full border transition-colors",
                 selectedWasteTypes.includes(type)
-                  ? "bg-primary text-white border-primary"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-gray-400",
+                  ? "bg-cobalt-600 text-white border-cobalt-600"
+                  : "bg-white text-slate-600 border-slate-200 hover:border-slate-400",
               ].join(" ")}
             >
               {type}
@@ -151,15 +151,15 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
           ))}
         </div>
         {selectedWasteTypes.length > 0 && (
-          <p className="text-xs text-gray-400 mt-3">
+          <p className="text-xs text-slate-400 mt-3">
             선택됨: {selectedWasteTypes.join(", ")}
           </p>
         )}
       </div>
 
       {/* 비고 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
-        <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">메모 / 특이사항</h2>
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">메모 / 특이사항</h2>
         <textarea
           {...register("notes")}
           rows={3}
@@ -173,14 +173,14 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-4 py-2.5 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+          className="px-4 py-2.5 text-sm text-slate-600 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
         >
           취소
         </button>
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-secondary transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-cobalt-600 text-white rounded-lg hover:bg-cobalt-700 transition-colors disabled:opacity-50"
         >
           {isPending && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
           {mode === "create" ? "고객 등록" : "수정 완료"}
@@ -193,8 +193,8 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
 function inputCls(hasError: boolean) {
   return [
     "w-full h-[38px] px-3 text-sm rounded-lg border transition-colors",
-    "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
-    hasError ? "border-red-300 bg-red-50" : "border-gray-200 bg-white",
+    "focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600",
+    hasError ? "border-red-300 bg-red-50" : "border-slate-200 bg-white",
   ].join(" ");
 }
 
@@ -203,7 +203,7 @@ function Field({ label, error, children, className = "" }: {
 }) {
   return (
     <div className={className}>
-      <label className="block text-xs font-medium text-gray-600 mb-1.5">{label}</label>
+      <label className="block text-xs font-medium text-slate-600 mb-1.5">{label}</label>
       {children}
       {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>

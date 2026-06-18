@@ -48,7 +48,7 @@ export function InquiryStatusUpdateForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <p className="text-sm font-semibold text-gray-700 mb-2">처리 상태</p>
+        <p className="text-sm font-semibold text-slate-700 mb-2">처리 상태</p>
         <div className="flex flex-wrap gap-2">
           {STATUS_OPTIONS.map((opt) => (
             <button
@@ -58,22 +58,22 @@ export function InquiryStatusUpdateForm({
               className={cn(
                 "px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors",
                 selectedStatus === opt.value
-                  ? "border-[#0C5F6B] bg-[#0C5F6B] text-white"
-                  : "border-gray-200 bg-white text-gray-600 hover:border-[#0C5F6B]/50"
+                  ? "border-cobalt-600 bg-cobalt-600 text-white"
+                  : "border-slate-200 bg-white text-slate-600 hover:border-cobalt-600/50"
               )}
             >
               {opt.label}
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-400 mt-2">
+        <p className="text-xs text-slate-400 mt-2">
           현재:{" "}
           <InquiryStatusBadge status={currentStatus} className="ml-1" />
         </p>
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-gray-700 block mb-1">
+        <label className="text-sm font-semibold text-slate-700 block mb-1">
           메모 (내부용)
         </label>
         <textarea
@@ -81,7 +81,7 @@ export function InquiryStatusUpdateForm({
           onChange={(e) => setNotes(e.target.value)}
           rows={4}
           placeholder="담당자 메모, 처리 내용 등을 기록하세요"
-          className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#0C5F6B]/30 focus:border-[#0C5F6B] resize-none"
+          className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600 resize-none"
         />
       </div>
 
@@ -106,7 +106,7 @@ export function InquiryStatusUpdateForm({
       <button
         type="submit"
         disabled={isPending}
-        className="w-full py-2.5 bg-[#0C5F6B] text-white text-sm font-semibold rounded-lg hover:bg-[#0E9E7E] transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+        className="w-full py-2.5 bg-cobalt-600 text-white text-sm font-semibold rounded-lg hover:bg-cobalt-700 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
       >
         {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
         {isPending ? "저장 중..." : "저장하기"}

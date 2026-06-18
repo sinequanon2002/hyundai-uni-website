@@ -32,7 +32,7 @@ export function SendQuoteButton({ quoteId, email }: SendQuoteButtonProps) {
       type="button"
       onClick={handleSend}
       disabled={isPending}
-      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-secondary transition-colors disabled:opacity-50"
+      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-cobalt-600 text-white rounded-lg hover:bg-cobalt-700 transition-colors disabled:opacity-50"
     >
       {isPending ? (
         <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

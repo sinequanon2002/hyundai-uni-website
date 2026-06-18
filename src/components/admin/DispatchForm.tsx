@@ -130,8 +130,8 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* 기본 정보 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
-        <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">기본 정보</h2>
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">기본 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="배출 사업장">
             <select {...register("customer_id")} className={inputCls(false)}>
@@ -162,13 +162,13 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
       </div>
 
       {/* 폐기물 항목 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide">폐기물 항목</h2>
+          <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide">폐기물 항목</h2>
           <button
             type="button"
             onClick={() => append({ waste_type: "", unit: "드럼(200L)", estimated_qty: 0, actual_qty: 0, unit_price: 0, amount: 0 })}
-            className="inline-flex items-center gap-1 text-xs text-primary hover:text-secondary font-medium transition-colors"
+            className="inline-flex items-center gap-1 text-xs text-cobalt-600 hover:text-mint-600 font-medium transition-colors"
           >
             <Plus className="w-3.5 h-3.5" />
             항목 추가
@@ -187,12 +187,12 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
             const amt   = qty * price;
 
             return (
-              <div key={field.id} className="border border-gray-100 rounded-xl p-4 bg-gray-50/50 relative">
+              <div key={field.id} className="border border-slate-100 rounded-xl p-4 bg-slate-50/50 relative">
                 {fields.length > 1 && (
                   <button
                     type="button"
                     onClick={() => remove(i)}
-                    className="absolute top-3 right-3 text-gray-300 hover:text-red-400 transition-colors"
+                    className="absolute top-3 right-3 text-slate-300 hover:text-red-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -228,7 +228,7 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
                   </Field>
 
                   <Field label="금액" className="col-span-2 sm:col-span-1">
-                    <div className="h-[38px] flex items-center px-3 text-sm font-medium text-primary bg-primary/5 border border-primary/20 rounded-lg">
+                    <div className="h-[38px] flex items-center px-3 text-sm font-medium text-cobalt-600 bg-cobalt-100 border border-cobalt-600/20 rounded-lg">
                       {amt.toLocaleString("ko-KR")}원
                     </div>
                   </Field>
@@ -239,25 +239,25 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
         </div>
 
         {/* 합계 */}
-        <div className="mt-5 pt-4 border-t border-gray-100 space-y-1 text-sm">
-          <div className="flex justify-between text-gray-600">
+        <div className="mt-5 pt-4 border-t border-slate-100 space-y-1 text-sm">
+          <div className="flex justify-between text-slate-600">
             <span>공급가액</span>
             <span>{subtotal.toLocaleString("ko-KR")}원</span>
           </div>
-          <div className="flex justify-between text-gray-600">
+          <div className="flex justify-between text-slate-600">
             <span>부가세 (10%)</span>
             <span>{tax.toLocaleString("ko-KR")}원</span>
           </div>
-          <div className="flex justify-between font-bold text-base text-gray-900 pt-1">
+          <div className="flex justify-between font-bold text-base text-navy-900 pt-1">
             <span>합계</span>
-            <span className="text-primary">{total.toLocaleString("ko-KR")}원</span>
+            <span className="text-cobalt-600">{total.toLocaleString("ko-KR")}원</span>
           </div>
         </div>
       </div>
 
       {/* 메모 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
-        <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">메모</h2>
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">메모</h2>
         <textarea
           {...register("notes")}
           rows={3}
@@ -271,14 +271,14 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-4 py-2.5 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+          className="px-4 py-2.5 text-sm text-slate-600 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
         >
           취소
         </button>
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-secondary transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-cobalt-600 text-white rounded-lg hover:bg-cobalt-700 transition-colors disabled:opacity-50"
         >
           {isPending && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
           {mode === "create" ? "수거 건 등록" : "수정 완료"}
@@ -291,8 +291,8 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
 function inputCls(hasError: boolean) {
   return [
     "w-full h-[38px] px-3 text-sm rounded-lg border transition-colors",
-    "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
-    hasError ? "border-red-300 bg-red-50" : "border-gray-200 bg-white",
+    "focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600",
+    hasError ? "border-red-300 bg-red-50" : "border-slate-200 bg-white",
   ].join(" ");
 }
 
@@ -301,7 +301,7 @@ function Field({ label, error, children, className = "" }: {
 }) {
   return (
     <div className={className}>
-      <label className="block text-xs font-medium text-gray-600 mb-1.5">{label}</label>
+      <label className="block text-xs font-medium text-slate-600 mb-1.5">{label}</label>
       {children}
       {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>

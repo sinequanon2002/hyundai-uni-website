@@ -29,10 +29,10 @@ export function GeneratePdfButton({ quoteId }: GeneratePdfButtonProps) {
       type="button"
       onClick={handleGenerate}
       disabled={isPending}
-      className="inline-flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50"
+      className="inline-flex items-center gap-2 px-3 py-2 text-sm border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors disabled:opacity-50"
     >
       {isPending ? (
-        <span className="w-4 h-4 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin" />
+        <span className="w-4 h-4 border-2 border-slate-200 border-t-slate-600 rounded-full animate-spin" />
       ) : (
         <FileText className="w-4 h-4" />
       )}

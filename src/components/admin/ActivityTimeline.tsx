@@ -15,13 +15,13 @@ const STATUS_COLORS: Record<string, string> = {
   reviewing: "text-blue-600 bg-blue-50 border-blue-200",
   quoted:    "text-purple-600 bg-purple-50 border-purple-200",
   completed: "text-green-600 bg-green-50 border-green-200",
-  cancelled: "text-gray-500 bg-gray-50 border-gray-200",
+  cancelled: "text-slate-500 bg-slate-50 border-slate-200",
 };
 
 function StatusChip({ status }: { status: string | null }) {
-  if (!status) return <span className="text-gray-400">-</span>;
+  if (!status) return <span className="text-slate-400">-</span>;
   return (
-    <span className={cn("text-xs px-1.5 py-0.5 rounded border font-medium", STATUS_COLORS[status] ?? "text-gray-600 bg-gray-50 border-gray-200")}>
+    <span className={cn("text-xs px-1.5 py-0.5 rounded border font-medium", STATUS_COLORS[status] ?? "text-slate-600 bg-slate-50 border-slate-200")}>
       {STATUS_LABELS[status] ?? status}
     </span>
   );
@@ -42,25 +42,25 @@ function ActivityItem({ activity, isLast }: ActivityItemProps) {
   let iconBg: string;
 
   if (activity.action_type === "status_change") {
-    iconBg = "bg-primary/10 text-primary";
+    iconBg = "bg-cobalt-100 text-cobalt-600";
     icon = <ArrowRight className="w-3.5 h-3.5" />;
     content = (
       <span className="flex items-center gap-1.5 flex-wrap">
         <StatusChip status={activity.from_status} />
-        <ArrowRight className="w-3 h-3 text-gray-400 shrink-0" />
+        <ArrowRight className="w-3 h-3 text-slate-400 shrink-0" />
         <StatusChip status={activity.to_status} />
-        <span className="text-gray-500 text-xs">로 변경</span>
+        <span className="text-slate-500 text-xs">로 변경</span>
       </span>
     );
   } else if (activity.action_type === "assigned") {
-    iconBg = "bg-secondary/10 text-secondary";
+    iconBg = "bg-mint-100 text-mint-600";
     icon = <UserCheck className="w-3.5 h-3.5" />;
-    content = <span className="text-sm text-gray-700">{activity.note}</span>;
+    content = <span className="text-sm text-slate-700">{activity.note}</span>;
   } else {
-    iconBg = "bg-gray-100 text-gray-500";
+    iconBg = "bg-slate-100 text-slate-500";
     icon = <StickyNote className="w-3.5 h-3.5" />;
     content = (
-      <span className="text-sm text-gray-700 line-clamp-2 break-keep">
+      <span className="text-sm text-slate-700 line-clamp-2 break-keep">
         메모: {activity.note}
       </span>
     );
@@ -73,16 +73,16 @@ function ActivityItem({ activity, isLast }: ActivityItemProps) {
         <div className={cn("w-7 h-7 rounded-full flex items-center justify-center shrink-0", iconBg)}>
           {icon}
         </div>
-        {!isLast && <div className="w-px flex-1 bg-gray-100 mt-1" />}
+        {!isLast && <div className="w-px flex-1 bg-slate-100 mt-1" />}
       </div>
 
       {/* 내용 */}
       <div className={cn("pb-4 min-w-0", isLast && "pb-0")}>
         <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mb-1">
-          <span className="text-xs font-semibold text-gray-700">
+          <span className="text-xs font-semibold text-slate-700">
             {activity.actor_name ?? "시스템"}
           </span>
-          <span className="flex items-center gap-0.5 text-xs text-gray-400">
+          <span className="flex items-center gap-0.5 text-xs text-slate-400">
             <Clock className="w-2.5 h-2.5" />
             {time}
           </span>
@@ -106,7 +106,7 @@ export function ActivityTimeline({ activities, createdAt, companyName }: Activit
 
   return (
     <div>
-      <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">
+      <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">
         활동 이력
       </h2>
 
@@ -117,17 +117,17 @@ export function ActivityTimeline({ activities, createdAt, companyName }: Activit
             <div className="w-7 h-7 rounded-full bg-accent/10 text-accent flex items-center justify-center shrink-0 text-xs font-bold">
               접
             </div>
-            {(activities.length > 0) && <div className="w-px flex-1 bg-gray-100 mt-1" />}
+            {(activities.length > 0) && <div className="w-px flex-1 bg-slate-100 mt-1" />}
           </div>
           <div className={cn("min-w-0", activities.length > 0 ? "pb-4" : "pb-0")}>
             <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mb-1">
-              <span className="text-xs font-semibold text-gray-700">{companyName}</span>
-              <span className="flex items-center gap-0.5 text-xs text-gray-400">
+              <span className="text-xs font-semibold text-slate-700">{companyName}</span>
+              <span className="flex items-center gap-0.5 text-xs text-slate-400">
                 <Clock className="w-2.5 h-2.5" />
                 {createdTime}
               </span>
             </div>
-            <span className="text-sm text-gray-700">견적 문의 접수</span>
+            <span className="text-sm text-slate-700">견적 문의 접수</span>
           </div>
         </li>
 
@@ -141,7 +141,7 @@ export function ActivityTimeline({ activities, createdAt, companyName }: Activit
       </ul>
 
       {activities.length === 0 && (
-        <p className="text-xs text-gray-400 mt-2 pl-10">아직 처리 이력이 없습니다.</p>
+        <p className="text-xs text-slate-400 mt-2 pl-10">아직 처리 이력이 없습니다.</p>
       )}
     </div>
   );

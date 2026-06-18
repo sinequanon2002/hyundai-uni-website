@@ -164,12 +164,12 @@ export function AdminNav({ isAdmin, displayName, roleLabel }: AdminNavProps) {
   return (
     <>
       {/* 데스크톱 사이드바 (lg 이상) */}
-      <aside className="hidden lg:flex flex-col w-[260px] shrink-0 bg-primary sticky top-0 h-dvh">
+      <aside className="hidden lg:flex flex-col w-[260px] shrink-0 bg-navy-900 sticky top-0 h-dvh">
         {sidebarInner}
       </aside>
 
       {/* 모바일 상단 헤더 (lg 미만) */}
-      <header className="lg:hidden bg-primary text-white sticky top-0 z-30 shrink-0">
+      <header className="lg:hidden bg-navy-900 text-white sticky top-0 z-30 shrink-0">
         <div className="px-4 h-14 flex items-center justify-between">
           <a
             href="/admin/inquiries"
@@ -203,7 +203,7 @@ export function AdminNav({ isAdmin, displayName, roleLabel }: AdminNavProps) {
         />
         <aside
           className={cn(
-            "relative w-[280px] bg-primary flex flex-col h-full z-50 shadow-2xl transition-transform duration-300 ease-in-out",
+            "relative w-[280px] bg-navy-900 flex flex-col h-full z-50 shadow-2xl transition-transform duration-300 ease-in-out",
             isOpen ? "translate-x-0" : "-translate-x-full"
           )}
         >

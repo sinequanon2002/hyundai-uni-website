@@ -33,13 +33,13 @@ export default async function NewDispatchPage({ searchParams }: PageProps) {
     <div>
       <Link
         href={customer_id ? `/admin/customers/${customer_id}` : "/admin/dispatches"}
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary mb-6 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-cobalt-600 mb-6 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         {customer_id ? "고객 상세로" : "수거 건 목록으로"}
       </Link>
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-gray-900">수거 건 등록</h1>
+        <h1 className="text-xl font-bold text-navy-900">수거 건 등록</h1>
       </div>
       <DispatchForm
         mode="create"

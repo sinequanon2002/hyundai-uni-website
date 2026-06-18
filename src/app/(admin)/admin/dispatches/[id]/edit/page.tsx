@@ -39,14 +39,14 @@ export default async function EditDispatchPage({ params }: PageProps) {
     <div>
       <Link
         href={`/admin/dispatches/${d.id}`}
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary mb-6 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-cobalt-600 mb-6 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         수거 건 상세
       </Link>
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-gray-900">수거 건 수정</h1>
-        <p className="text-sm text-gray-400 font-mono mt-0.5">{d.dispatch_number}</p>
+        <h1 className="text-xl font-bold text-navy-900">수거 건 수정</h1>
+        <p className="text-sm text-slate-400 font-mono mt-0.5">{d.dispatch_number}</p>
       </div>
       <DispatchForm
         mode="edit"

@@ -73,8 +73,8 @@ export function NoticeForm({ notice }: Props) {
                 }}
                 className={`px-5 py-2 rounded-lg text-sm font-semibold border transition-colors ${
                   postType === type
-                    ? "bg-primary text-white border-primary"
-                    : "bg-white text-neutral-600 border-neutral-300 hover:border-primary"
+                    ? "bg-cobalt-600 text-white border-cobalt-600"
+                    : "bg-white text-neutral-600 border-neutral-300 hover:border-cobalt-600"
                 }`}
               >
                 {type === "notice" ? "공지사항" : "블로그 자료실"}
@@ -100,7 +100,7 @@ export function NoticeForm({ notice }: Props) {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="공지사항 제목을 입력하세요"
           required
-          className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+          className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
         />
       </div>
 
@@ -111,7 +111,7 @@ export function NoticeForm({ notice }: Props) {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           >
             {CATEGORIES.map((c) => (
               <option key={c} value={c}>{c}</option>
@@ -124,7 +124,7 @@ export function NoticeForm({ notice }: Props) {
               type="checkbox"
               checked={isPinned}
               onChange={(e) => setIsPinned(e.target.checked)}
-              className="w-4 h-4 rounded border-neutral-300 text-primary focus:ring-primary"
+              className="w-4 h-4 rounded border-neutral-300 text-cobalt-600 focus:ring-cobalt-600"
             />
             <span className="text-sm font-medium text-neutral-700">상단 고정</span>
           </label>
@@ -142,7 +142,7 @@ export function NoticeForm({ notice }: Props) {
             onChange={(e) => setExcerpt(e.target.value)}
             placeholder="검색 결과와 목록 카드에 표시할 1~2문장 요약을 입력하세요"
             rows={2}
-            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary resize-none"
+            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600 resize-none"
           />
         </div>
       )}
@@ -158,7 +158,7 @@ export function NoticeForm({ notice }: Props) {
             value={tags}
             onChange={(e) => setTags(e.target.value)}
             placeholder="예: 폐유, 폐기물관리법, 올바로시스템"
-            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           />
         </div>
       )}
@@ -183,7 +183,7 @@ export function NoticeForm({ notice }: Props) {
         <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
+          className="px-6 py-2 text-sm bg-cobalt-600 text-white rounded-lg hover:bg-cobalt-700 disabled:opacity-50 transition-colors"
         >
           {isPending ? "저장 중..." : isEdit ? "수정 완료" : "등록"}
         </button>

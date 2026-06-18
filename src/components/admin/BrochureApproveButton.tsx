@@ -18,14 +18,14 @@ export function BrochureApproveButton({ id, status, approvedAt }: Props) {
 
   if (localStatus === "approved") {
     return (
-      <span className="text-xs text-gray-400">
+      <span className="text-xs text-slate-400">
         {approvedAt ? new Date(approvedAt).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "발송됨"}
       </span>
     );
   }
 
   if (localStatus === "rejected") {
-    return <span className="text-xs text-gray-400">반려됨</span>;
+    return <span className="text-xs text-slate-400">반려됨</span>;
   }
 
   const handleApprove = () => {
@@ -62,7 +62,7 @@ export function BrochureApproveButton({ id, status, approvedAt }: Props) {
           disabled={isPending}
           className={cn(
             "inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors",
-            "bg-[#0C5F6B] text-white hover:bg-[#0E9E7E] disabled:opacity-50"
+            "bg-cobalt-600 text-white hover:bg-cobalt-700 disabled:opacity-50"
           )}
           title="승인 및 이메일 발송"
         >
@@ -72,7 +72,7 @@ export function BrochureApproveButton({ id, status, approvedAt }: Props) {
         <button
           onClick={handleReject}
           disabled={isPending}
-          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50"
+          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors bg-slate-100 text-slate-600 hover:bg-slate-200 disabled:opacity-50"
           title="반려"
         >
           <X className="w-3 h-3" />
