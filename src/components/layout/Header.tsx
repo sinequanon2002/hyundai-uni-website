@@ -121,9 +121,10 @@ export function Header() {
 
   return (
     <>
-      <header ref={headerRef} className="sticky top-0 z-[60] w-full border-b border-white/10 bg-[#0A1B20]/95 backdrop-blur-md">
+      {/* 글래스 헤더 — 디자인 시스템 glass morphism */}
+      <header ref={headerRef} className="sticky top-0 z-[60] w-full border-b border-slate-200/80 bg-white/85 backdrop-blur-[12px] shadow-ds-xs">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="font-bold text-xl text-white shrink-0">
+          <Link href="/" className="font-bold text-xl text-navy-900 shrink-0 tracking-tight">
             현대유앤아이
           </Link>
 
@@ -136,8 +137,8 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "px-4 py-5 transition-colors hover:text-secondary",
-                      pathname.startsWith(item.href) ? "text-secondary font-semibold" : "text-white/70"
+                      "px-4 py-5 transition-colors hover:text-cobalt-600",
+                      pathname.startsWith(item.href) ? "text-cobalt-600 font-semibold" : "text-slate-600"
                     )}
                   >
                     {item.label}
@@ -158,8 +159,8 @@ export function Header() {
                 >
                   <button
                     className={cn(
-                      "flex items-center gap-1 px-4 py-5 transition-colors hover:text-secondary",
-                      active ? "text-secondary" : "text-white/70"
+                      "flex items-center gap-1 px-4 py-5 transition-colors hover:text-cobalt-600",
+                      active ? "text-cobalt-600" : "text-slate-600"
                     )}
                     onClick={() =>
                       setActiveDropdown((prev) =>
@@ -179,10 +180,10 @@ export function Header() {
                     />
                   </button>
 
-                  {/* Dropdown */}
+                  {/* Dropdown — 디자인 시스템 카드 스타일 */}
                   <div
                     className={cn(
-                      "absolute top-full left-0 min-w-[200px] bg-[#0F2830] rounded-xl shadow-xl border border-white/10 py-2 transition-all duration-200 origin-top",
+                      "absolute top-full left-0 min-w-[200px] bg-white rounded-xl shadow-ds-lg border border-slate-200 py-2 transition-all duration-200 origin-top",
                       isDropdownOpen
                         ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
                         : "opacity-0 scale-y-95 -translate-y-1 pointer-events-none"
@@ -191,13 +192,12 @@ export function Header() {
                     onMouseLeave={handleMouseLeave}
                   >
                     {item.children.map((child) => {
-                      // 서비스 소개: highlight 항목 앞에 구분선
                       const showDivider = item.basePath === '/service' && child.highlight;
 
                       return (
                         <div key={child.href}>
                           {showDivider && (
-                            <div className="my-1.5 mx-4 border-t border-white/10" />
+                            <div className="my-1.5 mx-4 border-t border-slate-100" />
                           )}
                           <Link
                             href={child.href}
@@ -207,11 +207,11 @@ export function Header() {
                             className={cn(
                               "flex items-center justify-between px-5 py-2.5 text-sm transition-colors",
                               child.highlight
-                                ? "hover:bg-accent/10 hover:text-accent text-accent/80 font-medium"
-                                : "hover:bg-white/5 hover:text-white",
+                                ? "hover:bg-mint-50 hover:text-mint-600 text-mint-600 font-medium"
+                                : "hover:bg-slate-50 hover:text-navy-900",
                               pathname === child.href && !child.external
-                                ? "bg-white/5 text-white font-medium"
-                                : !child.highlight && "text-white/60"
+                                ? "bg-cobalt-50 text-cobalt-700 font-medium"
+                                : !child.highlight && "text-slate-600"
                             )}
                           >
                             <span className="flex items-center gap-2">
@@ -219,7 +219,7 @@ export function Header() {
                               {child.label}
                             </span>
                             {child.badge && (
-                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-white/10 text-white/40">
+                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500">
                                 {child.badge}
                               </span>
                             )}
@@ -236,18 +236,18 @@ export function Header() {
             <a
               href={`tel:${COMPANY.tel}`}
               onClick={() => trackPhoneClick('header')}
-              className="ml-4 hidden xl:flex items-center gap-2 text-white/90 hover:text-secondary transition-colors font-semibold tabular-nums"
+              className="ml-4 hidden xl:flex items-center gap-2 text-navy-900 hover:text-cobalt-600 transition-colors font-semibold tabular-nums font-mono"
             >
-              <Phone size={15} className="text-secondary" />
+              <Phone size={15} className="text-cobalt-600" />
               {COMPANY.tel}
             </a>
 
-            {/* CTA 버튼 */}
+            {/* CTA 버튼 — mint 액센트 */}
             <Link
               href={CTA_ITEM.href}
               className={cn(
-                "ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02] bg-primary text-white shadow-primary/20 hover:bg-primary/90",
-                pathname === CTA_ITEM.href && "shadow-primary/30"
+                "ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-pill text-sm font-bold transition-all duration-200 shadow-ds-md hover:shadow-glow-cta hover:-translate-y-px bg-mint-500 text-white hover:bg-mint-600",
+                pathname === CTA_ITEM.href && "bg-mint-600"
               )}
             >
               <FileText size={16} />
@@ -261,12 +261,12 @@ export function Header() {
               href={`tel:${COMPANY.tel}`}
               onClick={() => trackPhoneClick('header_mobile')}
               aria-label="전화 문의"
-              className="p-2 text-white"
+              className="p-2 text-navy-900"
             >
               <Phone size={20} />
             </a>
             <button
-              className="p-2 text-white focus:outline-none relative z-[70]"
+              className="p-2 text-navy-900 focus:outline-none relative z-[70]"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
             >
@@ -276,10 +276,10 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile Navigation Overlay */}
+      {/* Mobile Navigation Overlay — 네이비 */}
       <div
         className={cn(
-          "fixed inset-0 z-[50] bg-[#0A1B20] transition-all duration-300 ease-in-out lg:hidden overflow-y-auto pt-20",
+          "fixed inset-0 z-[50] bg-navy-900 transition-all duration-300 ease-in-out lg:hidden overflow-y-auto pt-20",
           isOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-4"
@@ -296,8 +296,8 @@ export function Header() {
                       className={cn(
                         "block py-4 text-lg font-bold transition-colors",
                         pathname.startsWith(item.href)
-                          ? "text-secondary"
-                          : "text-white hover:text-secondary"
+                          ? "text-cobalt-500"
+                          : "text-white hover:text-cobalt-400"
                       )}
                     >
                       {item.label}
@@ -315,7 +315,7 @@ export function Header() {
                   <button
                     className={cn(
                       "w-full flex items-center justify-between py-4 text-left text-lg font-bold transition-colors",
-                      active ? "text-secondary" : "text-white"
+                      active ? "text-cobalt-500" : "text-white"
                     )}
                     onClick={() => toggleMobileAccordion(item.basePath)}
                     aria-expanded={isAccordionOpen}
@@ -325,7 +325,7 @@ export function Header() {
                       size={20}
                       className={cn(
                         "transition-transform duration-300 text-white/40",
-                        isAccordionOpen ? "rotate-180 text-secondary" : ""
+                        isAccordionOpen ? "rotate-180 text-cobalt-400" : ""
                       )}
                     />
                   </button>
@@ -347,9 +347,9 @@ export function Header() {
                           className={cn(
                             "flex items-center justify-between py-2.5 px-3 rounded-lg text-sm transition-colors",
                             child.highlight
-                              ? "text-accent/80 font-medium hover:bg-accent/10 hover:text-accent"
+                              ? "text-mint-400 font-medium hover:bg-mint-500/10 hover:text-mint-400"
                               : pathname === child.href
-                              ? "text-secondary bg-white/5 font-medium"
+                              ? "text-cobalt-400 bg-white/5 font-medium"
                               : "text-white/60 hover:text-white hover:bg-white/5"
                           )}
                         >
@@ -358,7 +358,7 @@ export function Header() {
                             {child.label}
                           </span>
                           {child.badge && (
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-neutral-100 text-neutral-400">
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-white/10 text-white/50">
                               {child.badge}
                             </span>
                           )}
@@ -374,7 +374,7 @@ export function Header() {
           <div className="pt-8 pb-12">
             <Link
               href="/support/inquiry"
-              className="flex items-center justify-center gap-2 w-full py-4 text-center bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors"
+              className="flex items-center justify-center gap-2 w-full py-4 text-center bg-mint-500 text-white rounded-xl font-bold shadow-glow-cta hover:bg-mint-600 transition-colors"
             >
               <ArrowRight size={18} />
               견적 문의하기
