@@ -97,7 +97,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
       </form>
 
       {/* 테이블 */}
-      <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
+      <div className="bg-white rounded-sm border border-neutral-200 overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-neutral-50 border-b border-neutral-200">
             <tr>

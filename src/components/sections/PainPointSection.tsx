@@ -62,7 +62,7 @@ export function PainPointSection() {
             return (
               <div
                 key={i}
-                className={`flex gap-4 p-4 bg-white rounded-xl border border-slate-200 shadow-ds-sm hover:shadow-ds-md hover:border-cobalt-100 transition-all duration-200 ${isLast && isOdd ? "md:col-span-2 md:max-w-[calc(50%-8px)] md:mx-auto" : ""}`}
+                className={`flex gap-4 p-4 bg-white rounded-sm border border-slate-200 shadow-ds-sm hover:shadow-ds-md hover:border-cobalt-100 transition-all duration-200 ${isLast && isOdd ? "md:col-span-2 md:max-w-[calc(50%-8px)] md:mx-auto" : ""}`}
               >
                 <div className="shrink-0 w-9 h-9 rounded-lg bg-cobalt-50 text-cobalt-600 flex items-center justify-center mt-0.5">
                   <Icon size={18} strokeWidth={1.8} />

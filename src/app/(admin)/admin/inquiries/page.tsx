@@ -75,11 +75,11 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
 
       {/* 목록 */}
       {!result.success ? (
-        <div className="bg-white rounded-xl shadow-ds-sm py-16 text-center text-red-400 text-sm">
+        <div className="bg-white rounded-sm shadow-ds-sm py-16 text-center text-red-400 text-sm">
           데이터를 불러오는 중 오류가 발생했습니다.
         </div>
       ) : inquiries.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-ds-sm py-16 text-center text-slate-400 text-sm">
+        <div className="bg-white rounded-sm shadow-ds-sm py-16 text-center text-slate-400 text-sm">
           문의 내역이 없습니다.
         </div>
       ) : (
@@ -90,7 +90,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
               <li key={inq.id}>
                 <Link
                   href={`/admin/inquiries/${inq.id}`}
-                  className="block bg-white rounded-xl shadow-ds-sm p-4 active:bg-slate-50 transition-colors"
+                  className="block bg-white rounded-sm shadow-ds-sm p-4 active:bg-slate-50 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-3 mb-2.5">
                     <span className="font-bold text-navy-900 text-[15px] leading-tight">
@@ -130,7 +130,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
           </ul>
 
           {/* 데스크톱: 테이블 */}
-          <div className="hidden md:block bg-white rounded-xl shadow-ds-sm overflow-hidden">
+          <div className="hidden md:block bg-white rounded-sm shadow-ds-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

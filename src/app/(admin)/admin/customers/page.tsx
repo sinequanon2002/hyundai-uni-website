@@ -34,7 +34,7 @@ export default async function AdminCustomersPage({ searchParams }: PageProps) {
       </div>
 
       {/* 검색 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-4 mb-4">
+      <div className="bg-white rounded-sm shadow-ds-sm p-4 mb-4">
         <form method="get" className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
           <input
@@ -48,7 +48,7 @@ export default async function AdminCustomersPage({ searchParams }: PageProps) {
 
       {/* 리스트 */}
       {customers.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-ds-sm p-16 text-center text-slate-400">
+        <div className="bg-white rounded-sm shadow-ds-sm p-16 text-center text-slate-400">
           <Users className="w-10 h-10 mx-auto mb-3 opacity-30" />
           <p className="text-sm">등록된 고객이 없습니다</p>
           <Link href="/admin/customers/new" className="mt-3 inline-block text-sm text-cobalt-600 hover:underline">
@@ -56,7 +56,7 @@ export default async function AdminCustomersPage({ searchParams }: PageProps) {
           </Link>
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-ds-sm overflow-hidden">
+        <div className="bg-white rounded-sm shadow-ds-sm overflow-hidden">
           {/* 데스크톱 테이블 */}
           <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-sm">

@@ -130,7 +130,7 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* 기본 정보 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">기본 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="배출 사업장">
@@ -162,7 +162,7 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
       </div>
 
       {/* 폐기물 항목 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide">폐기물 항목</h2>
           <button
@@ -187,7 +187,7 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
             const amt   = qty * price;
 
             return (
-              <div key={field.id} className="border border-slate-100 rounded-xl p-4 bg-slate-50/50 relative">
+              <div key={field.id} className="border border-slate-100 rounded-sm p-4 bg-slate-50/50 relative">
                 {fields.length > 1 && (
                   <button
                     type="button"
@@ -256,7 +256,7 @@ export function DispatchForm({ mode, dispatch, staffList, customers, defaultCust
       </div>
 
       {/* 메모 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">메모</h2>
         <textarea
           {...register("notes")}

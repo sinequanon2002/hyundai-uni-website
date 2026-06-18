@@ -53,7 +53,7 @@ export function GalleryGrid({ items }: Props) {
           <button
             key={item.id}
             onClick={() => setLightboxIdx(idx)}
-            className="group text-left rounded-xl overflow-hidden shadow-ds-sm hover:shadow-ds-md transition-all duration-300 bg-white border border-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt-600"
+            className="group text-left rounded-sm overflow-hidden shadow-ds-sm hover:shadow-ds-md transition-all duration-300 bg-white border border-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt-600"
           >
             {/* 이미지 */}
             <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
@@ -138,7 +138,7 @@ export function GalleryGrid({ items }: Props) {
                 alt={current.title}
                 width={1200}
                 height={900}
-                className="w-full h-auto max-h-[60vh] lg:max-h-[80vh] object-contain rounded-xl"
+                className="w-full h-auto max-h-[60vh] lg:max-h-[80vh] object-contain rounded-sm"
               />
             </div>
 

@@ -57,7 +57,7 @@ export default function MyProfilePage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+      <div className="bg-white rounded-sm border border-gray-100 shadow-sm p-6">
         {/* 이메일 (읽기 전용) */}
         <div className="mb-5 pb-5 border-b border-gray-100">
           <p className="text-xs text-neutral-mid mb-1">이메일 (변경 불가)</p>

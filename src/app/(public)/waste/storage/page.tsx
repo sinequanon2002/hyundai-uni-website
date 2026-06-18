@@ -74,7 +74,7 @@ export default function WasteStoragePage() {
         <div className="flex flex-col gap-8 mb-20">
 
           {/* Card 1 */}
-          <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
+          <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
             <div className="bg-blue-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 text-center">
               <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600">
                 <Warehouse className="w-10 h-10" />
@@ -100,7 +100,7 @@ export default function WasteStoragePage() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
+          <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
             <div className="bg-emerald-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 text-center">
               <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-4 text-emerald-600">
                 <Package className="w-10 h-10" />
@@ -126,7 +126,7 @@ export default function WasteStoragePage() {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
+          <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row hover:shadow-ds-md transition-shadow">
             <div className="bg-orange-50/50 md:w-1/3 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 text-center">
               <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-orange-600">
                 <Calendar className="w-10 h-10" />
@@ -159,7 +159,7 @@ export default function WasteStoragePage() {
 
         {/* Section B: 보관표지판 예시 */}
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-navy-900 text-center md:text-left">보관표지판 설치 예시</h2>
-        <div className="bg-yellow-400 p-2 md:p-4 rounded-xl shadow-lg max-w-3xl mx-auto rotate-1 hover:rotate-0 transition-transform duration-300">
+        <div className="bg-yellow-400 p-2 md:p-4 rounded-sm shadow-lg max-w-3xl mx-auto rotate-1 hover:rotate-0 transition-transform duration-300">
           <div className="bg-white border-4 border-black p-6 md:p-10 rounded">
             <div className="text-center border-b-4 border-black pb-4 mb-6">
               <h3 className="text-3xl md:text-4xl font-black tracking-widest">지 정 폐 기 물</h3>
@@ -232,7 +232,7 @@ export default function WasteStoragePage() {
                 basis: "폐기물관리법 제65조",
               },
             ].map(({ icon: Icon, color, iconColor, title, penalty, basis }) => (
-              <div key={title} className={`rounded-xl border p-5 ${color}`}>
+              <div key={title} className={`rounded-sm border p-5 ${color}`}>
                 <div className="flex items-start gap-3">
                   <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${iconColor}`} />
                   <div>
@@ -245,7 +245,7 @@ export default function WasteStoragePage() {
             ))}
           </div>
 
-          <div className="bg-cobalt-50 border border-cobalt-600/15 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="bg-cobalt-50 border border-cobalt-600/15 rounded-sm p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <p className="text-sm text-navy-700">
               보관기준 준수 여부가 걱정되신다면 현대유앤아이에 문의하세요. 법적 요건을 함께 검토해드립니다.
             </p>

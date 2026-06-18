@@ -9,12 +9,12 @@ export function CtaSection() {
   const fadeIn = useFadeIn();
 
   return (
-    /* 디자인 시스템 CTA 밴드 — cobalt→mint 그라디언트 */
+    /* Microsoft 스타일 CTA 밴드 — 플랫 단일 블루 */
     <section className="py-20 md:py-28">
       <div className="container mx-auto px-4 md:px-8">
         <div
           {...fadeIn}
-          className={`rounded-xl md:rounded-[24px] overflow-hidden bg-gradient-to-r from-cobalt-600 to-mint-500 shadow-ds-xl px-8 md:px-14 py-14 md:py-16 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 ${fadeIn.className}`}
+          className={`rounded-sm overflow-hidden bg-cobalt-600 px-8 md:px-14 py-14 md:py-16 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 ${fadeIn.className}`}
         >
           {/* 텍스트 */}
           <div className="text-center lg:text-left text-white max-w-2xl">

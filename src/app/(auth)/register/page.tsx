@@ -29,7 +29,7 @@ function RegisterForm() {
     return (
       <div className="min-h-dvh bg-neutral-light flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-mint-500 mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-sm bg-mint-500 mb-4">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -41,7 +41,7 @@ function RegisterForm() {
             <br />
             이메일 내 링크를 클릭하면 로그인이 가능합니다.
           </p>
-          <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-left mb-6">
+          <div className="bg-blue-50 border border-blue-100 rounded-sm px-4 py-3 text-left mb-6">
             <p className="text-xs text-blue-700 leading-relaxed">
               이메일이 오지 않는 경우 스팸함을 확인하거나 잠시 후 다시 시도해주세요.
             </p>
@@ -58,7 +58,7 @@ function RegisterForm() {
     <div className="min-h-dvh bg-neutral-light flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-cobalt-600 mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-sm bg-cobalt-600 mb-4">
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -68,7 +68,7 @@ function RegisterForm() {
           <p className="text-sm text-neutral-mid mt-1">고객 포털 회원가입</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-ds-sm border border-slate-200 p-8">
+        <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 p-8">
           <h2 className="text-base font-semibold text-neutral-dark mb-6">회원가입</h2>
 
           {error && (

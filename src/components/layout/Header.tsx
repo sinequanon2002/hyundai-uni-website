@@ -121,7 +121,7 @@ export function Header() {
   return (
     <>
       {/* 글래스 헤더 — 디자인 시스템 glass morphism */}
-      <header ref={headerRef} className="sticky top-0 z-[60] w-full border-b border-slate-200/80 bg-white/85 backdrop-blur-[12px] shadow-ds-xs">
+      <header ref={headerRef} className="sticky top-0 z-[60] w-full border-b border-slate-200 bg-white/95 backdrop-blur-[8px]">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="font-bold text-xl text-navy-900 shrink-0 tracking-tight">
             현대유앤아이
@@ -241,8 +241,8 @@ export function Header() {
             <Link
               href={CTA_ITEM.href}
               className={cn(
-                "ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-[9px] text-sm font-bold transition-all duration-200 shadow-ds-md hover:-translate-y-px bg-[#202023] text-white hover:opacity-90",
-                pathname === CTA_ITEM.href && "opacity-90"
+                "ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-sm text-sm font-semibold transition-colors duration-200 bg-cobalt-600 text-white hover:bg-cobalt-700",
+                pathname === CTA_ITEM.href && "bg-cobalt-700"
               )}
             >
               <FileText size={16} />
@@ -366,7 +366,7 @@ export function Header() {
           <div className="pt-8 pb-12">
             <Link
               href="/support/inquiry"
-              className="flex items-center justify-center gap-2 w-full py-4 text-center bg-[#202023] text-white rounded-[9px] font-bold hover:opacity-90 transition-opacity shadow-ds-md"
+              className="flex items-center justify-center gap-2 w-full py-4 text-center bg-cobalt-600 text-white rounded-sm font-semibold hover:bg-cobalt-700 transition-colors"
             >
               <ArrowRight size={18} />
               견적 문의하기

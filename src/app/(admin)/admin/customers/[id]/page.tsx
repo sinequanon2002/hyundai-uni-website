@@ -89,7 +89,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 좌측: 상세 정보 */}
         <div className="space-y-4">
-          <div className="bg-white rounded-xl shadow-ds-sm p-5">
+          <div className="bg-white rounded-sm shadow-ds-sm p-5">
             <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">기본 정보</h2>
             <div className="space-y-3">
               {c.ceo_name && <InfoRow icon={User} label="대표자" value={c.ceo_name} />}
@@ -97,7 +97,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-ds-sm p-5">
+          <div className="bg-white rounded-sm shadow-ds-sm p-5">
             <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">담당자 정보</h2>
             <div className="space-y-3">
               {c.contact_name  && <InfoRow icon={User}  label="담당자" value={c.contact_name} />}
@@ -123,7 +123,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
           </div>
 
           {c.waste_types.length > 0 && (
-            <div className="bg-white rounded-xl shadow-ds-sm p-5">
+            <div className="bg-white rounded-sm shadow-ds-sm p-5">
               <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">주요 폐기물</h2>
               <div className="flex flex-wrap gap-1.5">
                 {c.waste_types.map((wt) => (
@@ -134,20 +134,20 @@ export default async function CustomerDetailPage({ params }: PageProps) {
           )}
 
           {c.notes && (
-            <div className="bg-white rounded-xl shadow-ds-sm p-5">
+            <div className="bg-white rounded-sm shadow-ds-sm p-5">
               <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-2">메모</h2>
               <p className="text-sm text-slate-700 whitespace-pre-wrap">{c.notes}</p>
             </div>
           )}
 
-          <div className="bg-slate-50 rounded-xl p-4 text-xs text-slate-400 space-y-1">
+          <div className="bg-slate-50 rounded-sm p-4 text-xs text-slate-400 space-y-1">
             <p>등록일: {new Date(c.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</p>
           </div>
         </div>
 
         {/* 우측: 수거 이력 */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl shadow-ds-sm overflow-hidden">
+          <div className="bg-white rounded-sm shadow-ds-sm overflow-hidden">
             <div className="flex items-center justify-between p-5 border-b border-slate-50">
               <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide">수거 이력</h2>
               <Link href={`/admin/dispatches?customer_id=${c.id}`} className="text-xs text-cobalt-600 hover:underline">전체 보기</Link>
@@ -194,7 +194,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
 
 function KpiCard({ label, value, sub, className = "" }: { label: string; value: string; sub: string; className?: string }) {
   return (
-    <div className={`bg-white rounded-xl shadow-ds-sm p-4 ${className}`}>
+    <div className={`bg-white rounded-sm shadow-ds-sm p-4 ${className}`}>
       <p className="text-xs text-slate-400 mb-1">{label}</p>
       <p className="text-xl font-bold text-navy-900">{value}</p>
       <p className="text-xs text-slate-400 mt-0.5">{sub}</p>

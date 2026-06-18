@@ -22,10 +22,10 @@ function PostCard({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/blog/${post.id}`}
-      className="group flex flex-col bg-white rounded-xl border border-slate-200 shadow-ds-sm hover:shadow-ds-md hover:border-cobalt-100 transition-all duration-200 overflow-hidden"
+      className="group flex flex-col bg-white rounded-sm border border-slate-200 shadow-ds-sm hover:shadow-ds-md hover:border-cobalt-100 transition-all duration-200 overflow-hidden"
     >
       {/* Thumbnail or fallback */}
-      <div className="aspect-video bg-gradient-to-br from-cobalt-50 to-mint-50 relative overflow-hidden">
+      <div className="aspect-video bg-cobalt-50 relative overflow-hidden">
         {post.thumbnail_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

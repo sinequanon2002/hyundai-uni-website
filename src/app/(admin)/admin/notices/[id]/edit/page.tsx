@@ -41,7 +41,7 @@ export default async function EditNoticePage({ params }: Props) {
       <div className="mb-6">
         <h1 className="text-xl font-bold text-neutral-900">공지 수정</h1>
       </div>
-      <div className="bg-white rounded-xl border border-neutral-200 p-6">
+      <div className="bg-white rounded-sm border border-neutral-200 p-6">
         <NoticeForm notice={result.data} />
       </div>
     </div>

@@ -66,11 +66,11 @@ export function ProcessClient() {
 
             {/* Main Card */}
             <div
-              className={`bg-white rounded-xl shadow-ds-sm border p-6 md:p-8 cursor-pointer transition-all duration-300 group ${isOpen ? 'border-cobalt-600 ring-1 ring-cobalt-600' : 'border-slate-200 hover:border-cobalt-600/50 hover:shadow-ds-md'}`}
+              className={`bg-white rounded-sm shadow-ds-sm border p-6 md:p-8 cursor-pointer transition-all duration-300 group ${isOpen ? 'border-cobalt-600 ring-1 ring-cobalt-600' : 'border-slate-200 hover:border-cobalt-600/50 hover:shadow-ds-md'}`}
               onClick={() => setOpenStep(isOpen ? null : item.step)}
             >
               <div className="flex flex-col md:flex-row md:items-center gap-6">
-                <div className={`w-16 h-16 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-cobalt-50 text-cobalt-600' : 'bg-slate-100 text-slate-500 group-hover:bg-cobalt-50 group-hover:text-cobalt-600'}`}>
+                <div className={`w-16 h-16 rounded-sm flex items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-cobalt-50 text-cobalt-600' : 'bg-slate-100 text-slate-500 group-hover:bg-cobalt-50 group-hover:text-cobalt-600'}`}>
                   <Icon className="w-8 h-8" />
                 </div>
 
@@ -86,7 +86,7 @@ export function ProcessClient() {
 
               {/* Details Panel */}
               <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-60 opacity-100 mt-6 pt-6 border-t border-slate-200' : 'max-h-0 opacity-0 mt-0 pt-0 border-transparent'}`}>
-                <div className="bg-slate-50 rounded-xl p-5 md:p-6 text-navy-700 leading-relaxed border border-slate-200">
+                <div className="bg-slate-50 rounded-sm p-5 md:p-6 text-navy-700 leading-relaxed border border-slate-200">
                   {item.details}
                 </div>
               </div>

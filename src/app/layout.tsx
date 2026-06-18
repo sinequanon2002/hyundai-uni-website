@@ -124,10 +124,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {/* Plus Jakarta Sans — 기본 라틴 서체 (ClickUp 디자인 시스템) */}
+        {/* Microsoft 스타일: Segoe UI는 시스템 서체로 사용 (웹폰트 불필요). 숫자용 JetBrains Mono만 로드 */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
         {/* Pretendard Variable — 한글 (dynamic subset, 성능 최적화) */}
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />

@@ -100,7 +100,7 @@ export default async function QuoteDetailPage({ params }: PageProps) {
         {/* 좌측: 수신처 + 항목 */}
         <div className="lg:col-span-2 space-y-4">
           {/* 고객 정보 */}
-          <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+          <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
             <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">수신처 정보</h2>
             <div className="space-y-3">
               <Row icon={Building2} label="사업장명" value={q.company_name} />
@@ -112,7 +112,7 @@ export default async function QuoteDetailPage({ params }: PageProps) {
           </div>
 
           {/* 견적 항목 테이블 */}
-          <div className="bg-white rounded-xl shadow-ds-sm overflow-hidden">
+          <div className="bg-white rounded-sm shadow-ds-sm overflow-hidden">
             <div className="p-5 sm:p-6 pb-0">
               <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">견적 항목</h2>
             </div>
@@ -184,7 +184,7 @@ export default async function QuoteDetailPage({ params }: PageProps) {
 
           {/* 비고 */}
           {q.notes && (
-            <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+            <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
               <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">비고</h2>
               <p className="text-sm text-slate-700 whitespace-pre-wrap">{q.notes}</p>
             </div>
@@ -193,7 +193,7 @@ export default async function QuoteDetailPage({ params }: PageProps) {
 
         {/* 우측: 견적 정보 */}
         <div className="space-y-4">
-          <div className="bg-white rounded-xl shadow-ds-sm p-5">
+          <div className="bg-white rounded-sm shadow-ds-sm p-5">
             <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">견적 정보</h2>
             <div className="space-y-3 text-sm">
               <div className="flex justify-between">
@@ -220,7 +220,7 @@ export default async function QuoteDetailPage({ params }: PageProps) {
           </div>
 
           {/* 타임스탬프 */}
-          <div className="bg-slate-50 rounded-xl p-4 text-xs text-slate-400 space-y-1">
+          <div className="bg-slate-50 rounded-sm p-4 text-xs text-slate-400 space-y-1">
             <p>작성일: {new Date(q.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</p>
             {q.updated_at && <p>수정일: {new Date(q.updated_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</p>}
           </div>

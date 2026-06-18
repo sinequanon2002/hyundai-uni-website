@@ -64,7 +64,7 @@ function formatPhone(value: string) {
 function PrivacyModal({ title, content, onClose }: { title: string; content: string; onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col">
+      <div className="bg-white rounded-sm shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col">
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
           <h3 className="font-bold text-navy-900">{title}</h3>
           <button onClick={onClose} className="p-1 rounded-full hover:bg-slate-100 transition-colors text-slate-500">✕</button>
@@ -73,7 +73,7 @@ function PrivacyModal({ title, content, onClose }: { title: string; content: str
           <pre className="text-xs text-slate-500 whitespace-pre-wrap leading-relaxed font-sans">{content}</pre>
         </div>
         <div className="px-6 py-4 border-t border-slate-200">
-          <button onClick={onClose} className="w-full py-2.5 bg-cobalt-600 text-white text-sm font-semibold rounded-xl hover:bg-cobalt-700 transition-colors">확인</button>
+          <button onClick={onClose} className="w-full py-2.5 bg-cobalt-600 text-white text-sm font-semibold rounded-sm hover:bg-cobalt-700 transition-colors">확인</button>
         </div>
       </div>
     </div>
@@ -128,8 +128,8 @@ export default function BrochurePage() {
 
             {/* 소개서 미리보기 */}
             <div>
-              <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden">
-                <div className="bg-gradient-to-br from-primary to-secondary aspect-[3/4] flex flex-col items-center justify-center text-white p-8">
+              <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 overflow-hidden">
+                <div className="bg-primary aspect-[3/4] flex flex-col items-center justify-center text-white p-8">
                   <FileText size={64} className="mb-4 opacity-80" />
                   <p className="text-sm font-medium uppercase tracking-widest opacity-70 mb-2">COMPANY BROCHURE</p>
                   <h3 className="text-2xl font-bold text-center leading-snug">
@@ -154,7 +154,7 @@ export default function BrochurePage() {
             {/* 다운로드 폼 */}
             <div>
               {submitted ? (
-                <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 p-8 text-center">
+                <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 p-8 text-center">
                   <div className="w-16 h-16 bg-cobalt-50 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle size={32} className="text-mint-500" />
                   </div>
@@ -163,15 +163,15 @@ export default function BrochurePage() {
                     담당자 검토 후 <strong>영업일 1일 이내</strong>에<br />
                     입력하신 이메일로 소개서를 보내드립니다.
                   </p>
-                  <div className="bg-slate-50 rounded-xl p-4 text-sm text-slate-500 space-y-1 text-left">
+                  <div className="bg-slate-50 rounded-sm p-4 text-sm text-slate-500 space-y-1 text-left">
                     <p className="flex items-center gap-2"><Phone size={14} className="text-cobalt-600 shrink-0" /> 빠른 문의: 054-973-3973</p>
                     <p className="flex items-center gap-2"><Mail size={14} className="text-cobalt-600 shrink-0" /> hduni3973@naver.com</p>
                   </div>
                 </div>
               ) : (
-                <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 p-8">
+                <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 p-8">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 bg-cobalt-50 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-cobalt-50 rounded-sm flex items-center justify-center">
                       <Download size={20} className="text-cobalt-600" />
                     </div>
                     <h2 className="text-xl font-bold text-navy-900">소개서 무료 신청</h2>
@@ -243,7 +243,7 @@ export default function BrochurePage() {
                     </div>
 
                     {/* 동의 섹션 */}
-                    <div className="border border-slate-200 rounded-xl p-4 space-y-3">
+                    <div className="border border-slate-200 rounded-sm p-4 space-y-3">
                       {/* 개인정보 동의 (필수) */}
                       <div>
                         <div className="flex items-center gap-2 mb-2">
@@ -303,7 +303,7 @@ export default function BrochurePage() {
                     <button
                       type="submit"
                       disabled={isPending}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 bg-mint-500 text-white rounded-xl font-bold text-sm hover:bg-mint-600 transition-colors shadow-ds-sm disabled:opacity-60"
+                      className="w-full flex items-center justify-center gap-2 py-3.5 bg-mint-500 text-white rounded-sm font-bold text-sm hover:bg-mint-600 transition-colors shadow-ds-sm disabled:opacity-60"
                     >
                       {isPending ? (
                         <><Loader2 size={16} className="animate-spin" /> 신청 중...</>

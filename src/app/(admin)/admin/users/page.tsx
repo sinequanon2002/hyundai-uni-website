@@ -177,12 +177,12 @@ export default async function UsersPage() {
         </p>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-100 p-4 sm:p-6">
+      <div className="bg-white rounded-sm border border-slate-100 p-4 sm:p-6">
         <h2 className="text-base font-semibold text-neutral-dark mb-4">새 직원 계정 생성</h2>
         <CreateUserForm />
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-100 overflow-hidden">
+      <div className="bg-white rounded-sm border border-slate-100 overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
           <h2 className="text-base font-semibold text-neutral-dark">직원 목록</h2>
           <span className="text-sm text-neutral-mid">{users.length}명</span>

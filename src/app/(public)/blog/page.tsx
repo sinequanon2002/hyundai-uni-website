@@ -121,7 +121,7 @@ export default async function BlogPage({ searchParams }: Props) {
         {showFeatured && (
           <Link
             href={`/blog/${featuredPost.id}`}
-            className="group mb-14 grid md:grid-cols-[3fr_2fr] rounded-xl overflow-hidden border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300"
+            className="group mb-14 grid md:grid-cols-[3fr_2fr] rounded-sm overflow-hidden border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300"
           >
             {/* 이미지 */}
             <div className="aspect-[16/9] md:aspect-auto overflow-hidden bg-[#f0f1f3] relative min-h-[260px]">
@@ -189,7 +189,7 @@ export default async function BlogPage({ searchParams }: Props) {
                 className="group flex flex-col"
               >
                 {/* 썸네일 */}
-                <div className="aspect-[120/63] overflow-hidden bg-[#f0f1f3] rounded-xl relative mb-4 shrink-0">
+                <div className="aspect-[120/63] overflow-hidden bg-[#f0f1f3] rounded-sm relative mb-4 shrink-0">
                   {post.thumbnail_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img

@@ -36,7 +36,7 @@ export default function LoginPage({ searchParams }: PageProps) {
       <div className="w-full max-w-sm">
         {/* 로고 영역 */}
         <div className="text-center mb-8">
-          <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 ${isCustomer ? "bg-mint-500" : "bg-cobalt-600"}`}>
+          <div className={`inline-flex items-center justify-center w-12 h-12 rounded-sm mb-4 ${isCustomer ? "bg-mint-500" : "bg-cobalt-600"}`}>
             {isCustomer ? (
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -56,7 +56,7 @@ export default function LoginPage({ searchParams }: PageProps) {
         </div>
 
         {/* 로그인 카드 */}
-        <div className="bg-white rounded-2xl shadow-ds-sm border border-slate-200 p-8">
+        <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 p-8">
           <h2 className="text-base font-semibold text-neutral-dark mb-6">로그인</h2>
 
           {/* 에러 메시지 */}

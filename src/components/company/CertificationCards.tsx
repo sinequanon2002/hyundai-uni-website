@@ -49,7 +49,7 @@ export function CertificationCards() {
         {CERTIFICATIONS.map((cert) => (
           <div
             key={cert.id}
-            className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group cursor-pointer hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            className="bg-white rounded-sm shadow-sm border border-gray-100 overflow-hidden group cursor-pointer hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
             onClick={() => setSelectedId(cert.id)}
           >
             <div className="w-full aspect-[4/3] bg-neutral-50 relative overflow-hidden flex flex-col items-center justify-center gap-4">
@@ -78,7 +78,7 @@ export function CertificationCards() {
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             onClick={() => setSelectedId(null)}
           />
-          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto z-10">
+          <div className="relative bg-white rounded-sm shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto z-10">
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <div>
                 <h2 className="text-xl font-bold text-neutral-900">{activeCert.title}</h2>

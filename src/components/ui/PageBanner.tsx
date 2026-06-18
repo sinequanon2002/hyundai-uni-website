@@ -23,7 +23,7 @@ export function PageBanner({ title, subtitle, backgroundImage, compact }: PageBa
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-800 to-cobalt-700 z-0" />
+        <div className="absolute inset-0 bg-navy-900 z-0" />
       )}
       <div className="absolute inset-0 bg-black/30 z-10" />
       <div className="z-20 text-center px-4 sm:px-6">

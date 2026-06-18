@@ -67,7 +67,7 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
 
       {/* 목록 */}
       {requests.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-ds-sm py-16 text-center text-slate-400 text-sm">신청 내역이 없습니다.</div>
+        <div className="bg-white rounded-sm shadow-ds-sm py-16 text-center text-slate-400 text-sm">신청 내역이 없습니다.</div>
       ) : (
         <>
           {/* 모바일: 카드 리스트 */}
@@ -75,7 +75,7 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
             {requests.map((req) => {
               const badge = STATUS_BADGE[req.status];
               return (
-                <li key={req.id} className="bg-white rounded-xl shadow-ds-sm p-4">
+                <li key={req.id} className="bg-white rounded-sm shadow-ds-sm p-4">
                   <div className="flex items-start justify-between gap-3 mb-2.5">
                     <div className="min-w-0">
                       <p className="font-bold text-navy-900 text-[15px] leading-tight">{req.name}</p>
@@ -109,7 +109,7 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
           </ul>
 
           {/* 데스크톱: 테이블 */}
-          <div className="hidden md:block bg-white rounded-xl shadow-ds-sm overflow-hidden">
+          <div className="hidden md:block bg-white rounded-sm shadow-ds-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

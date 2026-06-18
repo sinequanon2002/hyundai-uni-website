@@ -64,7 +64,7 @@ export default async function DispatchDetailPage({ params }: PageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 좌측: 기본 정보 */}
         <div className="space-y-4">
-          <div className="bg-white rounded-xl shadow-ds-sm p-5">
+          <div className="bg-white rounded-sm shadow-ds-sm p-5">
             <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">수거 정보</h2>
             <div className="space-y-3">
               {d.customer_name && (
@@ -102,7 +102,7 @@ export default async function DispatchDetailPage({ params }: PageProps) {
           </div>
 
           {d.quotation_id && (
-            <div className="bg-white rounded-xl shadow-ds-sm p-5">
+            <div className="bg-white rounded-sm shadow-ds-sm p-5">
               <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">연결된 견적서</h2>
               <Link href={`/admin/quotes/${d.quotation_id}`} className="inline-flex items-center gap-1.5 text-sm text-cobalt-600 hover:underline">
                 <FileText className="w-4 h-4" />
@@ -112,20 +112,20 @@ export default async function DispatchDetailPage({ params }: PageProps) {
           )}
 
           {d.notes && (
-            <div className="bg-white rounded-xl shadow-ds-sm p-5">
+            <div className="bg-white rounded-sm shadow-ds-sm p-5">
               <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">메모</h2>
               <p className="text-sm text-slate-700 whitespace-pre-wrap">{d.notes}</p>
             </div>
           )}
 
-          <div className="bg-slate-50 rounded-xl p-4 text-xs text-slate-400 space-y-1">
+          <div className="bg-slate-50 rounded-sm p-4 text-xs text-slate-400 space-y-1">
             <p>등록일: {new Date(d.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</p>
           </div>
         </div>
 
         {/* 우측: 폐기물 항목 + 금액 */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white rounded-xl shadow-ds-sm overflow-hidden">
+          <div className="bg-white rounded-sm shadow-ds-sm overflow-hidden">
             <div className="p-5 border-b border-slate-50">
               <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wide">폐기물 항목</h2>
             </div>

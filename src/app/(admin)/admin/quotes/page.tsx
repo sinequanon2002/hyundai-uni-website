@@ -53,7 +53,7 @@ export default async function AdminQuotesPage({ searchParams }: PageProps) {
       </div>
 
       {/* 필터 바 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-4 mb-4 flex flex-col sm:flex-row gap-3">
+      <div className="bg-white rounded-sm shadow-ds-sm p-4 mb-4 flex flex-col sm:flex-row gap-3">
         {/* 상태 탭 */}
         <div className="flex gap-1 flex-wrap">
           {(Object.keys(STATUS_LABELS) as Array<QuoteStatus | "all">).map((s) => (
@@ -87,12 +87,12 @@ export default async function AdminQuotesPage({ searchParams }: PageProps) {
 
       {/* 테이블 */}
       {quotations.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-ds-sm p-16 text-center text-slate-400">
+        <div className="bg-white rounded-sm shadow-ds-sm p-16 text-center text-slate-400">
           <FileText className="w-10 h-10 mx-auto mb-3 opacity-30" />
           <p className="text-sm">견적서가 없습니다</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-ds-sm overflow-hidden">
+        <div className="bg-white rounded-sm shadow-ds-sm overflow-hidden">
           {/* 데스크톱 테이블 */}
           <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-sm">

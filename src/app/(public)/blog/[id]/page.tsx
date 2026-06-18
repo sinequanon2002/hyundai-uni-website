@@ -78,7 +78,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
         {/* 썸네일 */}
         {post.thumbnail_url && (
-          <div className="rounded-xl overflow-hidden mb-8 aspect-[16/9] bg-slate-100">
+          <div className="rounded-sm overflow-hidden mb-8 aspect-[16/9] bg-slate-100">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={post.thumbnail_url} alt={post.title} className="w-full h-full object-cover" />
           </div>
@@ -103,7 +103,7 @@ export default async function BlogDetailPage({ params }: Props) {
           </h1>
 
           {post.excerpt && (
-            <p className="text-slate-500 text-sm leading-relaxed mb-4 bg-slate-50 rounded-xl p-4 border border-slate-200">
+            <p className="text-slate-500 text-sm leading-relaxed mb-4 bg-slate-50 rounded-sm p-4 border border-slate-200">
               {post.excerpt}
             </p>
           )}
@@ -135,13 +135,13 @@ export default async function BlogDetailPage({ params }: Props) {
         />
 
         {/* 하단 CTA */}
-        <div className="mt-10 bg-cobalt-50/50 rounded-xl border border-cobalt-50 p-6 text-center">
+        <div className="mt-10 bg-cobalt-50/50 rounded-sm border border-cobalt-50 p-6 text-center">
           <p className="text-sm text-slate-500 mb-4">
             지정폐기물 처리가 필요하시면 무료 상담을 요청하세요.
           </p>
           <Link
             href="/support/inquiry"
-            className="inline-flex items-center gap-2 bg-mint-500 text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-mint-600 transition-colors"
+            className="inline-flex items-center gap-2 bg-mint-500 text-white px-6 py-2.5 rounded-sm font-semibold text-sm hover:bg-mint-600 transition-colors"
           >
             무료 견적 문의
           </Link>

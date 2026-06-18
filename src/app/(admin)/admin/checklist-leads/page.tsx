@@ -40,11 +40,11 @@ export default async function ChecklistLeadsPage({ searchParams }: Props) {
       </div>
 
       {leads.length === 0 ? (
-        <div className="bg-white rounded-xl border border-slate-200 p-12 text-center">
+        <div className="bg-white rounded-sm border border-slate-200 p-12 text-center">
           <p className="text-slate-400 text-sm">아직 신청자가 없습니다.</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-ds-sm overflow-hidden">
+        <div className="bg-white rounded-sm border border-slate-200 shadow-ds-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-slate-100 bg-slate-50 text-left">

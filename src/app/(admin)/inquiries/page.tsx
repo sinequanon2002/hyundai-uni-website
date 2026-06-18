@@ -68,7 +68,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
       </div>
 
       {/* 테이블 */}
-      <div className="bg-white rounded-xl shadow-ds-sm overflow-hidden">
+      <div className="bg-white rounded-sm shadow-ds-sm overflow-hidden">
         {inquiries.length === 0 ? (
           <div className="py-16 text-center text-slate-400 text-sm">
             문의 내역이 없습니다.

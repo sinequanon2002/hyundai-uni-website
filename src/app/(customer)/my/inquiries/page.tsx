@@ -70,7 +70,7 @@ export default async function MyInquiriesPage({ searchParams }: PageProps) {
       </div>
 
       {/* 목록 */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
+      <div className="bg-white rounded-sm border border-gray-100 shadow-sm">
         {inquiries.length === 0 ? (
           <div className="py-14 text-center">
             <p className="text-sm text-neutral-mid">해당하는 문의 내역이 없습니다.</p>

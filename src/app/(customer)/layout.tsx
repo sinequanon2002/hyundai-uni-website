@@ -86,7 +86,7 @@ export default async function CustomerLayout({
       <div className="flex-1 max-w-6xl mx-auto w-full px-4 py-8 flex gap-8">
         {/* 사이드 네비게이션 */}
         <aside className="hidden md:block w-48 shrink-0">
-          <nav className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+          <nav className="bg-white rounded-sm border border-gray-100 shadow-sm overflow-hidden">
             <div className="px-4 py-3 border-b border-gray-100">
               <p className="text-xs font-semibold text-neutral-mid uppercase tracking-wide">마이페이지</p>
             </div>

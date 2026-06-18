@@ -142,7 +142,7 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* 고객 정보 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">고객 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="사업장명 *" error={errors.company_name?.message}>
@@ -164,7 +164,7 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
       </div>
 
       {/* 견적 항목 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide">견적 항목</h2>
           <button
@@ -257,7 +257,7 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
       </div>
 
       {/* 추가 정보 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">추가 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="견적 유효기간" error={errors.valid_until?.message}>

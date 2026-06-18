@@ -89,9 +89,9 @@ export function ClientsSection() {
               <div
                 key={index}
                 {...fadeCard}
-                className={`group p-6 rounded-2xl border border-slate-200 bg-white hover:border-cobalt-200 hover:shadow-ds-md transition-all duration-300 ${fadeCard.className}`}
+                className={`group p-6 rounded-sm border border-slate-200 bg-white hover:border-cobalt-200 hover:shadow-ds-md transition-all duration-300 ${fadeCard.className}`}
               >
-                <div className="w-12 h-12 rounded-xl bg-cobalt-50 border border-cobalt-100 text-cobalt-600 flex items-center justify-center mb-5 group-hover:bg-cobalt-600 group-hover:border-cobalt-600 group-hover:text-white transition-colors duration-300">
+                <div className="w-12 h-12 rounded-sm bg-cobalt-50 border border-cobalt-100 text-cobalt-600 flex items-center justify-center mb-5 group-hover:bg-cobalt-600 group-hover:border-cobalt-600 group-hover:text-white transition-colors duration-300">
                   {cat.icon}
                 </div>
                 <h3 className="text-lg font-bold text-navy-900 mb-4">

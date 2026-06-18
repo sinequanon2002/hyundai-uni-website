@@ -237,7 +237,7 @@ export default function InquiryPage() {
             {/* ── 좌측 안내 ── */}
             <aside className="lg:col-span-2 space-y-6">
               {/* 연락처 카드 */}
-              <div className="bg-white rounded-2xl shadow-sm p-6">
+              <div className="bg-white rounded-sm shadow-sm p-6">
                 <h3 className="text-base font-bold text-navy-900 mb-4">
                   직접 문의하기
                 </h3>
@@ -285,7 +285,7 @@ export default function InquiryPage() {
               </div>
 
               {/* 처리 절차 */}
-              <div className="bg-white rounded-2xl shadow-sm p-6">
+              <div className="bg-white rounded-sm shadow-sm p-6">
                 <h3 className="text-base font-bold text-navy-900 mb-4">
                   처리 절차
                 </h3>
@@ -318,7 +318,7 @@ export default function InquiryPage() {
 
             {/* ── 우측 폼 ── */}
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="bg-white rounded-sm shadow-sm p-8">
                 <h2 className="text-xl font-bold text-navy-900 mb-1">
                   견적 문의
                 </h2>
@@ -599,7 +599,7 @@ export default function InquiryPage() {
                   </div>
 
                   {/* 개인정보 동의 */}
-                  <div className="border border-slate-200 rounded-xl p-4 space-y-3">
+                  <div className="border border-slate-200 rounded-sm p-4 space-y-3">
                     {/* 필수 동의 */}
                     <div>
                       <div className="flex items-center gap-2 mb-2">
@@ -670,7 +670,7 @@ export default function InquiryPage() {
                   <button
                     type="submit"
                     disabled={isPending || isUploading}
-                    className="w-full py-3.5 bg-mint-500 text-white font-bold rounded-xl hover:bg-mint-600 transition-colors disabled:opacity-60 flex items-center justify-center gap-2 text-sm"
+                    className="w-full py-3.5 bg-cobalt-600 text-white font-bold rounded-sm hover:bg-cobalt-700 transition-colors disabled:opacity-60 flex items-center justify-center gap-2 text-sm"
                   >
                     {isPending ? (
                       <>
@@ -694,8 +694,8 @@ export default function InquiryPage() {
       {/* ── 성공 모달 ── */}
       {showSuccessModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-          <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-8 text-center">
-            <CheckCircle2 className="w-14 h-14 text-mint-500 mx-auto mb-4" />
+          <div className="bg-white rounded-sm shadow-xl max-w-sm w-full p-8 text-center">
+            <CheckCircle2 className="w-14 h-14 text-cobalt-600 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-navy-900 mb-2">
               문의가 접수되었습니다
             </h3>
@@ -710,7 +710,7 @@ export default function InquiryPage() {
               <div className="space-y-2">
                 <Link
                   href="/my/inquiries"
-                  className="block w-full py-3 bg-mint-500 text-white font-semibold rounded-xl hover:bg-mint-600 transition-colors text-sm"
+                  className="block w-full py-3 bg-cobalt-600 text-white font-semibold rounded-sm hover:bg-cobalt-700 transition-colors text-sm"
                   onClick={() => setShowSuccessModal(false)}
                 >
                   문의 내역 확인하기
@@ -724,15 +724,15 @@ export default function InquiryPage() {
               </div>
             ) : (
               <div className="space-y-3">
-                <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-left">
-                  <p className="text-xs font-semibold text-blue-800 mb-1">문의 내역을 온라인으로 확인하세요</p>
-                  <p className="text-xs text-blue-600 leading-relaxed">
+                <div className="bg-cobalt-50 border border-cobalt-100 rounded-sm px-4 py-3 text-left">
+                  <p className="text-xs font-semibold text-cobalt-700 mb-1">문의 내역을 온라인으로 확인하세요</p>
+                  <p className="text-xs text-cobalt-600 leading-relaxed">
                     로그인하면 접수 현황·견적 결과를 실시간으로 추적할 수 있습니다.
                   </p>
                 </div>
                 <Link
                   href="/support/inquiry-status"
-                  className="block w-full py-2.5 bg-mint-500 text-white font-semibold rounded-xl hover:bg-mint-600 transition-colors text-sm text-center"
+                  className="block w-full py-2.5 bg-cobalt-600 text-white font-semibold rounded-sm hover:bg-cobalt-700 transition-colors text-sm text-center"
                   onClick={() => setShowSuccessModal(false)}
                 >
                   문의현황 조회하기
@@ -740,14 +740,14 @@ export default function InquiryPage() {
                 <div className="flex gap-2">
                   <Link
                     href="/login"
-                    className="flex-1 py-2 border border-cobalt-600 text-cobalt-600 font-semibold rounded-xl hover:bg-cobalt-50 transition-colors text-sm text-center"
+                    className="flex-1 py-2 border border-cobalt-600 text-cobalt-600 font-semibold rounded-sm hover:bg-cobalt-50 transition-colors text-sm text-center"
                     onClick={() => setShowSuccessModal(false)}
                   >
                     로그인
                   </Link>
                   <Link
                     href="/register"
-                    className="flex-1 py-2 border border-slate-200 text-slate-500 font-semibold rounded-xl hover:bg-slate-50 transition-colors text-sm text-center"
+                    className="flex-1 py-2 border border-slate-200 text-slate-500 font-semibold rounded-sm hover:bg-slate-50 transition-colors text-sm text-center"
                     onClick={() => setShowSuccessModal(false)}
                   >
                     회원가입
@@ -905,7 +905,7 @@ function WasteTypeCombobox({
         </div>
 
         {open && (
-          <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-y-auto max-h-56">
+          <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-sm shadow-lg overflow-y-auto max-h-56">
             {showCustomAdd && (
               <li>
                 <button
@@ -1052,7 +1052,7 @@ function EmailAutocomplete({
         className={inputCls}
       />
       {suggestions.length > 0 && (
-        <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
+        <ul className="absolute z-20 left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-sm shadow-lg overflow-hidden">
           {suggestions.map((s, idx) => (
             <li key={s}>
               <button
@@ -1090,7 +1090,7 @@ function PrivacyModal({
 }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col">
+      <div className="bg-white rounded-sm shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col">
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
           <h3 className="font-bold text-navy-900">{title}</h3>
           <button
@@ -1108,7 +1108,7 @@ function PrivacyModal({
         <div className="px-6 py-4 border-t border-slate-200">
           <button
             onClick={onClose}
-            className="w-full py-2.5 bg-mint-500 text-white text-sm font-semibold rounded-xl hover:bg-mint-600 transition-colors"
+            className="w-full py-2.5 bg-cobalt-600 text-white text-sm font-semibold rounded-sm hover:bg-cobalt-700 transition-colors"
           >
             확인
           </button>

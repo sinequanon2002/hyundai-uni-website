@@ -62,7 +62,7 @@ export default async function MyPage() {
       </div>
 
       {/* 최근 문의 */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
+      <div className="bg-white rounded-sm border border-gray-100 shadow-sm">
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h2 className="text-sm font-semibold text-neutral-dark">최근 문의 내역</h2>
           <Link href="/my/inquiries" className="text-xs text-primary hover:underline">
@@ -128,7 +128,7 @@ function StatCard({ label, value, href }: { label: string; value: string; href: 
   return (
     <Link
       href={href}
-      className="bg-white rounded-xl border border-gray-100 shadow-sm px-4 py-4 hover:border-primary/30 transition-colors"
+      className="bg-white rounded-sm border border-gray-100 shadow-sm px-4 py-4 hover:border-primary/30 transition-colors"
     >
       <p className="text-xs text-neutral-mid">{label}</p>
       <p className="text-2xl font-bold text-primary mt-1">{value}</p>
@@ -140,7 +140,7 @@ function QuickLink({ href, title, desc }: { href: string; title: string; desc: s
   return (
     <Link
       href={href}
-      className="bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-4 hover:border-primary/30 transition-colors"
+      className="bg-white rounded-sm border border-gray-100 shadow-sm px-5 py-4 hover:border-primary/30 transition-colors"
     >
       <p className="text-sm font-semibold text-neutral-dark">{title}</p>
       <p className="text-xs text-neutral-mid mt-1">{desc}</p>

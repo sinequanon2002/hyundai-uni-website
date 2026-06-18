@@ -53,7 +53,7 @@ export default async function InquiryStatusPage() {
           </div>
 
           {inquiries.length === 0 ? (
-            <div className="bg-white rounded-xl border border-slate-200 shadow-sm py-14 text-center">
+            <div className="bg-white rounded-sm border border-slate-200 shadow-sm py-14 text-center">
               <p className="text-sm text-slate-500">아직 문의 내역이 없습니다.</p>
               <Link
                 href="/support/inquiry"
@@ -68,7 +68,7 @@ export default async function InquiryStatusPage() {
                 <li key={inq.id}>
                   <Link
                     href={`/my/inquiries/${inq.id}`}
-                    className="flex items-center justify-between bg-white rounded-xl border border-slate-200 shadow-sm px-5 py-4 hover:border-cobalt-600/30 transition-colors gap-4"
+                    className="flex items-center justify-between bg-white rounded-sm border border-slate-200 shadow-sm px-5 py-4 hover:border-cobalt-600/30 transition-colors gap-4"
                   >
                     <div className="min-w-0">
                       <p className="text-sm font-medium text-navy-900 truncate">
@@ -109,7 +109,7 @@ export default async function InquiryStatusPage() {
       <div className="max-w-3xl mx-auto px-4 py-10 space-y-8">
 
         {/* 비회원 조회 */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+        <div className="bg-white rounded-sm border border-slate-200 shadow-sm p-6 sm:p-8">
           <h2 className="text-base font-bold text-navy-900 mb-1">비회원 문의 조회</h2>
           <p className="text-sm text-slate-500 mb-5">
             견적 문의 시 입력하신 연락처로 접수 현황을 조회할 수 있습니다.
@@ -118,7 +118,7 @@ export default async function InquiryStatusPage() {
         </div>
 
         {/* 로그인 유도 */}
-        <div className="bg-gradient-to-br from-cobalt-50/50 to-cobalt-50 rounded-2xl border border-cobalt-600/10 p-6 sm:p-8">
+        <div className="bg-gradient-to-br from-cobalt-50/50 to-cobalt-50 rounded-sm border border-cobalt-600/10 p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex-1">
               <h3 className="text-base font-bold text-navy-900 mb-1">

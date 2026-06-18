@@ -49,10 +49,10 @@ export function ServicesSection() {
               <div
                 key={index}
                 {...fadeCard}
-                className={`group bg-white rounded-2xl p-6 sm:p-8 shadow-ds-md border border-slate-200 hover:shadow-ds-lg hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden ${fadeCard.className}`}
+                className={`group bg-white rounded-sm p-6 sm:p-8 shadow-ds-md border border-slate-200 hover:shadow-ds-lg hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden ${fadeCard.className}`}
               >
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cobalt-600 to-mint-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-cobalt-50 border border-cobalt-100 rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-cobalt-600 group-hover:border-cobalt-600 group-hover:text-white transition-colors duration-300 text-cobalt-600">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-cobalt-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-cobalt-50 border border-cobalt-100 rounded-sm flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-cobalt-600 group-hover:border-cobalt-600 group-hover:text-white transition-colors duration-300 text-cobalt-600">
                   <service.icon size={28} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-navy-900">

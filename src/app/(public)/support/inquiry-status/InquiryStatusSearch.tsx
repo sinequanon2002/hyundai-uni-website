@@ -105,7 +105,7 @@ export default function InquiryStatusSearch() {
                 const isCancelled = inq.status === "cancelled";
 
                 return (
-                  <div key={inq.id} className="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+                  <div key={inq.id} className="border border-slate-200 rounded-sm p-5 bg-slate-50/50">
                     {/* 헤더 */}
                     <div className="flex items-start justify-between gap-3 mb-4">
                       <div>

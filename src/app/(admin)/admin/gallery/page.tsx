@@ -66,13 +66,13 @@ export default async function GalleryAdminPage({ searchParams }: Props) {
 
       {/* 그리드 */}
       {items.length === 0 ? (
-        <div className="text-center py-20 text-neutral-400 bg-white rounded-xl border border-neutral-200">
+        <div className="text-center py-20 text-neutral-400 bg-white rounded-sm border border-neutral-200">
           등록된 갤러리 항목이 없습니다.
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {items.map((item) => (
-            <div key={item.id} className="group bg-white rounded-xl border border-neutral-200 overflow-hidden hover:shadow-ds-md transition-shadow">
+            <div key={item.id} className="group bg-white rounded-sm border border-neutral-200 overflow-hidden hover:shadow-ds-md transition-shadow">
               <div className="relative aspect-square overflow-hidden bg-neutral-100">
                 <Image
                   src={item.image_url}

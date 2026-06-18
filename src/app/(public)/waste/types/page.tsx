@@ -47,7 +47,7 @@ export default function ServicePage() {
       <div className="max-w-6xl mx-auto px-4 py-12 md:py-20 animate-fade-in-up">
 
         {/* ── 지정폐기물이란? ── */}
-        <div className="mb-14 bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="mb-14 bg-white rounded-sm border border-slate-200 overflow-hidden">
           <div className="bg-cobalt-600 px-8 py-6">
             <span className="text-xs font-bold text-white/70 tracking-widest uppercase block mb-1">법적 정의</span>
             <h2 className="text-xl md:text-2xl font-bold text-white">지정폐기물이란?</h2>
@@ -64,7 +64,7 @@ export default function ServicePage() {
                 { icon: Truck,       label: "운반 가능 업체", value: "환경부 허가 수집·운반업체만", color: "text-amber-600 bg-amber-50 border-amber-100" },
                 { icon: Eye,         label: "관리 방식", value: "전 과정 전자 추적·기록 의무", color: "text-cobalt-600 bg-cobalt-50 border-cobalt-600/15" },
               ].map(({ icon: Icon, label, value, color }) => (
-                <div key={label} className={`rounded-xl border p-4 ${color}`}>
+                <div key={label} className={`rounded-sm border p-4 ${color}`}>
                   <Icon className="w-5 h-5 mb-2" />
                   <p className="text-[11px] font-bold uppercase tracking-wide opacity-70 mb-0.5">{label}</p>
                   <p className="text-xs font-semibold leading-snug">{value}</p>
@@ -92,7 +92,7 @@ export default function ServicePage() {
             return (
               <div
                 key={waste.id}
-                className={`bg-white rounded-xl shadow-ds-sm border overflow-hidden transition-all duration-300 ${isOpen ? 'ring-2 ring-cobalt-600 border-transparent' : 'border-slate-200 hover:border-cobalt-600/50 hover:shadow-ds-md'}`}
+                className={`bg-white rounded-sm shadow-ds-sm border overflow-hidden transition-all duration-300 ${isOpen ? 'ring-2 ring-cobalt-600 border-transparent' : 'border-slate-200 hover:border-cobalt-600/50 hover:shadow-ds-md'}`}
               >
                 <button
                   onClick={() => setOpenId(openId === waste.id ? null : waste.id)}
@@ -129,7 +129,7 @@ export default function ServicePage() {
         </div>
 
         {/* 견적 문의 CTA */}
-        <div className="mt-10 bg-cobalt-50 rounded-xl border border-cobalt-600/15 p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-10 bg-cobalt-50 rounded-sm border border-cobalt-600/15 p-6 md:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <h3 className="text-base font-bold text-navy-900 mb-1">처리 가능 여부가 불확실한 폐기물도 문의해 주세요</h3>
             <p className="text-sm text-slate-500">목록에 없는 품목도 담당자가 검토 후 안내해 드립니다.</p>
@@ -155,7 +155,7 @@ export default function ServicePage() {
         </div>
 
         {/* 올바로시스템 소개 */}
-        <div className="mt-16 max-w-4xl mx-auto bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="mt-16 max-w-4xl mx-auto bg-white rounded-sm border border-slate-200 overflow-hidden">
           <div className="bg-cobalt-500 px-8 py-6">
             <span className="text-xs font-bold text-white/70 tracking-widest uppercase block mb-1">3단계 필수 도구</span>
             <h2 className="text-xl md:text-2xl font-bold text-white">올바로시스템이란?</h2>
@@ -172,7 +172,7 @@ export default function ServicePage() {
                 { icon: FileText,    label: "법적 증빙",   desc: "처리 완료 증빙서류 자동 보관" },
                 { icon: CheckCircle, label: "처리 결과",   desc: "최종 처리 결과 통보 및 이력 관리" },
               ].map(({ icon: Icon, label, desc }) => (
-                <div key={label} className="bg-cobalt-500/5 border border-cobalt-500/15 rounded-xl p-4">
+                <div key={label} className="bg-cobalt-500/5 border border-cobalt-500/15 rounded-sm p-4">
                   <Icon className="w-5 h-5 text-cobalt-500 mb-2" />
                   <p className="text-xs font-bold text-navy-900 mb-0.5">{label}</p>
                   <p className="text-[11px] text-slate-500 leading-snug">{desc}</p>

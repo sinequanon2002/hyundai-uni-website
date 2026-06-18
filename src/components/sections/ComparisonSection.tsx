@@ -37,7 +37,7 @@ export function ComparisonSection() {
         </div>
 
         {/* 비교표 — 디자인 시스템 카드 스타일 */}
-        <div {...fadeInTable} className={`max-w-3xl mx-auto rounded-xl overflow-hidden border border-slate-200 shadow-ds-md ${fadeInTable.className}`}>
+        <div {...fadeInTable} className={`max-w-3xl mx-auto rounded-sm overflow-hidden border border-slate-200 shadow-ds-md ${fadeInTable.className}`}>
           <div className="grid grid-cols-[1fr_1fr_1fr] bg-navy-900 text-white text-xs font-semibold">
             <div className="px-2.5 sm:px-4 py-3 text-slate-400">확인 항목</div>
             <div className="px-2.5 sm:px-4 py-3 text-center border-l border-white/10 text-slate-300">일반 업체</div>

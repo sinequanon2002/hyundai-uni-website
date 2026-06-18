@@ -55,7 +55,7 @@ export function MobileBottomBar() {
 
         <Link
           href="/support/inquiry"
-          className="flex flex-col items-center justify-center gap-0.5 bg-mint-500 text-white active:bg-mint-600"
+          className="flex flex-col items-center justify-center gap-0.5 bg-cobalt-600 text-white active:bg-cobalt-700"
         >
           <FileText size={19} />
           <span className="text-[11px] font-bold">견적 문의</span>

@@ -94,7 +94,7 @@ export default function FaqPage() {
             {FAQ_ITEMS.map((item, i) => (
               <details
                 key={i}
-                className="group bg-white rounded-xl border border-slate-200 shadow-sm open:shadow-md open:border-cobalt-600/20 transition-shadow"
+                className="group bg-white rounded-sm border border-slate-200 shadow-sm open:shadow-md open:border-cobalt-600/20 transition-shadow"
               >
                 <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                   <span className="text-[15px] font-bold text-navy-900 leading-snug">
@@ -123,7 +123,7 @@ export default function FaqPage() {
           </div>
 
           {/* 하단 CTA */}
-          <div className="mt-10 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 text-center">
+          <div className="mt-10 bg-white rounded-sm border border-slate-200 shadow-sm p-6 md:p-8 text-center">
             <h2 className="text-lg md:text-xl font-bold text-navy-900 mb-2">
               원하는 답변을 찾지 못하셨나요?
             </h2>

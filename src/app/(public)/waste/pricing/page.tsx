@@ -111,7 +111,7 @@ export default function PricingPage() {
               return (
                 <div
                   key={factor.title}
-                  className={`flex gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200 ${
+                  className={`flex gap-4 p-5 bg-slate-50 rounded-sm border border-slate-200 ${
                     isLast ? "md:col-span-2" : ""
                   }`}
                 >
@@ -142,7 +142,7 @@ export default function PricingPage() {
               return (
                 <div
                   key={s.step}
-                  className="p-6 bg-white rounded-xl border border-slate-200 shadow-ds-sm text-center"
+                  className="p-6 bg-white rounded-sm border border-slate-200 shadow-ds-sm text-center"
                 >
                   <div className="w-12 h-12 mx-auto rounded-full bg-cobalt-50 text-cobalt-600 flex items-center justify-center mb-4">
                     <Icon size={22} strokeWidth={1.8} />
@@ -156,7 +156,7 @@ export default function PricingPage() {
           </div>
 
           {/* 비용 절감 팁 */}
-          <div className="bg-[#F0FAFA] rounded-2xl p-6 md:p-8 mb-16">
+          <div className="bg-[#F0FAFA] rounded-sm p-6 md:p-8 mb-16">
             <div className="flex items-center gap-2.5 mb-5">
               <Lightbulb size={20} className="text-cobalt-600" />
               <h2 className="text-lg md:text-xl font-bold text-navy-900">
@@ -174,7 +174,7 @@ export default function PricingPage() {
           </div>
 
           {/* CTA */}
-          <div className="bg-gradient-to-r from-[#0A1B20] to-[#0F2830] rounded-2xl p-8 md:p-10 text-center text-white">
+          <div className="bg-navy-900 rounded-sm p-8 md:p-10 text-center text-white">
             <h2 className="text-xl md:text-2xl font-bold mb-3">
               정확한 비용이 궁금하신가요?
             </h2>

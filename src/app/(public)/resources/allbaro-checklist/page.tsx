@@ -115,7 +115,7 @@ export default function AllbaroChecklistPage() {
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
 
           {/* 과태료 경고 배너 */}
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3 mb-10 print:hidden">
+          <div className="bg-amber-50 border border-amber-200 rounded-sm p-4 flex items-start gap-3 mb-10 print:hidden">
             <AlertCircle size={18} className="text-amber-500 shrink-0 mt-0.5" />
             <p className="text-sm text-amber-800 leading-relaxed">
               올바로시스템 미신고·오기재 시 <strong>300만 원 이하 과태료</strong>가 부과됩니다. 아래 체크리스트로 사전 점검하세요.
@@ -128,7 +128,7 @@ export default function AllbaroChecklistPage() {
               {/* 상단 안내 */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 print:mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-mint-50 rounded-xl flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 bg-mint-50 rounded-sm flex items-center justify-center shrink-0">
                     <CheckCircle size={22} className="text-mint-500" />
                   </div>
                   <div>
@@ -138,7 +138,7 @@ export default function AllbaroChecklistPage() {
                 </div>
                 <button
                   onClick={() => window.print()}
-                  className="print:hidden flex items-center gap-2 px-5 py-2.5 bg-cobalt-600 text-white text-sm font-semibold rounded-[9px] hover:bg-cobalt-700 transition-colors shadow-ds-sm shrink-0"
+                  className="print:hidden flex items-center gap-2 px-5 py-2.5 bg-cobalt-600 text-white text-sm font-semibold rounded-sm hover:bg-cobalt-700 transition-colors shadow-ds-sm shrink-0"
                 >
                   <Printer size={16} />
                   PDF로 저장 / 인쇄
@@ -156,7 +156,7 @@ export default function AllbaroChecklistPage() {
                 {CHECKLIST_SECTIONS.map((section) => (
                   <div
                     key={section.category}
-                    className={`bg-white rounded-xl border ${section.border} shadow-ds-sm p-5 print:shadow-none print:border print:rounded-lg`}
+                    className={`bg-white rounded-sm border ${section.border} shadow-ds-sm p-5 print:shadow-none print:border print:rounded-lg`}
                   >
                     <h3 className={`text-sm font-bold ${section.color} mb-4 flex items-center gap-2`}>
                       <ClipboardList size={15} />
@@ -182,14 +182,14 @@ export default function AllbaroChecklistPage() {
               </div>
 
               {/* 상담 유도 카드 (인쇄 시 숨김) */}
-              <div className="mt-8 p-5 bg-cobalt-50 border border-cobalt-100 rounded-xl flex flex-col sm:flex-row items-start sm:items-center gap-4 print:hidden">
+              <div className="mt-8 p-5 bg-cobalt-50 border border-cobalt-100 rounded-sm flex flex-col sm:flex-row items-start sm:items-center gap-4 print:hidden">
                 <div className="flex-1">
                   <p className="font-semibold text-navy-900 mb-1">체크리스트 작성 후 궁금한 점이 있으신가요?</p>
                   <p className="text-sm text-slate-600">현장 방문 무료 상담 및 영업일 2일 이내 견적서 제공</p>
                 </div>
                 <a
                   href="tel:010-9084-9480"
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#202023] text-white text-sm font-bold rounded-[9px] hover:opacity-90 transition-opacity shrink-0"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-cobalt-600 text-white text-sm font-semibold rounded-sm hover:bg-cobalt-700 transition-colors shrink-0"
                 >
                   <Phone size={15} />
                   전화 상담
@@ -203,7 +203,7 @@ export default function AllbaroChecklistPage() {
               <div className="space-y-5">
                 <h2 className="text-lg font-bold text-navy-900">체크리스트 포함 항목 (미리보기)</h2>
                 {PREVIEW_SECTIONS.map((section) => (
-                  <div key={section.category} className="bg-white rounded-xl border border-slate-200 shadow-ds-sm p-5">
+                  <div key={section.category} className="bg-white rounded-sm border border-slate-200 shadow-ds-sm p-5">
                     <h3 className={`text-sm font-bold ${section.color} mb-3 flex items-center gap-2`}>
                       <ClipboardList size={15} />
                       {section.category}
@@ -227,9 +227,9 @@ export default function AllbaroChecklistPage() {
               </div>
 
               {/* 다운로드 폼 */}
-              <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 p-8 sticky top-28">
+              <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 p-8 sticky top-28">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 bg-cobalt-50 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-cobalt-50 rounded-sm flex items-center justify-center">
                     <Download size={20} className="text-cobalt-600" />
                   </div>
                   <div>
@@ -256,7 +256,7 @@ export default function AllbaroChecklistPage() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="010-0000-0000"
-                        className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-[9px] text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition"
+                        className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition"
                       />
                     </div>
                   </div>
@@ -272,7 +272,7 @@ export default function AllbaroChecklistPage() {
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                         placeholder="주식회사 예시"
-                        className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-[9px] text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition"
+                        className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-sm text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition"
                       />
                     </div>
                   </div>
@@ -287,7 +287,7 @@ export default function AllbaroChecklistPage() {
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 bg-mint-500 text-white rounded-[9px] font-bold text-sm hover:bg-mint-600 transition-colors shadow-ds-sm disabled:opacity-60"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 bg-mint-500 text-white rounded-sm font-bold text-sm hover:bg-mint-600 transition-colors shadow-ds-sm disabled:opacity-60"
                   >
                     {isPending ? (
                       <span className="flex items-center gap-2">

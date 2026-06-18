@@ -4,27 +4,27 @@
 
 @layer base {
   :root {
-    /* ── 디자인 시스템 색상 토큰 ── */
-    --navy-900: #0F172A;
-    --navy-800: #1E293B;
-    --navy-700: #334155;
-    --navy-600: #475569;
-    --cobalt-700: #1D4ED8;
-    --cobalt-600: #2563EB;
-    --cobalt-500: #3B82F6;
-    --cobalt-100: #DBEAFE;
-    --cobalt-50:  #EFF6FF;
-    --mint-600: #059669;
-    --mint-500: #10B981;
-    --mint-400: #34D399;
-    --mint-100: #D1FAE5;
-    --mint-50:  #ECFDF5;
-    --slate-50:  #F8FAFC;
-    --slate-100: #F1F5F9;
-    --slate-200: #E2E8F0;
-    --slate-300: #CBD5E1;
-    --slate-400: #94A3B8;
-    --slate-500: #64748B;
+    /* ── Microsoft 스타일 색상 토큰 — 모노크롬 + 단일 블루(#0067B8) ── */
+    --navy-900: #171717;
+    --navy-800: #262626;
+    --navy-700: #404040;
+    --navy-600: #616161;
+    --cobalt-700: #005299;
+    --cobalt-600: #0067B8;
+    --cobalt-500: #2A87D8;
+    --cobalt-100: #CFE4F5;
+    --cobalt-50:  #F0F6FC;
+    --mint-600: #005299;
+    --mint-500: #0067B8;
+    --mint-400: #2A87D8;
+    --mint-100: #CFE4F5;
+    --mint-50:  #F0F6FC;
+    --slate-50:  #F8F8F8;
+    --slate-100: #F2F2F2;
+    --slate-200: #E0E0E0;
+    --slate-300: #C8C8C8;
+    --slate-400: #8A8A8A;
+    --slate-500: #616161;
 
     /* ── 시맨틱 토큰 ── */
     --text-strong:   var(--navy-900);
@@ -32,20 +32,20 @@
     --text-muted:    var(--slate-500);
     --text-inverse:  #FFFFFF;
     --text-link:     var(--cobalt-600);
-    --surface-page:  var(--slate-50);
+    --surface-page:  #FFFFFF;
     --surface-card:  #FFFFFF;
     --surface-sunken: var(--slate-100);
     --border-subtle: var(--slate-200);
     --border-default: var(--slate-300);
     --action-primary: var(--cobalt-600);
     --action-primary-hover: var(--cobalt-700);
-    --accent-cta: var(--mint-500);
-    --accent-cta-hover: var(--mint-600);
+    --accent-cta: var(--cobalt-600);
+    --accent-cta-hover: var(--cobalt-700);
 
     /* ── 글래스 효과 ── */
-    --glass-bg:     rgba(255,255,255,0.85);
-    --glass-border: rgba(255,255,255,0.6);
-    --glass-blur:   blur(12px);
+    --glass-bg:     rgba(255,255,255,0.92);
+    --glass-border: rgba(0,0,0,0.08);
+    --glass-blur:   blur(8px);
 
     /* ── 이징/전환 ── */
     --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
@@ -54,7 +54,7 @@
 
     /* ── 기존 호환 ── */
     --background: #ffffff;
-    --foreground: #1a1a1a;
+    --foreground: #171717;
   }
 
   html {
@@ -69,9 +69,9 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Plus Jakarta Sans', 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
+  font-family: 'Segoe UI', 'Pretendard Variable', 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
 }
 
 @layer utilities {

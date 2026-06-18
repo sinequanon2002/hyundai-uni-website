@@ -98,7 +98,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
 
       {/* 목록 */}
       {notices.length === 0 ? (
-        <div className="bg-white rounded-xl border border-neutral-200 py-12 text-center text-neutral-400 text-sm">
+        <div className="bg-white rounded-sm border border-neutral-200 py-12 text-center text-neutral-400 text-sm">
           공지사항이 없습니다
         </div>
       ) : (
@@ -106,7 +106,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
           {/* 모바일: 카드 리스트 */}
           <ul className="md:hidden space-y-3">
             {notices.map((notice) => (
-              <li key={notice.id} className="bg-white rounded-xl border border-neutral-200 p-4">
+              <li key={notice.id} className="bg-white rounded-sm border border-neutral-200 p-4">
                 <div className="flex items-start gap-2">
                   {notice.is_pinned && (
                     <span className="text-xs bg-cobalt-100 text-cobalt-600 px-1.5 py-0.5 rounded font-medium shrink-0 mt-0.5">
@@ -137,7 +137,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
           </ul>
 
           {/* 데스크톱: 테이블 */}
-          <div className="hidden md:block bg-white rounded-xl border border-neutral-200 overflow-hidden">
+          <div className="hidden md:block bg-white rounded-sm border border-neutral-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead className="bg-neutral-50 border-b border-neutral-200">

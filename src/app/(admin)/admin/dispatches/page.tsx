@@ -53,7 +53,7 @@ export default async function AdminDispatchesPage({ searchParams }: PageProps) {
       </div>
 
       {/* 필터 + 검색 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-4 mb-4 flex flex-col sm:flex-row gap-3">
+      <div className="bg-white rounded-sm shadow-ds-sm p-4 mb-4 flex flex-col sm:flex-row gap-3">
         <div className="flex gap-1 flex-wrap">
           {(Object.keys(STATUS_LABELS) as Array<DispatchStatus | "all">).map((s) => (
             <Link
@@ -86,12 +86,12 @@ export default async function AdminDispatchesPage({ searchParams }: PageProps) {
       </div>
 
       {dispatches.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-ds-sm p-16 text-center text-slate-400">
+        <div className="bg-white rounded-sm shadow-ds-sm p-16 text-center text-slate-400">
           <Truck className="w-10 h-10 mx-auto mb-3 opacity-30" />
           <p className="text-sm">수거 건이 없습니다</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-ds-sm overflow-hidden">
+        <div className="bg-white rounded-sm shadow-ds-sm overflow-hidden">
           {/* 데스크톱 테이블 */}
           <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-sm">

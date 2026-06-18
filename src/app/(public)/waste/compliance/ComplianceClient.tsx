@@ -93,7 +93,7 @@ export function ComplianceClient() {
 
       {/* Tab 1: 자가점검 체크리스트 */}
       {activeTab === 'checklist' && (
-        <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 p-6 md:p-10">
+        <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 p-6 md:p-10">
           <div className="mb-6 pb-6 border-b border-slate-200 flex justify-between items-end">
             <h3 className="text-xl font-bold text-navy-900">배출자 필수 점검 항목</h3>
             <span className="text-cobalt-600 font-bold">{checkedItems.size} / 7 완료</span>
@@ -103,7 +103,7 @@ export function ComplianceClient() {
             {checklistItems.map((item) => (
               <label
                 key={item.id}
-                className={`flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${checkedItems.has(item.id) ? 'border-cobalt-600 bg-cobalt-50' : 'border-slate-200 bg-white hover:border-cobalt-600/30'}`}
+                className={`flex items-start p-4 rounded-sm border-2 cursor-pointer transition-all duration-200 ${checkedItems.has(item.id) ? 'border-cobalt-600 bg-cobalt-50' : 'border-slate-200 bg-white hover:border-cobalt-600/30'}`}
               >
                 <div className="flex-shrink-0 mt-0.5">
                   <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${checkedItems.has(item.id) ? 'border-cobalt-600 bg-cobalt-600' : 'border-slate-400'}`}>
@@ -124,7 +124,7 @@ export function ComplianceClient() {
           </div>
 
           {/* Result Box */}
-          <div className={`p-6 rounded-xl border-2 flex items-start gap-4 transition-colors duration-500 ${result.bg}`}>
+          <div className={`p-6 rounded-sm border-2 flex items-start gap-4 transition-colors duration-500 ${result.bg}`}>
             <div className="shrink-0 pt-1">
               {result.icon}
             </div>
@@ -139,7 +139,7 @@ export function ComplianceClient() {
       {/* Tab 2: 벌칙사항 테이블 */}
       {activeTab === 'penalty' && (
         <div className="animate-fade-in-up">
-          <div className="bg-white rounded-xl shadow-ds-sm border border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-sm shadow-ds-sm border border-slate-200 overflow-hidden">
             <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
@@ -160,7 +160,7 @@ export function ComplianceClient() {
             </div>
           </div>
 
-          <div className="mt-6 p-4 bg-slate-50 rounded-xl flex gap-3 text-sm text-slate-500 border border-slate-200">
+          <div className="mt-6 p-4 bg-slate-50 rounded-sm flex gap-3 text-sm text-slate-500 border border-slate-200">
             <AlertCircle className="w-5 h-5 shrink-0" />
             <p>
               ※ 본 벌칙 사항은 「폐기물관리법」 기준을 축약하여 안내한 것으로, 실제 위반 사례의 세부 요건과 양형 기준에 따라 형량이나 과태료 금액이 다르게 적용될 수 있습니다. 법적 구속력을 갖는 유권해석의 근거로 사용할 수 없습니다.

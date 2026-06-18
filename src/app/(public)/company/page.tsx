@@ -142,7 +142,7 @@ export default function CompanyPage() {
               return (
                 <div
                   key={idx}
-                  className="bg-slate-100/50 p-8 rounded-xl flex flex-col items-center text-center hover:shadow-ds-md transition-shadow duration-300 border border-slate-200"
+                  className="bg-slate-100/50 p-8 rounded-sm flex flex-col items-center text-center hover:shadow-ds-md transition-shadow duration-300 border border-slate-200"
                 >
                   <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-ds-sm mb-6 text-cobalt-600">
                     <Icon size={32} />
@@ -276,7 +276,7 @@ export default function CompanyPage() {
         <SectionHeader tag="LOCATION" title="오시는 길" />
 
         {/* 지도 영역 */}
-        <div className="w-full h-[400px] md:h-[480px] rounded-xl overflow-hidden shadow-ds-md mb-16 relative bg-slate-100 flex flex-col items-center justify-center gap-6">
+        <div className="w-full h-[400px] md:h-[480px] rounded-sm overflow-hidden shadow-ds-md mb-16 relative bg-slate-100 flex flex-col items-center justify-center gap-6">
           <div className="flex flex-col items-center gap-3 text-slate-500">
             <MapPin size={48} className="text-cobalt-600 opacity-70" />
             <p className="font-semibold text-lg text-navy-700">{COMPANY.address}</p>
@@ -298,7 +298,7 @@ export default function CompanyPage() {
 
         {/* 3컬럼 정보 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-slate-50 p-8 rounded-xl border border-slate-200 flex flex-col h-full">
+          <div className="bg-slate-50 p-8 rounded-sm border border-slate-200 flex flex-col h-full">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-cobalt-50 text-cobalt-600 flex items-center justify-center flex-shrink-0">
                 <MapPin size={20} />
@@ -323,7 +323,7 @@ export default function CompanyPage() {
             </div>
           </div>
 
-          <div className="bg-slate-50 p-8 rounded-xl border border-slate-200 flex flex-col h-full">
+          <div className="bg-slate-50 p-8 rounded-sm border border-slate-200 flex flex-col h-full">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-cobalt-50 text-cobalt-600 flex items-center justify-center flex-shrink-0">
                 <Phone size={20} />
@@ -342,7 +342,7 @@ export default function CompanyPage() {
             </div>
           </div>
 
-          <div className="bg-slate-50 p-8 rounded-xl border border-slate-200 flex flex-col h-full">
+          <div className="bg-slate-50 p-8 rounded-sm border border-slate-200 flex flex-col h-full">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-cobalt-50 text-cobalt-600 flex items-center justify-center flex-shrink-0">
                 <Car size={20} />

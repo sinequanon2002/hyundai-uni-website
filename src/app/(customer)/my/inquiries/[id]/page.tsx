@@ -69,7 +69,7 @@ export default async function MyInquiryDetailPage({ params }: PageProps) {
 
       {/* 진행 상태 타임라인 (취소가 아닌 경우) */}
       {!isCancelled && (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-5">
+        <div className="bg-white rounded-sm border border-gray-100 shadow-sm px-5 py-5">
           <h2 className="text-sm font-semibold text-neutral-dark mb-4">처리 현황</h2>
           <div className="flex items-start gap-0">
             {STATUS_STEPS.map((step, idx) => {
@@ -102,7 +102,7 @@ export default async function MyInquiryDetailPage({ params }: PageProps) {
       )}
 
       {/* 문의 정보 */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-5 space-y-4">
+      <div className="bg-white rounded-sm border border-gray-100 shadow-sm px-5 py-5 space-y-4">
         <h2 className="text-sm font-semibold text-neutral-dark">문의 정보</h2>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
           <InfoRow label="접수 일시" value={new Date(inq.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })} />
@@ -121,7 +121,7 @@ export default async function MyInquiryDetailPage({ params }: PageProps) {
       </div>
 
       {/* 폐기물 종류 */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-5">
+      <div className="bg-white rounded-sm border border-gray-100 shadow-sm px-5 py-5">
         <h2 className="text-sm font-semibold text-neutral-dark mb-3">수거 요청 폐기물</h2>
         <div className="flex flex-wrap gap-2">
           {inq.waste_types.map((type) => (
@@ -142,7 +142,7 @@ export default async function MyInquiryDetailPage({ params }: PageProps) {
 
       {/* 추가 요청 사항 */}
       {inq.message && (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-5">
+        <div className="bg-white rounded-sm border border-gray-100 shadow-sm px-5 py-5">
           <h2 className="text-sm font-semibold text-neutral-dark mb-2">추가 요청 사항</h2>
           <p className="text-sm text-neutral-dark whitespace-pre-wrap">{inq.message}</p>
         </div>
@@ -150,7 +150,7 @@ export default async function MyInquiryDetailPage({ params }: PageProps) {
 
       {/* 사진 첨부 */}
       {inq.photo_urls && inq.photo_urls.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-5">
+        <div className="bg-white rounded-sm border border-gray-100 shadow-sm px-5 py-5">
           <h2 className="text-sm font-semibold text-neutral-dark mb-3">첨부 사진</h2>
           <div className="grid grid-cols-3 gap-2">
             {inq.photo_urls.map((url, i) => (

@@ -96,7 +96,7 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* 기본 정보 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">기본 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="사업장명 *" error={errors.company_name?.message} className="sm:col-span-2">
@@ -115,7 +115,7 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
       </div>
 
       {/* 담당자 정보 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">담당자 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="담당자명" error={errors.contact_name?.message}>
@@ -131,7 +131,7 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
       </div>
 
       {/* 폐기물 종류 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">주요 폐기물 종류</h2>
         <div className="flex flex-wrap gap-2">
           {WASTE_OPTIONS.map((type) => (
@@ -158,7 +158,7 @@ export function CustomerForm({ mode, customer, sourceInquiryId }: CustomerFormPr
       </div>
 
       {/* 비고 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+      <div className="bg-white rounded-sm shadow-ds-sm p-5 sm:p-6">
         <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">메모 / 특이사항</h2>
         <textarea
           {...register("notes")}

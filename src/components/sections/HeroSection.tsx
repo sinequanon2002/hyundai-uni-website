@@ -19,7 +19,7 @@ export function HeroSection() {
           {/* 좌측: 텍스트 콘텐츠 */}
           <div className="flex-1 flex flex-col items-start text-left order-2 lg:order-1">
             {/* 상단 배지 */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-7 rounded-full bg-cobalt-50 border border-cobalt-100 text-cobalt-700 text-xs font-semibold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-7 rounded-sm bg-cobalt-50 border border-cobalt-100 text-cobalt-700 text-xs font-semibold tracking-wide">
               <span className="w-1.5 h-1.5 rounded-full bg-cobalt-600 shrink-0" />
               지정폐기물 수집·운반 전문기업
             </div>
@@ -36,7 +36,7 @@ export function HeroSection() {
             </p>
 
             {/* 2영업일 강조 배지 */}
-            <div className="inline-flex items-center gap-2 bg-cobalt-50 border border-cobalt-100 text-cobalt-700 rounded-[9px] px-4 py-2.5 mb-7 text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 bg-cobalt-50 border border-cobalt-100 text-cobalt-700 rounded-sm px-4 py-2.5 mb-7 text-sm font-semibold">
               <span className="w-2 h-2 rounded-full bg-cobalt-600 shrink-0" />
               별도 비용 없이 &nbsp;·&nbsp; 영업일 2일 이내 정확한 견적서 회신
             </div>
@@ -51,35 +51,35 @@ export function HeroSection() {
               ].map((badge) => (
                 <span
                   key={badge}
-                  className="px-3.5 py-1.5 text-xs font-semibold bg-slate-100 border border-slate-200 rounded-full text-slate-600 tracking-wide"
+                  className="px-3.5 py-1.5 text-xs font-semibold bg-slate-100 border border-slate-200 rounded-sm text-slate-600 tracking-wide"
                 >
                   ✓ {badge}
                 </span>
               ))}
             </div>
 
-            {/* CTA 버튼 그룹 */}
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            {/* CTA — 단일 블루 필드 프라이머리 + 전화 텍스트 링크 */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 w-full sm:w-auto">
               <Link
                 href="/support/inquiry"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-[#202023] text-white font-bold rounded-[9px] hover:opacity-90 transition-opacity shadow-ds-md"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-cobalt-600 text-white font-semibold rounded-sm hover:bg-cobalt-700 transition-colors"
               >
                 <FileText size={18} />
                 견적 요청하기
               </Link>
               <a
                 href={`tel:${COMPANY.tel}`}
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-white border border-slate-200 text-navy-900 font-semibold rounded-[9px] hover:border-cobalt-200 hover:text-cobalt-600 transition-colors shadow-ds-xs"
+                className="inline-flex items-center justify-center sm:justify-start gap-2 px-1 py-2 text-cobalt-600 font-semibold hover:underline underline-offset-4 transition-colors"
               >
                 <Phone size={17} />
-                전화 문의 바로하기
+                전화 문의 {COMPANY.tel}
               </a>
             </div>
           </div>
 
           {/* 우측: 현장 이미지 카드 */}
           <div className="flex-1 w-full max-w-xl lg:max-w-none order-1 lg:order-2">
-            <div className="relative rounded-2xl overflow-hidden shadow-ds-xl aspect-[4/3]">
+            <div className="relative rounded-sm overflow-hidden shadow-ds-sm border border-slate-200 aspect-[4/3]">
               <Image
                 src="/images/hero-site.jpg"
                 alt="현대유앤아이 지정폐기물 보관 용기(IBC) 현장"

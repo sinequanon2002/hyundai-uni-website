@@ -41,7 +41,7 @@ export default async function AdminInvoicesPage({ searchParams }: PageProps) {
       </div>
 
       {/* 상태 필터 */}
-      <div className="bg-white rounded-xl shadow-ds-sm p-4 mb-4">
+      <div className="bg-white rounded-sm shadow-ds-sm p-4 mb-4">
         <div className="flex gap-1 flex-wrap">
           {(Object.keys(STATUS_LABELS) as Array<"all" | "pending" | "issued" | "paid" | "cancelled">).map((s) => (
             <Link
@@ -61,13 +61,13 @@ export default async function AdminInvoicesPage({ searchParams }: PageProps) {
       </div>
 
       {invoices.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-ds-sm p-16 text-center text-slate-400">
+        <div className="bg-white rounded-sm shadow-ds-sm p-16 text-center text-slate-400">
           <FileText className="w-10 h-10 mx-auto mb-3 opacity-30" />
           <p className="text-sm">세금계산서가 없습니다</p>
           <p className="text-xs mt-1">수거 건이 완료 처리되면 자동으로 생성됩니다</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-ds-sm overflow-hidden">
+        <div className="bg-white rounded-sm shadow-ds-sm overflow-hidden">
           {/* 데스크톱 테이블 */}
           <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-sm">

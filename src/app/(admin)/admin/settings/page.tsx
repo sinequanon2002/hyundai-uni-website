@@ -79,7 +79,7 @@ export default async function SettingsPage() {
     <div className="max-w-2xl space-y-6">
       <h1 className="text-xl font-bold text-neutral-900">사이트 설정</h1>
 
-      <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-6">
+      <div className="bg-white rounded-sm border border-neutral-200 p-4 sm:p-6">
         <h2 className="text-base font-semibold text-neutral-800 mb-1">공지사항 작성 권한</h2>
         <p className="text-sm text-neutral-500 mb-4">
           선택된 역할의 직원만 공지사항을 작성·수정·삭제할 수 있습니다.
@@ -95,7 +95,7 @@ export default async function SettingsPage() {
         </form>
       </div>
 
-      <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-6">
+      <div className="bg-white rounded-sm border border-neutral-200 p-4 sm:p-6">
         <h2 className="text-base font-semibold text-neutral-800 mb-1">현장갤러리 작성 권한</h2>
         <p className="text-sm text-neutral-500 mb-4">
           선택된 역할의 직원만 현장갤러리를 등록·수정·삭제할 수 있습니다.

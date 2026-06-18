@@ -34,7 +34,7 @@ export default async function NewNoticePage() {
       <div className="mb-6">
         <h1 className="text-xl font-bold text-neutral-900">새 공지 작성</h1>
       </div>
-      <div className="bg-white rounded-xl border border-neutral-200 p-6">
+      <div className="bg-white rounded-sm border border-neutral-200 p-6">
         <NoticeForm />
       </div>
     </div>

@@ -33,7 +33,7 @@ interface AuthorityLinksProps {
  */
 export function AuthorityLinks({ className = "" }: AuthorityLinksProps) {
   return (
-    <div className={`mt-8 bg-slate-50 rounded-xl border border-slate-200 p-5 ${className}`}>
+    <div className={`mt-8 bg-slate-50 rounded-sm border border-slate-200 p-5 ${className}`}>
       <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">
         관련 공공기관 바로가기
       </p>
