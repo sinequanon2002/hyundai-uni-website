@@ -142,8 +142,8 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* 고객 정보 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
-        <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">고객 정보</h2>
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">고객 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="사업장명 *" error={errors.company_name?.message}>
             <input {...register("company_name")} className={inputCls(!!errors.company_name)} placeholder="(주)홍길동기업" />
@@ -164,13 +164,13 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
       </div>
 
       {/* 견적 항목 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide">견적 항목</h2>
+          <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide">견적 항목</h2>
           <button
             type="button"
             onClick={() => append({ waste_type: "", unit: "kg", quantity: 0, unit_price: 0, amount: 0 })}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-secondary transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-cobalt-600 hover:text-mint-600 transition-colors"
           >
             <Plus className="w-3.5 h-3.5" />
             항목 추가
@@ -182,7 +182,7 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
         )}
 
         {/* 헤더 (데스크톱) */}
-        <div className="hidden sm:grid grid-cols-[1fr_80px_90px_100px_110px_36px] gap-2 text-xs text-gray-400 font-medium mb-2 px-1">
+        <div className="hidden sm:grid grid-cols-[1fr_80px_90px_100px_110px_36px] gap-2 text-xs text-slate-400 font-medium mb-2 px-1">
           <span>폐기물 종류</span>
           <span>단위</span>
           <span className="text-right">수량</span>
@@ -195,7 +195,7 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
           {fields.map((field, i) => {
             const amount = Number(watchedItems[i]?.amount) || 0;
             return (
-              <div key={field.id} className="sm:grid sm:grid-cols-[1fr_80px_90px_100px_110px_36px] sm:gap-2 space-y-2 sm:space-y-0 p-3 sm:p-0 bg-gray-50 sm:bg-transparent rounded-lg sm:rounded-none">
+              <div key={field.id} className="sm:grid sm:grid-cols-[1fr_80px_90px_100px_110px_36px] sm:gap-2 space-y-2 sm:space-y-0 p-3 sm:p-0 bg-slate-50 sm:bg-transparent rounded-lg sm:rounded-none">
                 <input
                   {...register(`items.${i}.waste_type`)}
                   placeholder="폐기물 종류"
@@ -221,14 +221,14 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
                   placeholder="0"
                   className={`${inputCls(false)} text-right`}
                 />
-                <div className="flex items-center justify-end h-[38px] text-sm font-medium text-gray-700 bg-gray-50 rounded-lg px-3">
+                <div className="flex items-center justify-end h-[38px] text-sm font-medium text-slate-700 bg-slate-50 rounded-lg px-3">
                   {fmt(amount)}
                 </div>
                 <button
                   type="button"
                   onClick={() => remove(i)}
                   disabled={fields.length === 1}
-                  className="hidden sm:flex items-center justify-center w-9 h-9 text-gray-300 hover:text-red-400 transition-colors disabled:opacity-0"
+                  className="hidden sm:flex items-center justify-center w-9 h-9 text-slate-300 hover:text-red-400 transition-colors disabled:opacity-0"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -239,16 +239,16 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
 
         {/* 합계 */}
         <div className="mt-5 flex justify-end">
-          <div className="w-full sm:w-64 border border-gray-100 rounded-lg overflow-hidden">
-            <div className="flex justify-between px-4 py-2.5 text-sm border-b border-gray-50">
-              <span className="text-gray-500">공급가액</span>
+          <div className="w-full sm:w-64 border border-slate-100 rounded-lg overflow-hidden">
+            <div className="flex justify-between px-4 py-2.5 text-sm border-b border-slate-50">
+              <span className="text-slate-500">공급가액</span>
               <span className="font-medium">{fmt(subtotal)}원</span>
             </div>
-            <div className="flex justify-between px-4 py-2.5 text-sm border-b border-gray-50">
-              <span className="text-gray-500">부가세 (10%)</span>
+            <div className="flex justify-between px-4 py-2.5 text-sm border-b border-slate-50">
+              <span className="text-slate-500">부가세 (10%)</span>
               <span className="font-medium">{fmt(tax)}원</span>
             </div>
-            <div className="flex justify-between px-4 py-3 bg-primary text-white text-sm font-bold">
+            <div className="flex justify-between px-4 py-3 bg-cobalt-600 text-white text-sm font-bold">
               <span>합 계</span>
               <span>{fmt(total)}원</span>
             </div>
@@ -257,8 +257,8 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
       </div>
 
       {/* 추가 정보 */}
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6">
-        <h2 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-4">추가 정보</h2>
+      <div className="bg-white rounded-xl shadow-ds-sm p-5 sm:p-6">
+        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">추가 정보</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="견적 유효기간" error={errors.valid_until?.message}>
             <input {...register("valid_until")} type="date" className={inputCls(false)} />
@@ -282,14 +282,14 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-4 py-2.5 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+          className="px-4 py-2.5 text-sm text-slate-600 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
         >
           취소
         </button>
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-secondary transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-cobalt-600 text-white rounded-lg hover:bg-cobalt-700 transition-colors disabled:opacity-50"
         >
           {isPending ? (
             <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -308,8 +308,8 @@ export function QuoteForm({ inquiryId, defaults }: QuoteFormProps) {
 function inputCls(hasError: boolean) {
   return [
     "w-full h-[38px] px-3 text-sm rounded-lg border transition-colors",
-    "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
-    hasError ? "border-red-300 bg-red-50" : "border-gray-200 bg-white",
+    "focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600",
+    hasError ? "border-red-300 bg-red-50" : "border-slate-200 bg-white",
   ].join(" ");
 }
 
@@ -326,7 +326,7 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <label className="block text-xs font-medium text-gray-600 mb-1.5">{label}</label>
+      <label className="block text-xs font-medium text-slate-600 mb-1.5">{label}</label>
       {children}
       {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>

@@ -17,7 +17,7 @@ export function ProcessSection() {
   const fadeInSteps = useFadeIn(0.08, 100);
 
   return (
-    <section className="py-14 md:py-20 bg-neutral-50 overflow-hidden">
+    <section className="py-14 md:py-20 bg-slate-50 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         <div {...fadeInHeader} className={`text-center mb-12 ${fadeInHeader.className}`}>
           <h3 className="text-xs font-bold text-cobalt-600 tracking-widest uppercase mb-2">처리 절차</h3>
@@ -26,9 +26,9 @@ export function ProcessSection() {
 
         <div {...fadeInSteps} className={`relative ${fadeInSteps.className}`}>
           {/* PC 연결선 */}
-          <div className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] border-t-2 border-dashed border-neutral-300" />
+          <div className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] border-t-2 border-dashed border-slate-300" />
           {/* 모바일 연결선 */}
-          <div className="block lg:hidden absolute top-[10%] bottom-[10%] left-[35px] border-l-2 border-dashed border-neutral-300" />
+          <div className="block lg:hidden absolute top-[10%] bottom-[10%] left-[35px] border-l-2 border-dashed border-slate-300" />
 
           <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 lg:gap-3 relative z-10">
             {PROCESSES.map((process, index) => {

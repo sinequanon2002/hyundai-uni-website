@@ -35,7 +35,7 @@ function ToolbarButton({
       title={title}
       className={`px-2 py-1 rounded text-sm transition-colors ${
         active
-          ? "bg-primary text-white"
+          ? "bg-cobalt-600 text-white"
           : "text-neutral-700 hover:bg-neutral-100"
       } ${disabled ? "opacity-40 cursor-not-allowed" : ""}`}
     >
@@ -61,7 +61,7 @@ export function RichTextEditor({ value, onChange, placeholder = "내용을 입�
       Underline,
       Link.configure({
         openOnClick: false,
-        HTMLAttributes: { class: "text-secondary underline" },
+        HTMLAttributes: { class: "text-mint-600 underline" },
       }),
       Image.configure({
         HTMLAttributes: { class: "max-w-full rounded" },

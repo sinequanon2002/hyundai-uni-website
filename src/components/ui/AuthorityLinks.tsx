@@ -33,8 +33,8 @@ interface AuthorityLinksProps {
  */
 export function AuthorityLinks({ className = "" }: AuthorityLinksProps) {
   return (
-    <div className={`mt-8 bg-neutral-50 rounded-2xl border border-neutral-200 p-5 ${className}`}>
-      <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-3">
+    <div className={`mt-8 bg-slate-50 rounded-xl border border-slate-200 p-5 ${className}`}>
+      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">
         관련 공공기관 바로가기
       </p>
       <div className="flex flex-wrap gap-2">
@@ -45,14 +45,14 @@ export function AuthorityLinks({ className = "" }: AuthorityLinksProps) {
             target="_blank"
             rel="noopener noreferrer"
             title={desc}
-            className="inline-flex items-center gap-1.5 bg-white border border-neutral-200 hover:border-primary hover:text-primary text-neutral-600 text-xs font-medium px-3 py-1.5 rounded-full transition-all"
+            className="inline-flex items-center gap-1.5 bg-white border border-slate-200 hover:border-cobalt-600 hover:text-cobalt-600 text-slate-500 text-xs font-medium px-3 py-1.5 rounded-full transition-all"
           >
             {label}
             <ExternalLink className="w-3 h-3 opacity-60" />
           </a>
         ))}
       </div>
-      <p className="text-xs text-neutral-400 mt-2">
+      <p className="text-xs text-slate-400 mt-2">
         ※ 위 링크는 외부 공공기관 사이트로 연결됩니다.
       </p>
     </div>

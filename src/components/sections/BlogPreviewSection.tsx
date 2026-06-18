@@ -83,7 +83,7 @@ export async function BlogPreviewSection() {
   if (posts.length === 0) return null;
 
   return (
-    <section className="py-14 md:py-20 bg-neutral-50">
+    <section className="py-14 md:py-20 bg-slate-50">
       <div className="container mx-auto px-4 md:px-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">

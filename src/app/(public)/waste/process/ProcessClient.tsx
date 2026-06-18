@@ -52,7 +52,7 @@ export function ProcessClient() {
   const [openStep, setOpenStep] = useState<number | null>(null);
 
   return (
-    <div className="relative border-l-4 border-gray-200 ml-4 md:ml-12 pl-6 md:pl-16 space-y-12 pb-12">
+    <div className="relative border-l-4 border-slate-200 ml-4 md:ml-12 pl-6 md:pl-16 space-y-12 pb-12">
       {processSteps.map((item) => {
         const isOpen = openStep === item.step;
         const Icon = item.icon;
@@ -60,33 +60,33 @@ export function ProcessClient() {
         return (
           <div key={item.step} className="relative">
             {/* Step Number Badge */}
-            <div className={`absolute -left-[56px] md:-left-[90px] top-0 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center font-bold text-lg md:text-xl border-4 border-gray-50 shadow-sm transition-colors duration-300 ${isOpen ? 'bg-primary text-white scale-110' : 'bg-white text-gray-400'}`}>
+            <div className={`absolute -left-[56px] md:-left-[90px] top-0 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center font-bold text-lg md:text-xl border-4 border-slate-50 shadow-ds-sm transition-colors duration-300 ${isOpen ? 'bg-cobalt-600 text-white scale-110' : 'bg-white text-slate-400'}`}>
               {item.step}
             </div>
 
             {/* Main Card */}
             <div
-              className={`bg-white rounded-2xl shadow-sm border p-6 md:p-8 cursor-pointer transition-all duration-300 group ${isOpen ? 'border-primary ring-1 ring-primary' : 'border-gray-200 hover:border-primary/50 hover:shadow-md'}`}
+              className={`bg-white rounded-xl shadow-ds-sm border p-6 md:p-8 cursor-pointer transition-all duration-300 group ${isOpen ? 'border-cobalt-600 ring-1 ring-cobalt-600' : 'border-slate-200 hover:border-cobalt-600/50 hover:shadow-ds-md'}`}
               onClick={() => setOpenStep(isOpen ? null : item.step)}
             >
               <div className="flex flex-col md:flex-row md:items-center gap-6">
-                <div className={`w-16 h-16 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-primary/10 text-primary' : 'bg-gray-100 text-gray-500 group-hover:bg-primary/5 group-hover:text-primary'}`}>
+                <div className={`w-16 h-16 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-cobalt-50 text-cobalt-600' : 'bg-slate-100 text-slate-500 group-hover:bg-cobalt-50 group-hover:text-cobalt-600'}`}>
                   <Icon className="w-8 h-8" />
                 </div>
 
                 <div className="flex-1">
-                  <h3 className={`text-2xl font-bold mb-2 transition-colors ${isOpen ? 'text-primary' : 'text-gray-900'}`}>{item.title}</h3>
-                  <p className="text-gray-600 font-medium text-lg lg:pr-8">{item.description}</p>
+                  <h3 className={`text-2xl font-bold mb-2 transition-colors ${isOpen ? 'text-cobalt-600' : 'text-navy-900'}`}>{item.title}</h3>
+                  <p className="text-slate-500 font-medium text-lg lg:pr-8">{item.description}</p>
                 </div>
 
                 <div className="hidden md:flex shrink-0">
-                  <ChevronDown className={`w-8 h-8 text-gray-300 transition-transform duration-300 ${isOpen ? 'rotate-180 text-primary' : 'group-hover:text-gray-500'}`} />
+                  <ChevronDown className={`w-8 h-8 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-cobalt-600' : 'group-hover:text-slate-500'}`} />
                 </div>
               </div>
 
               {/* Details Panel */}
-              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-60 opacity-100 mt-6 pt-6 border-t border-gray-100' : 'max-h-0 opacity-0 mt-0 pt-0 border-transparent'}`}>
-                <div className="bg-gray-50 rounded-xl p-5 md:p-6 text-gray-700 leading-relaxed border border-gray-100">
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-60 opacity-100 mt-6 pt-6 border-t border-slate-200' : 'max-h-0 opacity-0 mt-0 pt-0 border-transparent'}`}>
+                <div className="bg-slate-50 rounded-xl p-5 md:p-6 text-navy-700 leading-relaxed border border-slate-200">
                   {item.details}
                 </div>
               </div>

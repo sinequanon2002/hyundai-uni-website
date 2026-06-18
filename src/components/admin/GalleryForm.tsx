@@ -86,7 +86,7 @@ export function GalleryForm({ item }: Props) {
         <div className="flex gap-4 items-start">
           {/* 미리보기 */}
           <div
-            className="relative w-40 h-40 rounded-lg overflow-hidden border-2 border-dashed border-neutral-300 bg-neutral-50 flex items-center justify-center shrink-0 cursor-pointer hover:border-primary transition-colors"
+            className="relative w-40 h-40 rounded-lg overflow-hidden border-2 border-dashed border-neutral-300 bg-neutral-50 flex items-center justify-center shrink-0 cursor-pointer hover:border-cobalt-600 transition-colors"
             onClick={() => fileRef.current?.click()}
           >
             {imageUrl ? (
@@ -148,7 +148,7 @@ export function GalleryForm({ item }: Props) {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="예: 경기도 안산 도금공장 폐산 수거"
           required
-          className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+          className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
         />
       </div>
 
@@ -161,7 +161,7 @@ export function GalleryForm({ item }: Props) {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           >
             {PORTFOLIO_CATEGORIES.map((c) => (
               <option key={c} value={c}>{c}</option>
@@ -175,7 +175,7 @@ export function GalleryForm({ item }: Props) {
           <select
             value={region}
             onChange={(e) => setRegion(e.target.value)}
-            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           >
             {PORTFOLIO_REGIONS.map((r) => (
               <option key={r} value={r}>{r}</option>
@@ -191,7 +191,7 @@ export function GalleryForm({ item }: Props) {
             value={workDate}
             onChange={(e) => setWorkDate(e.target.value)}
             required
-            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           />
         </div>
       </div>
@@ -206,7 +206,7 @@ export function GalleryForm({ item }: Props) {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="작업 내용, 배출 사업장 종류, 처리 방법 등을 간략히 기재하세요"
           rows={3}
-          className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary resize-none"
+          className="w-full border border-neutral-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600 resize-none"
         />
       </div>
 
@@ -222,7 +222,7 @@ export function GalleryForm({ item }: Props) {
         <button
           type="submit"
           disabled={isPending || uploading}
-          className="px-6 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
+          className="px-6 py-2 text-sm bg-cobalt-600 text-white rounded-lg hover:bg-cobalt-700 disabled:opacity-50 transition-colors"
         >
           {isPending ? "저장 중..." : isEdit ? "수정 완료" : "등록"}
         </button>

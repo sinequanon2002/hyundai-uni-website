@@ -93,20 +93,20 @@ export default async function NoticeDetailPage({ params }: Props) {
 
       <section className="max-w-4xl mx-auto px-4 py-12 md:py-20">
         {/* 제목 영역 */}
-        <div className="border-t-2 border-primary pt-8 pb-6 border-b border-gray-200">
+        <div className="border-t-2 border-cobalt-600 pt-8 pb-6 border-b border-slate-200">
           <div className="flex items-center gap-3 mb-4">
             <span
               className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
-                categoryColorMap[notice.category] ?? "bg-gray-100 text-gray-600"
+                categoryColorMap[notice.category] ?? "bg-slate-100 text-slate-500"
               }`}
             >
               {notice.category}
             </span>
           </div>
-          <h2 className="text-xl md:text-2xl font-bold text-neutral-900 leading-tight mb-4 break-keep">
+          <h2 className="text-xl md:text-2xl font-bold text-navy-900 leading-tight mb-4 break-keep">
             {notice.title}
           </h2>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
               {new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
@@ -124,22 +124,22 @@ export default async function NoticeDetailPage({ params }: Props) {
 
         {/* 본문 */}
         <div
-          className="py-10 md:py-14 prose prose-neutral max-w-none leading-relaxed text-neutral-700
-                     prose-headings:text-neutral-900 prose-p:mb-4 prose-ul:pl-5 prose-ol:pl-5 prose-li:mb-1
+          className="py-10 md:py-14 prose prose-neutral max-w-none leading-relaxed text-navy-700
+                     prose-headings:text-navy-900 prose-p:mb-4 prose-ul:pl-5 prose-ol:pl-5 prose-li:mb-1
                      min-h-[200px]"
           dangerouslySetInnerHTML={{ __html: notice.content }}
         />
 
         {/* 이전글 / 다음글 */}
-        <div className="border-t border-gray-200">
+        <div className="border-t border-slate-200">
           {nextId && nextTitle && (
             <Link
               href={`/support/notice/${nextId}`}
-              className="flex items-center gap-3 px-4 py-4 hover:bg-blue-50/50 transition-colors border-b border-gray-100 group"
+              className="flex items-center gap-3 px-4 py-4 hover:bg-cobalt-50/30 transition-colors border-b border-slate-200 group"
             >
-              <ChevronUp className="w-4 h-4 text-gray-400 group-hover:text-primary" />
-              <span className="text-sm text-gray-500 w-16 shrink-0">다음글</span>
-              <span className="text-sm text-neutral-900 group-hover:text-primary transition-colors truncate">
+              <ChevronUp className="w-4 h-4 text-slate-400 group-hover:text-cobalt-600" />
+              <span className="text-sm text-slate-400 w-16 shrink-0">다음글</span>
+              <span className="text-sm text-navy-900 group-hover:text-cobalt-600 transition-colors truncate">
                 {nextTitle}
               </span>
             </Link>
@@ -147,11 +147,11 @@ export default async function NoticeDetailPage({ params }: Props) {
           {prevId && prevTitle && (
             <Link
               href={`/support/notice/${prevId}`}
-              className="flex items-center gap-3 px-4 py-4 hover:bg-blue-50/50 transition-colors border-b border-gray-100 group"
+              className="flex items-center gap-3 px-4 py-4 hover:bg-cobalt-50/30 transition-colors border-b border-slate-200 group"
             >
-              <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-primary" />
-              <span className="text-sm text-gray-500 w-16 shrink-0">이전글</span>
-              <span className="text-sm text-neutral-900 group-hover:text-primary transition-colors truncate">
+              <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-cobalt-600" />
+              <span className="text-sm text-slate-400 w-16 shrink-0">이전글</span>
+              <span className="text-sm text-navy-900 group-hover:text-cobalt-600 transition-colors truncate">
                 {prevTitle}
               </span>
             </Link>
@@ -162,7 +162,7 @@ export default async function NoticeDetailPage({ params }: Props) {
         <div className="mt-8 flex justify-center">
           <Link
             href="/support/notice"
-            className="inline-flex items-center gap-2 px-8 py-3 border border-gray-300 rounded-lg text-sm font-medium text-neutral-600 hover:bg-gray-50 hover:border-primary hover:text-primary transition-all"
+            className="inline-flex items-center gap-2 px-8 py-3 border border-slate-200 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 hover:border-cobalt-600 hover:text-cobalt-600 transition-all"
           >
             <List className="w-4 h-4" />
             목록으로

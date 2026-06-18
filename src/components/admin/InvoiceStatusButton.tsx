@@ -16,7 +16,7 @@ export function InvoiceStatusButton({ invoiceId, currentStatus }: { invoiceId: s
   const [isPending, startTransition] = useTransition();
 
   const next = NEXT[currentStatus];
-  if (!next) return <span className="text-xs text-gray-300">-</span>;
+  if (!next) return <span className="text-xs text-slate-300">-</span>;
 
   const handleClick = () => {
     startTransition(async () => {

@@ -32,7 +32,7 @@ function RoleCheckboxGroup({
             name={name}
             value={role}
             defaultChecked={current.includes(role)}
-            className="w-4 h-4 rounded border-neutral-300 text-primary focus:ring-primary"
+            className="w-4 h-4 rounded border-neutral-300 text-cobalt-600 focus:ring-cobalt-600"
           />
           <span className="text-sm text-neutral-700">
             {ROLE_LABELS[role]}
@@ -88,7 +88,7 @@ export default async function SettingsPage() {
           <RoleCheckboxGroup name="roles" current={noticeRoles} options={STAFF_ROLE_OPTIONS} />
           <button
             type="submit"
-            className="px-5 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors"
+            className="px-5 py-2 bg-cobalt-600 text-white text-sm rounded-lg hover:bg-cobalt-700 transition-colors"
           >
             저장
           </button>
@@ -104,7 +104,7 @@ export default async function SettingsPage() {
           <RoleCheckboxGroup name="roles" current={portfolioRoles} options={STAFF_ROLE_OPTIONS} />
           <button
             type="submit"
-            className="px-5 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors"
+            className="px-5 py-2 bg-cobalt-600 text-white text-sm rounded-lg hover:bg-cobalt-700 transition-colors"
           >
             저장
           </button>

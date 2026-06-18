@@ -64,7 +64,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
         {canWrite && (
           <Link
             href="/admin/notices/new"
-            className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors"
+            className="px-4 py-2 bg-cobalt-600 text-white text-sm rounded-lg hover:bg-cobalt-700 transition-colors"
           >
             + 새 공지 작성
           </Link>
@@ -78,7 +78,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
           name="search"
           defaultValue={search}
           placeholder="제목 검색..."
-          className="border border-neutral-300 rounded-lg px-3 py-2 text-sm flex-1 max-w-xs focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className="border border-neutral-300 rounded-lg px-3 py-2 text-sm flex-1 max-w-xs focus:outline-none focus:ring-2 focus:ring-cobalt-600/20"
         />
         <button
           type="submit"
@@ -109,7 +109,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
               <li key={notice.id} className="bg-white rounded-xl border border-neutral-200 p-4">
                 <div className="flex items-start gap-2">
                   {notice.is_pinned && (
-                    <span className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded font-medium shrink-0 mt-0.5">
+                    <span className="text-xs bg-cobalt-100 text-cobalt-600 px-1.5 py-0.5 rounded font-medium shrink-0 mt-0.5">
                       고정
                     </span>
                   )}
@@ -125,7 +125,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
                   <div className="flex items-center gap-4 mt-3 pt-3 border-t border-neutral-100">
                     <Link
                       href={`/admin/notices/${notice.id}/edit`}
-                      className="text-sm text-secondary hover:text-primary transition-colors font-medium"
+                      className="text-sm text-mint-600 hover:text-cobalt-600 transition-colors font-medium"
                     >
                       수정
                     </Link>
@@ -156,7 +156,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
                           {notice.is_pinned && (
-                            <span className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded font-medium shrink-0">
+                            <span className="text-xs bg-cobalt-100 text-cobalt-600 px-1.5 py-0.5 rounded font-medium shrink-0">
                               고정
                             </span>
                           )}
@@ -175,7 +175,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
                             <>
                               <Link
                                 href={`/admin/notices/${notice.id}/edit`}
-                                className="text-xs text-secondary hover:text-primary transition-colors"
+                                className="text-xs text-mint-600 hover:text-cobalt-600 transition-colors"
                               >
                                 수정
                               </Link>
@@ -202,7 +202,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
               href={`/admin/notices?page=${p}${search ? `&search=${encodeURIComponent(search)}` : ""}`}
               className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm transition-colors ${
                 p === page
-                  ? "bg-primary text-white"
+                  ? "bg-cobalt-600 text-white"
                   : "border border-neutral-300 hover:bg-neutral-50"
               }`}
             >

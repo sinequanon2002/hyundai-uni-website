@@ -47,14 +47,14 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
       {/* 헤더 */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">견적 문의 관리</h1>
-          <p className="text-sm text-gray-500 mt-0.5">전체 {total}건</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-navy-900">견적 문의 관리</h1>
+          <p className="text-sm text-slate-500 mt-0.5">전체 {total}건</p>
         </div>
         <InquirySearchInput basePath="/admin/inquiries" />
       </div>
 
       {/* 상태 필터 탭 */}
-      <div className="flex gap-1 mb-4 border-b border-gray-200 overflow-x-auto">
+      <div className="flex gap-1 mb-4 border-b border-slate-200 overflow-x-auto">
         {STATUS_TABS.map((tab) => {
           const isActive = status === tab.value;
           return (
@@ -63,8 +63,8 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
               href={buildHref({ status: tab.value, page: "1" })}
               className={`shrink-0 whitespace-nowrap px-4 py-2 text-sm font-medium rounded-t border-b-2 transition-colors ${
                 isActive
-                  ? "border-[#0C5F6B] text-[#0C5F6B]"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
+                  ? "border-cobalt-600 text-cobalt-600"
+                  : "border-transparent text-slate-500 hover:text-slate-700"
               }`}
             >
               {tab.label}
@@ -75,11 +75,11 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
 
       {/* 목록 */}
       {!result.success ? (
-        <div className="bg-white rounded-xl shadow-sm py-16 text-center text-red-400 text-sm">
+        <div className="bg-white rounded-xl shadow-ds-sm py-16 text-center text-red-400 text-sm">
           데이터를 불러오는 중 오류가 발생했습니다.
         </div>
       ) : inquiries.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-sm py-16 text-center text-gray-400 text-sm">
+        <div className="bg-white rounded-xl shadow-ds-sm py-16 text-center text-slate-400 text-sm">
           문의 내역이 없습니다.
         </div>
       ) : (
@@ -90,39 +90,39 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
               <li key={inq.id}>
                 <Link
                   href={`/admin/inquiries/${inq.id}`}
-                  className="block bg-white rounded-xl shadow-sm p-4 active:bg-gray-50 transition-colors"
+                  className="block bg-white rounded-xl shadow-ds-sm p-4 active:bg-slate-50 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-3 mb-2.5">
-                    <span className="font-bold text-gray-900 text-[15px] leading-tight">
+                    <span className="font-bold text-navy-900 text-[15px] leading-tight">
                       {inq.company_name}
                     </span>
                     <InquiryStatusBadge status={inq.status as InquiryStatus} />
                   </div>
                   <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[13px]">
-                    <dt className="text-gray-400">고객사 담당</dt>
-                    <dd className="text-gray-700">
+                    <dt className="text-slate-400">고객사 담당</dt>
+                    <dd className="text-slate-700">
                       {inq.contact_name}
                       {inq.department ? ` · ${inq.department}` : ""}
                     </dd>
-                    <dt className="text-gray-400">연락처</dt>
-                    <dd className="text-gray-700 tabular-nums">{inq.phone}</dd>
-                    <dt className="text-gray-400">폐기물</dt>
-                    <dd className="text-gray-700">
+                    <dt className="text-slate-400">연락처</dt>
+                    <dd className="text-slate-700 tabular-nums">{inq.phone}</dd>
+                    <dt className="text-slate-400">폐기물</dt>
+                    <dd className="text-slate-700">
                       {inq.waste_types[0]}
                       {inq.waste_types.length > 1 && (
-                        <span className="text-gray-400"> +{inq.waste_types.length - 1}</span>
+                        <span className="text-slate-400"> +{inq.waste_types.length - 1}</span>
                       )}
                     </dd>
-                    <dt className="text-gray-400">배정</dt>
-                    <dd className={inq.assigned_to ? "text-primary font-medium" : "text-gray-400 italic"}>
+                    <dt className="text-slate-400">배정</dt>
+                    <dd className={inq.assigned_to ? "text-cobalt-600 font-medium" : "text-slate-400 italic"}>
                       {inq.assigned_to ? (staffMap[inq.assigned_to] ?? "알수없음") : "미배정"}
                     </dd>
                   </dl>
-                  <div className="mt-2.5 pt-2.5 border-t border-gray-50 flex items-center justify-between">
-                    <span className="text-xs text-gray-400">
+                  <div className="mt-2.5 pt-2.5 border-t border-slate-50 flex items-center justify-between">
+                    <span className="text-xs text-slate-400">
                       {new Date(inq.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </span>
-                    <span className="text-xs font-medium text-[#0E9E7E]">상세 보기 →</span>
+                    <span className="text-xs font-medium text-mint-600">상세 보기 →</span>
                   </div>
                 </Link>
               </li>
@@ -130,53 +130,53 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
           </ul>
 
           {/* 데스크톱: 테이블 */}
-          <div className="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden">
+          <div className="hidden md:block bg-white rounded-xl shadow-ds-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-100">
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600 w-36">접수일</th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600">사업장명</th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden md:table-cell">소속팀</th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600">고객사 담당</th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">연락처</th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden xl:table-cell">폐기물</th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">
+                  <tr className="bg-slate-50 border-b border-slate-100">
+                    <th className="text-left px-4 py-3 font-semibold text-slate-600 w-36">접수일</th>
+                    <th className="text-left px-4 py-3 font-semibold text-slate-600">사업장명</th>
+                    <th className="text-left px-4 py-3 font-semibold text-slate-600 hidden md:table-cell">소속팀</th>
+                    <th className="text-left px-4 py-3 font-semibold text-slate-600">고객사 담당</th>
+                    <th className="text-left px-4 py-3 font-semibold text-slate-600 hidden lg:table-cell">연락처</th>
+                    <th className="text-left px-4 py-3 font-semibold text-slate-600 hidden xl:table-cell">폐기물</th>
+                    <th className="text-left px-4 py-3 font-semibold text-slate-600 hidden lg:table-cell">
                       <span className="flex items-center gap-1"><UserCircle className="w-3.5 h-3.5" />배정</span>
                     </th>
-                    <th className="text-left px-4 py-3 font-semibold text-gray-600 w-24">상태</th>
-                    <th className="text-center px-4 py-3 font-semibold text-gray-600 w-16">상세</th>
+                    <th className="text-left px-4 py-3 font-semibold text-slate-600 w-24">상태</th>
+                    <th className="text-center px-4 py-3 font-semibold text-slate-600 w-16">상세</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-slate-50">
                   {inquiries.map((inq) => (
-                    <tr key={inq.id} className="hover:bg-gray-50/50 transition-colors">
-                      <td className="px-4 py-3 text-gray-500">
+                    <tr key={inq.id} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="px-4 py-3 text-slate-500">
                         {new Date(inq.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                       </td>
-                      <td className="px-4 py-3 font-medium text-gray-900">
+                      <td className="px-4 py-3 font-medium text-navy-900">
                         {inq.company_name}
                       </td>
-                      <td className="px-4 py-3 text-gray-600 hidden md:table-cell">
+                      <td className="px-4 py-3 text-slate-600 hidden md:table-cell">
                         {inq.department ?? "-"}
                       </td>
-                      <td className="px-4 py-3 text-gray-600">{inq.contact_name}</td>
-                      <td className="px-4 py-3 text-gray-600 hidden lg:table-cell">{inq.phone}</td>
-                      <td className="px-4 py-3 text-gray-600 hidden xl:table-cell">
+                      <td className="px-4 py-3 text-slate-600">{inq.contact_name}</td>
+                      <td className="px-4 py-3 text-slate-600 hidden lg:table-cell">{inq.phone}</td>
+                      <td className="px-4 py-3 text-slate-600 hidden xl:table-cell">
                         {inq.waste_types[0]}
                         {inq.waste_types.length > 1 && (
-                          <span className="text-gray-400 text-xs ml-1">
+                          <span className="text-slate-400 text-xs ml-1">
                             +{inq.waste_types.length - 1}
                           </span>
                         )}
                       </td>
                       <td className="px-4 py-3 hidden lg:table-cell">
                         {inq.assigned_to ? (
-                          <span className="text-xs font-medium text-primary">
+                          <span className="text-xs font-medium text-cobalt-600">
                             {staffMap[inq.assigned_to] ?? "알수없음"}
                           </span>
                         ) : (
-                          <span className="text-xs text-gray-400 italic">미배정</span>
+                          <span className="text-xs text-slate-400 italic">미배정</span>
                         )}
                       </td>
                       <td className="px-4 py-3">
@@ -185,7 +185,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
                       <td className="px-4 py-3 text-center">
                         <Link
                           href={`/admin/inquiries/${inq.id}`}
-                          className="text-[#0E9E7E] hover:text-[#0C5F6B] font-medium text-xs"
+                          className="text-mint-600 hover:text-cobalt-600 font-medium text-xs"
                         >
                           보기
                         </Link>
@@ -207,13 +207,13 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
             aria-disabled={page <= 1}
             className={`p-2 rounded-lg border transition-colors ${
               page <= 1
-                ? "opacity-30 pointer-events-none border-gray-100"
-                : "border-gray-200 hover:border-[#0C5F6B] hover:text-[#0C5F6B]"
+                ? "opacity-30 pointer-events-none border-slate-100"
+                : "border-slate-200 hover:border-cobalt-600 hover:text-cobalt-600"
             }`}
           >
             <ChevronLeft className="w-4 h-4" />
           </Link>
-          <span className="text-sm text-gray-600 px-2">
+          <span className="text-sm text-slate-600 px-2">
             {page} / {totalPages}
           </span>
           <Link
@@ -221,8 +221,8 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
             aria-disabled={page >= totalPages}
             className={`p-2 rounded-lg border transition-colors ${
               page >= totalPages
-                ? "opacity-30 pointer-events-none border-gray-100"
-                : "border-gray-200 hover:border-[#0C5F6B] hover:text-[#0C5F6B]"
+                ? "opacity-30 pointer-events-none border-slate-100"
+                : "border-slate-200 hover:border-cobalt-600 hover:text-cobalt-600"
             }`}
           >
             <ChevronRight className="w-4 h-4" />

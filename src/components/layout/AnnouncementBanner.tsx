@@ -23,7 +23,7 @@ export function AnnouncementBanner() {
   if (!visible) return null;
 
   return (
-    <div className="w-full bg-accent text-white text-xs md:text-sm py-2.5 px-4">
+    <div className="w-full bg-cobalt-700 text-white text-xs md:text-sm py-2.5 px-4">
       <div className="container mx-auto flex items-center justify-center gap-3">
         <p className="text-center leading-snug">
           지정폐기물 담당자 필독 —{" "}

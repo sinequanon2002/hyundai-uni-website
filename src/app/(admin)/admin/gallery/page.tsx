@@ -57,7 +57,7 @@ export default async function GalleryAdminPage({ searchParams }: Props) {
         {canWrite && (
           <Link
             href="/admin/gallery/new"
-            className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors"
+            className="px-4 py-2 bg-cobalt-600 text-white text-sm rounded-lg hover:bg-cobalt-700 transition-colors"
           >
             + 새 항목 등록
           </Link>
@@ -72,7 +72,7 @@ export default async function GalleryAdminPage({ searchParams }: Props) {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {items.map((item) => (
-            <div key={item.id} className="group bg-white rounded-xl border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div key={item.id} className="group bg-white rounded-xl border border-neutral-200 overflow-hidden hover:shadow-ds-md transition-shadow">
               <div className="relative aspect-square overflow-hidden bg-neutral-100">
                 <Image
                   src={item.image_url}
@@ -87,7 +87,7 @@ export default async function GalleryAdminPage({ searchParams }: Props) {
                   {item.title}
                 </p>
                 <div className="flex flex-wrap gap-1 mb-2">
-                  <span className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded">
+                  <span className="text-xs bg-cobalt-100 text-cobalt-600 px-1.5 py-0.5 rounded">
                     {item.category}
                   </span>
                   <span className="text-xs bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded">
@@ -101,7 +101,7 @@ export default async function GalleryAdminPage({ searchParams }: Props) {
                   <div className="flex items-center gap-2 border-t border-neutral-100 pt-2">
                     <Link
                       href={`/admin/gallery/${item.id}/edit`}
-                      className="text-xs text-secondary hover:text-primary transition-colors"
+                      className="text-xs text-mint-600 hover:text-cobalt-600 transition-colors"
                     >
                       수정
                     </Link>
@@ -124,7 +124,7 @@ export default async function GalleryAdminPage({ searchParams }: Props) {
               href={`/admin/gallery?page=${p}`}
               className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm transition-colors ${
                 p === page
-                  ? "bg-primary text-white"
+                  ? "bg-cobalt-600 text-white"
                   : "border border-neutral-300 hover:bg-neutral-50"
               }`}
             >

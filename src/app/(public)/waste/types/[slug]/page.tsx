@@ -65,36 +65,36 @@ export default function WasteTypeDetailPage({ params }: Props) {
       {/* 뒤로가기 */}
       <Link
         href="/waste/types"
-        className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary transition-colors mb-8"
+        className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-cobalt-600 transition-colors mb-8"
       >
         <ChevronLeft className="w-4 h-4" />
         지정폐기물 종류 전체 보기
       </Link>
 
       {/* ── 히어로 ── */}
-      <section className="bg-white rounded-2xl border border-neutral-200 shadow-sm p-8 md:p-12 mb-8">
+      <section className="bg-white rounded-xl border border-slate-200 shadow-ds-sm p-8 md:p-12 mb-8">
         <div className="flex flex-col md:flex-row md:items-start gap-6">
-          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-            <Icon className="w-8 h-8 text-primary" />
+          <div className="w-16 h-16 rounded-2xl bg-cobalt-50 flex items-center justify-center shrink-0">
+            <Icon className="w-8 h-8 text-cobalt-600" />
           </div>
           <div className="flex-1">
-            <span className="inline-flex items-center text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
+            <span className="inline-flex items-center text-xs font-semibold text-cobalt-600 bg-cobalt-50 px-3 py-1 rounded-full mb-3">
               {detail.legalBasis}
             </span>
-            <h1 className="text-2xl md:text-4xl font-bold text-neutral-900 mb-3">
+            <h1 className="text-2xl md:text-4xl font-bold text-navy-900 mb-3">
               {detail.name} 수거·운반
             </h1>
-            <p className="text-neutral-600 text-base md:text-lg leading-relaxed">
+            <p className="text-slate-500 text-base md:text-lg leading-relaxed">
               {detail.fullDescription}
             </p>
           </div>
         </div>
 
         {/* CTA 버튼 */}
-        <div className="flex flex-col sm:flex-row gap-3 mt-8 pt-6 border-t border-neutral-100">
+        <div className="flex flex-col sm:flex-row gap-3 mt-8 pt-6 border-t border-slate-200">
           <Link
             href="/support/inquiry"
-            className="inline-flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center justify-center gap-2 bg-mint-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-mint-600 transition-colors"
           >
             <PhoneCall className="w-4 h-4" />
             무료 견적 문의
@@ -102,7 +102,7 @@ export default function WasteTypeDetailPage({ params }: Props) {
           {detail.galleryCategory && (
             <Link
               href={`/gallery?category=${encodeURIComponent(detail.galleryCategory)}`}
-              className="inline-flex items-center justify-center gap-2 bg-neutral-100 text-neutral-700 px-6 py-3 rounded-xl font-semibold hover:bg-neutral-200 transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-slate-100 text-navy-700 px-6 py-3 rounded-xl font-semibold hover:bg-slate-200 transition-colors"
             >
               <Images className="w-4 h-4" />
               {detail.name} 현장 사진 보기
@@ -114,17 +114,17 @@ export default function WasteTypeDetailPage({ params }: Props) {
       {/* ── 발생 업종 ── */}
       <section className="mb-8">
         <div className="flex items-center gap-2 mb-5">
-          <Building2 className="w-5 h-5 text-primary" />
-          <h2 className="text-xl font-bold text-neutral-900">주요 발생 업종</h2>
+          <Building2 className="w-5 h-5 text-cobalt-600" />
+          <h2 className="text-xl font-bold text-navy-900">주요 발생 업종</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {detail.industries.map((ind) => (
             <div
               key={ind.name}
-              className="bg-white rounded-xl border border-neutral-200 p-5 hover:border-primary/40 hover:shadow-sm transition-all"
+              className="bg-white rounded-xl border border-slate-200 p-5 hover:border-cobalt-600/40 hover:shadow-ds-sm transition-all"
             >
-              <h3 className="font-bold text-neutral-900 mb-1.5">{ind.name}</h3>
-              <p className="text-sm text-neutral-500">{ind.examples}</p>
+              <h3 className="font-bold text-navy-900 mb-1.5">{ind.name}</h3>
+              <p className="text-sm text-slate-500">{ind.examples}</p>
             </div>
           ))}
         </div>
@@ -132,22 +132,22 @@ export default function WasteTypeDetailPage({ params }: Props) {
 
       {/* ── 처리 프로세스 ── */}
       <section className="mb-8">
-        <h2 className="text-xl font-bold text-neutral-900 mb-5">현대유앤아이 처리 프로세스</h2>
-        <div className="bg-white rounded-2xl border border-neutral-200 shadow-sm overflow-hidden">
+        <h2 className="text-xl font-bold text-navy-900 mb-5">현대유앤아이 처리 프로세스</h2>
+        <div className="bg-white rounded-xl border border-slate-200 shadow-ds-sm overflow-hidden">
           {detail.process.map((step, idx) => (
             <div
               key={step.step}
               className={`flex gap-4 p-5 md:p-6 ${
-                idx !== detail.process.length - 1 ? "border-b border-neutral-100" : ""
+                idx !== detail.process.length - 1 ? "border-b border-slate-200" : ""
               }`}
             >
               {/* 스텝 번호 */}
-              <div className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
+              <div className="w-9 h-9 rounded-full bg-cobalt-600 text-white flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
                 {step.step}
               </div>
               <div>
-                <h3 className="font-bold text-neutral-900 mb-1">{step.title}</h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">{step.desc}</p>
+                <h3 className="font-bold text-navy-900 mb-1">{step.title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
               </div>
             </div>
           ))}
@@ -156,15 +156,15 @@ export default function WasteTypeDetailPage({ params }: Props) {
 
       {/* ── 주요 특징 ── */}
       <section className="mb-8">
-        <h2 className="text-xl font-bold text-neutral-900 mb-5">현대유앤아이가 선택받는 이유</h2>
+        <h2 className="text-xl font-bold text-navy-900 mb-5">현대유앤아이가 선택받는 이유</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {detail.keyPoints.map((point) => (
             <div
               key={point}
-              className="flex items-start gap-3 bg-accent/5 rounded-xl p-4 border border-accent/20"
+              className="flex items-start gap-3 bg-mint-500/5 rounded-xl p-4 border border-mint-500/20"
             >
-              <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-              <span className="text-sm font-medium text-neutral-800">{point}</span>
+              <CheckCircle2 className="w-5 h-5 text-mint-500 shrink-0 mt-0.5" />
+              <span className="text-sm font-medium text-navy-900">{point}</span>
             </div>
           ))}
         </div>
@@ -172,14 +172,14 @@ export default function WasteTypeDetailPage({ params }: Props) {
 
       {/* ── 현장 갤러리 연계 (galleryCategory 있는 경우만) ── */}
       {detail.galleryCategory && (
-        <section className="mb-8 bg-neutral-900 rounded-2xl p-8 text-white">
+        <section className="mb-8 bg-navy-900 rounded-2xl p-8 text-white">
           <h2 className="text-xl font-bold mb-2">실제 {detail.name} 현장 사진</h2>
-          <p className="text-neutral-400 text-sm mb-5">
+          <p className="text-slate-400 text-sm mb-5">
             현대유앤아이가 직접 수거·운반한 {detail.name} 작업 현장 사진을 확인하세요.
           </p>
           <Link
             href={`/gallery?category=${encodeURIComponent(detail.galleryCategory)}`}
-            className="inline-flex items-center gap-2 bg-white text-neutral-900 px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-neutral-100 transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-navy-900 px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-slate-100 transition-colors"
           >
             <Images className="w-4 h-4" />
             {detail.name} 현장갤러리 보기
@@ -189,7 +189,7 @@ export default function WasteTypeDetailPage({ params }: Props) {
       )}
 
       {/* ── 견적 문의 CTA ── */}
-      <section className="bg-primary rounded-2xl p-8 md:p-10 text-white text-center">
+      <section className="bg-cobalt-600 rounded-xl p-8 md:p-10 text-white text-center">
         <h2 className="text-xl md:text-2xl font-bold mb-2">
           {detail.name} 처리가 필요하신가요?
         </h2>
@@ -200,7 +200,7 @@ export default function WasteTypeDetailPage({ params }: Props) {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/support/inquiry"
-            className="inline-flex items-center justify-center gap-2 bg-white text-primary px-7 py-3 rounded-xl font-bold hover:bg-neutral-100 transition-colors"
+            className="inline-flex items-center justify-center gap-2 bg-white text-cobalt-600 px-7 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors"
           >
             온라인 견적 문의
             <ArrowRight className="w-4 h-4" />
@@ -219,7 +219,7 @@ export default function WasteTypeDetailPage({ params }: Props) {
       <div className="mt-10 text-center">
         <Link
           href="/waste/types"
-          className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-primary transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-cobalt-600 transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
           다른 지정폐기물 종류 보기

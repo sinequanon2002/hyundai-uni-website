@@ -30,19 +30,18 @@ export function SubNav({ items = COMPANY_SUBNAV_ITEMS }: { items?: {label: strin
   const pathname = usePathname();
 
   return (
-    <div className="w-full border-b border-gray-200 bg-white sticky top-16 z-40">
+    <div className="w-full border-b border-slate-200 bg-white/90 backdrop-blur-sm sticky top-16 z-40">
       <div className="max-w-6xl mx-auto px-4">
         <nav className="w-full">
           <ul className="grid grid-cols-2 md:flex md:justify-center md:space-x-8">
             {items.map((item, index) => {
               const isActive = pathname === item.href;
-              // 홀수 개수의 마지막 항목은 모바일에서 한 행을 가득 채워 외톨이 셀 방지
               const isLastOdd = items.length % 2 === 1 && index === items.length - 1;
               return (
                 <li
                   key={item.href}
                   className={cn(
-                    "flex border-b border-gray-100 md:border-none",
+                    "flex border-b border-slate-100 md:border-none",
                     isLastOdd && "col-span-2 md:col-span-1"
                   )}
                 >
@@ -50,12 +49,12 @@ export function SubNav({ items = COMPANY_SUBNAV_ITEMS }: { items?: {label: strin
                     href={item.href}
                     className={cn(
                       "flex-1 flex items-center justify-center min-h-[48px] px-2 py-3 md:px-4 md:py-4 text-sm md:text-base font-medium leading-tight transition-colors relative text-center",
-                      isActive ? "text-primary font-bold" : "text-neutral-600 hover:text-primary"
+                      isActive ? "text-cobalt-600 font-bold" : "text-slate-500 hover:text-cobalt-600"
                     )}
                   >
                     {item.label}
                     {isActive && (
-                      <span className="absolute bottom-[-1px] left-0 w-full h-[3px] bg-primary rounded-t-md" />
+                      <span className="absolute bottom-[-1px] left-0 w-full h-[3px] bg-cobalt-600 rounded-t-md" />
                     )}
                   </Link>
                 </li>

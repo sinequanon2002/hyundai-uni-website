@@ -53,7 +53,7 @@ export function GalleryGrid({ items }: Props) {
           <button
             key={item.id}
             onClick={() => setLightboxIdx(idx)}
-            className="group text-left rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 bg-white border border-neutral-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="group text-left rounded-xl overflow-hidden shadow-ds-sm hover:shadow-ds-md transition-all duration-300 bg-white border border-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt-600"
           >
             {/* 이미지 */}
             <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
@@ -65,7 +65,7 @@ export function GalleryGrid({ items }: Props) {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
               {/* 호버 오버레이 */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-cobalt-600/80 via-cobalt-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <span className="text-white text-sm font-medium">자세히 보기 →</span>
               </div>
             </div>
@@ -75,19 +75,19 @@ export function GalleryGrid({ items }: Props) {
               {/* 카테고리 배지 */}
               <span
                 className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${
-                  categoryColorMap[item.category] ?? "bg-neutral-100 text-neutral-600"
+                  categoryColorMap[item.category] ?? "bg-slate-100 text-slate-500"
                 }`}
               >
                 {item.category}
               </span>
 
               {/* 제목 */}
-              <h3 className="text-sm font-bold text-neutral-900 mb-2 leading-snug line-clamp-2">
+              <h3 className="text-sm font-bold text-navy-900 mb-2 leading-snug line-clamp-2">
                 {item.title}
               </h3>
 
               {/* 메타 정보 */}
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-neutral-500">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
                 <span className="flex items-center gap-1">
                   <MapPin className="w-3 h-3 shrink-0" />
                   {item.region}

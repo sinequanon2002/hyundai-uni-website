@@ -30,7 +30,7 @@ function RoleSelect({
         name="role"
         defaultValue={currentRole}
         disabled={isSelf}
-        className="text-xs border border-gray-200 rounded px-2 py-1 bg-white text-neutral-dark disabled:bg-gray-100 disabled:text-gray-400 focus:outline-none focus:ring-1 focus:ring-primary/40"
+        className="text-xs border border-slate-200 rounded px-2 py-1 bg-white text-neutral-dark disabled:bg-slate-100 disabled:text-slate-400 focus:outline-none focus:ring-1 focus:ring-cobalt-600/20"
       >
         {USER_ROLES.filter((r) => r !== "customer").map((r) => (
           <option key={r} value={r}>
@@ -41,7 +41,7 @@ function RoleSelect({
       {!isSelf && (
         <button
           type="submit"
-          className="text-xs px-2.5 py-1 rounded bg-primary/10 text-primary hover:bg-primary/20 transition-colors font-medium"
+          className="text-xs px-2.5 py-1 rounded bg-cobalt-100 text-cobalt-600 hover:bg-cobalt-100 transition-colors font-medium"
         >
           저장
         </button>
@@ -90,7 +90,7 @@ function CreateUserForm() {
             type="email"
             required
             placeholder="staff@company.co.kr"
-            className="w-full text-sm px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           />
         </div>
         <div>
@@ -101,7 +101,7 @@ function CreateUserForm() {
             required
             minLength={8}
             placeholder="비밀번호 입력"
-            className="w-full text-sm px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           />
         </div>
         <div>
@@ -110,7 +110,7 @@ function CreateUserForm() {
             name="fullName"
             type="text"
             placeholder="홍길동"
-            className="w-full text-sm px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           />
         </div>
         <div>
@@ -119,7 +119,7 @@ function CreateUserForm() {
             name="role"
             required
             defaultValue="sales_rep"
-            className="w-full text-sm px-3 py-2 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+            className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-cobalt-600/20 focus:border-cobalt-600"
           >
             {USER_ROLES.filter((r) => r !== "customer").map((r) => (
               <option key={r} value={r}>
@@ -132,7 +132,7 @@ function CreateUserForm() {
       <div className="flex justify-end pt-1">
         <button
           type="submit"
-          className="px-4 py-2 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-secondary transition-colors"
+          className="px-4 py-2 text-sm font-semibold bg-cobalt-600 text-white rounded-lg hover:bg-cobalt-700 transition-colors"
         >
           계정 생성
         </button>
@@ -177,13 +177,13 @@ export default async function UsersPage() {
         </p>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-100 p-4 sm:p-6">
+      <div className="bg-white rounded-xl border border-slate-100 p-4 sm:p-6">
         <h2 className="text-base font-semibold text-neutral-dark mb-4">새 직원 계정 생성</h2>
         <CreateUserForm />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-50 flex items-center justify-between">
+      <div className="bg-white rounded-xl border border-slate-100 overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
           <h2 className="text-base font-semibold text-neutral-dark">직원 목록</h2>
           <span className="text-sm text-neutral-mid">{users.length}명</span>
         </div>
@@ -195,7 +195,7 @@ export default async function UsersPage() {
         ) : (
           <>
             {/* 모바일: 카드 리스트 */}
-            <ul className="md:hidden divide-y divide-gray-50">
+            <ul className="md:hidden divide-y divide-slate-100">
               {users.map((u) => (
                 <li key={u.id} className="p-4">
                   <div className="flex items-start justify-between gap-3">
@@ -205,7 +205,7 @@ export default async function UsersPage() {
                           <span className="text-neutral-mid italic text-xs">이름 없음</span>
                         )}
                         {u.id === user.id && (
-                          <span className="ml-2 text-xs text-primary font-normal">(나)</span>
+                          <span className="ml-2 text-xs text-cobalt-600 font-normal">(나)</span>
                         )}
                       </div>
                       <div className="text-xs text-neutral-mid mt-0.5 break-all">{u.email}</div>
@@ -231,7 +231,7 @@ export default async function UsersPage() {
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-50">
+                  <tr className="border-b border-slate-100">
                     <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3">이름 / 이메일</th>
                     <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3">역할</th>
                     <th className="text-left text-xs font-medium text-neutral-mid px-6 py-3 hidden lg:table-cell">마지막 로그인</th>
@@ -239,16 +239,16 @@ export default async function UsersPage() {
                     <th className="px-6 py-3"></th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-slate-100">
                   {users.map((u) => (
-                    <tr key={u.id} className="hover:bg-gray-50/50 transition-colors">
+                    <tr key={u.id} className="hover:bg-slate-50/50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="font-medium text-neutral-dark">
                           {u.full_name ?? (
                             <span className="text-neutral-mid italic text-xs">이름 없음</span>
                           )}
                           {u.id === user.id && (
-                            <span className="ml-2 text-xs text-primary font-normal">(나)</span>
+                            <span className="ml-2 text-xs text-cobalt-600 font-normal">(나)</span>
                           )}
                         </div>
                         <div className="text-xs text-neutral-mid mt-0.5">{u.email}</div>

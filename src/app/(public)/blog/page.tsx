@@ -59,20 +59,20 @@ export default async function BlogPage({ searchParams }: Props) {
     <main className="min-h-dvh bg-white">
 
       {/* ── 페이지 헤더 ── */}
-      <section className="border-b border-neutral-100 bg-white">
+      <section className="border-b border-slate-200 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-          <p className="text-sm font-semibold text-primary mb-3">폐기물 정보 블로그</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight mb-3">
+          <p className="text-sm font-semibold text-cobalt-600 mb-3">폐기물 정보 블로그</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-navy-900 leading-tight mb-3">
             담당자가 꼭 알아야 할 지정폐기물 정보
           </h1>
-          <p className="text-neutral-500 text-base leading-relaxed">
+          <p className="text-slate-500 text-base leading-relaxed">
             처리 방법 · 법령 안내 · 올바로시스템 활용 · 업종별 가이드
           </p>
         </div>
       </section>
 
       {/* ── 카테고리 탭 (sticky) ── */}
-      <div className="bg-white border-b border-neutral-100 sticky top-16 z-30">
+      <div className="bg-white border-b border-slate-200 sticky top-16 z-30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
             <Link
@@ -80,8 +80,8 @@ export default async function BlogPage({ searchParams }: Props) {
               className={cn(
                 "shrink-0 px-4 py-2 rounded-md text-sm font-medium transition-all",
                 !category
-                  ? "bg-[#f3f4f6] text-neutral-900 font-semibold"
-                  : "text-[#415160] hover:bg-neutral-100"
+                  ? "bg-[#f3f4f6] text-navy-900 font-semibold"
+                  : "text-[#415160] hover:bg-slate-100"
               )}
             >
               전체
@@ -93,8 +93,8 @@ export default async function BlogPage({ searchParams }: Props) {
                 className={cn(
                   "shrink-0 px-4 py-2 rounded-md text-sm font-medium transition-all",
                   category === cat
-                    ? "bg-[#f3f4f6] text-neutral-900 font-semibold"
-                    : "text-[#415160] hover:bg-neutral-100"
+                    ? "bg-[#f3f4f6] text-navy-900 font-semibold"
+                    : "text-[#415160] hover:bg-slate-100"
                 )}
               >
                 {cat}
@@ -108,9 +108,9 @@ export default async function BlogPage({ searchParams }: Props) {
 
         {/* ── 빈 상태 ── */}
         {posts.length === 0 && (
-          <div className="text-center py-28 text-neutral-400">
+          <div className="text-center py-28 text-slate-400">
             <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
-            <p className="font-semibold text-lg text-neutral-500">아직 등록된 글이 없습니다.</p>
+            <p className="font-semibold text-lg text-slate-500">아직 등록된 글이 없습니다.</p>
             <p className="text-sm mt-2">
               지정폐기물 정보·법령 안내·처리 사례 등 유용한 자료를 곧 업로드할 예정입니다.
             </p>
@@ -121,7 +121,7 @@ export default async function BlogPage({ searchParams }: Props) {
         {showFeatured && (
           <Link
             href={`/blog/${featuredPost.id}`}
-            className="group mb-14 grid md:grid-cols-[3fr_2fr] rounded-2xl overflow-hidden border border-neutral-200 hover:border-neutral-300 hover:shadow-lg transition-all duration-300"
+            className="group mb-14 grid md:grid-cols-[3fr_2fr] rounded-xl overflow-hidden border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300"
           >
             {/* 이미지 */}
             <div className="aspect-[16/9] md:aspect-auto overflow-hidden bg-[#f0f1f3] relative min-h-[260px]">
@@ -134,11 +134,11 @@ export default async function BlogPage({ searchParams }: Props) {
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <BookOpen className="w-16 h-16 text-neutral-300" />
+                  <BookOpen className="w-16 h-16 text-slate-300" />
                 </div>
               )}
               {featuredPost.is_pinned && (
-                <span className="absolute top-4 left-4 px-3 py-1 text-xs font-bold bg-primary text-white rounded-full">
+                <span className="absolute top-4 left-4 px-3 py-1 text-xs font-bold bg-mint-500 text-white rounded-full">
                   추천
                 </span>
               )}
@@ -147,21 +147,21 @@ export default async function BlogPage({ searchParams }: Props) {
             {/* 콘텐츠 */}
             <div className="flex flex-col justify-center p-8 md:p-10 bg-white">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-xs font-semibold px-2.5 py-1 rounded bg-[#f0f1f3] text-neutral-600">
+                <span className="text-xs font-semibold px-2.5 py-1 rounded bg-[#f0f1f3] text-slate-500">
                   {featuredPost.category}
                 </span>
-                <span className="text-xs text-neutral-400">최신 글</span>
+                <span className="text-xs text-slate-400">최신 글</span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 leading-snug mb-4 group-hover:text-primary transition-colors line-clamp-3">
+              <h2 className="text-2xl md:text-3xl font-bold text-navy-900 leading-snug mb-4 group-hover:text-cobalt-600 transition-colors line-clamp-3">
                 {featuredPost.title}
               </h2>
               {featuredPost.excerpt && (
-                <p className="text-sm text-neutral-500 line-clamp-3 mb-6 leading-relaxed">
+                <p className="text-sm text-slate-500 line-clamp-3 mb-6 leading-relaxed">
                   {featuredPost.excerpt}
                 </p>
               )}
-              <div className="flex items-center justify-between pt-5 border-t border-neutral-100">
-                <div className="flex items-center gap-3 text-xs text-neutral-400">
+              <div className="flex items-center justify-between pt-5 border-t border-slate-200">
+                <div className="flex items-center gap-3 text-xs text-slate-400">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />
                     {formatDate(featuredPost.created_at)}
@@ -171,7 +171,7 @@ export default async function BlogPage({ searchParams }: Props) {
                     {featuredPost.views.toLocaleString()}
                   </span>
                 </div>
-                <span className="flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all">
+                <span className="flex items-center gap-1.5 text-cobalt-600 font-semibold text-sm group-hover:gap-2.5 transition-all">
                   읽기 <ArrowRight className="w-4 h-4" />
                 </span>
               </div>
@@ -199,11 +199,11 @@ export default async function BlogPage({ searchParams }: Props) {
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <BookOpen className="w-10 h-10 text-neutral-300" />
+                      <BookOpen className="w-10 h-10 text-slate-300" />
                     </div>
                   )}
                   {post.is_pinned && (
-                    <span className="absolute top-2.5 left-2.5 px-2 py-0.5 text-[10px] font-bold bg-primary text-white rounded-full">
+                    <span className="absolute top-2.5 left-2.5 px-2 py-0.5 text-[10px] font-bold bg-mint-500 text-white rounded-full">
                       추천
                     </span>
                   )}
@@ -211,21 +211,21 @@ export default async function BlogPage({ searchParams }: Props) {
 
                 {/* 텍스트 */}
                 <div className="flex flex-col flex-1">
-                  <span className="self-start text-xs font-semibold px-2.5 py-1 rounded bg-[#f0f1f3] text-neutral-600 mb-3">
+                  <span className="self-start text-xs font-semibold px-2.5 py-1 rounded bg-[#f0f1f3] text-slate-500 mb-3">
                     {post.category}
                   </span>
 
-                  <h3 className="font-bold text-neutral-900 leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-2 text-base flex-1">
+                  <h3 className="font-bold text-navy-900 leading-snug mb-2 group-hover:text-cobalt-600 transition-colors line-clamp-2 text-base flex-1">
                     {post.title}
                   </h3>
 
                   {post.excerpt && (
-                    <p className="text-sm text-neutral-500 line-clamp-2 mb-4 leading-relaxed">
+                    <p className="text-sm text-slate-500 line-clamp-2 mb-4 leading-relaxed">
                       {post.excerpt}
                     </p>
                   )}
 
-                  <div className="flex items-center gap-3 text-xs text-neutral-400 mt-auto">
+                  <div className="flex items-center gap-3 text-xs text-slate-400 mt-auto">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       {formatDate(post.created_at)}
@@ -247,7 +247,7 @@ export default async function BlogPage({ searchParams }: Props) {
             <Link
               href={buildUrl({ page: page - 1 })}
               className={cn(
-                "p-2 rounded-lg hover:bg-neutral-100 transition-colors text-neutral-600",
+                "p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-500",
                 page === 1 && "opacity-30 pointer-events-none"
               )}
               aria-label="이전 페이지"
@@ -261,8 +261,8 @@ export default async function BlogPage({ searchParams }: Props) {
                 className={cn(
                   "w-9 h-9 rounded-lg text-sm font-medium transition-all flex items-center justify-center",
                   p === page
-                    ? "bg-primary text-white"
-                    : "text-neutral-600 hover:bg-neutral-100"
+                    ? "bg-cobalt-600 text-white"
+                    : "text-slate-500 hover:bg-slate-100"
                 )}
               >
                 {p}
@@ -271,7 +271,7 @@ export default async function BlogPage({ searchParams }: Props) {
             <Link
               href={buildUrl({ page: page + 1 })}
               className={cn(
-                "p-2 rounded-lg hover:bg-neutral-100 transition-colors text-neutral-600",
+                "p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-500",
                 page === totalPages && "opacity-30 pointer-events-none"
               )}
               aria-label="다음 페이지"

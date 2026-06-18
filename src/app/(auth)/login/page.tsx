@@ -36,7 +36,7 @@ export default function LoginPage({ searchParams }: PageProps) {
       <div className="w-full max-w-sm">
         {/* 로고 영역 */}
         <div className="text-center mb-8">
-          <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 ${isCustomer ? "bg-accent" : "bg-primary"}`}>
+          <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 ${isCustomer ? "bg-mint-500" : "bg-cobalt-600"}`}>
             {isCustomer ? (
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -56,7 +56,7 @@ export default function LoginPage({ searchParams }: PageProps) {
         </div>
 
         {/* 로그인 카드 */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="bg-white rounded-2xl shadow-ds-sm border border-slate-200 p-8">
           <h2 className="text-base font-semibold text-neutral-dark mb-6">로그인</h2>
 
           {/* 에러 메시지 */}
@@ -80,7 +80,7 @@ export default function LoginPage({ searchParams }: PageProps) {
                 autoComplete="email"
                 required
                 placeholder="example@company.co.kr"
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm text-neutral-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm text-neutral-dark placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition"
               />
             </div>
 
@@ -95,13 +95,13 @@ export default function LoginPage({ searchParams }: PageProps) {
                 autoComplete="current-password"
                 required
                 placeholder="비밀번호를 입력하세요"
-                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm text-neutral-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm text-neutral-dark placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cobalt-500/30 focus:border-cobalt-500 transition"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full mt-2 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-full mt-2 py-2.5 rounded-lg bg-mint-500 text-white text-sm font-semibold hover:bg-mint-600 transition-colors focus:outline-none focus:ring-2 focus:ring-cobalt-500/40"
             >
               로그인
             </button>
@@ -113,13 +113,13 @@ export default function LoginPage({ searchParams }: PageProps) {
           <div className="mt-6 space-y-3 text-center">
             <p className="text-sm text-neutral-mid">
               아직 계정이 없으신가요?{" "}
-              <Link href="/register" className="text-primary font-medium hover:underline">
+              <Link href="/register" className="text-cobalt-600 font-medium hover:underline">
                 회원가입
               </Link>
             </p>
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-sm text-neutral-mid hover:text-primary transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm text-neutral-mid hover:text-cobalt-600 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -135,7 +135,7 @@ export default function LoginPage({ searchParams }: PageProps) {
             </p>
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-sm text-neutral-mid hover:text-primary transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm text-neutral-mid hover:text-cobalt-600 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
