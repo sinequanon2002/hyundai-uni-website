@@ -172,14 +172,14 @@ export default function WasteTypeDetailPage({ params }: Props) {
 
       {/* ── 현장 갤러리 연계 (galleryCategory 있는 경우만) ── */}
       {detail.galleryCategory && (
-        <section className="mb-8 bg-neutral-900 rounded-2xl p-8 text-white">
+        <section className="mb-8 bg-navy-900 rounded-2xl p-8 text-white">
           <h2 className="text-xl font-bold mb-2">실제 {detail.name} 현장 사진</h2>
           <p className="text-slate-400 text-sm mb-5">
             현대유앤아이가 직접 수거·운반한 {detail.name} 작업 현장 사진을 확인하세요.
           </p>
           <Link
             href={`/gallery?category=${encodeURIComponent(detail.galleryCategory)}`}
-            className="inline-flex items-center gap-2 bg-white text-neutral-900 px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-neutral-100 transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-navy-900 px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-slate-100 transition-colors"
           >
             <Images className="w-4 h-4" />
             {detail.name} 현장갤러리 보기

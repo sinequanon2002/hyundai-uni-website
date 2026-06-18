@@ -55,7 +55,7 @@ export default function ServicePage() {
           <div className="p-6 md:p-8">
             <blockquote className="border-l-4 border-cobalt-600/40 pl-5 py-1 mb-6 text-navy-700 text-sm leading-relaxed">
               사업장에서 발생하는 폐기물 중 주변 환경을 오염시킬 수 있거나 인체에 위해를 줄 수 있는 유해한 물질로서 대통령령으로 정하는 폐기물
-              <span className="block text-xs text-neutral-400 mt-1">— 폐기물관리법 제2조 제4호</span>
+              <span className="block text-xs text-slate-400 mt-1">— 폐기물관리법 제2조 제4호</span>
             </blockquote>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[

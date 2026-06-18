@@ -33,10 +33,10 @@ export function ServicesSection() {
     <section id="services" className="py-20 md:py-28 bg-white">
       <div className="container mx-auto px-4 md:px-8">
         <div {...fadeInHeader} className={`text-center mb-16 md:mb-20 ${fadeInHeader.className}`}>
-          <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
+          <span className="inline-flex items-center bg-cobalt-50 text-cobalt-700 border border-cobalt-100 rounded-pill px-3 py-1 text-xs font-semibold tracking-wide mb-4">
             주요 서비스
-          </h3>
-          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900">
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-navy-900">
             전문성으로 완성하는 지정폐기물 관리
           </h2>
         </div>
@@ -49,15 +49,16 @@ export function ServicesSection() {
               <div
                 key={index}
                 {...fadeCard}
-                className={`group bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-neutral-100 hover:shadow-xl hover:-translate-y-4 transition-all duration-300 ${fadeCard.className}`}
+                className={`group bg-white rounded-2xl p-6 sm:p-8 shadow-ds-md border border-slate-200 hover:shadow-ds-lg hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden ${fadeCard.className}`}
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-primary group-hover:text-white transition-colors duration-300 text-primary">
-                  <service.icon size={36} strokeWidth={1.5} />
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cobalt-600 to-mint-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-cobalt-50 border border-cobalt-100 rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-cobalt-600 group-hover:border-cobalt-600 group-hover:text-white transition-colors duration-300 text-cobalt-600">
+                  <service.icon size={28} strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-neutral-900">
+                <h3 className="text-xl font-bold mb-4 text-navy-900">
                   {service.title}
                 </h3>
-                <p className="text-neutral-600 leading-relaxed">
+                <p className="text-slate-600 leading-relaxed">
                   {service.description}
                 </p>
               </div>

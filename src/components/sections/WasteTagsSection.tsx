@@ -71,7 +71,7 @@ export function WasteTagsSection() {
                   {guide.name}
                 </Link>
                 {i < DETAIL_GUIDES.length - 1 && (
-                  <span className="text-neutral-200">·</span>
+                  <span className="text-slate-200">·</span>
                 )}
               </span>
             ))}

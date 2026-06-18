@@ -28,10 +28,10 @@ export function ComparisonSection() {
           <h3 className="text-xs font-bold text-cobalt-600 tracking-widest uppercase mb-2">
             현대유앤아이를 선택해야 하는 이유
           </h3>
-          <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 leading-tight mb-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-navy-900 leading-tight mb-3">
             지정폐기물은 아무 업체에나<br className="hidden md:inline" /> 맡길 수 없습니다
           </h2>
-          <p className="text-neutral-500 max-w-lg mx-auto text-sm leading-relaxed">
+          <p className="text-slate-500 max-w-lg mx-auto text-sm leading-relaxed">
             허가 여부부터 처리 증빙까지 — 위탁 업체를 선택하기 전 반드시 확인하세요.
           </p>
         </div>

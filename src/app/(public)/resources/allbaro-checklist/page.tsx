@@ -27,7 +27,7 @@ export default function AllbaroChecklistPage() {
         subtitle="지정폐기물 담당자가 꼭 알아야 할 필수 체크리스트를 무료로 받아보세요"
       />
 
-      <section className="py-16 md:py-24 bg-neutral-light">
+      <section className="py-16 md:py-24 bg-slate-50">
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           {/* 상단 안내 배너 */}
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3 mb-10">
@@ -70,11 +70,11 @@ export default function AllbaroChecklistPage() {
                     <CheckCircle size={32} className="text-mint-500" />
                   </div>
                   <h3 className="text-xl font-bold text-navy-900 mb-2">신청 완료!</h3>
-                  <p className="text-neutral-mid text-sm leading-relaxed mb-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
                     담당자가 확인 후 <strong>당일 또는 익영업일</strong>에<br />
                     입력하신 번호로 연락드립니다.
                   </p>
-                  <div className="bg-neutral-light rounded-xl p-4 text-sm text-slate-500 space-y-1.5">
+                  <div className="bg-slate-50 rounded-xl p-4 text-sm text-slate-500 space-y-1.5">
                     <p className="flex items-center gap-2">
                       <Phone size={14} className="text-cobalt-600" />
                       직접 문의: 010-9084-9480
@@ -97,7 +97,7 @@ export default function AllbaroChecklistPage() {
                     </div>
                   </div>
 
-                  <p className="text-sm text-neutral-mid mb-6 leading-relaxed">
+                  <p className="text-sm text-slate-600 mb-6 leading-relaxed">
                     전화번호만 입력하시면 담당자가 직접 연락해 체크리스트와 함께
                     폐기물 처리 상담도 도와드립니다.
                   </p>

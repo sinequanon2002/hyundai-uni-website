@@ -122,7 +122,7 @@ export default function BrochurePage() {
         subtitle="현대유앤아이의 지정폐기물 처리 서비스를 한눈에 확인하세요"
       />
 
-      <section className="py-16 md:py-24 bg-neutral-light">
+      <section className="py-16 md:py-24 bg-slate-50">
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           <div className="grid md:grid-cols-2 gap-10 items-start">
 
@@ -138,7 +138,7 @@ export default function BrochurePage() {
                   <p className="mt-3 text-sm text-white/60">2025년 최신판</p>
                 </div>
                 <div className="p-6">
-                  <p className="text-sm text-neutral-mid mb-4 font-medium">소개서 주요 내용</p>
+                  <p className="text-sm text-slate-600 mb-4 font-medium">소개서 주요 내용</p>
                   <ul className="space-y-2.5">
                     {HIGHLIGHTS.map((item) => (
                       <li key={item} className="flex items-start gap-2.5 text-sm text-slate-500">
@@ -159,11 +159,11 @@ export default function BrochurePage() {
                     <CheckCircle size={32} className="text-mint-500" />
                   </div>
                   <h3 className="text-xl font-bold text-navy-900 mb-2">신청이 완료되었습니다</h3>
-                  <p className="text-neutral-mid text-sm leading-relaxed mb-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
                     담당자 검토 후 <strong>영업일 1일 이내</strong>에<br />
                     입력하신 이메일로 소개서를 보내드립니다.
                   </p>
-                  <div className="bg-neutral-light rounded-xl p-4 text-sm text-slate-500 space-y-1 text-left">
+                  <div className="bg-slate-50 rounded-xl p-4 text-sm text-slate-500 space-y-1 text-left">
                     <p className="flex items-center gap-2"><Phone size={14} className="text-cobalt-600 shrink-0" /> 빠른 문의: 054-973-3973</p>
                     <p className="flex items-center gap-2"><Mail size={14} className="text-cobalt-600 shrink-0" /> hduni3973@naver.com</p>
                   </div>
@@ -176,7 +176,7 @@ export default function BrochurePage() {
                     </div>
                     <h2 className="text-xl font-bold text-navy-900">소개서 무료 신청</h2>
                   </div>
-                  <p className="text-sm text-neutral-mid mb-6">
+                  <p className="text-sm text-slate-600 mb-6">
                     간단한 정보를 입력하시면 이메일로 소개서를 보내드립니다.
                   </p>
 

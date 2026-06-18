@@ -29,19 +29,19 @@ export function WhyUsSection() {
   const fadeInHeader = useFadeIn();
 
   return (
-    <section className="py-20 md:py-28 bg-[#F0FAFA]">
+    <section className="py-20 md:py-28 bg-cobalt-50/40">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex flex-col lg:flex-row gap-10 sm:gap-12 lg:gap-24">
           <div {...fadeInHeader} className={`lg:w-1/3 flex flex-col justify-center ${fadeInHeader.className}`}>
-            <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
+            <span className="inline-flex items-center bg-white text-cobalt-700 border border-cobalt-100 rounded-pill px-3 py-1 text-xs font-semibold tracking-wide mb-4 self-start shadow-ds-xs">
               선택 이유
-            </h3>
-            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 leading-tight mb-6">
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-navy-900 leading-tight mb-6">
               현대유앤아이를
               <br />
               선택하는 이유
             </h2>
-            <div className="w-16 h-1 bg-primary rounded-full" />
+            <div className="w-16 h-1 bg-cobalt-600 rounded-full" />
           </div>
 
           <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -50,13 +50,13 @@ export function WhyUsSection() {
               const fadeCard = useFadeIn(0.1, index * 100);
               return (
                 <div key={index} {...fadeCard} className={`${fadeCard.className}`}>
-                  <div className="text-5xl md:text-6xl font-black text-primary/10 mb-4 font-[family-name:var(--font-geist-mono)]">
+                  <div className="text-5xl md:text-6xl font-black text-cobalt-600/15 mb-4 font-mono">
                     {reason.num}
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-neutral-900">
+                  <h3 className="text-xl font-bold mb-3 text-navy-900">
                     {reason.title}
                   </h3>
-                  <p className="text-neutral-600 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed">
                     {reason.description}
                   </p>
                 </div>

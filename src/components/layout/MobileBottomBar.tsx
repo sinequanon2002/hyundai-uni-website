@@ -25,7 +25,7 @@ export function MobileBottomBar() {
         aria-label="빠른 문의"
         className={cn(
           "fixed bottom-0 inset-x-0 z-40 lg:hidden",
-          "grid h-16 bg-white border-t border-neutral-200",
+          "grid h-16 bg-white border-t border-slate-200",
           "shadow-[0_-2px_12px_rgba(0,0,0,0.08)]",
           "pb-[env(safe-area-inset-bottom)]",
           hasKakao ? "grid-cols-3" : "grid-cols-2"
