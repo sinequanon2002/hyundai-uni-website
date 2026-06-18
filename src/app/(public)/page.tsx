@@ -10,7 +10,7 @@ import { StructuredData } from "@/components/seo/StructuredData";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col font-pretendard pt-16">
+    <main className="flex flex-col font-pretendard">
       <StructuredData />
       {/* 1. 핵심 메시지 + 즉시 CTA */}
       <HeroSection />

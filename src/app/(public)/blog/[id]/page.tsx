@@ -60,7 +60,7 @@ export default async function BlogDetailPage({ params }: Props) {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

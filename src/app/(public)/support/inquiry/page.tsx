@@ -11,6 +11,7 @@ import { SubNav, SUPPORT_SUBNAV_ITEMS } from "@/components/ui/SubNav";
 import { COMPANY } from "@/lib/constants";
 import {
   inquiryFormSchema,
+  type InquiryFormInput,
   type InquiryFormValues,
   WASTE_TYPES,
 } from "@/lib/schemas/inquiry";
@@ -102,7 +103,7 @@ export default function InquiryPage() {
     watch,
     reset,
     formState: { errors },
-  } = useForm<InquiryFormValues>({
+  } = useForm<InquiryFormInput, unknown, InquiryFormValues>({
     resolver: zodResolver(inquiryFormSchema),
     defaultValues: {
       wasteTypes: [],
@@ -228,7 +229,7 @@ export default function InquiryPage() {
         subtitle="지정폐기물 수거·운반 견적을 문의하세요"
         compact
       />
-      <SubNav items={SUPPORT_SUBNAV_ITEMS} current="/support/inquiry" />
+      <SubNav items={SUPPORT_SUBNAV_ITEMS} />
 
       <section className="py-8 md:py-10 bg-[#F0FAFA]">
         <div className="max-w-6xl mx-auto px-4">
@@ -917,7 +918,7 @@ function WasteTypeCombobox({
                   className="w-full px-4 py-2.5 text-sm text-left flex items-center gap-2 bg-[#0C5F6B]/5 text-[#0C5F6B] hover:bg-[#0C5F6B]/10 border-b border-gray-100"
                 >
                   <span className="font-semibold">직접 입력:</span>
-                  <span>"{input.trim()}" 추가</span>
+                  <span>&ldquo;{input.trim()}&rdquo; 추가</span>
                 </button>
               </li>
             )}

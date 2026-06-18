@@ -39,7 +39,7 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">소개서 신청 관리</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">소개서 신청 관리</h1>
           <p className="text-sm text-gray-500 mt-0.5">전체 {total}건</p>
         </div>
       </div>
@@ -65,64 +65,107 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
         })}
       </div>
 
-      {/* 테이블 */}
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-        {requests.length === 0 ? (
-          <div className="py-16 text-center text-gray-400 text-sm">신청 내역이 없습니다.</div>
-        ) : (
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-gray-50 border-b border-gray-100">
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 w-32">신청일</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">이름</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600">회사명</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden md:table-cell">이메일</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">연락처</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-600 w-20 hidden sm:table-cell">마케팅</th>
-                <th className="text-left px-4 py-3 font-semibold text-gray-600 w-24">상태</th>
-                <th className="text-center px-4 py-3 font-semibold text-gray-600 w-28">작업</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50">
-              {requests.map((req) => {
-                const badge = STATUS_BADGE[req.status];
-                return (
-                  <tr key={req.id} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="px-4 py-3 text-gray-500">
+      {/* 목록 */}
+      {requests.length === 0 ? (
+        <div className="bg-white rounded-xl shadow-sm py-16 text-center text-gray-400 text-sm">신청 내역이 없습니다.</div>
+      ) : (
+        <>
+          {/* 모바일: 카드 리스트 */}
+          <ul className="md:hidden space-y-3">
+            {requests.map((req) => {
+              const badge = STATUS_BADGE[req.status];
+              return (
+                <li key={req.id} className="bg-white rounded-xl shadow-sm p-4">
+                  <div className="flex items-start justify-between gap-3 mb-2.5">
+                    <div className="min-w-0">
+                      <p className="font-bold text-gray-900 text-[15px] leading-tight">{req.name}</p>
+                      <p className="text-[13px] text-gray-500 mt-0.5 truncate">{req.company_name}</p>
+                    </div>
+                    <span className={cn("text-xs font-semibold px-2.5 py-1 rounded-full shrink-0", badge.cls)}>
+                      {badge.label}
+                    </span>
+                  </div>
+                  <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[13px]">
+                    <dt className="text-gray-400">이메일</dt>
+                    <dd className="text-gray-700 break-all">{req.email}</dd>
+                    <dt className="text-gray-400">연락처</dt>
+                    <dd className="text-gray-700 tabular-nums">{req.phone}</dd>
+                    <dt className="text-gray-400">마케팅</dt>
+                    <dd className="text-gray-700">{req.marketing_consent ? "동의" : "미동의"}</dd>
+                  </dl>
+                  <div className="mt-3 pt-3 border-t border-gray-50 flex items-center justify-between gap-3">
+                    <span className="text-xs text-gray-400">
                       {new Date(req.created_at).toLocaleDateString("ko-KR")}
-                    </td>
-                    <td className="px-4 py-3 font-medium text-gray-900">{req.name}</td>
-                    <td className="px-4 py-3 text-gray-600">{req.company_name}</td>
-                    <td className="px-4 py-3 text-gray-600 hidden md:table-cell">{req.email}</td>
-                    <td className="px-4 py-3 text-gray-600 hidden lg:table-cell">{req.phone}</td>
-                    <td className="px-4 py-3 text-center hidden sm:table-cell">
-                      <span className={cn("text-xs px-2 py-0.5 rounded-full", req.marketing_consent ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-400")}>
-                        {req.marketing_consent ? "동의" : "미동의"}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className={cn("text-xs font-semibold px-2.5 py-1 rounded-full", badge.cls)}>
-                        {badge.label}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-center">
-                      <BrochureApproveButton
-                        id={req.id}
-                        status={req.status}
-                        approvedAt={req.approved_at}
-                      />
-                    </td>
+                    </span>
+                    <BrochureApproveButton
+                      id={req.id}
+                      status={req.status}
+                      approvedAt={req.approved_at}
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* 데스크톱: 테이블 */}
+          <div className="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 border-b border-gray-100">
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 w-32">신청일</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600">이름</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600">회사명</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden md:table-cell">이메일</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">연락처</th>
+                    <th className="text-center px-4 py-3 font-semibold text-gray-600 w-20">마케팅</th>
+                    <th className="text-left px-4 py-3 font-semibold text-gray-600 w-24">상태</th>
+                    <th className="text-center px-4 py-3 font-semibold text-gray-600 w-28">작업</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
-      </div>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {requests.map((req) => {
+                    const badge = STATUS_BADGE[req.status];
+                    return (
+                      <tr key={req.id} className="hover:bg-gray-50/50 transition-colors">
+                        <td className="px-4 py-3 text-gray-500">
+                          {new Date(req.created_at).toLocaleDateString("ko-KR")}
+                        </td>
+                        <td className="px-4 py-3 font-medium text-gray-900">{req.name}</td>
+                        <td className="px-4 py-3 text-gray-600">{req.company_name}</td>
+                        <td className="px-4 py-3 text-gray-600 hidden md:table-cell">{req.email}</td>
+                        <td className="px-4 py-3 text-gray-600 hidden lg:table-cell">{req.phone}</td>
+                        <td className="px-4 py-3 text-center">
+                          <span className={cn("text-xs px-2 py-0.5 rounded-full", req.marketing_consent ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-400")}>
+                            {req.marketing_consent ? "동의" : "미동의"}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className={cn("text-xs font-semibold px-2.5 py-1 rounded-full", badge.cls)}>
+                            {badge.label}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          <BrochureApproveButton
+                            id={req.id}
+                            status={req.status}
+                            approvedAt={req.approved_at}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* 페이지네이션 */}
       {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-1.5 mt-6">
+        <div className="flex flex-wrap justify-center items-center gap-1.5 mt-6">
           <Link
             href={buildHref({ page: String(page - 1) })}
             className={cn("p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-600", page === 1 && "opacity-30 pointer-events-none")}

@@ -16,7 +16,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="min-h-screen flex flex-col font-pretendard">
+    <main className="min-h-dvh flex flex-col font-pretendard">
       <div className="flex-1 flex flex-col items-center justify-center p-8 text-center mt-16">
         <h1 className="text-6xl font-black text-red-500 mb-6">500</h1>
         <h2 className="text-2xl font-bold mb-4">일시적 오류가 발생했습니다.</h2>

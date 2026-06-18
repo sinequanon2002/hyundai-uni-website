@@ -33,12 +33,12 @@ export function HeroSection() {
           지정폐기물 수집·운반 전문기업
         </div>
 
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6">
+        <h1 className="text-[clamp(2rem,7vw,4.5rem)] font-bold leading-tight mb-6">
           환경을 지키는 책임,
           <br />
           신뢰를 운반합니다.
         </h1>
-        <p className="max-w-2xl text-lg md:text-xl text-neutral-100/90 mb-7 leading-relaxed font-light">
+        <p className="max-w-2xl text-base sm:text-lg md:text-xl text-neutral-100/90 mb-7 leading-relaxed font-light">
           지정폐기물 수집·운반 전문 기업으로서, 엄격한 법규 준수와 축적된 노하우로
           고객사의 환경 책임을 완벽하게 대행합니다.
         </p>
@@ -82,7 +82,7 @@ export function HeroSection() {
       </div>
 
       {/* 스크롤 안내 */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-white flex flex-col items-center gap-1.5 cursor-pointer select-none"
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 text-white flex flex-col items-center gap-1.5 cursor-pointer select-none"
         onClick={() => window.scrollBy({ top: window.innerHeight * 0.85, behavior: 'smooth' })}
       >
         <span className="text-xs tracking-widest opacity-70 font-medium">

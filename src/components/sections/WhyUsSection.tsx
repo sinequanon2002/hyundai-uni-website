@@ -31,7 +31,7 @@ export function WhyUsSection() {
   return (
     <section className="py-20 md:py-28 bg-[#F0FAFA]">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row gap-10 sm:gap-12 lg:gap-24">
           <div {...fadeInHeader} className={`lg:w-1/3 flex flex-col justify-center ${fadeInHeader.className}`}>
             <h3 className="text-sm font-bold text-accent tracking-widest uppercase mb-3">
               선택 이유

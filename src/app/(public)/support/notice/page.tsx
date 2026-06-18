@@ -50,7 +50,7 @@ export default async function NoticePage({ searchParams }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh bg-white">
       <PageBanner title="고객센터" subtitle="Customer Support" />
       <SubNav items={SUPPORT_SUBNAV_ITEMS} />
 
