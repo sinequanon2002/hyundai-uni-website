@@ -153,11 +153,11 @@ export default async function NoticePage({ searchParams }: Props) {
                         {notice.title}
                       </Link>
                       <span className="block md:hidden text-xs text-gray-400 mt-1">
-                        {new Date(notice.created_at).toLocaleDateString("ko-KR")} · 조회 {notice.views}
+                        {new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })} · 조회 {notice.views}
                       </span>
                     </td>
                     <td className="py-3.5 px-3 text-center text-gray-500 hidden md:table-cell">
-                      {new Date(notice.created_at).toLocaleDateString("ko-KR")}
+                      {new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </td>
                     <td className="py-3.5 px-3 text-center text-gray-500 hidden md:table-cell">
                       {notice.views.toLocaleString()}

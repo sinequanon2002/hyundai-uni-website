@@ -99,7 +99,7 @@ export default async function AdminCustomersPage({ searchParams }: PageProps) {
                       {c.total_revenue ? fmt(c.total_revenue) : "-"}
                     </td>
                     <td className="px-4 py-3 text-gray-400 text-xs">
-                      {new Date(c.created_at).toLocaleDateString("ko-KR")}
+                      {new Date(c.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </td>
                   </tr>
                 ))}

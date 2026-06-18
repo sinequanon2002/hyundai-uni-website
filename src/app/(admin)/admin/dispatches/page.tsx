@@ -125,7 +125,7 @@ export default async function AdminDispatchesPage({ searchParams }: PageProps) {
                       </span>
                     </td>
                     <td className="px-4 py-3 text-gray-600 text-xs">
-                      {d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString("ko-KR") : "-"}
+                      {d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "-"}
                     </td>
                     <td className="px-4 py-3 text-gray-600">{d.assigned_name ?? "-"}</td>
                     <td className="px-4 py-3 text-gray-500 text-xs truncate max-w-[140px]">
@@ -151,7 +151,7 @@ export default async function AdminDispatchesPage({ searchParams }: PageProps) {
                   </div>
                   <p className="font-semibold text-gray-900 text-sm truncate">{d.customer_name ?? "사업장 미지정"}</p>
                   <p className="text-xs text-gray-500 mt-0.5">
-                    {d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString("ko-KR") : "날짜 미정"}
+                    {d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "날짜 미정"}
                     {d.assigned_name ? ` · ${d.assigned_name}` : ""}
                   </p>
                 </div>

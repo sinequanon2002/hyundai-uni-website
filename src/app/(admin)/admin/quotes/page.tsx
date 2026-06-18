@@ -128,10 +128,10 @@ export default async function AdminQuotesPage({ searchParams }: PageProps) {
                       </span>
                     </td>
                     <td className="px-4 py-3 text-gray-500 text-xs">
-                      {q.valid_until ? new Date(q.valid_until).toLocaleDateString("ko-KR") : "-"}
+                      {q.valid_until ? new Date(q.valid_until).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "-"}
                     </td>
                     <td className="px-4 py-3 text-gray-400 text-xs">
-                      {new Date(q.created_at).toLocaleDateString("ko-KR")}
+                      {new Date(q.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </td>
                   </tr>
                 ))}
@@ -155,7 +155,7 @@ export default async function AdminQuotesPage({ searchParams }: PageProps) {
                 </div>
                 <div className="text-right ml-3 shrink-0">
                   <p className="font-bold text-sm text-gray-900">{fmt(q.total)}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{new Date(q.created_at).toLocaleDateString("ko-KR")}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{new Date(q.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</p>
                 </div>
               </Link>
             ))}

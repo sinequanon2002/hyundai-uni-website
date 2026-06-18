@@ -111,7 +111,7 @@ export default async function BlogDetailPage({ params }: Props) {
           <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-400">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
-              {new Date(post.created_at).toLocaleDateString("ko-KR")}
+              {new Date(post.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
             </span>
             <span className="flex items-center gap-1.5">
               <Eye className="w-4 h-4" />

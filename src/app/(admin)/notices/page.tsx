@@ -132,7 +132,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
                   <td className="px-4 py-3 text-neutral-500 hidden sm:table-cell">{notice.category}</td>
                   <td className="px-4 py-3 text-neutral-500 hidden md:table-cell">{notice.author_name ?? "-"}</td>
                   <td className="px-4 py-3 text-neutral-500 hidden lg:table-cell">
-                    {new Date(notice.created_at).toLocaleDateString("ko-KR")}
+                    {new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                   </td>
                   <td className="px-4 py-3 text-neutral-500 hidden md:table-cell">{notice.views}</td>
                   <td className="px-4 py-3">

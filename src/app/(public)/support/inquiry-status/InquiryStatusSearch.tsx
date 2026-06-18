@@ -114,9 +114,9 @@ export default function InquiryStatusSearch() {
                           {inq.waste_types.length > 2 && ` 외 ${inq.waste_types.length - 2}건`}
                         </p>
                         <p className="text-xs text-neutral-mid mt-0.5">
-                          접수일: {new Date(inq.created_at).toLocaleDateString("ko-KR")}
+                          접수일: {new Date(inq.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                           {inq.collection_date && (
-                            <> · 희망수거일: {new Date(inq.collection_date).toLocaleDateString("ko-KR")}</>
+                            <> · 희망수거일: {new Date(inq.collection_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</>
                           )}
                         </p>
                       </div>

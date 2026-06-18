@@ -76,7 +76,7 @@ export default async function InquiryStatusPage() {
                         {inq.waste_types.length > 2 && ` 외 ${inq.waste_types.length - 2}건`}
                       </p>
                       <p className="text-xs text-neutral-mid mt-0.5">
-                        접수일: {new Date(inq.created_at).toLocaleDateString("ko-KR")}
+                        접수일: {new Date(inq.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                       </p>
                     </div>
                     <span className={`shrink-0 inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium border ${STATUS_COLOR[inq.status] ?? ""}`}>

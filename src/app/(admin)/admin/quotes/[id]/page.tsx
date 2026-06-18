@@ -207,13 +207,13 @@ export default async function QuoteDetailPage({ params }: PageProps) {
               {q.valid_until && (
                 <div className="flex justify-between">
                   <span className="text-gray-500">유효기간</span>
-                  <span className="text-gray-800">{new Date(q.valid_until).toLocaleDateString("ko-KR")}</span>
+                  <span className="text-gray-800">{new Date(q.valid_until).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</span>
                 </div>
               )}
               {q.collection_date && (
                 <div className="flex justify-between">
                   <span className="text-gray-500">수거예정일</span>
-                  <span className="text-gray-800">{new Date(q.collection_date).toLocaleDateString("ko-KR")}</span>
+                  <span className="text-gray-800">{new Date(q.collection_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</span>
                 </div>
               )}
             </div>
@@ -221,8 +221,8 @@ export default async function QuoteDetailPage({ params }: PageProps) {
 
           {/* 타임스탬프 */}
           <div className="bg-gray-50 rounded-xl p-4 text-xs text-gray-400 space-y-1">
-            <p>작성일: {new Date(q.created_at).toLocaleString("ko-KR")}</p>
-            {q.updated_at && <p>수정일: {new Date(q.updated_at).toLocaleString("ko-KR")}</p>}
+            <p>작성일: {new Date(q.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</p>
+            {q.updated_at && <p>수정일: {new Date(q.updated_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</p>}
           </div>
         </div>
       </div>

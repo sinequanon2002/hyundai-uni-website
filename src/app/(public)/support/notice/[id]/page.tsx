@@ -109,7 +109,7 @@ export default async function NoticeDetailPage({ params }: Props) {
           <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
-              {new Date(notice.created_at).toLocaleDateString("ko-KR")}
+              {new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
             </span>
             <span className="flex items-center gap-1.5">
               <Eye className="w-4 h-4" />

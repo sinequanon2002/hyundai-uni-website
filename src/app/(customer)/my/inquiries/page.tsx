@@ -89,7 +89,7 @@ export default async function MyInquiriesPage({ searchParams }: PageProps) {
                         {STATUS_LABEL[inq.status] ?? inq.status}
                       </span>
                       <span className="text-xs text-neutral-mid">
-                        {new Date(inq.created_at).toLocaleDateString("ko-KR")}
+                        {new Date(inq.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                       </span>
                     </div>
                     <p className="text-sm font-medium text-neutral-dark mt-1.5 truncate">

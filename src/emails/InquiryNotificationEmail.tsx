@@ -61,7 +61,7 @@ export function InquiryNotificationEmail({
           <Section style={headerStyle}>
             <Heading style={headerTitleStyle}>새로운 견적 문의 접수</Heading>
             <Text style={headerSubStyle}>
-              {new Date(submittedAt).toLocaleString("ko-KR")}
+              {new Date(submittedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}
             </Text>
           </Section>
 

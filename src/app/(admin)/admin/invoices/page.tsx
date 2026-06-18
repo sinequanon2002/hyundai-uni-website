@@ -103,10 +103,10 @@ export default async function AdminInvoicesPage({ searchParams }: PageProps) {
                     </td>
                     <td className="px-4 py-3 text-right font-semibold text-gray-900">{fmt(inv.total)}</td>
                     <td className="px-4 py-3 text-gray-500 text-xs">
-                      {inv.issued_at ? new Date(inv.issued_at).toLocaleDateString("ko-KR") : "-"}
+                      {inv.issued_at ? new Date(inv.issued_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "-"}
                     </td>
                     <td className="px-4 py-3 text-gray-500 text-xs">
-                      {inv.due_date ? new Date(inv.due_date).toLocaleDateString("ko-KR") : "-"}
+                      {inv.due_date ? new Date(inv.due_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "-"}
                     </td>
                     <td className="px-4 py-3">
                       <InvoiceStatusButton invoiceId={inv.id} currentStatus={inv.status} />

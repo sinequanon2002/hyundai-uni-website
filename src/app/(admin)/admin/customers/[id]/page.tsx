@@ -141,7 +141,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
           )}
 
           <div className="bg-gray-50 rounded-xl p-4 text-xs text-gray-400 space-y-1">
-            <p>등록일: {new Date(c.created_at).toLocaleString("ko-KR")}</p>
+            <p>등록일: {new Date(c.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</p>
           </div>
         </div>
 
@@ -173,7 +173,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
                         {d.waste_items.map((w) => w.waste_type).join(", ") || "-"}
                       </p>
                       <p className="text-xs text-gray-400 mt-0.5">
-                        {d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString("ko-KR") : "날짜 미정"}
+                        {d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "날짜 미정"}
                         {d.assigned_name ? ` · ${d.assigned_name}` : ""}
                       </p>
                     </div>

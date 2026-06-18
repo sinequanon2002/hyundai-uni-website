@@ -94,7 +94,7 @@ export default async function MyPage() {
                       {inq.waste_types.length > 2 && ` 외 ${inq.waste_types.length - 2}건`}
                     </p>
                     <p className="text-xs text-neutral-mid mt-0.5">
-                      {new Date(inq.created_at).toLocaleDateString("ko-KR")}
+                      {new Date(inq.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </p>
                   </div>
                   <span className={`ml-3 shrink-0 inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium border ${STATUS_COLOR[inq.status] ?? ""}`}>

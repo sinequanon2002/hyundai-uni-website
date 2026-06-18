@@ -19,7 +19,7 @@ export function BrochureApproveButton({ id, status, approvedAt }: Props) {
   if (localStatus === "approved") {
     return (
       <span className="text-xs text-gray-400">
-        {approvedAt ? new Date(approvedAt).toLocaleDateString("ko-KR") : "발송됨"}
+        {approvedAt ? new Date(approvedAt).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "발송됨"}
       </span>
     );
   }

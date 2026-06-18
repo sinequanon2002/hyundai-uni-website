@@ -198,7 +198,7 @@ interface QuotePdfProps {
 }
 
 export function QuotePdf({ quote, issuedAt }: QuotePdfProps) {
-  const issued = issuedAt ?? new Date().toLocaleDateString("ko-KR");
+  const issued = issuedAt ?? new Date().toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" });
 
   return (
     <Document title={`견적서 ${quote.quote_number}`} author={COMPANY.name}>
@@ -250,13 +250,13 @@ export function QuotePdf({ quote, issuedAt }: QuotePdfProps) {
             {quote.valid_until && (
               <View style={S.infoField}>
                 <Text style={S.infoLabel}>유효기간</Text>
-                <Text style={S.infoValue}>{new Date(quote.valid_until).toLocaleDateString("ko-KR")}</Text>
+                <Text style={S.infoValue}>{new Date(quote.valid_until).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</Text>
               </View>
             )}
             {quote.collection_date && (
               <View style={S.infoField}>
                 <Text style={S.infoLabel}>수거예정일</Text>
-                <Text style={S.infoValue}>{new Date(quote.collection_date).toLocaleDateString("ko-KR")}</Text>
+                <Text style={S.infoValue}>{new Date(quote.collection_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</Text>
               </View>
             )}
             <View style={S.infoField}>

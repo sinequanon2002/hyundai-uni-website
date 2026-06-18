@@ -89,7 +89,7 @@ export default async function AdminBrochuresPage({ searchParams }: PageProps) {
                 return (
                   <tr key={req.id} className="hover:bg-gray-50/50 transition-colors">
                     <td className="px-4 py-3 text-gray-500">
-                      {new Date(req.created_at).toLocaleDateString("ko-KR")}
+                      {new Date(req.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </td>
                     <td className="px-4 py-3 font-medium text-gray-900">{req.name}</td>
                     <td className="px-4 py-3 text-gray-600">{req.company_name}</td>

@@ -245,7 +245,7 @@ export async function generateQuotePdf(
 
   try {
     const q = quote as unknown as Quotation;
-    const issuedAt = new Date().toLocaleDateString("ko-KR");
+    const issuedAt = new Date().toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" });
 
     // PDF 렌더링
     const pdfBuffer = await renderToBuffer(
@@ -306,7 +306,7 @@ export async function sendQuotation(
 
   try {
     // 2. PDF 생성
-    const issuedAt = new Date().toLocaleDateString("ko-KR");
+    const issuedAt = new Date().toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" });
     const pdfBuffer = await renderToBuffer(
       React.createElement(QuotePdf, { quote, issuedAt }) as React.ReactElement<DocumentProps>
     );

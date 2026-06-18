@@ -76,11 +76,11 @@ export default async function DispatchDetailPage({ params }: PageProps) {
                 </InfoRow>
               )}
               <InfoRow icon={Calendar} label="수거 예정일">
-                <span>{d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString("ko-KR") : "-"}</span>
+                <span>{d.scheduled_date ? new Date(d.scheduled_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }) : "-"}</span>
               </InfoRow>
               {d.actual_date && (
                 <InfoRow icon={Calendar} label="실제 수거일">
-                  <span>{new Date(d.actual_date).toLocaleDateString("ko-KR")}</span>
+                  <span>{new Date(d.actual_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</span>
                 </InfoRow>
               )}
               {d.collection_address && (
@@ -119,7 +119,7 @@ export default async function DispatchDetailPage({ params }: PageProps) {
           )}
 
           <div className="bg-gray-50 rounded-xl p-4 text-xs text-gray-400 space-y-1">
-            <p>등록일: {new Date(d.created_at).toLocaleString("ko-KR")}</p>
+            <p>등록일: {new Date(d.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}</p>
           </div>
         </div>
 

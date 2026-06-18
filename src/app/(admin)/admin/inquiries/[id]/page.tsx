@@ -266,12 +266,12 @@ export default async function AdminInquiryDetailPage({ params }: PageProps) {
           <div className="bg-gray-50 rounded-xl p-4 text-xs text-gray-400 space-y-1">
             <p>
               접수일:{" "}
-              {new Date(inq.created_at).toLocaleString("ko-KR")}
+              {new Date(inq.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}
             </p>
             {inq.updated_at && (
               <p>
                 최종 수정:{" "}
-                {new Date(inq.updated_at).toLocaleString("ko-KR")}
+                {new Date(inq.updated_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}
               </p>
             )}
           </div>

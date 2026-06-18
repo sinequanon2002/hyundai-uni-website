@@ -94,7 +94,7 @@ export function GalleryGrid({ items }: Props) {
                 </span>
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3 h-3 shrink-0" />
-                  {new Date(item.work_date).toLocaleDateString("ko-KR")}
+                  {new Date(item.work_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                 </span>
               </div>
             </div>
@@ -161,7 +161,7 @@ export function GalleryGrid({ items }: Props) {
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 shrink-0 text-white/40" />
-                  <span>작업일: {new Date(current.work_date).toLocaleDateString("ko-KR")}</span>
+                  <span>작업일: {new Date(current.work_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</span>
                 </div>
                 {current.author_name && (
                   <div className="flex items-center gap-2">

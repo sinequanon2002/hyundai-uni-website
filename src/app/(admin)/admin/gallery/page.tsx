@@ -95,7 +95,7 @@ export default async function GalleryAdminPage({ searchParams }: Props) {
                   </span>
                 </div>
                 <p className="text-xs text-neutral-400 mb-2">
-                  {new Date(item.work_date).toLocaleDateString("ko-KR")}
+                  {new Date(item.work_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                 </p>
                 {canWrite && (
                   <div className="flex items-center gap-2 border-t border-neutral-100 pt-2">

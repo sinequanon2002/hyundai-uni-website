@@ -105,7 +105,7 @@ export default async function MyInquiryDetailPage({ params }: PageProps) {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-5 space-y-4">
         <h2 className="text-sm font-semibold text-neutral-dark">문의 정보</h2>
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-          <InfoRow label="접수 일시" value={new Date(inq.created_at).toLocaleString("ko-KR")} />
+          <InfoRow label="접수 일시" value={new Date(inq.created_at).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })} />
           <InfoRow label="담당자명" value={inq.contact_name} />
           <InfoRow label="연락처" value={inq.phone} />
           <InfoRow label="알림 방법" value={NOTIFICATION_LABEL[inq.notification_method] ?? inq.notification_method} />
@@ -135,7 +135,7 @@ export default async function MyInquiryDetailPage({ params }: PageProps) {
         )}
         {inq.collection_date && (
           <p className="text-sm text-neutral-mid mt-1">
-            희망 수거일: {new Date(inq.collection_date).toLocaleDateString("ko-KR")}
+            희망 수거일: {new Date(inq.collection_date).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
           </p>
         )}
       </div>

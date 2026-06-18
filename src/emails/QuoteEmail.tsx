@@ -22,7 +22,7 @@ export function QuoteEmail({
 }: QuoteEmailProps) {
   const totalFormatted = total.toLocaleString("ko-KR");
   const validStr = validUntil
-    ? new Date(validUntil).toLocaleDateString("ko-KR")
+    ? new Date(validUntil).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })
     : null;
 
   return (

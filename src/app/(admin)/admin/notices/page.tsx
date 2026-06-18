@@ -118,7 +118,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-xs text-neutral-500">
                   <span className="bg-neutral-100 px-1.5 py-0.5 rounded">{notice.category}</span>
                   <span>{notice.author_name ?? "-"}</span>
-                  <span>{new Date(notice.created_at).toLocaleDateString("ko-KR")}</span>
+                  <span>{new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}</span>
                   <span>조회 {notice.views}</span>
                 </div>
                 {canWrite && (
@@ -166,7 +166,7 @@ export default async function NoticesAdminPage({ searchParams }: Props) {
                       <td className="px-4 py-3 text-neutral-500">{notice.category}</td>
                       <td className="px-4 py-3 text-neutral-500">{notice.author_name ?? "-"}</td>
                       <td className="px-4 py-3 text-neutral-500 hidden lg:table-cell">
-                        {new Date(notice.created_at).toLocaleDateString("ko-KR")}
+                        {new Date(notice.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                       </td>
                       <td className="px-4 py-3 text-neutral-500">{notice.views}</td>
                       <td className="px-4 py-3">

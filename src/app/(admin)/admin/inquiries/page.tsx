@@ -120,7 +120,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
                   </dl>
                   <div className="mt-2.5 pt-2.5 border-t border-gray-50 flex items-center justify-between">
                     <span className="text-xs text-gray-400">
-                      {new Date(inq.created_at).toLocaleDateString("ko-KR")}
+                      {new Date(inq.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                     </span>
                     <span className="text-xs font-medium text-[#0E9E7E]">상세 보기 →</span>
                   </div>
@@ -152,7 +152,7 @@ export default async function AdminInquiriesPage({ searchParams }: PageProps) {
                   {inquiries.map((inq) => (
                     <tr key={inq.id} className="hover:bg-gray-50/50 transition-colors">
                       <td className="px-4 py-3 text-gray-500">
-                        {new Date(inq.created_at).toLocaleDateString("ko-KR")}
+                        {new Date(inq.created_at).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" })}
                       </td>
                       <td className="px-4 py-3 font-medium text-gray-900">
                         {inq.company_name}
