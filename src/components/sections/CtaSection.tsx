@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { useFadeIn } from "@/hooks/useFadeIn";
+import { COMPANY } from "@/lib/constants";
 
 export function CtaSection() {
   const fadeIn = useFadeIn();
@@ -26,22 +27,22 @@ export function CtaSection() {
             </p>
           </div>
 
-          {/* 이중 CTA */}
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 shrink-0">
+          {/* CTA 버튼 그룹 */}
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <Link
               href="/support/inquiry"
-              className="group inline-flex items-center justify-center gap-2.5 bg-white text-cobalt-700 px-7 py-4 rounded-md font-bold text-base shadow-ds-md hover:shadow-ds-lg hover:-translate-y-px transition-all duration-200"
+              className="group inline-flex items-center justify-center gap-2.5 bg-white text-cobalt-700 px-8 py-4 rounded-md font-bold text-base shadow-ds-md hover:shadow-ds-lg hover:-translate-y-px transition-all duration-200"
             >
               빠른 견적 문의
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link
-              href="/resources/brochure"
-              className="inline-flex items-center justify-center gap-2.5 bg-white/15 border border-white/50 text-white px-7 py-4 rounded-md font-semibold text-base hover:bg-white/25 transition-colors"
+            <a
+              href={`tel:${COMPANY.tel}`}
+              className="inline-flex items-center justify-center gap-2.5 bg-white/15 border border-white/50 text-white px-8 py-4 rounded-md font-semibold text-base hover:bg-white/25 transition-colors"
             >
-              <FileText size={18} />
-              서비스 소개서 보기
-            </Link>
+              <Phone size={18} />
+              전화 상담
+            </a>
           </div>
         </div>
       </div>

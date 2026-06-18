@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, FileText } from "lucide-react";
+import { Phone, FileText } from "lucide-react";
 import { useFadeIn } from "@/hooks/useFadeIn";
+import { COMPANY } from "@/lib/constants";
 
 export function HeroSection() {
   const fadeIn = useFadeIn();
@@ -66,13 +67,13 @@ export function HeroSection() {
                 <FileText size={18} />
                 견적 요청하기
               </Link>
-              <Link
-                href="/resources/brochure"
+              <a
+                href={`tel:${COMPANY.tel}`}
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-white border border-slate-200 text-navy-900 font-semibold rounded-[9px] hover:border-cobalt-200 hover:text-cobalt-600 transition-colors shadow-ds-xs"
               >
-                <ArrowRight size={17} />
-                서비스 소개서 보기
-              </Link>
+                <Phone size={17} />
+                전화 문의 바로하기
+              </a>
             </div>
           </div>
 

@@ -4,7 +4,6 @@ import { PainPointSection } from "@/components/sections/PainPointSection";
 import { ComparisonSection } from "@/components/sections/ComparisonSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { WasteTagsSection } from "@/components/sections/WasteTagsSection";
-import { BlogPreviewSection } from "@/components/sections/BlogPreviewSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { StructuredData } from "@/components/seo/StructuredData";
 
@@ -24,9 +23,7 @@ export default function Home() {
       <ProcessSection />
       {/* 6. 서비스 범위 — 처리 가능 품목 */}
       <WasteTagsSection />
-      {/* 7. 신뢰 콘텐츠 — 정보 블로그 */}
-      <BlogPreviewSection />
-      {/* 8. 최종 전환 CTA */}
+      {/* 7. 최종 전환 CTA */}
       <CtaSection />
     </main>
   );

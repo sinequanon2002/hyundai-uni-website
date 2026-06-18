@@ -21,7 +21,6 @@ export const WASTE_SUBNAV_ITEMS = [
 export const SUPPORT_SUBNAV_ITEMS = [
   { label: "공지사항", href: "/support/notice" },
   { label: "자주 묻는 질문", href: "/support/faq" },
-  { label: "자료실 바로가기", href: "/resources/brochure" },
   { label: "견적문의", href: "/support/inquiry" },
   { label: "문의현황 조회", href: "/support/inquiry-status" },
 ];

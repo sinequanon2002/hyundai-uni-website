@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ChevronDown, FileText, Download, ArrowRight, Phone } from 'lucide-react';
+import { Menu, X, ChevronDown, FileText, ArrowRight, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { COMPANY } from '@/lib/constants';
 import { trackPhoneClick } from '@/lib/analytics';
@@ -42,7 +42,6 @@ const NAV_ITEMS: NavItem[] = [
       { label: '서비스 안내',    href: '/waste/types' },
       { label: '보관·법적 의무', href: '/waste/storage' },
       { label: '비용 안내',      href: '/waste/pricing' },
-      { label: '서비스 소개서',  href: '/resources/brochure', highlight: true },
       { label: '회사 소개',      href: '/company' },
     ],
   },
@@ -205,17 +204,13 @@ export function Header() {
                               ? { target: '_blank', rel: 'noopener noreferrer' }
                               : {})}
                             className={cn(
-                              "flex items-center justify-between px-5 py-2.5 text-sm transition-colors",
-                              child.highlight
-                                ? "hover:bg-mint-50 hover:text-mint-600 text-mint-600 font-medium"
-                                : "hover:bg-slate-50 hover:text-navy-900",
+                              "flex items-center justify-between px-5 py-2.5 text-sm transition-colors hover:bg-slate-50 hover:text-navy-900",
                               pathname === child.href && !child.external
                                 ? "bg-cobalt-50 text-cobalt-700 font-medium"
-                                : !child.highlight && "text-slate-600"
+                                : "text-slate-600"
                             )}
                           >
                             <span className="flex items-center gap-2">
-                              {child.highlight && <Download size={13} className="shrink-0" />}
                               {child.label}
                             </span>
                             {child.badge && (
@@ -346,15 +341,12 @@ export function Header() {
                             : {})}
                           className={cn(
                             "flex items-center justify-between py-2.5 px-3 rounded-lg text-sm transition-colors",
-                            child.highlight
-                              ? "text-mint-400 font-medium hover:bg-mint-500/10 hover:text-mint-400"
-                              : pathname === child.href
+                            pathname === child.href
                               ? "text-cobalt-400 bg-white/5 font-medium"
                               : "text-white/60 hover:text-white hover:bg-white/5"
                           )}
                         >
                           <span className="flex items-center gap-2">
-                            {child.highlight && <Download size={13} />}
                             {child.label}
                           </span>
                           {child.badge && (
